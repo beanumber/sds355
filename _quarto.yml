@@ -1,0 +1,52 @@
+project:
+  type: website
+  render:
+    - "*.qmd"
+
+bibliography: refs.bib
+
+website:
+  title: "SDS 355: Fall 2025"
+  navbar:
+    left:
+      - text: "Home"
+        icon: house
+        href: index.qmd
+      - icon: chevron-contract
+        href: syllabus.qmd
+      - icon: calendar
+        href: schedule.qmd
+      - text: "Assignments"
+        icon: list-task
+        menu:
+          - text: "Projects"
+            icon: diagram-2-fill
+            href: projects.html
+          - text: "Sprints"
+            icon: person-walking
+            href: sprints.html
+          - text: "Ind. Learning"
+            icon: book
+            href: learning.html
+          - text: "Final Paper"
+            icon: file-pdf
+            href: paper.html
+          - text: "Ethics essay"
+            icon: bag-heart
+            href: ethics_essay.html
+    right:
+      - icon: github
+        href: https://www.github.com/sds-capstone
+      - icon: slack
+        href: https://sds-355-01-202601.slack.com/
+  page-footer: 
+    left: "Created by Ben Baumer" 
+
+
+format:
+  html:
+    theme: journal
+    highlight: textmate
+    toc: true
+    toc-depth: 6
+    css: smith.css

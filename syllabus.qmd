@@ -1,0 +1,320 @@
+---
+title: "Syllabus"
+---
+
+
+```{r, include=FALSE}
+button <- function(..., button_type = "default", 
+                   button_size = "small", .noWS = NULL) {
+  class <- paste(
+    c("btn", paste0("btn-", button_type), paste0("btn-", button_size)),
+    collapse = " "
+  )
+  htmltools::tag("button", varArgs = list(class = class, ...), .noWS = .noWS)
+}
+```
+
+
+## About the Course
+
+### Instructor
+
+::: {.grid}
+
+::: {.g-col-8}
+
+- [Ben Baumer](https://www.smith.edu/academics/faculty/ben-baumer)  
+  `r fontawesome::fa("at")` [bbaumer@smith.edu](mailto:bbaumer@smith.edu)  
+  `r fontawesome::fa("phone")` 413-585-3440  
+  `r fontawesome::fa("github")` [beanumber](http://www.github.com/beanumber)  
+
+
+Student hours:
+
+- Tuesdays and Wednesdays from 2:45 pm -- 3:30 pm ET in McConnell 213
+- Fridays from 9:45 am -- 11:15 am ET in McConnell 213
+- by appointment:
+    - either in McConnell 213
+    - or via Zoom  `r fontawesome::fa("video")` 
+
+**Pedagogical Partner**: Sarah Susnea '25 <ssusnea@smith.edu>
+
+:::
+::: {.g-col-4}
+
+![](https://www.smith.edu/sites/default/files/styles/content_faculty_profile_full_xlarge/public/media/Faculty/ben_baumer_crop.jpg.webp?itok=oJwH0bw1)
+
+:::
+
+:::
+
+
+### Description
+
+This one-semester course leverages students' previous coursework to address a real-world data analysis problem. Students collaborate in teams on research projects [sponsored by academia, government, and/or industry](https://smithcollege-sds.github.io/capstone/). These projects reinforce skills developed [in the course of the SDS major](https://www.smith.edu/about-smith/institutional-research/learning-goals#offices-institutional-research-statistical-data-sciences), including: statistical modeling, programming with data, written, oral, and graphical communication about data, and the ability to bring data science skills to bear on a problem in a specific domain of application. In addition, professional skills developed include: ethics, project management, collaborative software development, documentation, and consulting. Regular team meetings, weekly progress reports, interim and final reports, and multiple presentations are required. Open only to majors. Topics will vary from year to year. 
+
+::: {.callout-note}
+This course satisfies the capstone requirement for the [major in Statistical & Data Sciences](https://www.smith.edu/academics/statistics). In most years, it addresses **all** of the major's learning goals:
+:::
+
+- Identify and work with a wide variety of data types (including, but not limited to, categorical, numerical, text, spatial and temporal) and formats (e.g. CSV, XML, JSON, relational databases, audio, video, etc.). 
+- Extract meaningful information from data sets that have a variety of sizes and formats.
+- Fit and interpret statistical models, including but not limited to linear regression models. Use models to make predictions, and evaluate the efficacy of those models and the accuracy of those predictions.
+- Understand the strengths and limits of different research methods for the collection, analysis and interpretation of data. Be able to design studies for various purposes.
+- Attend to and explain the role of uncertainty in inferential statistical procedures.
+- Read and understand data analyses used in research reports. Contribute to the data analysis portion of a research project in at least one applied discipline.
+- Compute with data in at least one high-level programming language, as evidenced by the ability to analyze a complex data set.
+- Work in multiple languages and computational environments.
+- Convey quantitative information in written, oral and graphical forms of communication to both technical and non-technical audiences.
+- Assess the ethical implications to society of data-based research, analyses, and technology in an informed manner. Use resources, such as professional guidelines, institutional review boards, and published research, to inform ethical responsibilities.
+
+
+### Prerequisites
+
+SDS 192 and SDS 291 and CSC 111
+
+### Textbooks
+
+#### Required
+
+::: {.grid}
+
+::: {.g-col-4}
+
+![](https://cdn.mall.adeptmind.ai/https%3A%2F%2Ftarget.scene7.com%2Fis%2Fimage%2FTarget%2FGUEST_6b4c75be-0c91-4c89-9d08-8e80fbc9f06b%3Fwid%3D1000%26hei%3D1000_large.webp)
+
+:::
+
+::: {.g-col-8}
+
+
+- [*Data Feminism*](https://mitpress.mit.edu/books/data-feminism), Catherine D'Ignazio and Lauren F. Klein, MIT Press, 2020. 
+    - [$24 on Amazon](https://www.amazon.com/dp/0262044005/)
+    - [Available free online](https://data-feminism.mitpress.mit.edu/)
+
+`r button("Required", button_type = "danger")`
+
+:::
+
+:::
+
+
+
+#### Recommended where appropriate:
+
+- [*Weapons of Math Destruction*](https://www.penguinrandomhouse.com/books/241363/weapons-of-math-destruction-by-cathy-oneil/), Cathy O'Neil, Broadway Books, 2017. [$11 on Amazon](https://www.amazon.com/Weapons-Math-Destruction-Increases-Inequality/dp/0553418831/)
+- [DataCamp](https://www.datacamp.com/groups/shared_links/c1977455385a23b6fe219885ffa55455e999a28094e93eec367f3c6418fd0a22), online programming courses for data science. Available for free.  
+  **Please be aware of [sexual harassment incident!](https://www.buzzfeednews.com/article/daveyalba/datacamp-sexual-harassment-metoo-tech-startup)**
+- *[Computer Age Statistical Inference](https://web.stanford.edu/~hastie/CASI/)*, Efron and Hastie, Cambridge University Press, 2016. Available free online.
+- *[Advanced R](https://adv-r.hadley.nz/)*, 2nd edition. Hadley Wickham, CRC Press, 2019. Available free online.
+- *[R Packages](http://r-pkgs.had.co.nz/)*, 2nd edition. Hadley Wickham, O'Reilly, 2015. Available free online.
+- *[R for Data Science](http://r4ds.had.co.nz/)*, Garrett Grolemund and Hadley Wickham, O'Reilly, 2017. Available free online.
+- *[Modern Data Science with R](https://mdsr-book.github.io/mdsr3e/)*, 2nd edition. Baumer, Kaplan, and Horton. CRC Press, 2021. Available for free online. 
+- *[Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R](https://bookdown.org/roback/bookdown-BeyondMLR/)*, Roback and Legler. CRC Press, 2021. Available for free online. 
+- *[Mastering Shiny](https://mastering-shiny.org/)*, Wickham. O'Reilly, 2021. Available free online.
+
+#### Supplemental reading:
+
+- [*Algorithms of Oppression*](https://nyupress.org/9781479837243/algorithms-of-oppression/), Safia Noble, NYU Press, 2018. 
+- *[Race After Technology](https://www.ruhabenjamin.com/race-after-technology)*, Ruha Benjamin. [Wiley](https://www.wiley.com/en-us/Race+After+Technology:+Abolitionist+Tools+for+the+New+Jim+Code-p-9781509526437), 2019. 
+- *Automating Inequality*, Eubanks, Picador, 2019. [[Amazon](https://www.amazon.com/Automating-Inequality-High-Tech-Profile-Police/dp/1250215781/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=&sr=)]
+- [Shiny](https://shiny.rstudio.com/) is an interactive web application framework for R. Available for free via our Posit Connect Server. 
+
+
+### Classes
+
+Classes meets on Mondays from 1:40-2:55 and on Wednesdays from 1:20--2:35 pm ET in Bass 204. 
+
+### Accommodations
+
+Smith is committed to providing support services and reasonable accommodations to all students with disabilities. 
+To request an accommodation, please register with the [Accessibility Resource Center](https://www.smith.edu/your-campus/offices-services/accessibility-resource-center) (ARC) at the beginning of the semester. 
+To contact ARC, please email <arc@smith.edu>.
+
+## Policies {#policies .unnumbered}
+
+### Inclusion
+
+I am committed to fostering a classroom environment where all students thrive. 
+I am committed to affirming the identities, realities and voices of all students, especially those from historically marginalized or underrepresented backgrounds. 
+I am dedicated to creating a space where everyone in the class is respected, is free from discrimination based on race, ethnicity, sexual orientation, religion, gender identity, disability status, and other identities, and feel welcome and ready to learn at your highest potential. 
+
+If you have any concerns or suggestions for how to make this class more inclusive, please reach out to me. 
+**I am here to support your learning and growth as data scientists and people!**
+
+### Attendance
+
+You choose whether you will attend class. 
+If you choose to attend, I expect your full attention. 
+If you choose not to attend, you accept responsibility for any lost educational value. 
+
+::: {.callout-important}
+We hope it goes without saying that during class, you should not use your computer or cell phone for personal email, web browsing, social media, or any activity that's not related to the class. 
+:::
+
+### Collaboration
+
+Much of this course will operate on a collaborative basis, and you are
+expected and encouraged to work together with a partner or in small
+groups to study, complete assignments, and work on projects.
+However, **all work that you submit for credit must be your own**. 
+
+
+::: {.callout-important}
+Copying and pasting sentences, paragraphs, or *blocks of code* from another student or from online sources is not acceptable and will receive no credit. 
+:::
+
+No interaction with anyone but
+the instructors is allowed on any exams or quizzes. All students, staff
+and faculty are bound by the Smith College Honor Code, which Smith has
+had since 1944.
+
+### Use of Generative AI 
+
+`r button("Important", button_type = "danger")`
+
+This course has a **flexible** policy towards the use of generative AI tools.
+
+- Use: 
+    - In writing code: The use of generative AI is **permitted** in this course as long as you cite the tool you used and understand what the code is doing to the same extent as if you had written it yourself. Specific assignments may have more restrictive use policies. 
+    - In writing text: The use of generative AI tools is **limited** to pre-writing activities (e.g., brainstorming, gathering information, organizing an outline, etc.). AI tools are specifically **not permitted** for writing entire sentences, paragraphs, drafts, or papers to complete class assignments. (Please see the policy on Abuse below.)
+- Abuse: Attempts to pass off AI-generated content as your own (including but not limited to failure to properly cite generative AI tools) is considered plagiarism and could be a violation of [Smith's Academic Honor Code](#honor-code). 
+- Disclosure: If you choose to use generative AI as a learning aid, it is essential to disclose its use on your assignments to maintain academic integrity. If you use generative AI, make sure to add a "Generative AI Disclosure" [callout block](https://quarto.org/docs/authoring/callouts.html) at the bottom of your assignment (see below). Your disclosure should state what program you used and how you used it, including links to the specific prompts you used, if possible. Properly citing the AI-generated content allows me to understand your process better and gives credit to the assistance received from these tools. 
+
+::: {title="Sample Generative AI Disclosure Statement" .callout-important}
+Generative AI Disclosure: This assignment was supported by use of the AI platform [ChatGPT](https://openai.com/chatgpt/). 
+Specifically, I used GPT 3.5 to assist in the title creation (link here), although the final title was modified slightly. 
+I also used ChatGPT to help me plan my outline (link here). 
+I implemented the chatbot's recommendations.
+:::
+
+::: {.callout-warning}
+Remember that generative AI is not *intelligent*, doesn't *think*, and has no idea what is *true* or *false*. 
+You are solely responsible for the veracity of anything (e.g., code or text) you submit. 
+:::
+
+### Academic Honor Code Statement {#honor-code}
+
+> Smith College expects all students to be honest and committed to the principles of academic and intellectual integrity in their preparation and submission of course work and examinations.
+Students and faculty at Smith are part of an academic community defined by its commitment to scholarship, which depends on scrupulous and attentive acknowledgement of all sources of information, and honest and respectful use of college resources.
+
+Cases of dishonesty, plagiarism, etc., will be reported to the Academic Honor Board.
+
+### Code of Conduct `r button("Important", button_type = "danger")`
+
+As the instructor and assistants for this course, we are committed to making participation in this course a harassment-free experience for everyone, regardless of level of experience, gender, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, or religion. Examples of unacceptable behavior by participants in this course include the use of sexual language or imagery, derogatory comments or personal attacks, deliberate misgendering or use of "dead" names, trolling, public or private harassment, insults, or other unprofessional conduct.
+
+As the instructor and assistants we have the right and responsibility to point out and stop behavior that is not aligned to this Code of Conduct. Participants who do not follow the Code of Conduct may be reprimanded for such behavior. Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the instructor.
+
+::: {.callout-important}
+All students, the instructor, the lab instructor, and all assistants are expected to adhere to this Code of Conduct in all settings for this course: lectures, labs, office hours, tutoring hours, and over Slack.
+:::
+
+This Code of Conduct is adapted from the [Contributor Covenant](http://contributor-covenant.org/), version 1.0.0, available [here](http://contributor-covenant.org/version/1/0/0/).
+
+## Content
+
+Class time will be approximately divided as follows: 25% discussions about data science ethics, and 75% group work on projects. 
+Mondays will typically focus on project work, while Wednesdays will typically focus on ethics discussions. 
+
+### Expectations
+
+This is a 4 credit course, meaning that by federal guidelines, it should consume about 12 hours per week of your time. We meet for 2.5 hours per week. That means **you should be spending about 9.5 hours per week**, or nearly 2 hours per day, on this course **outside of class.** 
+
+::: {.callout-warning}
+You should be spending about 9.5 hours per week on this course outside of class.
+:::
+
+### Grading
+
+This course is [ungraded](https://en.wikipedia.org/wiki/Ungrading).
+You will still receive a letter grade for this course, but that grade will be the result of a series of conversations that you and I have over the course of the semester. 
+Three times during the semester, you will submit a written reflection of your learning in the course to date to Moodle with a grade proposal, and I will offer a written response with my proposed grade. 
+Then we'll talk one-on-one and reach an agreement. 
+Most likely, I will accept your proposal and that is the grade that you will receive. 
+However, I reserve the right to be the final arbiter of grades. 
+Because it will be based on a series of conversations that we have, your grade will not be a surprise to you and you will (almost certainly) be satisfied with it. 
+
+In thinking about what grade you deserve, I am interested in the following dimensions of learning (in no particular order):
+
+- Engagement: How much effort are you putting into this class? How hard are you trying? How respsonsive and accountable are you to your teammates and your project sponsor? 
+- Learning: How much have you learned? What have you learned? What are the things that you can do at the end of the class that you couldn't do at the beginning? When you look back on this class, what will you tell people that you learned from this experience? 
+- Proficiency: How well are you able to perform the tasks required of your project and this class? How knowledgeable are you about the topics covered in class, or the various elements of your project? 
+
+### Assignments
+
+The learning in this course is centered around three main components:
+
+- Statistics and Data Science Ethics: You will read several articles, participate in class discussions, write several short papers, and write one longer essay about ethics. These activities will help you develop a **robust understanding of ethical issues** in statistics and data science, and prepare you to tackle them in your future. The ultimate deliverable will be a ~1200-word [**essay** on data science ethics, technology, and society](ethics_essay.qmd). 
+- Group project: You will collaborate on a group project over the course of the semester that is sponsored by an outside organization. These projects will be very open-ended and you will work on them nearly every day (see [Expectations](#expectations)). Ultimately, you will submit (as a group) a 10-page [Quarto Manuscript](paper.qmd) (to me) and give a final presentation (to your project sponsor). These activities will improve your ability to work within a team, to tackle an open-ended, complex, **real-world problem**, to write a high-quality research paper, and to give a professional presentation, among other things. Many former students have reported to me that this activity was the single-most impactful academic experience that they had at Smith. 
+- Independent learning and reflection: You will learn about at least one topic in statistics and data science that is outside of our curriculum. You will do this largely on your own, outside of class, and in service of the project. This activity will help you build confidence in your **ability to learn on your own**. You will submit a written reflection about this experience.  
+
+Please see the [schedule](schedule.qmd) for the most current due dates.
+
+#### Extensions
+
+I value your ability to meet deadlines and manage your own workload.
+I am also a reasonable person who understands that life happens and this is not always possible. 
+Extensions up to 48 hours will typically be granted *when requested at least 48 hours in advance* without requiring a reason or an explanation. 
+Longer extensions, or those requested within 48 hours of a deadline, will typically not be granted. 
+Please plan accordingly. 
+Please note that because many of the assignments in this class are collaborative, individual extensions for group assignments will be problematic. 
+**All extended deadlines will appear on Moodle.**
+
+## Resources {#resources .unnumbered}
+
+### Moodle and course website
+
+The [course website](http://beanumber.github.io/sds410/) and Moodle will be updated regularly with lecture handouts, project information, assignments, and other course resources. Homework and projected grades will be submitted to Moodle. Please check both regularly.
+
+### Computing
+
+The use of the `R` statistical computing environment with the [RStudio](http://rstudio.org) interface is thoroughly integrated into the course. You have two options for using `RStudio`:
+
+* The **server** version of [Posit Workbench](https://posit.co/products/enterprise/workbench/) on the [web](http://posit.smith.edu/). The advantage of using the server version is that all of your work will be stored in the cloud, where it is automatically saved and backed up. This means that you can access your work from any computer with a web browser (Firefox is recommended) and an Internet connection. 
+* A **desktop** version of [RStudio IDE](https://posit.co/products/open-source/rstudio/) installed on your machine. The downside to this approach is that your work is only stored locally, and you will have to manage your own installation. 
+
+Note that you do not have to choose one or the other -- you may use both. 
+However, it is important that you understand the distinction so that you can keep track of your work. 
+Both `R` and `RStudio` are free and open-source, and are installed on most computer labs on campus. 
+
+Unless otherwise noted, you should assume that it will be helpful to bring a laptop to class. It is not *required*, but since there are no workstations in the classroom, we will need a critical mass (i.e. at least 12) computers in the classroom pretty much everyday. 
+
+### Communication
+
+- `r fontawesome::fa("slack")` [Slack](https://sds-410-01-202503.slack.com/) is the primary forum for course-related discussions of all kinds. *Please do not email me with course-related questions!* Instead, post those `#questions` on Slack. If discretion is absolutely necessary, private message me on Slack. 
+- `r fontawesome::fa("github")` [GitHub](http://www.github.com/sds-capstone/) will host all of the code for projects associated with this course. All repositories are private by default.
+
+::: {.callout-important}
+It is very important that all project-related communication take place in Slack or GitHub channels that all group members can see! Private texts and side conversations will very quickly lead to other group members feeling excluded. 
+:::
+
+### Writing
+
+Your ability to communicate results---which may be technical in nature---to your audience -- which is likely to be non-technical---is critical to your success as a data scientist. 
+The assignments in this class will place an emphasis on the clarity of your writing.
+
+This course is part of Smith College's [Writing Enriched Curriculum](https://www.smith.edu/academics/jacobson-center/writing-enriched-curriculum). 
+As such, the course supports the [Writing Plan of the Program in Statistical & Data Sciences](https://www.smith.edu/sites/default/files/media/Documents/Jacobson-Center/SDS-WritingPlan-accessible.pdf). 
+
+Please read the [SDS Writing Plan](https://www.smith.edu/sites/default/files/media/Documents/Jacobson-Center/SDS-WritingPlan-accessible.pdf) for more information. 
+
+## Tentative Schedule
+
+The following outline gives a *basic* description of the course. Please see the [detailed schedule](schedule.qmd) for more specific information about readings and assignments.
+
+Week | Topic | Reading | Assignments |
+-----|-------|---------|-------------|
+1 | setup, GitHub, sponsors | |  |
+2 | sprint 1 | *Coded Bias* | ethics 1 |
+3 | sprint 1 | *WMD*, *DF*, Ch. 1 | ethics 2 |
+4 | sprint 1 | TBD | demo & retrospective |
+5 | sprint 2 | TBD | ethics 3, presentation |
+6 | sprint 2 | TBD | ethics 4, final paper (1st draft) |
+7 | sprint 2 | TBD | demo & retrospective |
+8 | sprint 3 | TBD | ethics 5 |
+9 | sprint 3 | TBD | ethics essay (draft) |
+10 | sprint 3 | | demo & retrospective |
+11 | sprint 4 |  | final paper (2nd draft) |
+12 | sprint 4 | | ethic essay |
+13 | presentations | | **Final Presentations**, **Final paper**  |

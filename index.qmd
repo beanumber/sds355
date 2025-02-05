@@ -1,0 +1,7 @@
+---
+title: "SDS 355"
+---
+
+Welcome to SDS 355: Sports Analytics. You will find most of the course content here, but please keep an eye on [Moodle](http://moodle.smith.edu) for grades and assignments. 
+
+![xkcd](https://imgs.xkcd.com/comics/sports.png)

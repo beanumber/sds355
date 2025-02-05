@@ -1,0 +1,482 @@
+---
+title: 'Schedule'
+include-in-header:
+  text: <script type="text/javascript" src="highlight_date.js"></script>
+---
+
+Please consult [Smith's academic calendar](https://www.smith.edu/academics/academic-calendar).
+
+```{r}
+#| message: false
+#| echo: false
+classes <- c(
+  as.Date("2025-01-27") + lubridate::ddays(0:14*7), 
+  as.Date("2025-01-29") + lubridate::ddays(0:13*7)
+) |>
+  sort()
+
+i <- 0
+echo_date <- function() {
+  i <<- i + 1
+  x <- classes[i] |>
+    format("%a, %b %e")
+  htmltools::div(
+    class = "card-header",
+    "data-date" = classes[i],
+    htmltools::h4(paste0(i, ". ", x))
+  )
+}
+```
+
+> Note: all videos with the `r fontawesome::fa("video")` icon are available via Moodle. 
+
+
+### Intro
+
+::: {.grid}
+
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- Introductions
+- Meet our project sponsors
+
+::: {.callout-note} 
+## Homework
+
+- Complete [project selection form](https://docs.google.com/forms/d/e/1FAIpQLSe434T-1ENJmLezTGaEQ7I_55hcCUmtWgtLhiJwD6KBSkim3A/viewform?usp=preview) by **Tuesday at noon** (log into Smith in your browser)
+- Review Scrum content (**before** next class):
+    - Read the [Scrum manifesto](https://www.scrumguides.org/docs/scrumguide/v2017/2017-Scrum-Guide-US.pdf)
+    - Watch [Understanding Scrum](https://www.youtube.com/watch?v=15uHZ911PsM)
+    - Watch the first 7 minutes of [Scrum in 10 Minutes](https://youtu.be/XU0llRltyFM)
+    - Review additional information from [Atlassian](https://www.atlassian.com/agile/scrum)
+    - `r fontawesome::fa("video")` [Scrum roles](lectures/dev_scrum_roles.qmd) (watch screencast on Moodle)
+    - `r fontawesome::fa("video")` [Sprint mechanics](lectures/dev_sprints.qmd)
+    - `r fontawesome::fa("video")` [Kanban](lectures/dev_kanban.qmd)
+    - `r fontawesome::fa("video")` [User stories](lectures/dev_user_stories.qmd)
+:::
+
+::: 
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- Project assignments
+    - Sign Capstone Agreements
+- GitHub setup
+    - [GitHub setup](lectures/dev_github_setup.qmd)
+    - [Fork and clone repositories](https://happygitwithr.com/fork-and-clone.html#usethiscreate_from_githubownerrepo)
+    - [Set up remotes](https://happygitwithr.com/upstream-changes.html#upstream-changes)
+    - Add names to README [via pull request](https://usethis.r-lib.org/articles/pr-functions.html)
+- From the 192 vault: 
+    - Intro to GitHub: [slides](http://beanumber.github.io/sds192/lectures/mdsr_workflow_01-github.html), [screencast](https://smith.zoom.us/rec/share/RPj9yNXUlvgPYTUJKRgITzwWCPtwX4icleerTHyy1VYjcaMstNfsE2yu1ENZ68Ci.QV8VvyaXq2hMT1oJ?startTime=1602177489000)
+    - Reproducible examples: [slides](http://beanumber.github.io/sds192/lectures/mdsr_workflow_03-reprex.html), [screencast](https://smith.zoom.us/rec/share/dcL5Zqwba4fExQLDVMLy_kIlAJnGbF0pogMlT55qYMVfPSCcTADUMb0zdki7ZW1v.QF03nXcVOSKAHmDU?startTime=1611757421000)
+    - Resolving GitHub conflicts: [slides](http://beanumber.github.io/sds192/lectures/mdsr_workflow_02-ghconflicts.html), [screencast](https://smith.zoom.us/rec/share/TucqZ3HQlkiacQSTK1QrfgmTBbH573OzIh5XaBkWp6Z2el0eiUnUSQ_Yh8-C4bRz.DIL28gzhKoBr9s4t?startTime=1602178093000)
+    - Live demo of GitHub conflicts: [screencast](https://smith.zoom.us/rec/share/bJWYkF_7LtMKLqB6BUB-YIyj7FwHk7LX_1BF1cSNGuB-PJYUXIIvwHL-GcB9Lcrt.0rjIcgaUI8nGfg5V?startTime=1602254301000)
+- Time permitting
+    - [Team](https://www.name-generator.org.uk/team/) [Name](https://www.wordlab.com/name-generators/team-name-generator/) [Generator](https://www.teamnames.net/team-name-generator)
+    - [Mascot / hex sticker](https://github.com/sds-capstone/edanalytics/raw/main/Logo.png)
+    - Q&A about Scrum
+
+
+::: {.callout-note} 
+## Homework
+
+- Elect a product owner for Sprint 1
+- Contact your project sponsor!
+- Pick a time on Friday/Saturday/Sunday for your 3rd weekly standup, post the schedule to Slack, and pin it
+:::
+
+:::
+:::
+
+---
+
+### Sprint 1
+
+::: {.grid}
+
+::: {.g-col-6 .card}
+`r echo_date()`
+
+- Introduction to Teamwork
+    - **[Megan Lyster](https://www.smith.edu/people/megan-lyster)**  
+      Assistant Director of the Wurtele Center
+- Time permitting:
+    - Sprint planning:
+        - Brainstorm a [Blue Sky](https://en.wiktionary.org/wiki/blue-sky_thinking) vision
+        - Set up sprint board using GitHub Projects
+
+
+::: {.callout-note} 
+## Homework
+
+- Read [Codes of Ethics](ethics_codes.qmd)
+
+:::
+
+
+
+::: 
+::: {.g-col-6 .card}
+`r echo_date()`
+
+- `r fontawesome::fa("video")` [Data security](lectures/dev_data_security.html)
+- [Codes of Ethics](ethics_codes.qmd)
+
+::: 
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- Projects
+
+::: {.callout-note} 
+## Homework
+
+- Read [Critique of Codes of Ethics](ethics_critique.qmd)
+:::
+
+
+::: 
+::: {.g-col-6 .card}
+`r echo_date()`
+
+- [Critique of Codes of Ethics](ethics_critique.qmd)
+
+
+::: 
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- Projects
+
+::: {.callout-note} 
+## Homework
+- [Book an appointment for a grade conference](https://calendar.app.google/cWz9rKwUyC92GmfV9)
+- **Prepare for Sprint Demo**
+    - Watch [this video about sprint demos](https://www.youtube.com/watch?v=InXAS_zRvqQ)
+    - Read more about [sprint reviews/demos](https://www.atlassian.com/agile/scrum/sprint-reviews)
+    - Prepare for 10 minute demo during next class
+:::
+
+::: 
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+```{r}
+#| echo: false
+#| message: false
+#| eval: false
+set.seed(21)
+library(tidyverse)
+sponsors <- c("chicubs", "honda", "cleveland", "elmhurst", "fhi", "dancedata")
+start_time <- as_datetime("2025-02-19 13:20:00") + dminutes(0:5 * 10) 
+projects <- tibble::tibble(
+  time = format(start_time, "%H:%M"),
+  demo = sample(sponsors),
+  retro = lag(demo, default = last(demo)),
+#  planning = lag(retro, default = last(retro))
+)
+
+projects |>
+  knitr::kable()
+```
+
+
+- **[Sprint demo](sprints.qmd#sprint-demo) (no more than 10 minutes, *with Ben*)**
+- **[Sprint retrospective](sprints.qmd#sprint-retrospective) (*with Megan*)**
+    - Watch [this video about sprint retrospectives](https://www.youtube.com/watch?v=dJNCHvqKljU)
+    - Read more about [sprint retrospectives](https://www.atlassian.com/agile/scrum/retrospectives)
+    - Read more about [sprint retros in Scrum](https://www.scrum.org/resources/what-is-a-sprint-retrospective)
+    - Revisit your Group Norms (on your README)
+
+
+::: {.callout-note} 
+## Homework
+
+- Submit **Sprint 1 retrospective** to Moodle (by Friday)
+- Complete **Reflection and projected grade after Sprint 1** on Moodle (at least 24 hours before your grade conference!)
+
+:::
+
+::: 
+:::
+
+---
+
+### Sprint 2
+
+::: {.grid}
+
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- **Sprint planning**
+
+::: {.callout-note} 
+## Homework
+- `r fontawesome::fa("video")` [Code review](lectures/dev_code_review.html)
+:::
+
+::: 
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- Ethical Case Study, Part I
+
+
+::: 
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- Projects
+
+::: 
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- Ethical Case Study, Part II
+
+::: 
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- Projects
+
+::: 
+::: {.g-col-6 .card}
+`r echo_date()`
+
+- **Sprint 2 Demo**
+- **Sprint retro (*with Megan*)**
+- **Sprint planning**
+
+
+
+:::
+
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- **SPRING BREAK -- NO CLASS**
+
+![](https://www.weareteachers.com/wp-content/uploads/teachers-leaving-for-spring-break-1.png)
+
+
+
+:::
+
+::: {.g-col-6 .card}
+`r echo_date()`
+
+- **SPRING BREAK -- NO CLASS**
+
+![](https://i.pinimg.com/474x/09/26/9c/09269c126f02a2082a743e6bafdd0b7e.jpg)
+
+
+```{r}
+#| echo: false
+#| message: false
+#| eval: false
+projects |>
+  mutate(
+    demo = sample(demo),
+    retro = lag(demo, default = last(demo)),
+  ) |>
+  knitr::kable()
+```
+
+
+
+::: 
+
+:::
+
+---
+
+### Sprint 3
+
+::: {.grid} 
+
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- Sprint planning
+
+::: {.callout-note} 
+## Homework
+- **Submit Final paper, 1st draft by Wednesday at midnight**
+- Prepare for Sprint demo
+:::
+
+
+::: 
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- [Stochastic parrots](ethics_parrots.html)
+
+::: 
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- Projects
+
+
+::: {.callout-note} 
+## Homework
+
+- **Record a presentation by Friday, 5 pm**
+    - 1st draft of (first part of) presentation!
+    - ~5 minutes
+    - Make a few slides
+    - Not a demo
+    - Concentrate on:
+        - What is the problem? 
+        - What data do you have?
+        - What are the keys issues? Why is this hard?
+
+:::
+
+::: 
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- [Generative AI](ethics_ai.html)
+
+::: {.callout-note} 
+## Homework
+
+- **Submit Second Reflection by Sunday**
+- **Schedule a final presentation [with your client](https://twitter.com/BaumerBen/status/993555071916019712)!**
+    - Towards the end of the semester
+    - It's OK with me if it happens during reading period or finals week, but you have the right to *not* have it during that time. 
+    - I want to be there -- I will work around your schedule
+
+:::
+
+::: 
+::: {.g-col-6 .card}
+`r echo_date()`
+
+- Projects
+
+::: 
+::: {.g-col-6 .card}
+`r echo_date()`
+
+
+```{r}
+#| echo: false
+#| message: false
+#| eval: false
+set.seed(784)
+library(tidyverse)
+start_time <- as_datetime("2024-11-21 09:30:00") + dminutes(0:5 * 10) 
+projects <- tibble::tibble(
+  time = format(start_time, "%H:%M"),
+  demo = sample(c("calibrate", "honda", "cleveland", "lbi", "umass", "dancedata")),
+  retro = lag(demo, default = last(demo)),
+#  planning = lag(retro, default = last(retro))
+)
+
+projects |>
+  knitr::kable()
+```
+
+
+- **Sprint 3 Demo**
+- **Sprint retro (with Megan)**
+
+::: {.callout-note} 
+## Homework
+- **Submit Ethics topic statement due Monday**
+:::
+
+::: 
+
+:::
+
+---
+
+### Sprint 4
+
+::: {.grid}
+
+::: {.g-col-6 .card}
+`r echo_date()`
+
+- Sprint planning
+
+
+::: 
+::: {.g-col-6 .card}
+`r echo_date()`
+
+- Projects
+
+::: {.callout-note} 
+## Homework
+- **[Submit Final paper, 2nd draft by Friday, 5 pm](paper.html)**
+:::
+
+
+::: 
+
+::: {.g-col-6 .card}
+`r echo_date()`
+
+- [Draft feedback](paper.html#feedback-from-previous-drafts)
+
+::: 
+::: {.g-col-6 .card}
+`r echo_date()`
+
+- Projects
+
+::: 
+
+
+::: {.g-col-6 .card}
+`r echo_date()`
+
+- Projects
+
+::: 
+::: {.g-col-6 .card}
+`r echo_date()`
+
+- Projects
+
+::: 
+::: {.g-col-6 .card}
+`r echo_date()`
+
+
+```{r}
+#| echo: false
+#| message: false
+#| eval: false
+tibble::tibble(
+  time = as_datetime("2024-09-26 09:30:00") + dminutes(0:5 * 5),
+  talk = sample(sponsors)
+) |>
+  mutate(time = format(time, "%H:%M")) |>
+  knitr::kable()
+```
+
+
+
+- Lightning talks (5 minutes, [2 slides](https://docs.google.com/presentation/d/1qMDYzdpfDkVkYT1a4lB8_k_92FkcSrT_wwwbpWOxukw/edit?usp=sharing))
+- Course feedback questionnaire
+
+::: {.callout-note} 
+## Homework
+- **[Final paper due](paper.html)**
+- **[Ethics essay](ethics.html) due**
+- **Final reflection due**
+- **All work due by May 9**
+:::
+
+:::
+
+:::
