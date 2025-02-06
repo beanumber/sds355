@@ -277,7 +277,7 @@ The following outline gives a *basic* description of the course. Please see the 
     - Topics: Expected Run Matrix, Expected Winning Percentage, estimating win probability [@albert2024analyzing] 
 - Weeks 5--6
     - Applications of the previous ideas to other sports
-    - Topics: Expected points in basketball, 4th down conversion in American football
+    - Topics: Expected points in basketball, 4th down conversion in American football, estimating expected winning coefficients
 - Weeks 7--8
     - Estimating team strength
     - Bradley-Terry, Elo ratings, using moneyline data
