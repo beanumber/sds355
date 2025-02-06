@@ -37,8 +37,6 @@ Student hours:
     - either in McConnell 213
     - or via Zoom  `r fontawesome::fa("video")` 
 
-**Pedagogical Partner**: Sarah Susnea '25 <ssusnea@smith.edu>
-
 :::
 ::: {.g-col-4}
 
@@ -51,49 +49,31 @@ Student hours:
 
 ### Description
 
-This one-semester course leverages students' previous coursework to address a real-world data analysis problem. Students collaborate in teams on research projects [sponsored by academia, government, and/or industry](https://smithcollege-sds.github.io/capstone/). These projects reinforce skills developed [in the course of the SDS major](https://www.smith.edu/about-smith/institutional-research/learning-goals#offices-institutional-research-statistical-data-sciences), including: statistical modeling, programming with data, written, oral, and graphical communication about data, and the ability to bring data science skills to bear on a problem in a specific domain of application. In addition, professional skills developed include: ethics, project management, collaborative software development, documentation, and consulting. Regular team meetings, weekly progress reports, interim and final reports, and multiple presentations are required. Open only to majors. Topics will vary from year to year. 
-
-::: {.callout-note}
-This course satisfies the capstone requirement for the [major in Statistical & Data Sciences](https://www.smith.edu/academics/statistics). In most years, it addresses **all** of the major's learning goals:
-:::
-
-- Identify and work with a wide variety of data types (including, but not limited to, categorical, numerical, text, spatial and temporal) and formats (e.g. CSV, XML, JSON, relational databases, audio, video, etc.). 
-- Extract meaningful information from data sets that have a variety of sizes and formats.
-- Fit and interpret statistical models, including but not limited to linear regression models. Use models to make predictions, and evaluate the efficacy of those models and the accuracy of those predictions.
-- Understand the strengths and limits of different research methods for the collection, analysis and interpretation of data. Be able to design studies for various purposes.
-- Attend to and explain the role of uncertainty in inferential statistical procedures.
-- Read and understand data analyses used in research reports. Contribute to the data analysis portion of a research project in at least one applied discipline.
-- Compute with data in at least one high-level programming language, as evidenced by the ability to analyze a complex data set.
-- Work in multiple languages and computational environments.
-- Convey quantitative information in written, oral and graphical forms of communication to both technical and non-technical audiences.
-- Assess the ethical implications to society of data-based research, analyses, and technology in an informed manner. Use resources, such as professional guidelines, institutional review boards, and published research, to inform ethical responsibilities.
+In sports analytics, we apply methods from the statistical and data sciences to sports to address fundamental questions of interest to players, coaches, team executives, journalists, and fans alike. 
+Simple questions (e.g., who are the best players?) are complicated by the interdependent nature of team sports, the omnipresence of randomness (i.e., luck), and frequent changes to personnel, rules, equipment, league alignments, and other structures.
+However, in many ways sports provides an ideal laboratory for applied statistical analysis, as many sports generate copious amounts of data under regularized conditions. 
+In this course, students will explore the big ideas in sports analytics (e.g., expected points, win probabilities, team strengths, etc.) and how they manifest across a variety of different sports. 
+They will develop a working knowledge of the most prominent statistical models for sports analytics and apply them to a variety of public sources of sports data. 
+The course will conclude with a research project on a topic and sport of the student's choosing.
 
 
 ### Prerequisites
 
-SDS 192 and SDS 291 and CSC 111
+SDS 192 and SDS 210 or the equivalent
 
 ### Textbooks
+
 
 #### Required
 
 ::: {.grid}
 
 ::: {.g-col-4}
-
-![](https://cdn.mall.adeptmind.ai/https%3A%2F%2Ftarget.scene7.com%2Fis%2Fimage%2FTarget%2FGUEST_6b4c75be-0c91-4c89-9d08-8e80fbc9f06b%3Fwid%3D1000%26hei%3D1000_large.webp)
-
+![](https://beanumber.github.io/abdwr3e/figures/9781032668093_cover.png)
 :::
 
 ::: {.g-col-8}
-
-
-- [*Data Feminism*](https://mitpress.mit.edu/books/data-feminism), Catherine D'Ignazio and Lauren F. Klein, MIT Press, 2020. 
-    - [$24 on Amazon](https://www.amazon.com/dp/0262044005/)
-    - [Available free online](https://data-feminism.mitpress.mit.edu/)
-
-`r button("Required", button_type = "danger")`
-
+*Analyzing Baseball Data with R*, 3rd edition, by Albert, Baumer, and Marchi. [Free to read online](https://beanumber.github.io/abdwr3e/)
 :::
 
 :::
@@ -102,10 +82,6 @@ SDS 192 and SDS 291 and CSC 111
 
 #### Recommended where appropriate:
 
-- [*Weapons of Math Destruction*](https://www.penguinrandomhouse.com/books/241363/weapons-of-math-destruction-by-cathy-oneil/), Cathy O'Neil, Broadway Books, 2017. [$11 on Amazon](https://www.amazon.com/Weapons-Math-Destruction-Increases-Inequality/dp/0553418831/)
-- [DataCamp](https://www.datacamp.com/groups/shared_links/c1977455385a23b6fe219885ffa55455e999a28094e93eec367f3c6418fd0a22), online programming courses for data science. Available for free.  
-  **Please be aware of [sexual harassment incident!](https://www.buzzfeednews.com/article/daveyalba/datacamp-sexual-harassment-metoo-tech-startup)**
-- *[Computer Age Statistical Inference](https://web.stanford.edu/~hastie/CASI/)*, Efron and Hastie, Cambridge University Press, 2016. Available free online.
 - *[Advanced R](https://adv-r.hadley.nz/)*, 2nd edition. Hadley Wickham, CRC Press, 2019. Available free online.
 - *[R Packages](http://r-pkgs.had.co.nz/)*, 2nd edition. Hadley Wickham, O'Reilly, 2015. Available free online.
 - *[R for Data Science](http://r4ds.had.co.nz/)*, Garrett Grolemund and Hadley Wickham, O'Reilly, 2017. Available free online.
@@ -115,10 +91,7 @@ SDS 192 and SDS 291 and CSC 111
 
 #### Supplemental reading:
 
-- [*Algorithms of Oppression*](https://nyupress.org/9781479837243/algorithms-of-oppression/), Safia Noble, NYU Press, 2018. 
-- *[Race After Technology](https://www.ruhabenjamin.com/race-after-technology)*, Ruha Benjamin. [Wiley](https://www.wiley.com/en-us/Race+After+Technology:+Abolitionist+Tools+for+the+New+Jim+Code-p-9781509526437), 2019. 
-- *Automating Inequality*, Eubanks, Picador, 2019. [[Amazon](https://www.amazon.com/Automating-Inequality-High-Tech-Profile-Police/dp/1250215781/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=&sr=)]
-- [Shiny](https://shiny.rstudio.com/) is an interactive web application framework for R. Available for free via our Posit Connect Server. 
+- [Posit Connect](https://posit.co/products/enterprise/connect/) is an interactive web application framework for R. Available for free via our Posit Connect Server. 
 
 
 ### Classes
@@ -214,9 +187,6 @@ This Code of Conduct is adapted from the [Contributor Covenant](http://contribut
 
 ## Content
 
-Class time will be approximately divided as follows: 25% discussions about data science ethics, and 75% group work on projects. 
-Mondays will typically focus on project work, while Wednesdays will typically focus on ethics discussions. 
-
 ### Expectations
 
 This is a 4 credit course, meaning that by federal guidelines, it should consume about 12 hours per week of your time. We meet for 2.5 hours per week. That means **you should be spending about 9.5 hours per week**, or nearly 2 hours per day, on this course **outside of class.** 
@@ -245,9 +215,6 @@ In thinking about what grade you deserve, I am interested in the following dimen
 
 The learning in this course is centered around three main components:
 
-- Statistics and Data Science Ethics: You will read several articles, participate in class discussions, write several short papers, and write one longer essay about ethics. These activities will help you develop a **robust understanding of ethical issues** in statistics and data science, and prepare you to tackle them in your future. The ultimate deliverable will be a ~1200-word [**essay** on data science ethics, technology, and society](ethics_essay.qmd). 
-- Group project: You will collaborate on a group project over the course of the semester that is sponsored by an outside organization. These projects will be very open-ended and you will work on them nearly every day (see [Expectations](#expectations)). Ultimately, you will submit (as a group) a 10-page [Quarto Manuscript](paper.qmd) (to me) and give a final presentation (to your project sponsor). These activities will improve your ability to work within a team, to tackle an open-ended, complex, **real-world problem**, to write a high-quality research paper, and to give a professional presentation, among other things. Many former students have reported to me that this activity was the single-most impactful academic experience that they had at Smith. 
-- Independent learning and reflection: You will learn about at least one topic in statistics and data science that is outside of our curriculum. You will do this largely on your own, outside of class, and in service of the project. This activity will help you build confidence in your **ability to learn on your own**. You will submit a written reflection about this experience.  
 
 Please see the [schedule](schedule.qmd) for the most current due dates.
 
@@ -303,18 +270,17 @@ Please read the [SDS Writing Plan](https://www.smith.edu/sites/default/files/med
 
 The following outline gives a *basic* description of the course. Please see the [detailed schedule](schedule.qmd) for more specific information about readings and assignments.
 
-Week | Topic | Reading | Assignments |
------|-------|---------|-------------|
-1 | setup, GitHub, sponsors | |  |
-2 | sprint 1 | *Coded Bias* | ethics 1 |
-3 | sprint 1 | *WMD*, *DF*, Ch. 1 | ethics 2 |
-4 | sprint 1 | TBD | demo & retrospective |
-5 | sprint 2 | TBD | ethics 3, presentation |
-6 | sprint 2 | TBD | ethics 4, final paper (1st draft) |
-7 | sprint 2 | TBD | demo & retrospective |
-8 | sprint 3 | TBD | ethics 5 |
-9 | sprint 3 | TBD | ethics essay (draft) |
-10 | sprint 3 | | demo & retrospective |
-11 | sprint 4 |  | final paper (2nd draft) |
-12 | sprint 4 | | ethic essay |
-13 | presentations | | **Final Presentations**, **Final paper**  |
+- Week 1
+    - Big ideas in sports analytics [@baumer2023big]
+- Weeks 2--4
+    - Fundamental concepts in sports analytics, as manifest in baseball. 
+    - Topics: Expected Run Matrix, Expected Winning Percentage, estimating win probability [@albert2024analyzing] 
+- Weeks 5--6
+    - Applications of the previous ideas to other sports
+    - Topics: Expected points in basketball, 4th down conversion in American football
+- Weeks 7--8
+    - Estimating team strength
+    - Bradley-Terry, Elo ratings, using moneyline data
+- Weeks 9--13
+    - student projects and presentations
+    
