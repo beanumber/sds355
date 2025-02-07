@@ -61,6 +61,13 @@ The course will conclude with a research project on a topic and sport of the stu
 
 SDS 192 and SDS 210 or the equivalent
 
+### Learning goals
+
+- Demonstrate technical understanding on the major concepts in sports analytics
+- Use statistical software to access and analyze public data about sports
+- Translate analytical frameworks across different sports, where applicable
+- Conduct in-depth quantitative research about sports and contextualize the results
+
 ### Textbooks
 
 
