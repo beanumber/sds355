@@ -32,7 +32,7 @@ button <- function(..., button_type = "default",
 Student hours:
 
 - Tuesdays and Wednesdays from 2:45 pm -- 3:30 pm ET in McConnell 213
-- Fridays from 9:45 am -- 11:15 am ET in McConnell 213
+- Fridays from 10:00 am -- 11:30 am ET in McConnell 213
 - by appointment:
     - either in McConnell 213
     - or via Zoom  `r fontawesome::fa("video")` 
@@ -96,7 +96,7 @@ SDS 192 and SDS 210 or the equivalent
 - *[Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R](https://bookdown.org/roback/bookdown-BeyondMLR/)*, Roback and Legler. CRC Press, 2021. Available for free online. 
 - *[Mastering Shiny](https://mastering-shiny.org/)*, Wickham. O'Reilly, 2021. Available free online.
 
-#### Supplemental reading:
+#### Supplemental resources:
 
 - [Posit Connect](https://posit.co/products/enterprise/connect/) is an interactive web application framework for R. Available for free via our Posit Connect Server. 
 
