@@ -10,8 +10,8 @@ Please consult [Smith's academic calendar](https://www.smith.edu/academics/acade
 #| message: false
 #| echo: false
 classes <- c(
-  as.Date("2025-01-27") + lubridate::ddays(0:14*7), 
-  as.Date("2025-01-29") + lubridate::ddays(0:13*7)
+  as.Date("2025-09-08") + lubridate::ddays(0:13*7), 
+  as.Date("2025-09-10") + lubridate::ddays(0:13*7)
 ) |>
   sort()
 
@@ -28,9 +28,6 @@ echo_date <- function() {
 }
 ```
 
-> Note: all videos with the `r fontawesome::fa("video")` icon are available via Moodle. 
-
-
 ### Intro
 
 ::: {.grid}
@@ -45,38 +42,12 @@ echo_date <- function() {
 ## Homework
 
 - Complete [project selection form](https://docs.google.com/forms/d/e/1FAIpQLSe434T-1ENJmLezTGaEQ7I_55hcCUmtWgtLhiJwD6KBSkim3A/viewform?usp=preview) by **Tuesday at noon** (log into Smith in your browser)
-- Review Scrum content (**before** next class):
-    - Read the [Scrum manifesto](https://www.scrumguides.org/docs/scrumguide/v2017/2017-Scrum-Guide-US.pdf)
-    - Watch [Understanding Scrum](https://www.youtube.com/watch?v=15uHZ911PsM)
-    - Watch the first 7 minutes of [Scrum in 10 Minutes](https://youtu.be/XU0llRltyFM)
-    - Review additional information from [Atlassian](https://www.atlassian.com/agile/scrum)
-    - `r fontawesome::fa("video")` [Scrum roles](lectures/dev_scrum_roles.qmd) (watch screencast on Moodle)
-    - `r fontawesome::fa("video")` [Sprint mechanics](lectures/dev_sprints.qmd)
-    - `r fontawesome::fa("video")` [Kanban](lectures/dev_kanban.qmd)
-    - `r fontawesome::fa("video")` [User stories](lectures/dev_user_stories.qmd)
+
 :::
 
 ::: 
 ::: {.g-col-6 .card} 
 `r echo_date()`
-
-- Project assignments
-    - Sign Capstone Agreements
-- GitHub setup
-    - [GitHub setup](lectures/dev_github_setup.qmd)
-    - [Fork and clone repositories](https://happygitwithr.com/fork-and-clone.html#usethiscreate_from_githubownerrepo)
-    - [Set up remotes](https://happygitwithr.com/upstream-changes.html#upstream-changes)
-    - Add names to README [via pull request](https://usethis.r-lib.org/articles/pr-functions.html)
-- From the 192 vault: 
-    - Intro to GitHub: [slides](http://beanumber.github.io/sds192/lectures/mdsr_workflow_01-github.html), [screencast](https://smith.zoom.us/rec/share/RPj9yNXUlvgPYTUJKRgITzwWCPtwX4icleerTHyy1VYjcaMstNfsE2yu1ENZ68Ci.QV8VvyaXq2hMT1oJ?startTime=1602177489000)
-    - Reproducible examples: [slides](http://beanumber.github.io/sds192/lectures/mdsr_workflow_03-reprex.html), [screencast](https://smith.zoom.us/rec/share/dcL5Zqwba4fExQLDVMLy_kIlAJnGbF0pogMlT55qYMVfPSCcTADUMb0zdki7ZW1v.QF03nXcVOSKAHmDU?startTime=1611757421000)
-    - Resolving GitHub conflicts: [slides](http://beanumber.github.io/sds192/lectures/mdsr_workflow_02-ghconflicts.html), [screencast](https://smith.zoom.us/rec/share/TucqZ3HQlkiacQSTK1QrfgmTBbH573OzIh5XaBkWp6Z2el0eiUnUSQ_Yh8-C4bRz.DIL28gzhKoBr9s4t?startTime=1602178093000)
-    - Live demo of GitHub conflicts: [screencast](https://smith.zoom.us/rec/share/bJWYkF_7LtMKLqB6BUB-YIyj7FwHk7LX_1BF1cSNGuB-PJYUXIIvwHL-GcB9Lcrt.0rjIcgaUI8nGfg5V?startTime=1602254301000)
-- Time permitting
-    - [Team](https://www.name-generator.org.uk/team/) [Name](https://www.wordlab.com/name-generators/team-name-generator/) [Generator](https://www.teamnames.net/team-name-generator)
-    - [Mascot / hex sticker](https://github.com/sds-capstone/edanalytics/raw/main/Logo.png)
-    - Q&A about Scrum
-
 
 ::: {.callout-note} 
 ## Homework
@@ -87,13 +58,6 @@ echo_date <- function() {
 :::
 
 :::
-:::
-
----
-
-### Sprint 1
-
-::: {.grid}
 
 ::: {.g-col-6 .card}
 `r echo_date()`
@@ -199,13 +163,6 @@ projects |>
 :::
 
 ::: 
-:::
-
----
-
-### Sprint 2
-
-::: {.grid}
 
 ::: {.g-col-6 .card} 
 `r echo_date()`
@@ -257,20 +214,11 @@ projects |>
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
-- **SPRING BREAK -- NO CLASS**
-
-![](https://www.weareteachers.com/wp-content/uploads/teachers-leaving-for-spring-break-1.png)
-
-
-
 :::
 
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- **SPRING BREAK -- NO CLASS**
-
-![](https://i.pinimg.com/474x/09/26/9c/09269c126f02a2082a743e6bafdd0b7e.jpg)
 
 
 ```{r}
@@ -394,21 +342,6 @@ projects |>
 
 ::: 
 
-:::
-
----
-
-### Sprint 4
-
-::: {.grid}
-
-::: {.g-col-6 .card}
-`r echo_date()`
-
-- Sprint planning
-
-
-::: 
 ::: {.g-col-6 .card}
 `r echo_date()`
 
