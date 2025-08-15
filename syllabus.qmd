@@ -32,7 +32,7 @@ button <- function(..., button_type = "default",
 Student hours:
 
 - Tuesdays and Wednesdays from 2:45 pm -- 3:30 pm ET in McConnell 213
-- Fridays from 9:45 am -- 11:15 am ET in McConnell 213
+- Fridays from 10:00 am -- 11:30 am ET in McConnell 213
 - by appointment:
     - either in McConnell 213
     - or via Zoom  `r fontawesome::fa("video")` 
@@ -96,20 +96,64 @@ SDS 192 and SDS 210 or the equivalent
 - *[Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R](https://bookdown.org/roback/bookdown-BeyondMLR/)*, Roback and Legler. CRC Press, 2021. Available for free online. 
 - *[Mastering Shiny](https://mastering-shiny.org/)*, Wickham. O'Reilly, 2021. Available free online.
 
-#### Supplemental reading:
+#### Supplemental resources:
 
 - [Posit Connect](https://posit.co/products/enterprise/connect/) is an interactive web application framework for R. Available for free via our Posit Connect Server. 
 
 
 ### Classes
 
-Classes meets on Mondays from 1:40-2:55 and on Wednesdays from 1:20--2:35 pm ET in Bass 204. 
+Classes meets on Mondays from 1:40-2:55 and on Wednesdays from 1:20--2:35 pm ET in Burton 307. 
 
 ### Accommodations
 
 Smith is committed to providing support services and reasonable accommodations to all students with disabilities. 
 To request an accommodation, please register with the [Accessibility Resource Center](https://www.smith.edu/your-campus/offices-services/accessibility-resource-center) (ARC) at the beginning of the semester. 
 To contact ARC, please email <arc@smith.edu>.
+
+## Content
+
+### Expectations
+
+This is a 4 credit course, meaning that by federal guidelines, it should consume about 12 hours per week of your time. We meet for 2.5 hours per week. That means **you should be spending about 9.5 hours per week**, or nearly 2 hours per day, on this course **outside of class.** 
+
+::: {.callout-warning}
+You should be spending about 9.5 hours per week on this course outside of class.
+:::
+
+
+My goal is to help you achieve the [learning goals](#learning-goals) for this course using only the mental model you have built of the material we have covered, and *without* the aid of generative AI. 
+While I accept the ubiquity of generative AI, I believe that helping you build your mental model of this material is where I can best contribute to your education. 
+To that end, much of our time in class and many of our assessments will take place in AI-free environments. 
+Other learning will take place [outside of class](#expectations), wherein [you are free to use AI in whatever fashion you want](#use-of-generative-ai) (unless otherwise noted), provided that it is in compliance with [Smith's Honor Code](#academic-honor-code-statement). 
+
+Please understand that while AI may be helpful to you in building your mental model of the material, it will not be available to you during many of our assessments, and I am comparatively less interested in your ability to complete tasks while using AI than I am in your ability to demonstrate knowledge using only your brain (and body). 
+
+This perspective applies to all course content, including mathematical equations and R code. 
+
+
+### Grading & Assignments
+
+The learning and assessments in this course are centered around three main components:
+
+- (10%) Engagement: Attending class meetings, being active on [the course Slack channel](#communication), participating in class discussions, and offering ideas and questions in class or on Slack are all ways of demonstrating engagement. Your engagement grade will be determined by me in consultation with periodic self-assessments completed by you. 
+- (15%) Bi-weekly homework/lab assignments: These assignments will include problems that allow you to working with data and analyze the results
+- (20%) Midterm exam: a written exam
+- (20%) [Colloquium presentation](https://en.wikipedia.org/wiki/Colloquium): You will choose a published research paper in sports analytics, and during the second half of the semester, you and a partner will present the paper to the class. 
+- (35%) Research project: a 10-page [Quarto Manuscript](https://quarto.org/docs/manuscripts/) and a 3-minute class presentation. 
+
+Please see the [schedule](schedule.qmd) for the most current due dates.
+
+#### Extensions
+
+I value your ability to meet deadlines and manage your own workload.
+I am also a reasonable person who understands that life happens and this is not always possible. 
+Extensions up to 48 hours will typically be granted *when requested at least 48 hours in advance* without requiring a reason or an explanation. 
+Longer extensions, or those requested within 48 hours of a deadline, will typically not be granted. 
+Please plan accordingly. 
+Please note that because many of the assignments in this class are collaborative, individual extensions for group assignments will be problematic. 
+**All extended deadlines will appear on Moodle.**
+
 
 ## Policies {#policies .unnumbered}
 
@@ -153,20 +197,9 @@ had since 1944.
 
 `r button("Important", button_type = "danger")`
 
-This course has a **flexible** policy towards the use of generative AI tools.
-
-- Use: 
-    - In writing code: The use of generative AI is **permitted** in this course as long as you cite the tool you used and understand what the code is doing to the same extent as if you had written it yourself. Specific assignments may have more restrictive use policies. 
-    - In writing text: The use of generative AI tools is **limited** to pre-writing activities (e.g., brainstorming, gathering information, organizing an outline, etc.). AI tools are specifically **not permitted** for writing entire sentences, paragraphs, drafts, or papers to complete class assignments. (Please see the policy on Abuse below.)
-- Abuse: Attempts to pass off AI-generated content as your own (including but not limited to failure to properly cite generative AI tools) is considered plagiarism and could be a violation of [Smith's Academic Honor Code](#honor-code). 
-- Disclosure: If you choose to use generative AI as a learning aid, it is essential to disclose its use on your assignments to maintain academic integrity. If you use generative AI, make sure to add a "Generative AI Disclosure" [callout block](https://quarto.org/docs/authoring/callouts.html) at the bottom of your assignment (see below). Your disclosure should state what program you used and how you used it, including links to the specific prompts you used, if possible. Properly citing the AI-generated content allows me to understand your process better and gives credit to the assistance received from these tools. 
-
-::: {title="Sample Generative AI Disclosure Statement" .callout-important}
-Generative AI Disclosure: This assignment was supported by use of the AI platform [ChatGPT](https://openai.com/chatgpt/). 
-Specifically, I used GPT 3.5 to assist in the title creation (link here), although the final title was modified slightly. 
-I also used ChatGPT to help me plan my outline (link here). 
-I implemented the chatbot's recommendations.
-:::
+Unless otherwise noted (such as for exams and oral presentations), generative AI can be used whenever you are outside of class. 
+However, **please read [my perspective](#perspective)** on learning and generative AI. 
+Please understand that careless and excessive use of generative AI will likely impede your ability to achieve the [course learning goals](#learning-goals). 
 
 ::: {.callout-warning}
 Remember that generative AI is not *intelligent*, doesn't *think*, and has no idea what is *true* or *false*. 
@@ -192,43 +225,6 @@ All students, the instructor, the lab instructor, and all assistants are expecte
 
 This Code of Conduct is adapted from the [Contributor Covenant](http://contributor-covenant.org/), version 1.0.0, available [here](http://contributor-covenant.org/version/1/0/0/).
 
-## Content
-
-### Expectations
-
-This is a 4 credit course, meaning that by federal guidelines, it should consume about 12 hours per week of your time. We meet for 2.5 hours per week. That means **you should be spending about 9.5 hours per week**, or nearly 2 hours per day, on this course **outside of class.** 
-
-::: {.callout-warning}
-You should be spending about 9.5 hours per week on this course outside of class.
-:::
-
-### Grading
-
-In thinking about what grade you deserve, I am interested in the following dimensions of learning (in no particular order):
-
-- Engagement: How much effort are you putting into this class? How hard are you trying? How respsonsive and accountable are you to your classmates? 
-- Learning: How much have you learned? What have you learned? What are the things that you can do at the end of the class that you couldn't do at the beginning? When you look back on this class, what will you tell people that you learned from this experience? 
-- Proficiency: How well are you able to perform the tasks required of your assignments for this class? How knowledgeable are you about the topics covered in class, or the various elements of your project? 
-
-### Assignments
-
-The learning in this course is centered around three main components:
-
-- (20%) Bi-weekly homework/lab assignments: These assignments will include components of working with data and analyzing the results
-- (30%) Midterm exam: a written exam
-- (50%) Research project: a 10-page [Quarto Manuscript](https://quarto.org/docs/manuscripts/) and a 3-minute class presentation. 
-
-Please see the [schedule](schedule.qmd) for the most current due dates.
-
-#### Extensions
-
-I value your ability to meet deadlines and manage your own workload.
-I am also a reasonable person who understands that life happens and this is not always possible. 
-Extensions up to 48 hours will typically be granted *when requested at least 48 hours in advance* without requiring a reason or an explanation. 
-Longer extensions, or those requested within 48 hours of a deadline, will typically not be granted. 
-Please plan accordingly. 
-Please note that because many of the assignments in this class are collaborative, individual extensions for group assignments will be problematic. 
-**All extended deadlines will appear on Moodle.**
 
 ## Resources {#resources .unnumbered}
 
@@ -238,14 +234,14 @@ The [course website](http://beanumber.github.io/sds410/) and Moodle will be upda
 
 ### Computing
 
-The use of the `R` statistical computing environment with the [RStudio](http://rstudio.org) interface is thoroughly integrated into the course. You have two options for using `RStudio`:
+The use of the R statistical computing environment with the [RStudio](http://rstudio.org) interface is thoroughly integrated into the course. You have two options for using RStudio:
 
 * The **server** version of [Posit Workbench](https://posit.co/products/enterprise/workbench/) on the [web](http://posit.smith.edu/). The advantage of using the server version is that all of your work will be stored in the cloud, where it is automatically saved and backed up. This means that you can access your work from any computer with a web browser (Firefox is recommended) and an Internet connection. 
 * A **desktop** version of [RStudio IDE](https://posit.co/products/open-source/rstudio/) installed on your machine. The downside to this approach is that your work is only stored locally, and you will have to manage your own installation. 
 
 Note that you do not have to choose one or the other -- you may use both. 
 However, it is important that you understand the distinction so that you can keep track of your work. 
-Both `R` and `RStudio` are free and open-source, and are installed on most computer labs on campus. 
+Both R and RStudio are free and open-source, and are installed on most computer labs on campus. 
 
 Unless otherwise noted, you should assume that it will be helpful to bring a laptop to class. It is not *required*, but since there are no workstations in the classroom, we will need a critical mass (i.e. at least 12) computers in the classroom pretty much everyday. 
 
