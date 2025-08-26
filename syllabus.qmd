@@ -137,10 +137,10 @@ This perspective applies to all course content, including mathematical equations
 The learning and assessments in this course are centered around three main components:
 
 - (10%) Engagement: Attending class meetings, being active on [the course Slack channel](#communication), participating in class discussions, and offering ideas and questions in class or on Slack are all ways of demonstrating engagement. Your engagement grade will be determined by me in consultation with periodic self-assessments completed by you. 
-- (15%) Bi-weekly homework/lab assignments: These assignments will include problems that allow you to working with data and analyze the results
+- (15%) [Bi-weekly homework/lab assignments](hw.qmd): These assignments will include problems that allow you to working with data and analyze the results
 - (20%) Midterm exam: a written exam
-- (20%) [Colloquium presentation](https://en.wikipedia.org/wiki/Colloquium): You will choose a published research paper in sports analytics, and during the second half of the semester, you and a partner will present the paper to the class. 
-- (35%) Research project: a 10-page [Quarto Manuscript](https://quarto.org/docs/manuscripts/) and a 3-minute class presentation. 
+- (20%) [Colloquium presentation](colloquium.qmd): You will choose a published research paper in sports analytics, and during the second half of the semester, you and a partner will present the paper to the class. 
+- (35%) [Research project](paper.qmd): a 10-page [Quarto Manuscript](https://quarto.org/docs/manuscripts/) and a 3-minute class presentation. 
 
 Please see the [schedule](schedule.qmd) for the most current due dates.
 

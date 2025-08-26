@@ -19,21 +19,12 @@ website:
       - text: "Assignments"
         icon: list-task
         menu:
-          - text: "Projects"
-            icon: diagram-2-fill
-            href: projects.html
-          - text: "Sprints"
-            icon: person-walking
-            href: sprints.html
-          - text: "Ind. Learning"
-            icon: book
-            href: learning.html
-          - text: "Final Paper"
-            icon: file-pdf
-            href: paper.html
-          - text: "Ethics essay"
-            icon: bag-heart
-            href: ethics_essay.html
+          - icon: code-slash
+            href: hw.qmd
+          - icon: file-arrow-up
+            href: colloquium.qmd
+          - icon: file-pdf
+            href: paper.qmd
     right:
       - icon: github
         href: https://www.github.com/sds-capstone

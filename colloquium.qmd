@@ -1,0 +1,67 @@
+---
+title: "Colloquium presentation"
+bibliography: refs.bib
+# use citeproc
+citeproc: true
+csl: apa-cv.csl
+suppress-bibliography: true
+---
+
+In a [colloquium](https://en.wikipedia.org/wiki/Colloquium), there is usually a different speaker each week. 
+During the second half of the semester, our class will run as a quasi-colloquium, wherein you will take turns presenting a sports analytics paper to the rest of the class. 
+This seminar is very common in graduate school, and is a great way to learn how to read a research paper at a deep level. 
+
+Your presentation should take about half of the class period (i.e., 35-40 minutes). 
+Your goal is maximize each other student's understanding of the paper by the time they leave the room. 
+
+Here is some advice and ground rules:
+
+- You can expect that the rest of the class will have read the paper. 
+- You use slides but you don't have to. You can ask the author for any slides that they may have already made and use those. 
+- You can use your own code or code from another source. 
+- Don't just lecture---prepare some type of activity (lasting no more than ~10-15 minutes) that will engage the other students and help them understand the material. 
+
+
+## Expectations
+
+You will choose a partner, and a paper (see #suggested-papers), and a date during the [second half of the semester](schedule.qmd), and send them to me for approval. 
+If I approve, we will put you on the schedule and post the paper to the rest of the class. 
+If I do not approve, try again. 
+By **Wednesday, October 8th** we will have the colloquium schedule and topics set. 
+
+# Suggested papers
+
+You are free to present any paper on any topic in sports analytics, provided that:
+
+- it is published in a peer-reviewed journal
+- it's not one of the other papers we are reading for this class
+- it is approved by me
+
+## Baseball
+
+1. @lindsey1963investigation
+1. @Albert2015
+
+## Basketball
+
+1. @Deshpande2016
+1. @cervone2016multiresolution
+
+## Football
+
+1. @Yurko2019nflwar
+1. @Romer2006
+1. @Yam2019
+1. @lopez2020bigger
+
+## Multisport
+
+1. @Bradley1952
+1. @Lopez2018
+
+## Other
+
+1. @Elo1978
+1. @kovalchik2016searching
+
+# References
