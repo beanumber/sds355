@@ -2,14 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://beanumber.github.io/sds355/syllabus.html</loc>
-    <lastmod>2025-08-19T20:47:01.439Z</lastmod>
+    <lastmod>2025-08-26T18:31:44.953Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/paper.html</loc>
+    <lastmod>2025-08-26T18:31:44.952Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/hw.html</loc>
+    <lastmod>2025-08-26T18:31:44.952Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/colloquium.html</loc>
+    <lastmod>2025-08-26T18:31:44.952Z</lastmod>
   </url>
   <url>
     <loc>https://beanumber.github.io/sds355/index.html</loc>
-    <lastmod>2025-08-19T20:47:01.439Z</lastmod>
+    <lastmod>2025-08-26T18:31:44.952Z</lastmod>
   </url>
   <url>
     <loc>https://beanumber.github.io/sds355/schedule.html</loc>
-    <lastmod>2025-08-19T20:47:01.439Z</lastmod>
+    <lastmod>2025-08-26T18:31:44.953Z</lastmod>
   </url>
 </urlset>

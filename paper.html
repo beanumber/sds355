@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>SDS 355 – SDS 355: Fall 2025</title>
+<title>Research Paper – SDS 355: Fall 2025</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -90,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> <i class="bi bi-house" role="img">
+    <a class="nav-link" href="./index.html"> <i class="bi bi-house" role="img">
 </i> 
 <span class="menu-text">Home</span></a>
   </li>  
@@ -151,15 +151,33 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#writing-for-data-science" id="toc-writing-for-data-science" class="nav-link active" data-scroll-target="#writing-for-data-science">Writing for data science</a></li>
+  <li><a href="#audience" id="toc-audience" class="nav-link" data-scroll-target="#audience">Audience</a>
+  <ul>
+  <li><a href="#the-structure-of-a-scientific-paper" id="toc-the-structure-of-a-scientific-paper" class="nav-link" data-scroll-target="#the-structure-of-a-scientific-paper">The structure of a scientific paper</a></li>
+  <li><a href="#feedback-from-previous-drafts" id="toc-feedback-from-previous-drafts" class="nav-link" data-scroll-target="#feedback-from-previous-drafts">Feedback from previous drafts</a></li>
+  <li><a href="#ethical-statement" id="toc-ethical-statement" class="nav-link" data-scroll-target="#ethical-statement">Ethical statement</a></li>
+  </ul></li>
+  <li><a href="#drafts-and-rubrics" id="toc-drafts-and-rubrics" class="nav-link" data-scroll-target="#drafts-and-rubrics">Drafts and rubrics</a>
+  <ul>
+  <li><a href="#first-draft" id="toc-first-draft" class="nav-link" data-scroll-target="#first-draft">First draft</a></li>
+  <li><a href="#second-draft" id="toc-second-draft" class="nav-link" data-scroll-target="#second-draft">Second draft</a></li>
+  <li><a href="#final-draft" id="toc-final-draft" class="nav-link" data-scroll-target="#final-draft">Final draft</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">SDS 355</h1>
+<h1 class="title">Research Paper</h1>
 </div>
 
 
@@ -176,15 +194,240 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to SDS 355: Sports Analytics. You will find most of the course content here, but please keep an eye on <a href="http://moodle.smith.edu">Moodle</a> for grades and assignments.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://imgs.xkcd.com/comics/sports.png" class="img-fluid figure-img"></p>
-<figcaption>xkcd</figcaption>
-</figure>
+<section id="writing-for-data-science" class="level2">
+<h2 class="anchored" data-anchor-id="writing-for-data-science">Writing for data science</h2>
+<p>Please follow the following guidelines for <em>all</em> drafts of your final paper:</p>
+<ul>
+<li><strong>All papers will be written in <a href="https://quarto.org/">Quarto</a></strong> as <strong><a href="https://quarto.org/docs/manuscripts/">Manuscripts</a></strong></li>
+<li>Use <a href="https://en.wikipedia.org/wiki/BibTeX">BibTeX</a> for <a href="https://quarto.org/docs/authoring/citations.html">citations</a>. Use <a href="https://scholar.google.com/">Google Scholar</a> to gather reference information in BibTeX format (adjust manually where necessary). Include a <a href="https://en.wikipedia.org/wiki/Digital_object_identifier"><code>doi</code></a> (preferred) and/or <code>url</code> field in all BibTeX entries. Insert citations into the body of the paper as appropriate. Cite R packages with information from <code>citation()</code>. You can start a <code>.bib</code> file with <code>knitr::write_bib()</code>. The BibTeX database for this page looks <a href="refs.bib">like this</a>.</li>
+<li>Include a link to your GitHub repository (where necessary) as a citation (even if it’s private)!</li>
+<li>All <a href="https://quarto.org/docs/authoring/figures.html">Figures</a> must be referenced explicitly in the text by number. Figures should have expansive captions that tell the reader what they are supposed to see in the figure. All figures should have readable axis labels and explicit units. Figures should be mostly self-explanatory! Spend <strong>more</strong> time gussying up the figures – not less!</li>
+<li><a href="https://quarto.org/docs/authoring/tables.html">Tables</a> should also have expansive captions and must be referenced in the text by number. Simple summary tables are easy to generate and really helpful to readers!</li>
+<li>Use <a href="https://quarto.org/docs/authoring/markdown-basics.html">Markdown formatting</a>, including: sections and subsections, lists, links, block quotes, chunks, and code, where appropriate.</li>
+<li>Put any pieces of code in backticks (`). That includes names of packages, functions, variable names, and even certain strings. For bits of actual code, use a chunk. Note that Quarto supports chunks in many languages, including <a href="https://quarto.org/docs/computations/python.html">Python</a>, <a href="https://bookdown.org/yihui/rmarkdown/language-engines.html#sql">SQL</a>, and <a href="https://bookdown.org/yihui/rmarkdown/language-engines.html#shell-scripts">bash</a>.</li>
+<li>Limit your <a href="https://twitter.com/ClintSmithIII/status/1290772304801259521?ref_src=twsrc%5Etfw">use of adverbs</a>.</li>
+</ul>
+</section>
+<section id="audience" class="level2">
+<h2 class="anchored" data-anchor-id="audience">Audience</h2>
+<p>Your final deliverable will be to write up your project as an academic paper. For your convenience, the format should conform to the <a href="https://www.causeweb.org/usproc/usresp">Undergraduate Research Project Competition (USRESP)</a> guidelines. If possible, you are strongly encouraged to submit your paper to the competition, but that decision will not affect your grade in this class. The paper should be 12–15 pages long, plus references, and an appendix (of arbitrary length) in which you can show more graphics, tables, etc.</p>
+<ul>
+<li>Use your GitHub repository to write the paper. Put the paper contents into a subdirectory called <code>quarto-manuscript</code>.</li>
+<li>Use GitHub issues to delegate certain tasks to certain people, and to keep track of your progress.</li>
+<li>Use the <a href="https://quarto.org/docs/manuscripts/">Manuscripts</a> feature to write the paper in Quarto.</li>
+<li>One submission per group.</li>
+</ul>
+<section id="the-structure-of-a-scientific-paper" class="level3">
+<h3 class="anchored" data-anchor-id="the-structure-of-a-scientific-paper">The structure of a scientific paper</h3>
+<p>Most commonly, research papers will have five sections like:</p>
+<ol type="1">
+<li>Introduction and Motivation: What is the problem you are trying to solve? Why is this problem interesting? What has been tried before? What have been the shortcoming of those approaches that necessitate your efforts? Often, this section will conclude with a subsection (or paragraph) outlining “our contributions.” What is the new knowledge that this paper contributes?</li>
+<li>Data: Where did it come from? What are some basic summary statistics, variable definitions, and/or visualizations that help the reader understand the data you are working with? Tables and figures are strongly encouraged here.</li>
+<li>Methods: What did you actually do? What techniques or methods did you employ? What were the specifications for any statistical models you used? What software or packages did you use or develop?</li>
+<li>Results: What did you learn about the problem you identified in Section 1? This is where you put the tables, figures, and analytics by-products of your work.</li>
+<li>Conclusion: What are the limitations of your work? What are some next steps that someone (either you or another research group) should consider in attempting to further your work? Remind us one last time about what you did.</li>
+</ol>
+<ul>
+<li>References: Every reference (except for books) needs a URL. Use Google Scholar to help with BibTeX. Every book needs publisher location. 🙄 The format is <code>Publisher City: Publisher Name</code>.</li>
+</ul>
+<p>Optionally, if you have more stuff:</p>
+<ul>
+<li><a href="https://quarto.org/docs/authoring/appendices.html">Appendix</a>: Include supplementary graphs and tables in an appendix. The reader may or may not read the appendix.</li>
+</ul>
+</section>
+<section id="feedback-from-previous-drafts" class="level3">
+<h3 class="anchored" data-anchor-id="feedback-from-previous-drafts">Feedback from previous drafts</h3>
+<p>The following common feedback applies to <strong>all</strong> groups. Please read carefully – these are <strong>mandatory</strong> recommendations.</p>
+<p>General feedback:</p>
+<ul>
+<li>Use an academic writing style. Use the <strong>present tense</strong> (in almost every case), even when writing about previously published papers or work that you did two months ago. Use “we” to describe your efforts. Avoid the <a href="https://en.wikipedia.org/wiki/Passive_voice">passive voice</a>!</li>
+<li>Use examples, screenshots, or peeks at data to illustrate what you are talking about.</li>
+<li>Don’t be afraid to get technical – this is a scientific paper. However, if you are going to invoke technical terms or concepts, you have to either explain them or give a citation to a reference that does.</li>
+<li>Focus on problems and solutions. What were the problems that your client had? How did you solve them? <strong>Don’t just narrate about what you did</strong> – connect the work that you did to the problems that existed before you started. If you find this hard to do, perhaps what you are writing about doesn’t need to be in the paper.</li>
+<li>Revise, then revise again.</li>
+</ul>
+</section>
+<section id="ethical-statement" class="level3">
+<h3 class="anchored" data-anchor-id="ethical-statement">Ethical statement</h3>
+<p>Your final paper <strong>must</strong> include an ethical statement. The ethical statement may be relegated to the appendix at your discretion.</p>
+<ul>
+<li>Drawing on what you have learned about data science ethics in this class, discuss <strong>any</strong> ethical considerations in your project. For some projects, this statement could be quite short (one paragraph may suffice). For other projects, more detail may be needed (no more than 2 pages).</li>
+<li>Be expansive and creative in your thinking about <strong>possible</strong> ethical considerations. One way to do this assignment poorly would be to write a short statement asserting that there are no ethical considerations, only to have me think of several fairly obvious ones.</li>
+</ul>
+</section>
+</section>
+<section id="drafts-and-rubrics" class="level2">
+<h2 class="anchored" data-anchor-id="drafts-and-rubrics">Drafts and rubrics</h2>
+<section id="first-draft" class="level3">
+<h3 class="anchored" data-anchor-id="first-draft">First draft</h3>
+<p>Your first draft focuses on the mechanics of writing a manuscript in Quarto. First, you have to get the template to compile. Second, you can fill in easy details about yourselves. Third, write a complete introductory section. This section should be complete and include a compreshensible description of your problem, and why the previous approaches to solving it were insufficient. Fourth, write a complete section about your data. What data do you have? How many rows and columns? What format? What are some basic summary statistics? [This is a good place to include a table.] Fifth, set up BibTeX and cite at least one reference in your introduction.</p>
+<p>Your submission should include:</p>
+<ul>
+<li>Title</li>
+<li>Authors and affiliations</li>
+<li>Abstract</li>
+<li>Introduction (Section 1)</li>
+<li>Data (Section 2)</li>
+<li>References (using BibTeX, with at least one citation)</li>
+</ul>
+<table class="caption-top table">
+<caption>Final paper first draft rubric</caption>
+<colgroup>
+<col style="width: 3%">
+<col style="width: 22%">
+<col style="width: 34%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Criteria</th>
+<th style="text-align: left;">Four</th>
+<th style="text-align: left;">Five</th>
+<th style="text-align: left;">Six</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Formatting</td>
+<td style="text-align: left;">Multiple formatting errors. References do not use BiBTeX.</td>
+<td style="text-align: left;">Formatting works, but does not help to structure the paper. Section titles do not clearly indicate what section is about. Figures/images are too big or too small.</td>
+<td style="text-align: left;">Section titles provide clear structure. Figures, tables, and images fit nicely into the narrative. References use BiBTeX and are complete.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Attention to detail</td>
+<td style="text-align: left;">Title does is not descriptive. References are mostly incomplete.</td>
+<td style="text-align: left;">Author information and/or affiliations are incomplete. References do not include URLs.</td>
+<td style="text-align: left;">Title is informative and catchy. Author information is complete. References include complete information, including URLs.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Introduction</td>
+<td style="text-align: left;">Introduction does not describe the problem. Introduction does not discuss previous approaches or cite previous work.</td>
+<td style="text-align: left;">Introduction describes the problem, but uses language that is either overly technical (unexplained jargon) or not technical enough (imprecise). Description of previous work is vague.</td>
+<td style="text-align: left;">Introduction clearly describes the problem using appropriate language. Introduction discusses previous work and includes citations. Introduction is written in present tense.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Data</td>
+<td style="text-align: left;">Description of data is vague, rife with jargon, or inaccurate. Key variables are not defined. Units are not included.</td>
+<td style="text-align: left;">Description of data is not comprehensive. Key variables are summarized but not well-defined. Units are implied or omitted. Tables and/or figures are unclear or barely readable.</td>
+<td style="text-align: left;">Description of data is clear and comprehensive. Basic summary statistics are included in neat, readable tables. Key variables are well-defined and summarized in tables or figures, with units made explicit.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="second-draft" class="level3">
+<h3 class="anchored" data-anchor-id="second-draft">Second draft</h3>
+<p>Second draft criteria include everything in the first draft, plus:</p>
+<ul>
+<li>Methods (Section 3)</li>
+<li>Results (Section 4) – can be preliminary</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Incorporate my feedback from the first draft and revise accordingly!</p>
+</div>
+</div>
+<table class="caption-top table">
+<caption>Final paper second draft rubric</caption>
+<colgroup>
+<col style="width: 1%">
+<col style="width: 22%">
+<col style="width: 35%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Criteria</th>
+<th style="text-align: left;">Ten</th>
+<th style="text-align: left;">Eleven</th>
+<th style="text-align: left;">Twelve</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">General</td>
+<td style="text-align: left;">Corrections from first draft were fully implemented. Methods section is imprecise and/or incomplete. Results section is sparse.</td>
+<td style="text-align: left;">Methods section contains too much narrative about what was tried, rather than focusing on what is important for the reader to know. Results section is largely incomplete and fails to drive home message.</td>
+<td style="text-align: left;">Methods section explains in appropriate scientific language what is important for the reader to know and how it was done. Results section drives home the message of the paper using fully-explained examples, figures, tables, etc.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="final-draft" class="level3">
+<h3 class="anchored" data-anchor-id="final-draft">Final draft</h3>
+<p>Final draft criteria include everything in the first and second drafts, plus:</p>
+<ul>
+<li>Results (Section 4) – finalized</li>
+<li>Conclusion (Section 5)
+<ul>
+<li>Ethical statement (can be in appendix)</li>
+<li>Limitations</li>
+<li>Future work</li>
+<li>Final thoughts</li>
+</ul></li>
+<li>Acknowledgements</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Incorporate my feedback from the second draft and revise accordingly!</p>
+</div>
+</div>
+<table class="caption-top table">
+<caption>Final paper final draft rubric</caption>
+<colgroup>
+<col style="width: 3%">
+<col style="width: 36%">
+<col style="width: 2%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Criteria</th>
+<th style="text-align: left;">Sixteen</th>
+<th style="text-align: left;">Eighteen</th>
+<th style="text-align: left;">Twenty</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Formatting</td>
+<td style="text-align: left;">Section titles do not clearly indicate what section is about. Figures/images are too big or too small. References do not use BiBTeX.</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Section titles provide clear structure. Figures, tables, and images fit nicely into the narrative. References use BiBTeX and are complete.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Narrative</td>
+<td style="text-align: left;">Paper tells the story of what you did, including excessive details about data wrangling, and/or failed approaches that are not informative.</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Introduction explains key concepts and illustrates why research was necessary. Team’s contribution is clearly communicated. Outside research is extensive and appropriately sourced. Paper focuses on the information that is most important to readers.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Completeness</td>
+<td style="text-align: left;">Results section is still largely empty. Methods section is thin on details or largely incomplete. Figures, tables, and references are not working properly.</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Results section is substantially complete. Methods section is fully sketched out, if not complete. Figures, tables, and references are working, if not complete.</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
