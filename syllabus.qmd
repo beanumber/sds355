@@ -89,6 +89,8 @@ SDS 192 and SDS 210 or the equivalent
 
 #### Recommended where appropriate:
 
+- *[Introduction to Sports Analytics using R](https://www.prospectpressvt.com/textbooks/elmore-sports-analytics)*. Elmore and Urbaczewski, 2025. Prospect Press. 
+- *[Bayes Rules! An Introduction to Applied Bayesian Modeling](https://www.bayesrulesbook.com/)*. Johnson, Ott, Dogucu, CRC Press, 2021. Available free online. 
 - *[Advanced R](https://adv-r.hadley.nz/)*, 2nd edition. Hadley Wickham, CRC Press, 2019. Available free online.
 - *[R Packages](http://r-pkgs.had.co.nz/)*, 2nd edition. Hadley Wickham, O'Reilly, 2015. Available free online.
 - *[R for Data Science](http://r4ds.had.co.nz/)*, Garrett Grolemund and Hadley Wickham, O'Reilly, 2017. Available free online.
@@ -121,6 +123,7 @@ This is a 4 credit course, meaning that by federal guidelines, it should consume
 You should be spending about 9.5 hours per week on this course outside of class.
 :::
 
+### Perspective
 
 My goal is to help you achieve the [learning goals](#learning-goals) for this course using only the mental model you have built of the material we have covered, and *without* the aid of generative AI. 
 While I accept the ubiquity of generative AI, I believe that helping you build your mental model of this material is where I can best contribute to your education. 
@@ -131,6 +134,7 @@ Please understand that while AI may be helpful to you in building your mental mo
 
 This perspective applies to all course content, including mathematical equations and R code. 
 
+You can read [more about my thoughts](https://beanumber.github.io/ai.html) on generative AI in education. 
 
 ### Grading & Assignments
 

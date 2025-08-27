@@ -37,10 +37,13 @@ You are free to present any paper on any topic in sports analytics, provided tha
 - it's not one of the other papers we are reading for this class
 - it is approved by me
 
+The following is a non-exhaustive list of high-quality papers which I think would be appropriate. 
+
 ## Baseball
 
 1. @lindsey1963investigation
 1. @Albert2015
+1. @elmore2022bang
 
 ## Basketball
 
@@ -50,18 +53,21 @@ You are free to present any paper on any topic in sports analytics, provided tha
 ## Football
 
 1. @Yurko2019nflwar
+1. @dutta2020unsupervised
+1. @mallepalle2020extracting
+1. @yurko2020going
 1. @Romer2006
 1. @Yam2019
 1. @lopez2020bigger
 
 ## Multisport
 
+1. @franks2016metaanalytics
 1. @Bradley1952
 1. @Lopez2018
 
 ## Other
 
+1. @de2025age
 1. @Elo1978
 1. @kovalchik2016searching
-
-# References

@@ -2,3 +2,15 @@
 title: Homework
 ---
 
+::: {.callout-note}
+
+All homework assignments must be completed in Quarto and submitted as a PDF to Moodle by the corresponding **Friday at 5 pm**. 
+
+:::
+
+## HW 1: Due 9/19
+
+
+1. [*ABDWR*, 4.7.1](https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises)
+1. [*ABDWR*, 4.7.2](https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises)
+1. 
