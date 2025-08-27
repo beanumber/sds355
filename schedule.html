@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -39,7 +59,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2e4d431198c4378bc5575068d6c4566b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-d8bce306a4c47d71f1e7aa5fc1e1385a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -191,6 +211,10 @@ ul.task-list li input[type="checkbox"] {
 <div class="grid">
 <div class="g-col-6 card">
 <p></p><div class="card-header" data-date="2025-09-08"> <h4 class="anchored">1. Mon, Sep  8</h4> </div><p></p>
+<ul>
+<li>Introductions</li>
+<li>Expected Winning Percentage</li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -203,12 +227,17 @@ Homework
 <div class="callout-body-container callout-body">
 <ul>
 <li>Complete <a href="https://docs.google.com/forms/d/1UieMVg-UhMoTk4SkYVvlKqUEwcrxrl3B6322QBg8uL8/viewform?usp=preview">pre-course questionnaire</a> by <strong>Tuesday at noon</strong> (if you haven’t already!)</li>
+<li>Read <em>ABDWR</em>, <a href="https://beanumber.github.io/abdwr3e/04-pythagoras.html">Ch. 4</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div class="g-col-6 card">
 <p></p><div class="card-header" data-date="2025-09-10"> <h4 class="anchored">2. Wed, Sep 10</h4> </div><p></p>
+<ul>
+<li>Recap from Monday</li>
+<li><em>Moneyball</em> screening</li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -219,12 +248,17 @@ Homework
 </div>
 </div>
 <div class="callout-body-container callout-body">
-
+<ul>
+<li>Read <em>ABDWR</em>, <a href="https://beanumber.github.io/abdwr3e/05-runsexpectancy.html">Ch. 5</a></li>
+</ul>
 </div>
 </div>
 </div>
 <div class="g-col-6 card">
 <p></p><div class="card-header" data-date="2025-09-15"> <h4 class="anchored">3. Mon, Sep 15</h4> </div><p></p>
+<ul>
+<li>The Run Expectancy Matrix</li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -241,11 +275,30 @@ Homework
 </div>
 <div class="g-col-6 card">
 <p></p><div class="card-header" data-date="2025-09-17"> <h4 class="anchored">4. Wed, Sep 17</h4> </div><p></p>
+<ul>
+<li>Evaluating strategies using the REM</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Homework
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>HW 1 due Friday by 5 pm</strong></li>
+<li>Read <span class="citation" data-cites="Albert2015">Albert (<a href="#ref-Albert2015" role="doc-biblioref">2015</a>)</span></li>
+</ul>
+</div>
+</div>
 </div>
 <div class="g-col-6 card">
 <p></p><div class="card-header" data-date="2025-09-22"> <h4 class="anchored">5. Mon, Sep 22</h4> </div><p></p>
 <ul>
-<li>Projects</li>
+<li>Win Probability</li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -276,6 +329,7 @@ Homework
 <div class="g-col-6 card">
 <p></p><div class="card-header" data-date="2025-09-29"> <h4 class="anchored">7. Mon, Sep 29</h4> </div><p></p>
 <ul>
+<li>Expected points per possession</li>
 <li><a href="https://operations.nfl.com/gameday/analytics/big-data-bowl/">Big Data Bowl</a></li>
 <li><a href="https://americansoccerinsights.com/call-for-proposals/">American Soccer Insights Summit</a></li>
 </ul>
@@ -295,6 +349,9 @@ Homework
 </div>
 <div class="g-col-6 card">
 <p></p><div class="card-header" data-date="2025-10-01"> <h4 class="anchored">8. Wed, Oct  1</h4> </div><p></p>
+<ul>
+<li>First-down conversion</li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -311,6 +368,9 @@ Note
 </div>
 <div class="g-col-6 card">
 <p></p><div class="card-header" data-date="2025-10-06"> <h4 class="anchored">9. Mon, Oct  6</h4> </div><p></p>
+<ul>
+<li>Bradley-Terry models</li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -327,6 +387,9 @@ Homework
 </div>
 <div class="g-col-6 card">
 <p></p><div class="card-header" data-date="2025-10-08"> <h4 class="anchored">10. Wed, Oct  8</h4> </div><p></p>
+<ul>
+<li>Bayesian state-space models</li>
+</ul>
 </div>
 <div class="g-col-6 card">
 <p></p><div class="card-header" data-date="2025-10-13"> <h4 class="anchored">11. Mon, Oct 13</h4> </div><p></p>
@@ -534,9 +597,14 @@ Important
 </div>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Albert2015" class="csl-entry" role="listitem">
+Albert, J. 2015. <span>“Player Evaluation Using Win Probabilities in Sports Competitions.”</span> <em>Wiley Interdisciplinary Reviews: Computational Statistics</em> 7 (5): 316–25. <a href="https://doi.org/10.1002/wics.1358">https://doi.org/10.1002/wics.1358</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
