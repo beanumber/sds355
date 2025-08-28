@@ -51,11 +51,13 @@ echo_date <- function() {
 `r echo_date()`
 
 - Recap from Monday
-- *Moneyball* screening
 
 ::: {.callout-note} 
 ## Homework
 
+- Watch [*Moneyball*](https://en.wikipedia.org/wiki/Moneyball_(film))  
+  TONIGHT, 7:30 PM - 9:30 PM
+  Hillyer Graham
 - Read *ABDWR*, [Ch. 5](https://beanumber.github.io/abdwr3e/05-runsexpectancy.html)
 
 :::
@@ -65,6 +67,7 @@ echo_date <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
+- *Moneyball* discussion
 - The Run Expectancy Matrix
 
 ::: {.callout-note} 
