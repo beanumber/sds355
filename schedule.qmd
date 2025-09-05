@@ -26,6 +26,13 @@ echo_date <- function() {
     htmltools::h4(paste0(i, ". ", x))
   )
 }
+
+activity <- function() {
+  paste(fontawesome::fa("chart-line"), "Activity:")
+}
+slides <- function() {
+  paste(fontawesome::fa("microphone"), "Mini-lecture:")
+}
 ```
 
 ### Baseball analytics
@@ -36,7 +43,9 @@ echo_date <- function() {
 `r echo_date()`
 
 - Introductions
-- Expected Winning Percentage
+- `r activity()` [2004 Trade Deadline](activities/01_trade_deadline.qmd)
+- `r slides()` [Expected Winning Percentage](slides/01_expected_wpct.qmd)
+- [Sporcle quiz](https://www.sporcle.com/games/Knapster/mlbteammvp)
 
 ::: {.callout-note} 
 ## Homework
@@ -108,7 +117,12 @@ echo_date <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- [New England Symposium on Statistics in Sports](https://www.nessis.org/)
+- [Tigers @ Red Sox](https://www.mlb.com/gameday/tigers-vs-red-sox/2025/09/26/776181/live?partnerId=LR_preview)  
+  Friday, 7:10 pm  
+  [Fenway Park, Boston, MA](https://www.google.com/maps/place/fenway+park/data=!4m2!3m1!1s0x89e379f63f253f6f:0xa2800dcb647a5504?sa=X&ved=1t:155783&ictx=111)
+- [New England Symposium on Statistics in Sports](https://www.nessis.org/)  
+  Saturday, 9 am - 6 pm  
+  Harvard University
 
 ::: 
 

@@ -1,0 +1,166 @@
+---
+title: "Trade Deadline"
+author: "Prof. Baumer"
+date: 2025-09-08
+date-format: medium
+format: 
+  pdf:
+    template-partials: 
+      - ../tex/title.tex
+      - ../tex/before-body.tex
+    toc: false
+    number-sections: true
+#    mainfont: "EB Garamond"
+execute:
+  echo: false
+  warning: false
+---
+
+### Activity: [MLB Trade deadline](https://en.wikipedia.org/wiki/Trade_(sports)#MLB_2)
+
+It's July 18th, 2004 and you are the general manager of the New York Mets. 
+You've just beaten your division rival, the Philadelphia Phillies, to move within 2 games of the division lead. 
+The NL East standings on the next morning were:
+
+```{r}
+library(tidyverse)
+
+gl2004 <- retrosheet::get_retrosheet("game", 2004)
+```
+
+
+```{r}
+nl_east <- gl2004 |>
+  mutate(
+    win_teamID = ifelse(HmRuns > VisRuns, HmTm, VisTm),
+    lose_teamID = ifelse(HmRuns > VisRuns, VisTm, HmTm),
+    win_R = ifelse(HmRuns > VisRuns, HmRuns, VisRuns),
+    lose_R = ifelse(HmRuns > VisRuns, VisRuns, HmRuns),
+    win_RA = lose_R,
+    lose_RA = win_R
+  ) |>
+  filter(Date < "2004-07-19") |>
+  select(Date, contains("_")) |>
+  pivot_longer(
+    cols = -Date, 
+    names_to = c("category", ".value"), 
+    names_sep = "_"
+  ) |>
+  filter(teamID %in% c("NYN", "PHI", "ATL", "FLO", "MON")) |>
+  group_by(teamID) |>
+  summarize(
+    G = n(),
+    W = sum(category == "win"),
+    L = sum(category == "lose"),
+    wpct = W / (W + L),
+    RS = sum(R),
+    RA = sum(RA)
+  )
+
+nl_east |>
+  arrange(desc(wpct)) |>
+  knitr::kable(digits = 3)
+```
+
+You have an important decision to make. 
+If the Mets make the playoffs, your job will be secure and you will get a bonus. 
+If the Mets don't make the playoffs, your job could be in jeopardy. 
+For the purposes of this exercise, assume that the Mets will make the playoffs if they finish 2nd (or better) in the division. 
+You can improve your chances of making the playoffs this season by trading some of your best minor league players for some lousy team's good major league players (whose contracts will expire at the end of the season). 
+However, the loss of those minor league players may came back to haunt you in a few years, so you can't just give them away for nothing. 
+
+1. The Mets current winning percentage is .505 after 91 games. If they continue winning at that pace, how many of their 162 games will they win? \
+\
+\
+\
+1. Brainstorm and write down at least **three** limitations for this projection. 
+\
+\
+\
+\
+\
+1. What is the Mets run differential through 91 games? Also compute this for the other teams in the NL East. 
+\
+\
+\
+\
+1. How would you characterize the Mets standing among the other teams in the division? 
+\
+\
+\
+\
+\
+1. How might runs scored and runs allowed be useful in improving your projection? 
+
+```{r}
+#| eval: false
+nl_east |>
+  mutate(wpct_hat = 1 / (1 + (RA/RS)^2)) |>
+  arrange(desc(wpct)) |>
+  knitr::kable(digits = 3)
+```
+
+\newpage
+
+1. Consider the following plot, which shows the relationship between winning percentage and run differential for all teams since 1954. 
+
+```{r}
+library(Lahman)
+teams54 <- Teams |>
+  filter(yearID >= 1954) |>
+  select(teamID, yearID, lgID, G, W, L, R, RA) |>
+  mutate(
+    RD = R - RA, 
+    wpct = W / (W + L),
+  )
+```
+
+2. Describe the relationship between run differential and winning percentage. 
+
+```{r}
+mod_pyt <- lm(wpct ~ RD, data = teams54)
+
+weird <- broom::augment(mod_pyt) |>
+  mutate(id = row_number()) |>
+  arrange(desc(.cooksd)) |>
+  head(6)
+
+ggplot(teams54, aes(x = RD, y = wpct)) +
+  geom_hline(yintercept = 0.5, linetype = 3) +
+  geom_vline(xintercept = 0, linetype = 3) +
+  geom_point(alpha = 0.1) +
+  ggrepel::geom_label_repel(data = teams54[weird$id, ], aes(label = paste(yearID, teamID))) + 
+  scale_y_continuous("Winning Percentage") +
+  scale_x_continuous("Run Differential")
+```
+
+3. If the Mets continue to score and allow runs at their current pace, what will their run differential be at the end of the season? 
+\
+\
+\
+\
+\
+1. Draw and label the point on the plot that would correspond to the Mets. 
+
+```{r}
+#| eval: false
+predict(mod_pyt, newdata = data.frame(wpct = .505, RD = (18/91) * 162))
+```
+
+5. Using the model from the plot, how many games do you project that the Mets will win? 
+\
+\
+\
+\
+\
+\
+1. What do you think the Mets chances are for making the playoffs? Do you think they should go for it?[^kazmir]
+\
+\
+\
+\
+\
+
+[^kazmir]: [Read this](https://en.wikipedia.org/wiki/Scott_Kazmir#Tampa_Bay_Devil_Rays_/_Rays) to find out what actually happened. 
+
+

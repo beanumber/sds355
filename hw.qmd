@@ -1,5 +1,6 @@
 ---
 title: Homework
+show-solutions: false
 ---
 
 ::: {.callout-note}
@@ -8,9 +9,205 @@ All homework assignments must be completed in Quarto and submitted as a PDF to M
 
 :::
 
+
+```{r}
+#| message: false
+library(tidyverse)
+library(Lahman)
+```
+
 ## HW 1: Due 9/19
 
+1. Use the **Lahman** package to identify when MLB moved to a 154-game schedule? When did they move to a 162 game schedule? Since the advent of the 154-game schedule, in which years were there interruptions in play? Can you Identify the cause of each? 
 
-1. [*ABDWR*, 4.7.1](https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises)
-1. [*ABDWR*, 4.7.2](https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises)
-1. 
+::: {.content-hidden unless-meta="show-solutions"}
+::: {.callout-note title="SOLUTION"}
+
+```{r}
+Teams |>
+  group_by(yearID) |>
+  summarize(
+    max_G = max(G),
+    mean_G = mean(G)
+  ) |> 
+  arrange(yearID) |>
+  print(n = 200)
+```
+
+The 154-game schedule was standardized in 1904 across both leagues. 
+The AL moved to a 162-game schedule in 1961, and the NL followed the next year. 
+
+There were interruptions in play in:
+
+- 1918-1919 (WWI)
+- [1972 (player's strike)](https://en.wikipedia.org/wiki/1972_Major_League_Baseball_strike)
+- [1981 (player's strike)](https://en.wikipedia.org/wiki/1981_Major_League_Baseball_strike)
+- [1994-1995 (strike)](https://en.wikipedia.org/wiki/1994%E2%80%9395_Major_League_Baseball_strike)
+- 2020 (COVID)
+
+:::
+:::
+
+2. Since the advent of the 154-game schedule, use the **Lahman** package to rank the 10 best and 10 worst teams of all time, as measured by winning percentage. 
+
+::: {.content-hidden unless-meta="show-solutions"}
+::: {.callout-note title="SOLUTION"}
+
+```{r}
+teams <- Teams |>
+  mutate(
+    wpct = W / (W + L)
+  ) |>
+  filter(yearID >= 1904) |>
+  arrange(desc(wpct)) |>
+  select(yearID, teamID, G, W, L, wpct, WSWin)
+
+teams |>
+  head(10)
+
+teams |>
+  tail(10)
+```
+
+:::
+:::
+
+3. Use the **Lahman** package to identify all 8 players in Major League history with at least 300 home runs and at least 300 stolen bases in their careers. 
+
+::: {.content-hidden unless-meta="show-solutions"}
+::: {.callout-note title="SOLUTION"}
+
+```{r}
+Batting |>
+  group_by(playerID) |>
+  summarize(
+    first = min(yearID),
+    last = max(yearID),
+    tHR = sum(HR),
+    tSB = sum(SB)
+  ) |>
+  filter(tHR >= 300 & tSB >= 300) |>
+  arrange(desc(last)) |>
+  left_join(People, by = join_by(playerID)) |>
+  select(nameLast, nameFirst, first, last, tHR, tSB)
+```
+
+:::
+:::
+
+4. Use the **Lahman** package to identify all 10 pitchers in Major League history with at least 300 wins and at least 3000 strikeouts in their careers. 
+
+
+::: {.content-hidden unless-meta="show-solutions"}
+::: {.callout-note title="SOLUTION"}
+
+```{r}
+Pitching |>
+  group_by(playerID) |>
+  summarize(
+    first = min(yearID),
+    last = max(yearID),
+    tW = sum(W),
+    tSO = sum(SO)
+  ) |>
+  filter(tW >= 300 & tSO >= 3000) |>
+  arrange(desc(last)) |>
+  left_join(People, by = join_by(playerID)) |>
+  select(nameLast, nameFirst, first, last, tW, tSO)
+```
+
+:::
+:::
+
+5. Produce the following table for all teams with the words "New York" or "Brooklyn" in their names.
+
+
+```{r}
+#| echo: false
+Teams |>
+  filter(str_detect(name, "New York|Brooklyn")) |>
+  group_by(franchID) |>
+  summarize(
+    num_teamids = n_distinct(teamID),
+    names = paste(unique(name), collapse = ","),
+    num_seasons = n_distinct(yearID),
+    first = min(yearID), 
+    last = max(yearID),
+    G = sum(G),
+    wpct = sum(W) / sum(W + L),
+    WS = sum(WSWin == "Y", na.rm = TRUE)
+  ) |>
+  arrange(desc(last), desc(G)) |>
+  knitr::kable()
+```
+
+::: {.content-hidden unless-meta="show-solutions"}
+::: {.callout-note title="SOLUTION"}
+
+(see chunk)
+
+:::
+:::
+
+6. [*ABDWR*, Exercise 4.7.1](https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises)
+
+Hint: See <https://beanumber.github.io/abdwr3e/02-intro.html#iterating-using-map>
+
+::: {.content-hidden unless-meta="show-solutions"}
+::: {.callout-note title="SOLUTION"}
+
+```{r}
+Teams |>
+  filter(yearID >= 1961 & yearID <= 2000) |>
+  select(teamID, yearID, lgID, G, W, L, R, RA) |>
+  mutate(
+    RD = R - RA, 
+    wpct = W / (W + L),
+    decade = floor(yearID %/% 10) * 10
+  ) |>
+  group_by(decade) |>
+  group_split() |>
+  map(~lm(wpct ~ RD, data = .x)) |>
+  map(coef) |>
+  bind_rows() |>
+  mutate(
+    plus10 = `(Intercept)` + RD * 10
+  )
+```
+
+:::
+:::
+
+7. [*ABDWR*, Exercise 4.7.2](https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises)
+
+
+::: {.content-hidden unless-meta="show-solutions"}
+::: {.callout-note title="SOLUTION"}
+
+```{r}
+old <- Teams |>
+  filter(yearID < 1900) |>
+  select(teamID, yearID, lgID, G, W, L, R, RA) |>
+  mutate(
+    RD = R - RA, 
+    wpct = W / (W + L),
+    logWratio = log(W / L), 
+    logRratio = log(R / RA)
+  ) |>
+  filter(W > 0)
+
+mod_py <- lm(logWratio ~ 0 + logRratio, data = old)
+mod_py
+```
+
+```{r}
+plot(mod_py, 1)
+mod_py |>
+  broom::augment() |>
+  slice(c(7, 40))
+old[c(7, 40), ]
+```
+
+:::
+:::
+

@@ -1,0 +1,276 @@
+---
+title: "Expected Winning Percentage"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "September 8, 2025"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+# Measuring team strength
+
+## Limitations of Won-Loss Record
+
+::: {.incremental}
+
+- Binary outcomes are "noisy"
+- Chance / randomness / luck
+- Short seasons
+- Personnel changes
+    - Injuries
+    - Trades
+- Strength of schedule
+
+:::
+
+## Generic model for team strength
+
+$$
+  \text{Team Strength} = f(X) + \epsilon
+$$
+
+::: {.incremental}
+
+- What are some variables in $X$?
+    - player quality? 
+    - coach/manager quality? 
+    - scoring ability?
+    - defensive ability?
+
+:::
+
+## Winning percentage
+
+$$
+  wpct = \frac{W}{G} = \frac{W}{W + L}
+$$
+
+- If $wpct$ is noisy, how can we **predict** future $wpct$? 
+
+## Run differential
+
+- $RS$: runs scored (by a team)
+- $RA$: runs allowed (by that same team)
+
+::: {.incremental}
+
+- If $RS > RA$, what should happen to $wpct$? 
+- If $RS < RA$, what should happen to $wpct$? 
+- If $RS = RA$, what should happen to $wpct$? 
+
+:::
+
+## Computing run differential
+
+```{r}
+library(tidyverse)
+library(Lahman)
+
+team_runs <- Teams |> 
+  filter(yearID >= 1954) |>
+  rename(RS = R) |> 
+  mutate(wpct = W / (W + L), RD = RS - RA) |>
+  select(yearID, teamID, lgID, wpct, RS, RA, RD)
+
+team_runs
+```
+
+## Visualize the relationship
+
+```{r}
+rd_plot <- ggplot(
+  data = team_runs, aes(x = RD, y = wpct)
+) +
+  geom_vline(xintercept = 0, color = "darkgray", linetype = 2) +
+  geom_hline(yintercept = 0.5, color = "darkgray", linetype = 2) +
+  geom_point(alpha = 0.2) + 
+  xlab("Run Differential") + 
+  ylab("Winning Percentage") +
+  geom_smooth(method = "lm")
+```
+
+## Historical relationship
+
+```{r}
+rd_plot
+```
+
+
+## Regression model
+
+```{r}
+mod <- lm(wpct ~ RD, data = team_runs)
+coef(mod)
+```
+
+. . .
+
+- Rule of thumb: 10 runs = 1 win
+
+```{r}
+coef(mod)["RD"] * 10 * 162
+```
+
+. . .
+
+- What happens at the extremes? 
+
+## Jamesian (Pythagorean) expected winning percentage
+
+- [Bill James](https://en.wikipedia.org/wiki/Bill_James) (1983)
+$$
+  \widehat{wpct} = \frac{RS^\alpha}{RS^\alpha + RA^\alpha} = \frac{1}{1 + (RA/RS)^\alpha}
+$$
+
+::: { .incremental}
+
+- James: $\alpha = 2$
+- But what is the **optimal** value? 
+
+:::
+
+## Computing run ratio
+
+```{r}
+team_runs <- team_runs |>
+  mutate(run_ratio = RS/RA)
+
+rr_plot <- ggplot(
+  data = team_runs, aes(x = run_ratio, y = wpct)
+) +
+  geom_vline(xintercept = 1, color = "darkgray", linetype = 2) +
+  geom_hline(yintercept = 0.5, color = "darkgray", linetype = 2) +
+  geom_point(alpha = 0.2) + 
+  xlab("Ratio of Runs Scored to Runs Allowed") + 
+  ylab("Winning Percentage")
+
+exp_wpct <- function(x, k = 2) { 
+  return(1/(1 + (1/x)^k))
+}
+```
+
+## Jamesian model
+
+```{r}
+rr_plot +
+  geom_smooth(method = "lm") +
+  stat_function(fun = exp_wpct, args = list(2), linewidth = 2, color = "navy") 
+```
+
+## Could we do better? 
+
+- Why $\alpha = 2$? 
+
+. . .
+
+```{r}
+optimal <- team_runs |>
+  nls(
+    formula = wpct ~ 1/(1 + (1/run_ratio)^k), 
+    start = list(k = 2)
+  ) |>
+  coef()
+optimal
+```
+
+## Visualize all models
+
+```{r}
+rr_plot +
+  geom_smooth(method = "lm") +
+  stat_function(fun = exp_wpct, args = list(2), linewidth = 2, color = "navy") +
+  stat_function(fun = exp_wpct, args = list(optimal), linewidth = 2, color = "gold")
+```
+
+## Extensions 
+
+To other sports:
+
+- Morey (1993): $\alpha \approx 18$ for the NBA
+- **Exercise**: compute the optimal $\alpha$ for another sport!
+
+. . .
+
+Other methods:
+
+- Bradley-Terry models [@Bradley1952]
+- Elo ratings [@Elo1978]
+- Bayesian state-space models [@Glickman1998]
+
+# How good is my team? 
+
+## 2004 [trade deadline](https://en.wikipedia.org/wiki/Trade_(sports)#MLB_2)
+
+```{r}
+#| echo: false
+library(retrosheet)
+yearID <- 2004
+
+retro_gl <- get_retrosheet("game", yearID)
+
+games <- retro_gl |>
+  mutate(home_win = HmRuns > VisRuns) |>
+  select(Date, VisTm, HmTm, home_win) |>
+  pivot_longer(
+    -c(Date, home_win),
+    names_to = "is_home", values_to = "team_id", 
+  ) |>
+  mutate(
+    is_win = ifelse(
+      is_home == "HmTm", home_win, abs(1 - home_win))
+  ) |>
+  group_by(team_id) |>
+  mutate(
+    cum_W = cumsum(is_win), 
+    cum_L = cumsum(!is_win), 
+    cum_G = cum_W + cum_L, 
+    G_over_500 = cum_W - cum_L, 
+    last_game = cum_G == max(cum_G)
+  )
+
+retro_teams <- retrosheet::getTeamIDs(yearID) |>
+  enframe(name = "mascot", value = "retro_id")
+
+mlb_pal <- teamcolors::teamcolors |>
+  filter(league == "mlb", str_detect(division, "NL")) |>
+  inner_join(retro_teams, by = "mascot") |>
+  select(retro_id, primary) |>
+  deframe()
+
+games <- games |>
+  filter(team_id %in% names(mlb_pal))
+```
+
+```{r}
+#| echo: false
+ggplot(
+    games, 
+    aes(x = cum_G, y = G_over_500, color = team_id)
+  ) + 
+  geom_hline(yintercept = 18, color = "darkgray", lty = 2) + 
+  geom_vline(xintercept = 100, color = "darkgray", lty = 2) +
+  geom_line() +  
+  ggrepel::geom_label_repel(
+    data = filter(games, last_game), 
+    aes(label = team_id)
+  ) + 
+  annotate("text", x = 2, y = 22, label = "90 wins", color = "darkgray", hjust = "left") +
+  scale_color_manual(
+    guide = "none", name = "Team",
+    values = mlb_pal
+  ) +
+  scale_y_continuous("Games above .500") + 
+  scale_x_continuous("Cumulative Games Played") + 
+  labs(title = paste("Daily MLB Standings,", yearID), 
+       caption = "Source: Retrosheet")
+```
+
+## References
