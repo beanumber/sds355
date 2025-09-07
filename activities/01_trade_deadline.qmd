@@ -9,7 +9,6 @@ format:
       - ../tex/title.tex
       - ../tex/before-body.tex
     toc: false
-    number-sections: true
 execute:
   echo: false
   warning: false
@@ -19,7 +18,7 @@ execute:
 
 It's July 18th, 2004 and you are the general manager of the New York Mets. 
 You've just beaten your division rival, the Philadelphia Phillies, to move within 2 games of the division lead. 
-The NL East standings on the next morning were:
+The NL East standings on the next morning are:
 
 ```{r}
 library(tidyverse)
@@ -68,11 +67,20 @@ For the purposes of this exercise, assume that the Mets will make the playoffs i
 You can improve your chances of making the playoffs this season by trading some of your best minor league players for some lousy team's good major league players (whose contracts will expire at the end of the season). 
 However, the loss of those minor league players may came back to haunt you in a few years, so you can't just give them away for nothing. 
 
-1. The Mets current winning percentage is .505 after 91 games. If they continue winning at that pace, how many of their 162 games will they win? \
+1. The Mets current winning percentage is .505 after 91 games. If they continue winning at that pace, how many of their 162 games will they win? 
+\
+
+```{r}
+#| eval: false
+(46/91)*162
+```
+
 \
 \
 \
+
 1. Brainstorm and write down at least **three** limitations for this projection. 
+\
 \
 \
 \
@@ -101,7 +109,9 @@ nl_east |>
 
 \newpage
 
-1. Consider the following plot, which shows the relationship between winning percentage and run differential for all teams since 1954. 
+### Relationship between run differential and wins
+
+Consider the following plot, which shows the relationship between wins and run differential for all teams since 1954. 
 
 ```{r}
 library(Lahman)
@@ -114,31 +124,40 @@ teams54 <- Teams |>
   )
 ```
 
-2. Describe the relationship between run differential and winning percentage. 
-
 ```{r}
-mod_pyt <- lm(wpct ~ RD, data = teams54)
+mod_pyt <- lm(wpct * 162 ~ RD, data = teams54)
 
 weird <- broom::augment(mod_pyt) |>
   mutate(id = row_number()) |>
   arrange(desc(.cooksd)) |>
   head(6)
 
-ggplot(teams54, aes(x = RD, y = wpct)) +
-  geom_hline(yintercept = 0.5, linetype = 3) +
+ggplot(teams54, aes(x = RD, y = wpct * 162)) +
+  geom_hline(yintercept = 81, linetype = 3) +
   geom_vline(xintercept = 0, linetype = 3) +
   geom_point(alpha = 0.1) +
   ggrepel::geom_label_repel(data = teams54[weird$id, ], aes(label = paste(yearID, teamID))) + 
-  scale_y_continuous("Winning Percentage") +
+  scale_y_continuous("Wins per 162 games") +
   scale_x_continuous("Run Differential")
 ```
 
+1. Describe the relationship between run differential and wins (e.g., form, direction, and strength). 
+\
+\
+\
+\
 3. If the Mets continue to score and allow runs at their current pace, what will their run differential be at the end of the season? 
 \
 \
+
+```{r}
+#| eval: false
+(18/91) * 162
+```
+
 \
 \
-\
+
 1. Draw and label the point on the plot that would correspond to the Mets. 
 
 ```{r}
@@ -146,7 +165,7 @@ ggplot(teams54, aes(x = RD, y = wpct)) +
 predict(mod_pyt, newdata = data.frame(wpct = .505, RD = (18/91) * 162))
 ```
 
-5. Using the model from the plot, how many games do you project that the Mets will win? 
+5. Using the data from the plot, how many games do you project that the Mets will win? 
 \
 \
 \
