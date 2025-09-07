@@ -79,7 +79,7 @@ However, the loss of those minor league players may came back to haunt you in a 
 \
 \
 
-1. Brainstorm and write down at least **three** limitations for this projection. 
+2. Brainstorm and write down at least **three** limitations for this projection. 
 \
 \
 \
@@ -111,12 +111,12 @@ nl_east |>
 
 ### Relationship between run differential and wins
 
-Consider the following plot, which shows the relationship between wins and run differential for all teams since 1954. 
+Consider the following plot, which shows the relationship between wins per 162 games and run differential for all teams since 1954. 
 
 ```{r}
 library(Lahman)
 teams54 <- Teams |>
-  filter(yearID >= 1954) |>
+  filter(yearID >= 1954, G > 150) |>
   select(teamID, yearID, lgID, G, W, L, R, RA) |>
   mutate(
     RD = R - RA, 
@@ -148,7 +148,6 @@ ggplot(teams54, aes(x = RD, y = wpct * 162)) +
 \
 3. If the Mets continue to score and allow runs at their current pace, what will their run differential be at the end of the season? 
 \
-\
 
 ```{r}
 #| eval: false
@@ -158,14 +157,14 @@ ggplot(teams54, aes(x = RD, y = wpct * 162)) +
 \
 \
 
-1. Draw and label the point on the plot that would correspond to the Mets. 
+3. Draw and label the point on the plot that would correspond to the Mets. 
 
 ```{r}
 #| eval: false
 predict(mod_pyt, newdata = data.frame(wpct = .505, RD = (18/91) * 162))
 ```
 
-5. Using the data from the plot, how many games do you project that the Mets will win? 
+4. Using the data from the plot, how many games do you project that the Mets will win? 
 \
 \
 \
