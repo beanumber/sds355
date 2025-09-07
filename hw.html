@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-d8bce306a4c47d71f1e7aa5fc1e1385a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -112,9 +147,14 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-assignments">    
         <li>
-    <a class="dropdown-item" href="./hw.html"><i class="bi bi-code-slash" role="img">
+    <a class="dropdown-item" href="./hw.html"><i class="bi bi-speedometer" role="img">
 </i> 
  <span class="dropdown-text">Homework</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./sporcle.html"><i class="bi bi-code-slash" role="img">
+</i> 
+ <span class="dropdown-text">Sporcle</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./colloquium.html"><i class="bi bi-file-arrow-up" role="img">
@@ -130,11 +170,6 @@ ul.task-list li input[type="checkbox"] {
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://www.github.com/sds-capstone"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://sds-355-01-202601.slack.com/"> <i class="bi bi-slack" role="img">
 </i> 
@@ -156,7 +191,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hw-1-due-919" id="toc-hw-1-due-919" class="nav-link active" data-scroll-target="#hw-1-due-919">HW 1: Due 9/19</a></li>
+  <li><a href="#hw-1-due-912" id="toc-hw-1-due-912" class="nav-link active" data-scroll-target="#hw-1-due-912">HW 1: Due 9/12</a></li>
+  <li><a href="#hw-2-due-919" id="toc-hw-2-due-919" class="nav-link" data-scroll-target="#hw-2-due-919">HW 2: Due 9/19</a></li>
   </ul>
 </nav>
     </div>
@@ -193,14 +229,227 @@ Note
 </div>
 <div class="callout-body-container callout-body">
 <p>All homework assignments must be completed in Quarto and submitted as a PDF to Moodle by the corresponding <strong>Friday at 5 pm</strong>.</p>
+<p>You must <strong>show your code</strong>!!</p>
 </div>
 </div>
-<section id="hw-1-due-919" class="level2">
-<h2 class="anchored" data-anchor-id="hw-1-due-919">HW 1: Due 9/19</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Lahman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="hw-1-due-912" class="level2">
+<h2 class="anchored" data-anchor-id="hw-1-due-912">HW 1: Due 9/12</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You may find <a href="https://cdalzell.github.io/Lahman/">the schema for the <strong>Lahman</strong> database</a> helpful.</p>
+</div>
+</div>
 <ol type="1">
-<li><a href="https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises"><em>ABDWR</em>, 4.7.1</a></li>
-<li><a href="https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises"><em>ABDWR</em>, 4.7.2</a></li>
-<li></li>
+<li>Use the <strong>Lahman</strong> package to identify when MLB moved to a 154-game schedule? When did they move to a 162 game schedule? Since the advent of the 154-game schedule, in which years were there interruptions in play? Can you Identify the cause of each?</li>
+</ol>
+<ol start="2" type="1">
+<li>Since the advent of the 154-game schedule, use the <strong>Lahman</strong> package to rank the 10 best and 10 worst teams of all time, as measured by winning percentage.</li>
+</ol>
+<ol start="3" type="1">
+<li>Use the <strong>Lahman</strong> package to identify all 8 players in Major League history with at least 300 home runs and at least 300 stolen bases in their careers.</li>
+</ol>
+<ol start="4" type="1">
+<li>Use the <strong>Lahman</strong> package to identify all 10 pitchers in Major League history with at least 300 wins and at least 3000 strikeouts in their careers.</li>
+</ol>
+<ol start="5" type="1">
+<li>Use the <code>Teams</code> table from the <strong>Lahman</strong> package to produce the following table for all teams with the words “New York” or “Brooklyn” in their names.</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 65%">
+<col style="width: 6%">
+<col style="width: 3%">
+<col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">franchID</th>
+<th style="text-align: right;">num_teamids</th>
+<th style="text-align: left;">names</th>
+<th style="text-align: right;">num_seasons</th>
+<th style="text-align: right;">first</th>
+<th style="text-align: right;">last</th>
+<th style="text-align: right;">G</th>
+<th style="text-align: right;">wpct</th>
+<th style="text-align: right;">WS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NYY</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">New York Highlanders,New York Yankees</td>
+<td style="text-align: right;">121</td>
+<td style="text-align: right;">1903</td>
+<td style="text-align: right;">2023</td>
+<td style="text-align: right;">18852</td>
+<td style="text-align: right;">0.5693882</td>
+<td style="text-align: right;">27</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NYM</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">New York Mets</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">1962</td>
+<td style="text-align: right;">2023</td>
+<td style="text-align: right;">9810</td>
+<td style="text-align: right;">0.4822485</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SFG</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">New York Gothams,New York Giants</td>
+<td style="text-align: right;">75</td>
+<td style="text-align: right;">1883</td>
+<td style="text-align: right;">1957</td>
+<td style="text-align: right;">11115</td>
+<td style="text-align: right;">0.5533060</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LAD</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Brooklyn Atlantics,Brooklyn Grays,Brooklyn Bridegrooms,Brooklyn Grooms,Brooklyn Superbas,Brooklyn Dodgers,Brooklyn Robins</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">1884</td>
+<td style="text-align: right;">1957</td>
+<td style="text-align: right;">11031</td>
+<td style="text-align: right;">0.5157740</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BTT</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Brooklyn Tip-Tops</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1914</td>
+<td style="text-align: right;">1915</td>
+<td style="text-align: right;">310</td>
+<td style="text-align: right;">0.4803922</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BWW</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Brooklyn Ward’s Wonders</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1890</td>
+<td style="text-align: right;">1890</td>
+<td style="text-align: right;">133</td>
+<td style="text-align: right;">0.5757576</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NYI</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">New York Giants</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1890</td>
+<td style="text-align: right;">1890</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">0.5648855</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BRG</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Brooklyn Gladiators</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1890</td>
+<td style="text-align: right;">1890</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0.2653061</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NYP</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">New York Metropolitans</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1883</td>
+<td style="text-align: right;">1887</td>
+<td style="text-align: right;">592</td>
+<td style="text-align: right;">0.4663212</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NYU</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">New York Mutuals</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1876</td>
+<td style="text-align: right;">1876</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">0.3750000</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NNA</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">New York Mutuals</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1871</td>
+<td style="text-align: right;">1875</td>
+<td style="text-align: right;">278</td>
+<td style="text-align: right;">0.5531136</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BRA</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Brooklyn Atlantics</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1872</td>
+<td style="text-align: right;">1875</td>
+<td style="text-align: right;">192</td>
+<td style="text-align: right;">0.2631579</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ECK</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Brooklyn Eckfords</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1872</td>
+<td style="text-align: right;">1872</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">0.1034483</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="hw-2-due-919" class="level2">
+<h2 class="anchored" data-anchor-id="hw-2-due-919">HW 2: Due 9/19</h2>
+<ol type="1">
+<li><a href="https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises"><em>ABDWR</em>, Exercise 4.7.1</a></li>
+</ol>
+<p>Hint: See <a href="https://beanumber.github.io/abdwr3e/02-intro.html#iterating-using-map" class="uri">https://beanumber.github.io/abdwr3e/02-intro.html#iterating-using-map</a></p>
+<ol start="2" type="1">
+<li><a href="https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises"><em>ABDWR</em>, Exercise 4.7.2</a></li>
 </ol>
 
 
