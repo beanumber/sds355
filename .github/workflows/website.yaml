@@ -31,6 +31,8 @@ jobs:
             any::emoji
             any::here
             any::usethis
+            any::Lahman
+            any::retrosheet
 
       - name: Install GitHub packages
         run: |

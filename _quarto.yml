@@ -26,8 +26,6 @@ website:
           - icon: file-pdf
             href: paper.qmd
     right:
-      - icon: github
-        href: https://www.github.com/sds-capstone
       - icon: slack
         href: https://sds-355-01-202601.slack.com/
   page-footer: 
