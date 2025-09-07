@@ -29,14 +29,16 @@ jobs:
             any::remotes
             any::tidyverse
             any::emoji
+            any::ggrepel
             any::here
-            any::usethis
             any::Lahman
             any::retrosheet
+            any::usethis
 
       - name: Install GitHub packages
         run: |
-#          Rscript -e 'remotes::install_github("SmithCollege-SDS/sds")'
+          Rscript -e 'remotes::install_github("SmithCollege-SDS/sds")'
+          Rscript -e 'remotes::install_github("BillPetti/baseballr")'
 
       - uses: quarto-dev/quarto-actions/setup@v2
       - run: |

@@ -1,0 +1,730 @@
+---
+title: "A brief history of sabermetrics"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "September 10, 2025"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+
+# What is sabermetrics?
+
+## Sabermetrics
+
+:::: {.columns}
+::: {.column width="60%"}
+
+![](https://sabermetricscapstone.files.wordpress.com/2014/12/sabermetrics3.jpg)
+
+:::
+::: {.column width="40%"}
+
+- statistics
+- computing
+- math
+- baseball
+- ~~physics~~
+
+:::
+::::
+
+
+## A brief history of sabermetrics {.fullpage}
+
+```{r, echo=FALSE}
+DiagrammeR::grViz("
+digraph dot {
+
+graph [layout = dot]
+
+node [shape = oval,
+      style = filled,
+      color = darkgrey,
+      label = '']
+
+node [fillcolor = orange, width = 2]
+a [label = 'sabermetrics']
+
+node [fillcolor = dodgerblue, fixedsize = true, width = 1]
+b [label = 'data']
+c [label = 'tools']
+d [label = 'methods']
+
+edge [color = darkgrey]
+{b c d} -> a
+}")
+```
+
+## Early 20th century
+
+:::: {.columns}
+::: {.column width="50%"}
+
+- 1900s: [Henry Chadwick](https://en.wikipedia.org/wiki/Henry_Chadwick_(writer)) invents the boxscore
+
+:::
+::: {.column width="50%"}
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Henry_Chadwick_Baseball.jpg/200px-Henry_Chadwick_Baseball.jpg)
+
+:::
+::::
+
+## Early 20th century: data
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/1876boxscore.jpg/220px-1876boxscore.jpg){width="400px"}
+
+:::
+::: {.column width="50%"}
+
+- Boxscores 
+    - game level
+    - dozens of rows
+
+:::
+::::
+
+## Early 20th century: tools
+
+:::: {.columns}
+::: {.column width="50%"}
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Early_SSA_accounting_operations.jpg/220px-Early_SSA_accounting_operations.jpg" width="350px">
+
+:::
+::: {.column width="50%"}
+
+  - 1880: [punched cards invented](https://en.wikipedia.org/wiki/History_of_computing_hardware) (by IBM)
+  - 1935: punched cards used by SSA
+
+:::
+::::
+
+## Early 20th century: methods
+
+:::: {.columns}
+::: {.column width="50%"}
+
+  - 1907: [Galton's paper](https://en.wikipedia.org/wiki/History_of_statistics) on wisdom-of-crowds
+  - 1908: [Gosset's *t*-test](https://en.wikipedia.org/wiki/Student%27s_t-distribution)
+  - 1918: Fisher introduces **variance**
+  - 1935: *Design of Experiments*
+
+:::
+::: {.column width="50%"}
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Youngronaldfisher2.JPG/220px-Youngronaldfisher2.JPG)
+  
+::: 
+::::
+
+## Early 20th century: what did we learn?
+
+:::: {.columns}
+::: {.column width="50%"}
+
+<img src="http://cdn1.sbnation.com/imported_assets/546275/cy_20-_20zack.jpg" width="350px">
+
+:::
+::: {.column width="50%"}
+
+- Batting
+    - batting average
+- Pitching:
+    - earned run average (**ERA**)
+- Fielding
+    - fielding percentage
+
+:::
+::::
+
+## Branch Rickey era
+
+:::: {.columns}
+::: {.column width="50%"}
+
+- 1947: [Allan Roth](http://www.baseball-reference.com/bullpen/Allan_Roth), Brooklyn Dodgers statistician
+:::
+::: {.column width="50%"}
+  <img src="http://sabr.org/sites/default/files/images/allan_roth_low_res_LOC_3c27300v.jpg" width="450px">
+::: 
+::::
+
+## Branch Rickey era: data
+
+:::: {.columns}  
+::: {.column width="50%"}
+  <img src="http://www.kevinsavagecards.com/ItemImages/000016/39_12308a_lg.jpeg" width="400px">
+:::
+
+::: {.column width="50%"}
+- Tabulated
+    - recorded by hand (?)
+    - hundreds of rows (?)
+- 1951: [*Official Encyclopedia of Baseball*](http://www.baseball-reference.com/bullpen/The_Official_Encyclopedia_of_Baseball)
+    - games played
+    - batting average (for hitters)
+    - wins and losses (pitchers)
+
+::: 
+::::
+
+## Branch Rickey era: tools
+
+:::: {.columns}
+::: {.column width="50%"}
+  <img src="http://www.vintagecalculators.com/assets/images/autogen/MonroeLN160X_1.jpg" width="400px">
+:::
+
+::: {.column width="50%"}
+  - 1940s: [Monroe LN-160X](http://www.vintagecalculators.com/html/monroe_ln-160x.html)
+  - 1947: [Victor is the world's largest exclusive manufacturer of adding machines](https://en.wikipedia.org/wiki/Victor_Technology)
+  - 1950: [Turing test](https://en.wikipedia.org/wiki/Turing_test)
+
+:::
+::::
+
+## Branch Rickey era: methods
+
+:::: {.columns} 
+::: {.column width="50%"}
+  - 1953: Metropolis's paper on [Monte Carlo methods](https://en.wikipedia.org/wiki/Nicholas_Metropolis#Monte_Carlo_method)
+  - 1959: [Lehmann's *Testing Statistical Hypotheses*](https://en.wikipedia.org/wiki/List_of_important_publications_in_statistics)
+  - 1970: Codd's ["A Relational Model of Data for Large Shared Data Banks"](http://www.quickbase.com/articles/timeline-of-database-history)
+
+:::
+
+::: {.column width="50%"}
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/3dRosenbrock.png/350px-3dRosenbrock.png" width="400px">
+
+  - 1970: [Metropolis-Hastings](https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm) for MCMC
+  
+:::
+::::  
+
+## [Roth on math](https://sabr.org/bioproj/person/350155ef)
+
+:::: {.columns} 
+::: {.column width="50%"}
+> The figures concerned in baseball statistical work don’t call for integral calculus or even advanced algebra.
+>
+> --Allan Roth
+:::
+
+::: {.column width="50%"}
+![](http://assets.sbnation.com/assets/573927/Rickey.jpg)
+:::
+::::
+
+::: footer
+Rosenthal, ed., "The Statistician," in *Baseball Is Their Business*, 1952, p. 140
+:::
+
+## What did we learn?
+
+:::: {.columns}  
+::: {.column width="50%"}
+  <img src="http://www.wikihow.com/images/c/c2/Calculate-On-Base-Percentage-Step-12.jpg" width="400px">
+  
+:::
+::: {.column width="50%"}
+- Batting:
+    - [**OBP** better than batting average](http://www.baseball-reference.com/bullpen/Allan_Roth)
+    - [Platoon effects](http://www.nytimes.com/1992/03/05/sports/alan-roth-74-dies-baseball-statistician.html)
+- Pitching:
+    - Pitch counts
+- Fielding:
+    - Spray charts
+
+::: 
+::::
+
+## Bill James era
+
+:::: {.columns} 
+::: {.column width="50%"}
+
+- 1977--1988: [Bill James](https://en.wikipedia.org/wiki/Bill_James) popularizes "[sabermetrics](https://en.wikipedia.org/wiki/Sabermetrics)"
+
+:::
+::: {.column width="50%"}
+
+  <img src="http://ecx.images-amazon.com/images/I/51iOtZD9EHL._SX258_BO1,204,203,200_.jpg" width="300px">
+
+:::
+::::
+
+## Bill James era: data
+
+:::: {.columns} 
+::: {.column width="50%"}
+
+![](https://fivethirtyeight.com/wp-content/uploads/2017/05/baseballencyclopedia-05.gif?w=575)
+
+:::
+::: {.column width="50%"}  
+- Compiled:
+    - seasonal, some batter vs. pitcher
+    - thousands of rows
+- 1969: ["Big Mac"](https://fivethirtyeight.com/features/before-baseball-reference-statheads-relied-on-the-big-mac/)
+
+::: 
+::::
+
+## Bill James era: tools
+
+:::: {.columns}
+::: {.column width="50%"}
+  - 1973: [TI SR-10](https://en.wikipedia.org/wiki/Calculator#History) pocket calculator
+  - 1974: [Ingres](https://en.wikipedia.org/wiki/Ingres_(database))
+  - 1977: [Apple II](https://en.wikipedia.org/wiki/Apple_II)
+  - 1981: [MS-DOS](https://en.wikipedia.org/wiki/MS-DOS) first released
+  - 1986: [SQL](https://en.wikipedia.org/wiki/SQL) becomes and ANSI standard
+  
+:::
+::: {.column width="50%"}
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Apple_II_IMG_4212.jpg" width="400px">
+
+:::
+::::
+
+## Bill James era: methods
+
+:::: {.columns}
+::: {.column width="50%"}
+<img src="http://courses.washington.edu/matlab1/Bootstrap_examples_07.png" width="400px">
+:::
+::: {.column width="50%"}
+- 1977: [Tukey](https://en.wikipedia.org/wiki/John_Tukey), *Exploratory Data Analysis*
+- 1977: [EM algorithm](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)
+- 1979: Efron discovers [the bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_(statistics))
+::: 
+::::
+
+## Bill James era: what did we learn?
+
+:::: {.columns}
+::: {.column width="50%"}
+
+- **Pythagorean Expectation**
+- Win Shares
+- Batting
+    - Runs Created
+- Pitching
+    - Game Score
+- Fielding
+    - Range Factor
+
+:::
+::: {.column width="50%"}
+<img src="http://www.eg.bucknell.edu/~bvollmay/baseball/wpct_vs_z.gif" width="400px">
+:::
+::::
+
+
+## Internet era
+
+:::: {.columns}
+::: {.column width="50%"}
+- 1990s: [rec.sport.baseball](https://groups.google.com/forum/#!forum/rec.sport.baseball) connects the next generation of sabermetricians
+:::
+::: {.column width="50%"}
+<img src="http://i0.wp.com/mopupduty.com/wp-content/uploads/2011/06/sabermetrics.jpg?fit=450%2C272" width="400px">
+::: 
+::::
+
+## Internet era: data
+
+:::: {.columns}  
+::: {.column width="50%"}
+- Seasonal
+    - `player-team-season`
+    - 100,000 rows seasonal
+- 1995: [Sean Lahman](https://en.wikipedia.org/wiki/Sean_Lahman) publishes first online database
+
+:::
+::: {.column width="50%"}
+
+![](https://i.ytimg.com/vi/jLtEOJjrx6M/maxresdefault.jpg)
+
+:::
+::::
+
+## Internet era: tools
+
+:::: {.columns} 
+::: {.column width="50%"}
+  - 1990: [Windows 3.0](https://en.wikipedia.org/wiki/Windows_3.0)
+  - 1995: [Excel 7.0](https://en.wikipedia.org/wiki/Microsoft_Excel#Number_of_rows_and_columns) can handle at most 16k rows
+  - 1998: [iMac G3](https://en.wikipedia.org/wiki/IMac_G3)
+
+:::
+::: {.column width="50%"}
+  <img src="http://cdn.cultofmac.com/wp-content/uploads/2016/08/tumblr_o860yvcIUg1rnoexwo1_1280-780x439.jpg" width="450px">
+:::
+::::
+
+## Internet era: methods
+
+:::: {.columns} 
+::: {.column width="50%"}
+<img src="https://imgs.xkcd.com/comics/linear_regression.png" width="400px">
+:::
+::: {.column width="50%"}
+- correlation
+- regression
+- Markov chains
+::: 
+::::
+
+## Internet era: what did we learn?
+
+> There is little if any difference among major-league pitchers in their ability to prevent hits on balls hit in the field of play.
+>
+> --Voros McCracken
+
+<!--
+
+- 1999: [Defense Independent Pitching Statistics (DIPS)](https://en.wikipedia.org/wiki/Defense_independent_pitching_statistics)
+
+-->
+
+::: footer
+McCracken, "[Pitching and Defense: How Much Control Do Hurlers Have?](http://www.baseballprospectus.com/article.php?articleid=878)," BaseballProspectus.com, Jan 23, 2001
+:::
+
+## {background-image="http://1.bp.blogspot.com/-fWxprKv-6LI/UltyCnvh5xI/AAAAAAAAIyY/It2_rSTrt9Q/s1600/Moneyball.JPG"}
+
+
+## Moneyball era: data
+
+:::: {.columns} 
+::: {.column width="50%"}
+- Play-by-play
+    - batter vs. pitcher
+    - several million rows
+- 1996: [Retrosheet](https://en.wikipedia.org/wiki/Retrosheet) starts publishing play-by-play data online
+
+:::
+::: {.column width="50%"}
+
+  <img src="http://www.retrosheet.org/hitloc.jpg" width="450px">
+::: 
+::::
+
+## Moneyball era: tools
+
+:::: {.columns} 
+::: {.column width="50%"}
+  - 2003: [Excel 11.0](https://en.wikipedia.org/wiki/Microsoft_Excel#Number_of_rows_and_columns) can handle at most 64k rows
+  - 2005: [MySQL](https://en.wikipedia.org/wiki/MySQL) powers Google
+  
+:::
+::: {.column width="50%"}
+
+```
+play,1,0,hendr001,00,X,9/F9S
+play,1,0,whitd001,22,BBFFC,K/C
+play,1,0,alomr001,32,BBCFBB,W
+play,1,0,cartj001,00,X,4/P4
+play,1,1,raint001,00,X,43/G34
+play,1,1,coraj001,01,CX,4/P4MD
+play,1,1,thomf001,30,BBBB,W
+play,1,1,ventr001,00,B,WP.1-2
+play,1,1,ventr001,11,B.CB,WP.2-3
+play,1,1,ventr001,32,B.CB.SFFBS,K
+```
+
+:::
+::::
+
+## Moneyball era: methods
+
+:::: {.columns} 
+::: {.column width="50%"}
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/KnnClassification.svg/220px-KnnClassification.svg.png" width="400px">
+
+:::
+::: {.column width="50%"}
+- regression
+- clustering
+- $k$-Nearest Neighbor
+::: 
+::::
+
+## Moneyball era: what did we learn?
+
+:::: {.columns} 
+::: {.column width="50%"}
+
+- Batting
+    - Linear Weights
+    - Value Over Replacement Player
+    - **Projection systems**
+- Pitching
+    - Leverage
+- Fielding
+    - [Ultimate Zone Rating](https://en.wikipedia.org/wiki/Ultimate_zone_rating)
+
+:::
+::: {.column width="50%"}
+![](https://fivethirtyeight.com/wp-content/uploads/2015/07/natesilver2_light.jpg?w=1200) 
+::: 
+::::
+
+## PITCHf/x era: data
+
+:::: {.columns} 
+::: {.column width="50%"}
+- Pitch-by-pitch
+    - each pitch
+    - several million rows *per season*
+
+:::
+::: {.column width="50%"}
+
+  <img src="http://cpsievert.github.io/slides/pitchRx/CC/gameday.png" width="400px">
+:::
+::::
+
+## PITCHf/x era: tools
+
+:::: {.columns} 
+::: {.column width="50%"}
+![](https://upload.wikimedia.org/wikipedia/en/d/dd/MySQL_logo.svg)
+
+:::
+::: {.column width="50%"}
+- 2000s: SQL can handle tens of millions of rows on modest hardware
+- 2007: [Excel 12.0](https://en.wikipedia.org/wiki/Microsoft_Excel#Number_of_rows_and_columns) can handle at most 1M rows
+
+::: 
+::::
+
+
+## PITCHf/x era: methods
+
+:::: {.columns} 
+::: {.column width="50%"}
+
+![](https://live.staticflickr.com/817/26231081097_1a9e72cf9e_b.jpg)
+
+:::
+::: {.column width="50%"}
+- mixed models
+- Bayesian methods
+- generalized linear models
+::: 
+::::
+
+## PITCHf/x era: what did we learn?
+
+:::: {.columns} 
+::: {.column width="50%"}
+- [WAR](https://en.wikipedia.org/wiki/Wins_Above_Replacement)
+- Pitching
+    - Spin rates
+    - **Catcher framing**
+
+:::
+::: {.column width="50%"}
+<img src="http://www.qcbaseball.com/images/swaying2.jpg" width="400px">
+:::
+::::
+
+## Statcast era: data
+
+:::: {.columns} 
+::: {.column width="50%"}
+- 2015: [Statcast](https://en.wikipedia.org/wiki/Statcast) deployed
+- Player-tracking
+    - every 1/15th of a second
+    - several million rows *per game*
+
+:::
+::: {.column width="50%"}
+  <img src="http://baseball.physics.illinois.edu/images/Tracking-2.png" width="400px">
+::: 
+::::
+
+## Statcast era: tools
+
+:::: {.columns} 
+::: {.column width="50%"}
+- Hadoop
+- Apache Spark
+- [Cray supercomputer](http://www.cray.com/blog/crays-mystery-mlb-team-revealed/)!
+
+:::
+::: {.column width="50%"}
+![](https://live.staticflickr.com/2580/4100441969_64bccc91bb_b.jpg)
+::: 
+::::
+
+## Statcast era: methods
+
+:::: {.columns} 
+::: {.column width="50%"}
+
+![](https://www.wordstream.com/wp-content/uploads/2021/07/machine-learning.png)
+
+:::
+::: {.column width="50%"}
+- machine learning
+    - regularized regression
+    - decision trees
+    - random forests
+    - neural networks
+    - support vector machines
+
+::: 
+::::
+
+
+## Statcast era: what have we learned?
+
+:::: {.columns} 
+::: {.column width="50%"}
+- Batting:
+    - exit velocity
+    - launch angle
+- Fielding:
+    - route efficiency
+    - pop time
+
+:::
+::: {.column width="50%"}
+<img src="http://www.hardballtimes.com/wp-content/uploads/2016/06/angle_speed_pred-2.png" width="400px">
+:::
+::::
+
+## Summary
+
+|         data      |  rows  |  tool  |  method  |  result  |
+|:-----------------:|:-----:|:-----:|:------:|:----:|
+|     boxscores     | dozens    |   paper   |  arithmetic   | rates  |
+|     tabulated     | hundreds    |   adding machine   |  arithmetic   | formulas  |
+|     compiled     | thousands    |   calculator   |  algebra   | metrics  |
+|   seasonal   | 100 k    |   spreadsheet   |  regression   | metrics  |
+|   play-by-play   | 1 M    |   SQL (laptop)   |  regression   | fitted models  |
+|   pitch-by-pitch   | 10 M    |   SQL (server)   |  mixed, Bayesian   | statistical models  |
+|   player tracking   | billions  |   Spark   |  ML   | ?  |
+
+## Example: Catcher Framing
+
+:::: {.columns} 
+::: {.column width="50%"}
+
+![](http://ia601701.us.archive.org/31/items/JoseMolinaryanDoumitGifs/MolinaFrame1.gif)
+Jose Molina (good)
+
+:::
+::: {.column width="50%"}
+![](http://ia801701.us.archive.org/31/items/JoseMolinaryanDoumitGifs/DoumitFrame1.gif)
+Ryan Doumit (bad)
+:::
+::::
+
+## Example: Catcher Framing
+
+:::: {.columns} 
+::: {.column width="50%"}
+
+![](http://ia601701.us.archive.org/31/items/JoseMolinaryanDoumitGifs/MolinaFrame3.gif)
+Jose Molina (good)
+
+:::
+::: {.column width="50%"}
+
+![](http://ia601701.us.archive.org/31/items/JoseMolinaryanDoumitGifs/DoumitFrame3.gif)
+Ryan Doumit (bad)
+
+::: 
+::::
+
+::: footer
+Learn more at [ESPN](http://espn.go.com/espn/feature/story/_/id/11127248/how-catcher-framing-becoming-great-skill-smart-teams-new-york-yankees-espn-magazine) or [Grantland](http://grantland.com/features/studying-art-pitch-framing-catchers-such-francisco-cervelli-chris-stewart-jose-molina-others/)
+:::
+
+# Baseball data
+
+## [Lahman](https://github.com/cdalzell/Lahman)
+
+:::: {.columns} 
+::: {.column width="30%"}
+
+![](https://github.com/cdalzell/Lahman/blob/master/man/figures/logo.png?raw=true)
+
+- Seasonal data, 1871-2025
+
+:::
+::: {.column width="70%"}
+
+```{r}
+library(Lahman)
+Teams |>
+  head()
+```
+
+:::
+::::
+
+## Retrosheet
+
+:::: {.columns} 
+::: {.column width="30%"}
+
+![](https://www.retrosheet.org/menubar/retro-logo.gif)
+
+- [**retrosheet** R package](https://github.com/colindouglas/retrosheet)
+
+::: 
+::: {.column width="70%"}
+
+```{r}
+library(retrosheet)
+get_retrosheet("game", 1986, "NYN") |>
+  head()
+```
+
+
+:::
+::::
+
+## Statcast via **baseballr**
+
+:::: {.columns} 
+::: {.column width="30%"}
+
+![](https://upload.wikimedia.org/wikipedia/en/6/6a/Statcast_logo.jpg)
+![](https://billpetti.github.io/baseballr/logo.png)
+
+::: 
+::: {.column width="70%"}
+
+```{r}
+# remotes::install_github("BillPetti/baseballr")
+library(baseballr)
+statcast_search_pitchers(
+  start_date = "2025-08-30", 
+  end_date = Sys.Date(), 
+  pitcherid = 804636
+)
+```
+
+
+:::
+::::
+

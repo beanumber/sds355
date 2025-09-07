@@ -60,13 +60,17 @@ slides <- function() {
 `r echo_date()`
 
 - Recap from Monday
+- `r slides()` [A brief history of sabermetrics](slides/02_sabermetrics.qmd)
 
 ::: {.callout-note} 
 ## Homework
 
+![](https://upload.wikimedia.org/wikipedia/en/thumb/2/2e/Moneyball_Poster.jpg/250px-Moneyball_Poster.jpg)
+
 - Watch [*Moneyball*](https://en.wikipedia.org/wiki/Moneyball_(film))  
-  TONIGHT, 7:30 PM - 9:30 PM
+  **TONIGHT**, 7:30 pm - 9:30 pm  
   Hillyer Graham
+- **HW 1 due Friday by 5 pm**
 - Read *ABDWR*, [Ch. 5](https://beanumber.github.io/abdwr3e/05-runsexpectancy.html)
 
 :::
@@ -96,7 +100,7 @@ slides <- function() {
 ::: {.callout-note} 
 ## Homework
 
-- **HW 1 due Friday by 5 pm**
+- **HW 2 due Friday by 5 pm**
 - Read @Albert2015
 
 :::

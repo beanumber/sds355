@@ -7,6 +7,8 @@ show-solutions: false
 
 All homework assignments must be completed in Quarto and submitted as a PDF to Moodle by the corresponding **Friday at 5 pm**. 
 
+You must **show your code**!!
+
 :::
 
 
@@ -16,7 +18,13 @@ library(tidyverse)
 library(Lahman)
 ```
 
-## HW 1: Due 9/19
+## HW 1: Due 9/12
+
+::: {.callout-tip}
+
+You may find [the schema for the **Lahman** database](https://cdalzell.github.io/Lahman/) helpful.
+
+:::
 
 1. Use the **Lahman** package to identify when MLB moved to a 154-game schedule? When did they move to a 162 game schedule? Since the advent of the 154-game schedule, in which years were there interruptions in play? Can you Identify the cause of each? 
 
@@ -119,7 +127,7 @@ Pitching |>
 :::
 :::
 
-5. Produce the following table for all teams with the words "New York" or "Brooklyn" in their names.
+5. Use the `Teams` table from the **Lahman** package to produce the following table for all teams with the words "New York" or "Brooklyn" in their names.
 
 
 ```{r}
@@ -149,7 +157,10 @@ Teams |>
 :::
 :::
 
-6. [*ABDWR*, Exercise 4.7.1](https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises)
+
+## HW 2: Due 9/19
+
+1. [*ABDWR*, Exercise 4.7.1](https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises)
 
 Hint: See <https://beanumber.github.io/abdwr3e/02-intro.html#iterating-using-map>
 
@@ -178,7 +189,7 @@ Teams |>
 :::
 :::
 
-7. [*ABDWR*, Exercise 4.7.2](https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises)
+2. [*ABDWR*, Exercise 4.7.2](https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises)
 
 
 ::: {.content-hidden unless-meta="show-solutions"}
