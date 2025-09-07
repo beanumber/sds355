@@ -19,11 +19,13 @@ button <- function(..., button_type = "default",
 
 ### Instructor
 
-::: {.grid}
+::: {.callout-important}
 
+::: {.grid}
 ::: {.g-col-8}
 
 - [Ben Baumer](https://www.smith.edu/academics/faculty/ben-baumer)  
+  `r fontawesome::fa("building")` McConnell 213  
   `r fontawesome::fa("at")` [bbaumer@smith.edu](mailto:bbaumer@smith.edu)  
   `r fontawesome::fa("phone")` 413-585-3440  
   `r fontawesome::fa("github")` [beanumber](http://www.github.com/beanumber)  
@@ -43,9 +45,8 @@ Student hours:
 ![](https://www.smith.edu/sites/default/files/styles/content_faculty_profile_full_xlarge/public/media/Faculty/ben_baumer_crop.jpg.webp?itok=oJwH0bw1)
 
 :::
-
 :::
-
+:::
 
 ### Description
 
@@ -59,7 +60,7 @@ The course will conclude with a research project on a topic and sport of the stu
 
 ### Prerequisites
 
-SDS 192 and SDS 210 or the equivalent
+SDS 192 and SDS 210 (or the equivalent)
 
 ### Learning goals
 
@@ -90,12 +91,11 @@ SDS 192 and SDS 210 or the equivalent
 #### Recommended where appropriate:
 
 - *[Introduction to Sports Analytics using R](https://www.prospectpressvt.com/textbooks/elmore-sports-analytics)*. Elmore and Urbaczewski, 2025. Prospect Press. 
-- *[Bayes Rules! An Introduction to Applied Bayesian Modeling](https://www.bayesrulesbook.com/)*. Johnson, Ott, Dogucu, CRC Press, 2021. Available free online. 
 - *[Advanced R](https://adv-r.hadley.nz/)*, 2nd edition. Hadley Wickham, CRC Press, 2019. Available free online.
-- *[R Packages](http://r-pkgs.had.co.nz/)*, 2nd edition. Hadley Wickham, O'Reilly, 2015. Available free online.
 - *[R for Data Science](http://r4ds.had.co.nz/)*, Garrett Grolemund and Hadley Wickham, O'Reilly, 2017. Available free online.
 - *[Modern Data Science with R](https://mdsr-book.github.io/mdsr3e/)*, 2nd edition. Baumer, Kaplan, and Horton. CRC Press, 2021. Available for free online. 
 - *[Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R](https://bookdown.org/roback/bookdown-BeyondMLR/)*, Roback and Legler. CRC Press, 2021. Available for free online. 
+- *[Bayes Rules! An Introduction to Applied Bayesian Modeling](https://www.bayesrulesbook.com/)*. Johnson, Ott, Dogucu, CRC Press, 2021. Available free online. 
 - *[Mastering Shiny](https://mastering-shiny.org/)*, Wickham. O'Reilly, 2021. Available free online.
 
 #### Supplemental resources:
@@ -105,13 +105,7 @@ SDS 192 and SDS 210 or the equivalent
 
 ### Classes
 
-Classes meets on Mondays from 1:40-2:55 and on Wednesdays from 1:20--2:35 pm ET in Burton 307. 
-
-### Accommodations
-
-Smith is committed to providing support services and reasonable accommodations to all students with disabilities. 
-To request an accommodation, please register with the [Accessibility Resource Center](https://www.smith.edu/your-campus/offices-services/accessibility-resource-center) (ARC) at the beginning of the semester. 
-To contact ARC, please email <arc@smith.edu>.
+Classes meets on Mondays and Wednesdays from 9:25-10:40 am ET in Burton 307. 
 
 ## Content
 
@@ -123,32 +117,19 @@ This is a 4 credit course, meaning that by federal guidelines, it should consume
 You should be spending about 9.5 hours per week on this course outside of class.
 :::
 
-### Perspective
-
-My goal is to help you achieve the [learning goals](#learning-goals) for this course using only the mental model you have built of the material we have covered, and *without* the aid of generative AI. 
-While I accept the ubiquity of generative AI, I believe that helping you build your mental model of this material is where I can best contribute to your education. 
-To that end, much of our time in class and many of our assessments will take place in AI-free environments. 
-Other learning will take place [outside of class](#expectations), wherein [you are free to use AI in whatever fashion you want](#use-of-generative-ai) (unless otherwise noted), provided that it is in compliance with [Smith's Honor Code](#academic-honor-code-statement). 
-
-Please understand that while AI may be helpful to you in building your mental model of the material, it will not be available to you during many of our assessments, and I am comparatively less interested in your ability to complete tasks while using AI than I am in your ability to demonstrate knowledge using only your brain (and body). 
-
-This perspective applies to all course content, including mathematical equations and R code. 
-
-You can read [more about my thoughts](https://beanumber.github.io/ai.html) on generative AI in education. 
-
 ### Grading & Assignments
 
 The learning and assessments in this course are centered around three main components:
 
 - (10%) Engagement: Attending class meetings, being active on [the course Slack channel](#communication), participating in class discussions, and offering ideas and questions in class or on Slack are all ways of demonstrating engagement. Your engagement grade will be determined by me in consultation with periodic self-assessments completed by you. 
-- (15%) [Bi-weekly homework/lab assignments](hw.qmd): These assignments will include problems that allow you to working with data and analyze the results
-- (20%) Midterm exam: a written exam
+- (15%) [Homework](hw.qmd): These assignments will include problems that allow you to work with data and analyze the results
+- (20%) Midterm exam: a closed book, self-scheduled written exam
 - (20%) [Colloquium presentation](colloquium.qmd): You will choose a published research paper in sports analytics, and during the second half of the semester, you and a partner will present the paper to the class. 
 - (35%) [Research project](paper.qmd): a 10-page [Quarto Manuscript](https://quarto.org/docs/manuscripts/) and a 3-minute class presentation. 
 
 Please see the [schedule](schedule.qmd) for the most current due dates.
 
-#### Extensions
+### Extensions
 
 I value your ability to meet deadlines and manage your own workload.
 I am also a reasonable person who understands that life happens and this is not always possible. 
@@ -157,6 +138,18 @@ Longer extensions, or those requested within 48 hours of a deadline, will typica
 Please plan accordingly. 
 Please note that because many of the assignments in this class are collaborative, individual extensions for group assignments will be problematic. 
 **All extended deadlines will appear on Moodle.**
+
+### Academic Integrity
+
+I expect that you will [maintain your academic integrity](https://www.smith.edu/your-campus/offices-services/dean-college/academic-integrity-board/academic-integrity-board-students#waypoint-1) in this class. 
+Please read [Smith's Academic Integrity Statement](https://www.smith.edu/your-campus/offices-services/dean-college/academic-integrity-board#waypoint-2).
+Please pay particular attention to this sentence in the "Examples of Violations" section:
+
+::: {.callout-danger}
+
+> If you are finding ways to avoid the “thinking” component of your coursework, you should stop to ask yourself whether you are compromising your academic integrity.
+
+:::
 
 
 ## Policies {#policies .unnumbered}
@@ -169,6 +162,12 @@ I am dedicated to creating a space where everyone in the class is respected, is 
 
 If you have any concerns or suggestions for how to make this class more inclusive, please reach out to me. 
 **I am here to support your learning and growth as data scientists and people!**
+
+### Accommodations
+
+Smith is committed to providing support services and reasonable accommodations to all students with disabilities. 
+To request an accommodation, please register with the [Accessibility Resource Center](https://www.smith.edu/your-campus/offices-services/accessibility-resource-center) (ARC) at the beginning of the semester. 
+To contact ARC, please email <arc@smith.edu>.
 
 ### Attendance
 
@@ -197,12 +196,42 @@ the instructors is allowed on any exams or quizzes. All students, staff
 and faculty are bound by the Smith College Honor Code, which Smith has
 had since 1944.
 
-### Use of Generative AI 
+### Generative AI 
 
-`r button("Important", button_type = "danger")`
+#### Generative AI and Academic Integrity
 
-Unless otherwise noted (such as for exams and oral presentations), generative AI can be used whenever you are outside of class. 
-However, **please read [my perspective](#perspective)** on learning and generative AI. 
+Please read the Smith Academic Integrity Board's statement on [Generative Artificial Intelligence & Your Academic Integrity](https://www.smith.edu/your-campus/offices-services/dean-college/academic-integrity-board/academic-integrity-board-students#waypoint-4)
+
+I draw your attention to the following excerpt:
+
+::: {.callout-tip}
+
+Any time you are using AI in a way that is substituting for the “thinking work” that you should be doing for a course, you should stop.
+
+:::
+
+#### My perspective on AI and your learning
+
+My goal is to help you achieve the [learning goals](#learning-goals) for this course using only the mental model you have built of the material we have covered, and *without* the aid of generative AI. 
+While I accept the ubiquity of generative AI, I believe that helping you build your mental model of this material is where I can best contribute to your education. 
+To that end, much of our time in class and many of our assessments will take place in AI-free environments. 
+Other learning will take place [outside of class](#expectations), wherein [you are free to use AI in whatever fashion you want](#usage) (unless otherwise noted), provided that it is in compliance with [Smith's Academic Integrity](#academic-integrity) policies. 
+
+Please understand that while AI may be helpful to you in building your mental model of the material, it will not be available to you during many of our assessments, and I am comparatively less interested in your ability to complete tasks while using AI than I am in your ability to demonstrate knowledge using only your brain (and body). 
+
+This perspective applies to all course content, including mathematical equations and R code. 
+
+#### Usage
+
+::: {.callout-important}
+
+- Use of generative AI is expressly prohibited on exams and oral presentations. 
+- Use of generative AI is generally prohibited **inside the classroom**, although there may be exceptions. 
+- Unless otherwise noted (such as the above), generative AI can be used whenever you are **outside of class**. 
+
+:::
+
+**Please read [my perspective](#my-perspective)** on learning and generative AI. 
 Please understand that careless and excessive use of generative AI will likely impede your ability to achieve the [course learning goals](#learning-goals). 
 
 ::: {.callout-warning}
@@ -210,14 +239,7 @@ Remember that generative AI is not *intelligent*, doesn't *think*, and has no id
 You are solely responsible for the veracity of anything (e.g., code or text) you submit. 
 :::
 
-### Academic Honor Code Statement {#honor-code}
-
-> Smith College expects all students to be honest and committed to the principles of academic and intellectual integrity in their preparation and submission of course work and examinations.
-Students and faculty at Smith are part of an academic community defined by its commitment to scholarship, which depends on scrupulous and attentive acknowledgement of all sources of information, and honest and respectful use of college resources.
-
-Cases of dishonesty, plagiarism, etc., will be reported to the Academic Honor Board.
-
-### Code of Conduct `r button("Important", button_type = "danger")`
+### Code of Conduct
 
 As the instructor and assistants for this course, we are committed to making participation in this course a harassment-free experience for everyone, regardless of level of experience, gender, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, or religion. Examples of unacceptable behavior by participants in this course include the use of sexual language or imagery, derogatory comments or personal attacks, deliberate misgendering or use of "dead" names, trolling, public or private harassment, insults, or other unprofessional conduct.
 
@@ -251,12 +273,7 @@ Unless otherwise noted, you should assume that it will be helpful to bring a lap
 
 ### Communication
 
-- `r fontawesome::fa("slack")` [Slack](https://sds-410-01-202503.slack.com/) is the primary forum for course-related discussions of all kinds. *Please do not email me with course-related questions!* Instead, post those `#questions` on Slack. If discretion is absolutely necessary, private message me on Slack. 
-- `r fontawesome::fa("github")` [GitHub](http://www.github.com/sds-capstone/) will host all of the code for projects associated with this course. All repositories are private by default.
-
-::: {.callout-important}
-It is very important that all project-related communication take place in Slack or GitHub channels that all group members can see! Private texts and side conversations will very quickly lead to other group members feeling excluded. 
-:::
+- `r fontawesome::fa("slack")` [Slack](https://sds-355-01-202601.slack.com/) is the primary forum for course-related discussions of all kinds. *Please do not email me with course-related questions!* Instead, post those `#questions` on Slack. If discretion is absolutely necessary, private message me on Slack. 
 
 ### Writing
 
@@ -270,7 +287,7 @@ Please read the [SDS Writing Plan](https://www.smith.edu/sites/default/files/med
 
 ## Tentative Schedule
 
-The following outline gives a *basic* description of the course. Please see the [detailed schedule](schedule.qmd) for more specific information about readings and assignments.
+Please see the [detailed schedule](schedule.qmd) for more specific information about readings and assignments.
 
 - Week 1
     - Big ideas in sports analytics [@baumer2023big]
