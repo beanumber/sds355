@@ -33,6 +33,7 @@ jobs:
             any::here
             any::Lahman
             any::retrosheet
+            any::teamcolors
             any::usethis
 
       - name: Install GitHub packages

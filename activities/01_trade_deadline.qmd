@@ -10,7 +10,6 @@ format:
       - ../tex/before-body.tex
     toc: false
     number-sections: true
-#    mainfont: "EB Garamond"
 execute:
   echo: false
   warning: false
