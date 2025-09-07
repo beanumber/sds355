@@ -33,6 +33,9 @@ activity <- function() {
 slides <- function() {
   paste(fontawesome::fa("microphone"), "Mini-lecture:")
 }
+quiz <- function() {
+  paste(fontawesome::fa("code"), "Quiz:")
+}
 ```
 
 ### Baseball analytics
@@ -45,7 +48,7 @@ slides <- function() {
 - Introductions
 - `r activity()` [2004 Trade Deadline](activities/01_trade_deadline.qmd)
 - `r slides()` [Expected Winning Percentage](slides/01_expected_wpct.qmd)
-- [Sporcle quiz](https://www.sporcle.com/games/Knapster/mlbteammvp)
+- `r quiz()` [Sporcle quiz 1](sporcle.qmd)
 
 ::: {.callout-note} 
 ## Homework
@@ -61,6 +64,7 @@ slides <- function() {
 
 - Recap from Monday
 - `r slides()` [A brief history of sabermetrics](slides/02_sabermetrics.qmd)
+- `r quiz()` [Sporcle quiz 2](sporcle.qmd)
 
 ::: {.callout-note} 
 ## Homework

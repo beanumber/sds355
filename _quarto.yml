@@ -19,8 +19,10 @@ website:
       - text: "Assignments"
         icon: list-task
         menu:
-          - icon: code-slash
+          - icon: speedometer
             href: hw.qmd
+          - icon: code-slash
+            href: sporcle.qmd
           - icon: file-arrow-up
             href: colloquium.qmd
           - icon: file-pdf

@@ -1,0 +1,50 @@
+---
+title: Sporcle
+format: 
+  html:
+    toc: true
+    number-sections: true
+params:
+  solutions: false
+---
+
+::: {.callout-note}
+
+<https://www.sporcle.com/games/subcategory/mlb>
+
+You must **show your code**!!
+
+:::
+
+```{r}
+#| message: false
+library(tidyverse)
+library(Lahman)
+```
+
+## [MLB Teams Last MVP](https://www.sporcle.com/games/Knapster/mlbteammvp)
+
+```{r}
+#| include: !expr params$solutions
+active_teams <- Teams |>
+  filter(yearID == 2023) |>
+  select(teamID, name)
+
+AwardsPlayers |>
+  filter(awardID == "Most Valuable Player") |>
+  left_join(Appearances, by = join_by("playerID", "yearID", "lgID")) |>
+  arrange(desc(yearID)) |>
+  group_by(teamID) |>
+  summarize(
+    playerID = first(playerID),
+    yearID = first(yearID)
+  ) |>
+  right_join(active_teams, by = join_by(teamID)) |>
+  arrange(name) |>
+  left_join(People, by = join_by(playerID)) |>
+  mutate(Player = paste(nameFirst, nameLast)) |>
+  select(Team = name, Player, Year = yearID) |>
+  knitr::kable()
+
+```
+
