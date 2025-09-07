@@ -28,7 +28,7 @@ jobs:
           packages:
             any::remotes
             any::tidyverse
-            # any::emoji
+            any::emoji
             any::ggrepel
             any::here
             any::Lahman
@@ -43,8 +43,6 @@ jobs:
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
           tinytex: true
-      - run: |
-          quarto --version
 
       - name: Publish to GitHub Pages (and render)
         uses: quarto-dev/quarto-actions/publish@v2
