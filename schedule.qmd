@@ -85,7 +85,7 @@ quiz <- function() {
 `r echo_date()`
 
 - *Moneyball* discussion
-- The Run Expectancy Matrix
+- Linear Weights
 
 ::: {.callout-note} 
 ## Homework
@@ -99,13 +99,12 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- Evaluating strategies using the REM
+- The Run Expectancy Matrix
 
 ::: {.callout-note} 
 ## Homework
 
 - **HW 2 due Friday by 5 pm**
-- Read @Albert2015
 
 :::
 
@@ -113,10 +112,14 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
-- Win Probability
+- Defense Independent Pitching Statistics (DIPS)
+- Evaluating strategies using the REM
+
 
 ::: {.callout-note} 
 ## Homework
+
+- Read @Albert2015
 
 :::
 
@@ -125,6 +128,7 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
+- Win Probability
 - [Tigers @ Red Sox](https://www.mlb.com/gameday/tigers-vs-red-sox/2025/09/26/776181/live?partnerId=LR_preview)  
   Friday, 7:10 pm  
   [Fenway Park, Boston, MA](https://www.google.com/maps/place/fenway+park/data=!4m2!3m1!1s0x89e379f63f253f6f:0xa2800dcb647a5504?sa=X&ved=1t:155783&ictx=111)

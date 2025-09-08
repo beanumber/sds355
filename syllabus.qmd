@@ -90,6 +90,7 @@ SDS 192 and SDS 210 (or the equivalent)
 
 #### Recommended where appropriate:
 
+- *[Curveball](https://www.amazon.com/Curve-Ball-Baseball-Statistics-Chance/dp/038700193X)*. Albert and Bennett, 2003. Copernicus. 
 - *[Introduction to Sports Analytics using R](https://www.prospectpressvt.com/textbooks/elmore-sports-analytics)*. Elmore and Urbaczewski, 2025. Prospect Press. 
 - *[Advanced R](https://adv-r.hadley.nz/)*, 2nd edition. Hadley Wickham, CRC Press, 2019. Available free online.
 - *[R for Data Science](http://r4ds.had.co.nz/)*, Garrett Grolemund and Hadley Wickham, O'Reilly, 2017. Available free online.
