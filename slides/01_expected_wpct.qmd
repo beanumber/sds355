@@ -15,6 +15,76 @@ execute:
   warning: false
 ---
 
+# How good is my team? 
+
+## 2004 [trade deadline](https://en.wikipedia.org/wiki/Trade_(sports)#MLB_2)
+
+```{r}
+#| echo: false
+library(tidyverse)
+library(Lahman)
+library(retrosheet)
+yearID <- 2004
+
+retro_gl <- get_retrosheet("game", yearID)
+
+games <- retro_gl |>
+  mutate(home_win = HmRuns > VisRuns) |>
+  select(Date, VisTm, HmTm, home_win) |>
+  pivot_longer(
+    -c(Date, home_win),
+    names_to = "is_home", values_to = "team_id", 
+  ) |>
+  mutate(
+    is_win = ifelse(
+      is_home == "HmTm", home_win, abs(1 - home_win))
+  ) |>
+  group_by(team_id) |>
+  mutate(
+    cum_W = cumsum(is_win), 
+    cum_L = cumsum(!is_win), 
+    cum_G = cum_W + cum_L, 
+    G_over_500 = cum_W - cum_L, 
+    last_game = cum_G == max(cum_G)
+  )
+
+retro_teams <- retrosheet::getTeamIDs(yearID) |>
+  enframe(name = "mascot", value = "retro_id")
+
+mlb_pal <- teamcolors::teamcolors |>
+  filter(league == "mlb", str_detect(division, "NL")) |>
+  inner_join(retro_teams, by = "mascot") |>
+  select(retro_id, primary) |>
+  deframe()
+
+games <- games |>
+  filter(team_id %in% names(mlb_pal))
+```
+
+```{r}
+#| echo: false
+ggplot(
+    games, 
+    aes(x = cum_G, y = G_over_500, color = team_id)
+  ) + 
+  geom_hline(yintercept = 18, color = "darkgray", lty = 2) + 
+  geom_vline(xintercept = 100, color = "darkgray", lty = 2) +
+  geom_line() +  
+  ggrepel::geom_label_repel(
+    data = filter(games, last_game), 
+    aes(label = team_id)
+  ) + 
+  annotate("text", x = 2, y = 22, label = "90 wins", color = "darkgray", hjust = "left") +
+  scale_color_manual(
+    guide = "none", name = "Team",
+    values = mlb_pal
+  ) +
+  scale_y_continuous("Games above .500") + 
+  scale_x_continuous("Cumulative Games Played") + 
+  labs(title = paste("Daily MLB Standings,", yearID), 
+       caption = "Source: Retrosheet")
+```
+
 # Measuring team strength
 
 ## Limitations of Won-Loss Record
@@ -205,72 +275,5 @@ Other methods:
 - Elo ratings [@Elo1978]
 - Bayesian state-space models [@Glickman1998]
 
-# How good is my team? 
-
-## 2004 [trade deadline](https://en.wikipedia.org/wiki/Trade_(sports)#MLB_2)
-
-```{r}
-#| echo: false
-library(retrosheet)
-yearID <- 2004
-
-retro_gl <- get_retrosheet("game", yearID)
-
-games <- retro_gl |>
-  mutate(home_win = HmRuns > VisRuns) |>
-  select(Date, VisTm, HmTm, home_win) |>
-  pivot_longer(
-    -c(Date, home_win),
-    names_to = "is_home", values_to = "team_id", 
-  ) |>
-  mutate(
-    is_win = ifelse(
-      is_home == "HmTm", home_win, abs(1 - home_win))
-  ) |>
-  group_by(team_id) |>
-  mutate(
-    cum_W = cumsum(is_win), 
-    cum_L = cumsum(!is_win), 
-    cum_G = cum_W + cum_L, 
-    G_over_500 = cum_W - cum_L, 
-    last_game = cum_G == max(cum_G)
-  )
-
-retro_teams <- retrosheet::getTeamIDs(yearID) |>
-  enframe(name = "mascot", value = "retro_id")
-
-mlb_pal <- teamcolors::teamcolors |>
-  filter(league == "mlb", str_detect(division, "NL")) |>
-  inner_join(retro_teams, by = "mascot") |>
-  select(retro_id, primary) |>
-  deframe()
-
-games <- games |>
-  filter(team_id %in% names(mlb_pal))
-```
-
-```{r}
-#| echo: false
-ggplot(
-    games, 
-    aes(x = cum_G, y = G_over_500, color = team_id)
-  ) + 
-  geom_hline(yintercept = 18, color = "darkgray", lty = 2) + 
-  geom_vline(xintercept = 100, color = "darkgray", lty = 2) +
-  geom_line() +  
-  ggrepel::geom_label_repel(
-    data = filter(games, last_game), 
-    aes(label = team_id)
-  ) + 
-  annotate("text", x = 2, y = 22, label = "90 wins", color = "darkgray", hjust = "left") +
-  scale_color_manual(
-    guide = "none", name = "Team",
-    values = mlb_pal
-  ) +
-  scale_y_continuous("Games above .500") + 
-  scale_x_continuous("Cumulative Games Played") + 
-  labs(title = paste("Daily MLB Standings,", yearID), 
-       caption = "Source: Retrosheet")
-```
 
 ## References
