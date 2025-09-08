@@ -2,7 +2,7 @@
 title: "Expected Winning Percentage"
 subtitle: "SDS 355"
 author: "Prof. Baumer" 
-date: "September 8, 2025"
+date: "2025-09-08"
 format: 
   revealjs:
     slide-number: true

@@ -4,6 +4,7 @@ project:
     - "*.qmd"
 
 bibliography: refs.bib
+date-format: long
 
 website:
   title: "SDS 355: Fall 2025"
