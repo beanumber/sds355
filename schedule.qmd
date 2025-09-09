@@ -48,7 +48,6 @@ quiz <- function() {
 - Introductions
 - `r activity()` [2004 Trade Deadline](activities/01_trade_deadline.qmd)
 - `r slides()` [Expected Winning Percentage](slides/01_expected_wpct.qmd)
-- `r quiz()` [Sporcle quiz 1](sporcle.qmd)
 
 ::: {.callout-note} 
 ## Homework
@@ -63,8 +62,8 @@ quiz <- function() {
 `r echo_date()`
 
 - Recap from Monday
+- `r quiz()` [Sporcle quiz 1](sporcle.qmd)
 - `r slides()` [A brief history of sabermetrics](slides/02_sabermetrics.qmd)
-- `r quiz()` [Sporcle quiz 2](sporcle.qmd)
 
 ::: {.callout-note} 
 ## Homework
@@ -73,7 +72,8 @@ quiz <- function() {
 
 - Watch [*Moneyball*](https://en.wikipedia.org/wiki/Moneyball_(film))  
   **TONIGHT**, 7:30 pm - 9:30 pm  
-  Hillyer Graham
+  Hillyer Graham  
+  Practice **Active Viewing** (see [page 12 of this](https://webapp4.asu.edu/bookstore/viewsyllabus/2227/93914/pdf;jsessionid=60F2D95BAFC1D6BEBFEAFDB6D0DEA997))
 - **HW 1 due Friday by 5 pm**
 - Read *ABDWR*, [Ch. 5](https://beanumber.github.io/abdwr3e/05-runsexpectancy.html)
 
@@ -84,6 +84,7 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
+- `r quiz()` [Sporcle quiz 2](sporcle.qmd)
 - *Moneyball* discussion
 - Linear Weights
 
