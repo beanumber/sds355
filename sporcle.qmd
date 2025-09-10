@@ -22,10 +22,105 @@ library(tidyverse)
 library(Lahman)
 ```
 
+## How to create a SQL duckdb database from the Lahman package {.unnumbered}
+
+### Educate yourself
+
+1. Read [*R for Data Science*, Ch. 21](https://r4ds.hadley.nz/databases.html)
+1. See also [*Modern Data Science with R*, Ch. 15](https://mdsr-book.github.io/mdsr3e/15-sqlI.html)
+
+### Instantiate the database
+
+Create a duckdb instance 
+
+```{r}
+#| message: false
+library(dbplyr)
+library(duckdb)
+con <- DBI::dbConnect(duckdb::duckdb())
+```
+
+### Populate the database
+
+Start populating it with data from the **Lahman** package. 
+
+```{r}
+# Have to do this for every table...
+dbWriteTable(con, "Teams", Lahman::Teams)
+dbWriteTable(con, "People", Lahman::People)
+```
+
+Challenge: Use a `map()` statement to do them all!
+
+### Step 4: Inpsect the database
+
+```{r}
+dbListTables(con)
+```
+
+### Access
+
+Now, you can access the data in your duckdb SQL database in several ways.
+
+#### Using `dbplyr`
+
+```{r}
+teams <- tbl(con, "Teams")
+
+active_teams <- teams |>
+  filter(yearID == 2023) |>
+  select(teamID, name)
+
+active_teams
+```
+
+And you can see the translated SQL query!
+
+```{r}
+active_teams |>
+  show_query()
+```
+
+#### Using `DBI`
+
+If you want to practice writing the raw SQL query
+
+```{r}
+con |>
+  dbGetQuery(
+"
+SELECT teamID, name
+FROM teams
+WHERE yearID = 2023;
+"
+)
+```
+
+#### Using Quarto/Markdown
+
+If you want SQL syntax highlighting, and to use the data back in R, make an SQL chunk
+
+```{sql}
+#| connection: con
+#| output.var: "teams_sql"
+#| echo: fenced
+SELECT teamID, name
+FROM teams
+WHERE yearID = 2023;
+```
+
+```{r}
+#| echo: fenced
+teams_sql
+```
+
+
+
 ## [MLB Teams Last MVP](https://www.sporcle.com/games/Knapster/mlbteammvp)
 
 ```{r}
 #| include: !expr params$solutions
+#| message: false
 active_teams <- Teams |>
   filter(yearID == 2023) |>
   select(teamID, name)
