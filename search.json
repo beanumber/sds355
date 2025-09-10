@@ -294,20 +294,6 @@
     "text": "Summary\n\n\n\n\n\n\n\n\n\n\ndata\nrows\ntool\nmethod\nresult\n\n\n\n\nboxscores\ndozens\npaper\narithmetic\nrates\n\n\ntabulated\nhundreds\nadding machine\narithmetic\nformulas\n\n\ncompiled\nthousands\ncalculator\nalgebra\nmetrics\n\n\nseasonal\n100 k\nspreadsheet\nregression\nmetrics\n\n\nplay-by-play\n1 M\nSQL (laptop)\nregression\nfitted models\n\n\npitch-by-pitch\n10 M\nSQL (server)\nmixed, Bayesian\nstatistical models\n\n\nplayer tracking\nbillions\nSpark\nML\n?"
   },
   {
-    "objectID": "slides/02_sabermetrics.html#example-catcher-framing",
-    "href": "slides/02_sabermetrics.html#example-catcher-framing",
-    "title": "A brief history of sabermetrics",
-    "section": "Example: Catcher Framing",
-    "text": "Example: Catcher Framing\n\n\n Jose Molina (good)\n\n Ryan Doumit (bad)"
-  },
-  {
-    "objectID": "slides/02_sabermetrics.html#example-catcher-framing-1",
-    "href": "slides/02_sabermetrics.html#example-catcher-framing-1",
-    "title": "A brief history of sabermetrics",
-    "section": "Example: Catcher Framing",
-    "text": "Example: Catcher Framing\n\n\n Jose Molina (good)\n\n Ryan Doumit (bad)\n\n\nLearn more at ESPN or Grantland"
-  },
-  {
     "objectID": "slides/02_sabermetrics.html#lahman",
     "href": "slides/02_sabermetrics.html#lahman",
     "title": "A brief history of sabermetrics",
@@ -558,6 +544,13 @@
     "title": "Sporcle",
     "section": "",
     "text": "Note\n\n\n\nhttps://www.sporcle.com/games/subcategory/mlb\nYou must show your code!!\nlibrary(tidyverse)\nlibrary(Lahman)"
+  },
+  {
+    "objectID": "sporcle.html#how-to-create-a-sql-duckdb-database-from-the-lahman-package",
+    "href": "sporcle.html#how-to-create-a-sql-duckdb-database-from-the-lahman-package",
+    "title": "Sporcle",
+    "section": "How to create a SQL duckdb database from the Lahman package",
+    "text": "How to create a SQL duckdb database from the Lahman package\n\n0.1 Educate yourself\n\nRead R for Data Science, Ch. 21\nSee also Modern Data Science with R, Ch. 15\n\n\n\n0.2 Instantiate the database\nCreate a duckdb instance\n\nlibrary(dbplyr)\nlibrary(duckdb)\ncon &lt;- DBI::dbConnect(duckdb::duckdb())\n\n\n\n0.3 Populate the database\nStart populating it with data from the Lahman package.\n\n# Have to do this for every table...\ndbWriteTable(con, \"Teams\", Lahman::Teams)\ndbWriteTable(con, \"People\", Lahman::People)\n\nChallenge: Use a map() statement to do them all!\n\n\n0.4 Step 4: Inpsect the database\n\ndbListTables(con)\n\n[1] \"People\" \"Teams\" \n\n\n\n\n0.5 Access\nNow, you can access the data in your duckdb SQL database in several ways.\n\n0.5.1 Using dbplyr\n\nteams &lt;- tbl(con, \"Teams\")\n\nactive_teams &lt;- teams |&gt;\n  filter(yearID == 2023) |&gt;\n  select(teamID, name)\n\nactive_teams\n\n# Source:   SQL [?? x 2]\n# Database: DuckDB v1.3.2 [unknown@Linux 6.11.0-1018-azure:R 4.5.1/:memory:]\n   teamID name                         \n   &lt;fct&gt;  &lt;chr&gt;                        \n 1 LAA    Los Angeles Angels of Anaheim\n 2 ARI    Arizona Diamondbacks         \n 3 ATL    Atlanta Braves               \n 4 BAL    Baltimore Orioles            \n 5 BOS    Boston Red Sox               \n 6 CHN    Chicago Cubs                 \n 7 CHA    Chicago White Sox            \n 8 CIN    Cincinnati Reds              \n 9 CLE    Cleveland Guardians          \n10 COL    Colorado Rockies             \n# ℹ more rows\n\n\nAnd you can see the translated SQL query!\n\nactive_teams |&gt;\n  show_query()\n\n&lt;SQL&gt;\nSELECT teamID, \"name\"\nFROM Teams\nWHERE (yearID = 2023.0)\n\n\n\n\n0.5.2 Using DBI\nIf you want to practice writing the raw SQL query\n\ncon |&gt;\n  dbGetQuery(\n\"\nSELECT teamID, name\nFROM teams\nWHERE yearID = 2023;\n\"\n)\n\n   teamID                          name\n1     LAA Los Angeles Angels of Anaheim\n2     ARI          Arizona Diamondbacks\n3     ATL                Atlanta Braves\n4     BAL             Baltimore Orioles\n5     BOS                Boston Red Sox\n6     CHN                  Chicago Cubs\n7     CHA             Chicago White Sox\n8     CIN               Cincinnati Reds\n9     CLE           Cleveland Guardians\n10    COL              Colorado Rockies\n11    DET                Detroit Tigers\n12    MIA                 Miami Marlins\n13    HOU                Houston Astros\n14    KCA            Kansas City Royals\n15    LAN           Los Angeles Dodgers\n16    MIL             Milwaukee Brewers\n17    MIN               Minnesota Twins\n18    NYN                 New York Mets\n19    NYA              New York Yankees\n20    OAK             Oakland Athletics\n21    PHI         Philadelphia Phillies\n22    PIT            Pittsburgh Pirates\n23    SDN              San Diego Padres\n24    SEA              Seattle Mariners\n25    SFN          San Francisco Giants\n26    SLN           St. Louis Cardinals\n27    TBA                Tampa Bay Rays\n28    TEX                 Texas Rangers\n29    TOR             Toronto Blue Jays\n30    WAS          Washington Nationals\n\n\n\n\n0.5.3 Using Quarto/Markdown\nIf you want SQL syntax highlighting, and to use the data back in R, make an SQL chunk\n\n```{sql}\n#| connection: con\n#| output.var: \"teams_sql\"\nSELECT teamID, name\nFROM teams\nWHERE yearID = 2023;\n```\n\n\n```{r}\nteams_sql\n```\n\n   teamID                          name\n1     LAA Los Angeles Angels of Anaheim\n2     ARI          Arizona Diamondbacks\n3     ATL                Atlanta Braves\n4     BAL             Baltimore Orioles\n5     BOS                Boston Red Sox\n6     CHN                  Chicago Cubs\n7     CHA             Chicago White Sox\n8     CIN               Cincinnati Reds\n9     CLE           Cleveland Guardians\n10    COL              Colorado Rockies\n11    DET                Detroit Tigers\n12    MIA                 Miami Marlins\n13    HOU                Houston Astros\n14    KCA            Kansas City Royals\n15    LAN           Los Angeles Dodgers\n16    MIL             Milwaukee Brewers\n17    MIN               Minnesota Twins\n18    NYN                 New York Mets\n19    NYA              New York Yankees\n20    OAK             Oakland Athletics\n21    PHI         Philadelphia Phillies\n22    PIT            Pittsburgh Pirates\n23    SDN              San Diego Padres\n24    SEA              Seattle Mariners\n25    SFN          San Francisco Giants\n26    SLN           St. Louis Cardinals\n27    TBA                Tampa Bay Rays\n28    TEX                 Texas Rangers\n29    TOR             Toronto Blue Jays\n30    WAS          Washington Nationals"
   },
   {
     "objectID": "sporcle.html#mlb-teams-last-mvp",
