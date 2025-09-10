@@ -391,7 +391,7 @@ Rosenthal, ed., "The Statistician," in *Baseball Is Their Business*, 1952, p. 14
 
 ## Internet era: what did we learn?
 
-> There is little if any difference among major-league pitchers in their ability to prevent hits on balls hit in the field of play.
+> There is **little if any** difference among major-league pitchers in their ability to prevent hits on balls hit in the field of play.
 >
 > --Voros McCracken
 
@@ -622,41 +622,6 @@ play,1,1,ventr001,32,B.CB.SFFBS,K
 |   pitch-by-pitch   | 10 M    |   SQL (server)   |  mixed, Bayesian   | statistical models  |
 |   player tracking   | billions  |   Spark   |  ML   | ?  |
 
-## Example: Catcher Framing
-
-:::: {.columns} 
-::: {.column width="50%"}
-
-![](http://ia601701.us.archive.org/31/items/JoseMolinaryanDoumitGifs/MolinaFrame1.gif)
-Jose Molina (good)
-
-:::
-::: {.column width="50%"}
-![](http://ia801701.us.archive.org/31/items/JoseMolinaryanDoumitGifs/DoumitFrame1.gif)
-Ryan Doumit (bad)
-:::
-::::
-
-## Example: Catcher Framing
-
-:::: {.columns} 
-::: {.column width="50%"}
-
-![](http://ia601701.us.archive.org/31/items/JoseMolinaryanDoumitGifs/MolinaFrame3.gif)
-Jose Molina (good)
-
-:::
-::: {.column width="50%"}
-
-![](http://ia601701.us.archive.org/31/items/JoseMolinaryanDoumitGifs/DoumitFrame3.gif)
-Ryan Doumit (bad)
-
-::: 
-::::
-
-::: footer
-Learn more at [ESPN](http://espn.go.com/espn/feature/story/_/id/11127248/how-catcher-framing-becoming-great-skill-smart-teams-new-york-yankees-espn-magazine) or [Grantland](http://grantland.com/features/studying-art-pitch-framing-catchers-such-francisco-cervelli-chris-stewart-jose-molina-others/)
-:::
 
 # Baseball data
 
