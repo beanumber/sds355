@@ -28,7 +28,10 @@ jobs:
           packages:
             any::remotes
             any::tidyverse
+            any::DBI
+            any::dbplyr
             any::DiagrammeR
+            any::duckdb
             any::emoji
             any::ggrepel
             any::here
