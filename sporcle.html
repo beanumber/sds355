@@ -191,20 +191,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#how-to-create-a-sql-duckdb-database-from-the-lahman-package" id="toc-how-to-create-a-sql-duckdb-database-from-the-lahman-package" class="nav-link active" data-scroll-target="#how-to-create-a-sql-duckdb-database-from-the-lahman-package">How to create a SQL duckdb database from the Lahman package</a>
-  <ul>
-  <li><a href="#educate-yourself" id="toc-educate-yourself" class="nav-link" data-scroll-target="#educate-yourself"><span class="header-section-number">0.1</span> Educate yourself</a></li>
-  <li><a href="#instantiate-the-database" id="toc-instantiate-the-database" class="nav-link" data-scroll-target="#instantiate-the-database"><span class="header-section-number">0.2</span> Instantiate the database</a></li>
-  <li><a href="#populate-the-database" id="toc-populate-the-database" class="nav-link" data-scroll-target="#populate-the-database"><span class="header-section-number">0.3</span> Populate the database</a></li>
-  <li><a href="#step-4-inpsect-the-database" id="toc-step-4-inpsect-the-database" class="nav-link" data-scroll-target="#step-4-inpsect-the-database"><span class="header-section-number">0.4</span> Step 4: Inpsect the database</a></li>
-  <li><a href="#access" id="toc-access" class="nav-link" data-scroll-target="#access"><span class="header-section-number">0.5</span> Access</a>
-  <ul>
-  <li><a href="#using-dbplyr" id="toc-using-dbplyr" class="nav-link" data-scroll-target="#using-dbplyr"><span class="header-section-number">0.5.1</span> Using <code>dbplyr</code></a></li>
-  <li><a href="#using-dbi" id="toc-using-dbi" class="nav-link" data-scroll-target="#using-dbi"><span class="header-section-number">0.5.2</span> Using <code>DBI</code></a></li>
-  <li><a href="#using-quartomarkdown" id="toc-using-quartomarkdown" class="nav-link" data-scroll-target="#using-quartomarkdown"><span class="header-section-number">0.5.3</span> Using Quarto/Markdown</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#mlb-teams-last-mvp" id="toc-mlb-teams-last-mvp" class="nav-link" data-scroll-target="#mlb-teams-last-mvp"><span class="header-section-number">1</span> MLB Teams Last MVP</a></li>
+  <li><a href="#mlb-teams-last-mvp" id="toc-mlb-teams-last-mvp" class="nav-link active" data-scroll-target="#mlb-teams-last-mvp"><span class="header-section-number">1</span> 9/10: MLB Teams Last MVP</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">2</span> 9/15:</a></li>
+  
   </ul>
 </nav>
     </div>
@@ -248,59 +237,288 @@ Note
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Lahman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="how-to-create-a-sql-duckdb-database-from-the-lahman-package" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="how-to-create-a-sql-duckdb-database-from-the-lahman-package">How to create a SQL duckdb database from the Lahman package</h2>
-<section id="educate-yourself" class="level3" data-number="0.1">
-<h3 data-number="0.1" class="anchored" data-anchor-id="educate-yourself"><span class="header-section-number">0.1</span> Educate yourself</h3>
+<section id="mlb-teams-last-mvp" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="mlb-teams-last-mvp"><span class="header-section-number">1</span> 9/10: <a href="https://www.sporcle.com/games/Knapster/mlbteammvp">MLB Teams Last MVP</a></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find all active teams (teams that played in 2023)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>active_teams <span class="ot">&lt;-</span> Teams <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yearID <span class="sc">==</span> <span class="dv">2023</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(teamID, name)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># find all MVPs</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>AwardsPlayers <span class="sc">|&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(awardID <span class="sc">==</span> <span class="st">"Most Valuable Player"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># find out which team(s) they played for in that year</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    Appearances, </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">join_by</span>(<span class="st">"playerID"</span>, <span class="st">"yearID"</span>, <span class="st">"lgID"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sort them by year</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(yearID)) <span class="sc">|&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(teamID) <span class="sc">|&gt;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># take the first one, since they're already sorted</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">playerID =</span> <span class="fu">first</span>(playerID),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">yearID =</span> <span class="fu">first</span>(yearID)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># now reduce to only the active teams!</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">right_join</span>(active_teams, <span class="at">by =</span> <span class="fu">join_by</span>(teamID)) <span class="sc">|&gt;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(name) <span class="sc">|&gt;</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get the players' names</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(People, <span class="at">by =</span> <span class="fu">join_by</span>(playerID)) <span class="sc">|&gt;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Player =</span> <span class="fu">paste</span>(nameFirst, nameLast)) <span class="sc">|&gt;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make the headers match</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">Team =</span> name, Player, <span class="at">Year =</span> yearID) <span class="sc">|&gt;</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Team</th>
+<th style="text-align: left;">Player</th>
+<th style="text-align: right;">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Arizona Diamondbacks</td>
+<td style="text-align: left;">NA NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Atlanta Braves</td>
+<td style="text-align: left;">Ronald Acuña</td>
+<td style="text-align: right;">2023</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Baltimore Orioles</td>
+<td style="text-align: left;">Cal Ripken</td>
+<td style="text-align: right;">1991</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Boston Red Sox</td>
+<td style="text-align: left;">Mookie Betts</td>
+<td style="text-align: right;">2018</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chicago Cubs</td>
+<td style="text-align: left;">Kris Bryant</td>
+<td style="text-align: right;">2016</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chicago White Sox</td>
+<td style="text-align: left;">Jose Abreu</td>
+<td style="text-align: right;">2020</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cincinnati Reds</td>
+<td style="text-align: left;">Joey Votto</td>
+<td style="text-align: right;">2010</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cleveland Guardians</td>
+<td style="text-align: left;">Al Rosen</td>
+<td style="text-align: right;">1953</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Colorado Rockies</td>
+<td style="text-align: left;">Larry Walker</td>
+<td style="text-align: right;">1997</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Detroit Tigers</td>
+<td style="text-align: left;">Miguel Cabrera</td>
+<td style="text-align: right;">2013</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Houston Astros</td>
+<td style="text-align: left;">Jose Altuve</td>
+<td style="text-align: right;">2017</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kansas City Royals</td>
+<td style="text-align: left;">George Brett</td>
+<td style="text-align: right;">1980</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Los Angeles Angels of Anaheim</td>
+<td style="text-align: left;">Shohei Ohtani</td>
+<td style="text-align: right;">2023</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Los Angeles Dodgers</td>
+<td style="text-align: left;">Cody Bellinger</td>
+<td style="text-align: right;">2019</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Miami Marlins</td>
+<td style="text-align: left;">Giancarlo Stanton</td>
+<td style="text-align: right;">2017</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Milwaukee Brewers</td>
+<td style="text-align: left;">Christian Yelich</td>
+<td style="text-align: right;">2018</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Minnesota Twins</td>
+<td style="text-align: left;">Joe Mauer</td>
+<td style="text-align: right;">2009</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">New York Mets</td>
+<td style="text-align: left;">NA NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">New York Yankees</td>
+<td style="text-align: left;">Aaron Judge</td>
+<td style="text-align: right;">2024</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Oakland Athletics</td>
+<td style="text-align: left;">Miguel Tejada</td>
+<td style="text-align: right;">2002</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Philadelphia Phillies</td>
+<td style="text-align: left;">Bryce Harper</td>
+<td style="text-align: right;">2021</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pittsburgh Pirates</td>
+<td style="text-align: left;">Andrew McCutchen</td>
+<td style="text-align: right;">2013</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">San Diego Padres</td>
+<td style="text-align: left;">Ken Caminiti</td>
+<td style="text-align: right;">1996</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">San Francisco Giants</td>
+<td style="text-align: left;">Buster Posey</td>
+<td style="text-align: right;">2012</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Seattle Mariners</td>
+<td style="text-align: left;">Ichiro Suzuki</td>
+<td style="text-align: right;">2001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">St.&nbsp;Louis Cardinals</td>
+<td style="text-align: left;">Paul Goldschmidt</td>
+<td style="text-align: right;">2022</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tampa Bay Rays</td>
+<td style="text-align: left;">NA NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Texas Rangers</td>
+<td style="text-align: left;">Josh Hamilton</td>
+<td style="text-align: right;">2010</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Toronto Blue Jays</td>
+<td style="text-align: left;">Josh Donaldson</td>
+<td style="text-align: right;">2015</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Washington Nationals</td>
+<td style="text-align: left;">Bryce Harper</td>
+<td style="text-align: right;">2015</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Here’s what that would look like in SQL</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">CONCAT</span>(nameFirst, <span class="st">' '</span>, nameLast) <span class="kw">AS</span> Player, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  t.name, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  mvp_year <span class="kw">AS</span> <span class="dt">Year</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> AwardsPlayers ap</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> Appearances a <span class="kw">ON</span> a.playerID <span class="op">=</span> ap.playerID <span class="kw">AND</span> a.yearID <span class="op">=</span> ap.yearID <span class="kw">AND</span> a.lgID <span class="op">=</span> ap.lgID</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">RIGHT</span> <span class="kw">JOIN</span> (</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> a.teamID, <span class="fu">MAX</span>(ap.yearID) <span class="kw">AS</span> mvp_year</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> AwardsPlayers ap</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">LEFT</span> <span class="kw">JOIN</span> Appearances a <span class="kw">ON</span> a.playerID <span class="op">=</span> ap.playerID <span class="kw">AND</span> a.yearID <span class="op">=</span> ap.yearID <span class="kw">AND</span> a.lgID <span class="op">=</span> ap.lgID</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> ap.awardID <span class="op">=</span> <span class="st">'Most Valuable Player'</span> </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> a.teamID</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ORDER</span> <span class="kw">BY</span> a.teamID</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  ) last_mvps <span class="kw">ON</span> last_mvps.teamID <span class="op">=</span> a.teamID <span class="kw">AND</span> last_mvps.mvp_year <span class="op">=</span> a.yearID</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> Teams t <span class="kw">ON</span> t.teamID <span class="op">=</span> last_mvps.teamID</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> People p <span class="kw">ON</span> p.playerID <span class="op">=</span> a.playerID</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> ap.awardID <span class="op">=</span> <span class="st">'Most Valuable Player'</span> </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> t.yearID <span class="op">=</span> <span class="dv">2023</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> t.name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="section"><span class="header-section-number">2</span> 9/15:</h2>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="how-to-create-a-sql-duckdb-database-from-the-lahman-package" class="level2 appendix" data-number="3"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">3</span> How to create a SQL duckdb database from the Lahman package</h2><div class="quarto-appendix-contents">
+
+<section id="educate-yourself" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="educate-yourself"><span class="header-section-number">3.1</span> Educate yourself</h3>
 <ol type="1">
 <li>Read <a href="https://r4ds.hadley.nz/databases.html"><em>R for Data Science</em>, Ch. 21</a></li>
 <li>See also <a href="https://mdsr-book.github.io/mdsr3e/15-sqlI.html"><em>Modern Data Science with R</em>, Ch. 15</a></li>
 </ol>
 </section>
-<section id="instantiate-the-database" class="level3" data-number="0.2">
-<h3 data-number="0.2" class="anchored" data-anchor-id="instantiate-the-database"><span class="header-section-number">0.2</span> Instantiate the database</h3>
+<section id="instantiate-the-database" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="instantiate-the-database"><span class="header-section-number">3.2</span> Instantiate the database</h3>
 <p>Create a duckdb instance</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(duckdb)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(duckdb<span class="sc">::</span><span class="fu">duckdb</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(duckdb)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(duckdb<span class="sc">::</span><span class="fu">duckdb</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="populate-the-database" class="level3" data-number="0.3">
-<h3 data-number="0.3" class="anchored" data-anchor-id="populate-the-database"><span class="header-section-number">0.3</span> Populate the database</h3>
+<section id="populate-the-database" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="populate-the-database"><span class="header-section-number">3.3</span> Populate the database</h3>
 <p>Start populating it with data from the <strong>Lahman</strong> package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Have to do this for every table...</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"Teams"</span>, Lahman<span class="sc">::</span>Teams)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"People"</span>, Lahman<span class="sc">::</span>People)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Have to do this for every table...</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"Teams"</span>, Lahman<span class="sc">::</span>Teams)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"People"</span>, Lahman<span class="sc">::</span>People)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"Appearances"</span>, Lahman<span class="sc">::</span>Appearances)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"AwardsPlayers"</span>, Lahman<span class="sc">::</span>AwardsPlayers)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"TeamsFranchises"</span>, Lahman<span class="sc">::</span>TeamsFranchises)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Challenge: Use a <code>map()</code> statement to do them all!</p>
 </section>
-<section id="step-4-inpsect-the-database" class="level3" data-number="0.4">
-<h3 data-number="0.4" class="anchored" data-anchor-id="step-4-inpsect-the-database"><span class="header-section-number">0.4</span> Step 4: Inpsect the database</h3>
+<section id="step-4-inpsect-the-database" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="step-4-inpsect-the-database"><span class="header-section-number">3.4</span> Step 4: Inpsect the database</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListTables</span>(con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListTables</span>(con)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "People" "Teams" </code></pre>
+<pre><code>[1] "Appearances"     "AwardsPlayers"   "People"          "Teams"          
+[5] "TeamsFranchises"</code></pre>
 </div>
 </div>
 </section>
-<section id="access" class="level3" data-number="0.5">
-<h3 data-number="0.5" class="anchored" data-anchor-id="access"><span class="header-section-number">0.5</span> Access</h3>
+<section id="access" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="access"><span class="header-section-number">3.5</span> Access</h3>
 <p>Now, you can access the data in your duckdb SQL database in several ways.</p>
-<section id="using-dbplyr" class="level4" data-number="0.5.1">
-<h4 data-number="0.5.1" class="anchored" data-anchor-id="using-dbplyr"><span class="header-section-number">0.5.1</span> Using <code>dbplyr</code></h4>
+<section id="using-dbplyr" class="level4" data-number="3.5.1">
+<h4 data-number="3.5.1" class="anchored" data-anchor-id="using-dbplyr"><span class="header-section-number">3.5.1</span> Using <code>dbplyr</code></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>teams <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="st">"Teams"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>active_teams <span class="ot">&lt;-</span> teams <span class="sc">|&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yearID <span class="sc">==</span> <span class="dv">2023</span>) <span class="sc">|&gt;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(teamID, name)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>active_teams</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>teams <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="st">"Teams"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>active_teams <span class="ot">&lt;-</span> teams <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yearID <span class="sc">==</span> <span class="dv">2023</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(teamID, name)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>active_teams</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Source:   SQL [?? x 2]
-# Database: DuckDB v1.3.2 [unknown@Linux 6.11.0-1018-azure:R 4.5.1/:memory:]
+# Database: DuckDB 1.3.3-dev231 [unknown@Linux 6.11.0-1018-azure:R 4.5.1/:memory:]
    teamID name                         
    &lt;fct&gt;  &lt;chr&gt;                        
  1 LAA    Los Angeles Angels of Anaheim
@@ -318,8 +536,8 @@ Note
 </div>
 <p>And you can see the translated SQL query!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>active_teams <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_query</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>active_teams <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_query</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;SQL&gt;
 SELECT teamID, "name"
@@ -328,18 +546,18 @@ WHERE (yearID = 2023.0)</code></pre>
 </div>
 </div>
 </section>
-<section id="using-dbi" class="level4" data-number="0.5.2">
-<h4 data-number="0.5.2" class="anchored" data-anchor-id="using-dbi"><span class="header-section-number">0.5.2</span> Using <code>DBI</code></h4>
+<section id="using-dbi" class="level4" data-number="3.5.2">
+<h4 data-number="3.5.2" class="anchored" data-anchor-id="using-dbi"><span class="header-section-number">3.5.2</span> Using <code>DBI</code></h4>
 <p>If you want to practice writing the raw SQL query</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>con <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dbGetQuery</span>(</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT teamID, name</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="st">FROM teams</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE yearID = 2023;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>con <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dbGetQuery</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT teamID, name</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="st">FROM teams</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE yearID = 2023;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="st">"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   teamID                          name
 1     LAA Los Angeles Angels of Anaheim
@@ -375,22 +593,22 @@ WHERE (yearID = 2023.0)</code></pre>
 </div>
 </div>
 </section>
-<section id="using-quartomarkdown" class="level4" data-number="0.5.3">
-<h4 data-number="0.5.3" class="anchored" data-anchor-id="using-quartomarkdown"><span class="header-section-number">0.5.3</span> Using Quarto/Markdown</h4>
+<section id="using-quartomarkdown" class="level4" data-number="3.5.3">
+<h4 data-number="3.5.3" class="anchored" data-anchor-id="using-quartomarkdown"><span class="header-section-number">3.5.3</span> Using Quarto/Markdown</h4>
 <p>If you want SQL syntax highlighting, and to use the data back in R, make an SQL chunk</p>
 <div class="cell" data-output.var="teams_sql">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sql}</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| connection: con</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| output.var: "teams_sql"</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> teamID, name</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> teams</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> yearID <span class="op">=</span> <span class="dv">2023</span>;</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sql}</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| connection: con</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| output.var: "teams_sql"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> teamID, name</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> teams</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> yearID <span class="op">=</span> <span class="dv">2023</span>;</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>teams_sql</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>teams_sql</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   teamID                          name
 1     LAA Los Angeles Angels of Anaheim
@@ -425,16 +643,11 @@ WHERE (yearID = 2023.0)</code></pre>
 30    WAS          Washington Nationals</code></pre>
 </div>
 </div>
-</section>
-</section>
-</section>
-<section id="mlb-teams-last-mvp" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="mlb-teams-last-mvp"><span class="header-section-number">1</span> <a href="https://www.sporcle.com/games/Knapster/mlbteammvp">MLB Teams Last MVP</a></h2>
 
 
 </section>
-
-</main> <!-- /main -->
+</section>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
