@@ -5,7 +5,7 @@ format:
     toc: true
     number-sections: true
 params:
-  solutions: false
+  solutions: true
 ---
 
 ::: {.callout-note}
@@ -22,7 +22,106 @@ library(tidyverse)
 library(Lahman)
 ```
 
-## How to create a SQL duckdb database from the Lahman package {.unnumbered}
+
+## 9/10: [MLB Teams Last MVP](https://www.sporcle.com/games/Knapster/mlbteammvp)
+
+```{r}
+#| include: !expr params$solutions
+#| message: false
+# find all active teams (teams that played in 2023)
+active_teams <- Teams |>
+  filter(yearID == 2023) |>
+  select(teamID, name)
+
+# find all MVPs
+AwardsPlayers |>
+  filter(awardID == "Most Valuable Player") |>
+  # find out which team(s) they played for in that year
+  left_join(
+    Appearances, 
+    by = join_by("playerID", "yearID", "lgID")
+  ) |>
+  # sort them by year
+  arrange(desc(yearID)) |>
+  group_by(teamID) |>
+  # take the first one, since they're already sorted
+  summarize(
+    playerID = first(playerID),
+    yearID = first(yearID)
+  ) |>
+  # now reduce to only the active teams!
+  right_join(active_teams, by = join_by(teamID)) |>
+  arrange(name) |>
+  # get the players' names
+  left_join(People, by = join_by(playerID)) |>
+  mutate(Player = paste(nameFirst, nameLast)) |>
+  # make the headers match
+  select(Team = name, Player, Year = yearID) |>
+  knitr::kable()
+```
+
+Here's what that would look like in SQL
+
+```{sql}
+#| connection: con
+#| eval: false
+
+SELECT 
+  CONCAT(nameFirst, ' ', nameLast) AS Player, 
+  t.name, 
+  mvp_year AS Year
+FROM AwardsPlayers ap
+  LEFT JOIN Appearances a ON a.playerID = ap.playerID AND a.yearID = ap.yearID AND a.lgID = ap.lgID
+  RIGHT JOIN (
+    SELECT a.teamID, MAX(ap.yearID) AS mvp_year
+    FROM AwardsPlayers ap
+    LEFT JOIN Appearances a ON a.playerID = ap.playerID AND a.yearID = ap.yearID AND a.lgID = ap.lgID
+    WHERE ap.awardID = 'Most Valuable Player' 
+    GROUP BY a.teamID
+    ORDER BY a.teamID
+  ) last_mvps ON last_mvps.teamID = a.teamID AND last_mvps.mvp_year = a.yearID
+  LEFT JOIN Teams t ON t.teamID = last_mvps.teamID
+  LEFT JOIN People p ON p.playerID = a.playerID
+WHERE ap.awardID = 'Most Valuable Player' 
+  AND t.yearID = 2023
+ORDER BY t.name;
+```
+
+```{r}
+#| eval: false
+#| include: false
+dbGetQuery(con, "
+
+SELECT 
+  CONCAT(nameFirst, ' ', nameLast) AS Player, 
+  t.name, 
+  mvp_year AS Year
+FROM AwardsPlayers ap
+  LEFT JOIN Appearances a ON a.playerID = ap.playerID AND a.yearID = ap.yearID AND a.lgID = ap.lgID
+  RIGHT JOIN (
+    SELECT a.teamID, MAX(ap.yearID) AS mvp_year
+    FROM AwardsPlayers ap
+    LEFT JOIN Appearances a ON a.playerID = ap.playerID AND a.yearID = ap.yearID AND a.lgID = ap.lgID
+    WHERE ap.awardID = 'Most Valuable Player' 
+    GROUP BY a.teamID
+    ORDER BY a.teamID
+  ) last_mvps ON last_mvps.teamID = a.teamID AND last_mvps.mvp_year = a.yearID
+  LEFT JOIN Teams t ON t.teamID = last_mvps.teamID
+  LEFT JOIN People p ON p.playerID = a.playerID
+WHERE ap.awardID = 'Most Valuable Player' 
+  AND t.yearID = 2023
+ORDER BY t.name;
+
+")
+```
+
+
+
+
+## 9/15: 
+
+
+## How to create a SQL duckdb database from the Lahman package { .appendix}
 
 ### Educate yourself
 
@@ -48,6 +147,9 @@ Start populating it with data from the **Lahman** package.
 # Have to do this for every table...
 dbWriteTable(con, "Teams", Lahman::Teams)
 dbWriteTable(con, "People", Lahman::People)
+dbWriteTable(con, "Appearances", Lahman::Appearances)
+dbWriteTable(con, "AwardsPlayers", Lahman::AwardsPlayers)
+dbWriteTable(con, "TeamsFranchises", Lahman::TeamsFranchises)
 ```
 
 Challenge: Use a `map()` statement to do them all!
@@ -115,31 +217,4 @@ teams_sql
 ```
 
 
-
-## [MLB Teams Last MVP](https://www.sporcle.com/games/Knapster/mlbteammvp)
-
-```{r}
-#| include: !expr params$solutions
-#| message: false
-active_teams <- Teams |>
-  filter(yearID == 2023) |>
-  select(teamID, name)
-
-AwardsPlayers |>
-  filter(awardID == "Most Valuable Player") |>
-  left_join(Appearances, by = join_by("playerID", "yearID", "lgID")) |>
-  arrange(desc(yearID)) |>
-  group_by(teamID) |>
-  summarize(
-    playerID = first(playerID),
-    yearID = first(yearID)
-  ) |>
-  right_join(active_teams, by = join_by(teamID)) |>
-  arrange(name) |>
-  left_join(People, by = join_by(playerID)) |>
-  mutate(Player = paste(nameFirst, nameLast)) |>
-  select(Team = name, Player, Year = yearID) |>
-  knitr::kable()
-
-```
 
