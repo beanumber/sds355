@@ -6,8 +6,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.34">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.24">
 
   <meta name="author" content="Prof.&nbsp;Baumer">
   <meta name="dcterms.date" content="2025-09-10">
@@ -96,7 +96,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-8a5cdbf101a0845817b98f2425171703.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-832775eafbd512325564c8c290c39367.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -236,8 +236,8 @@ Prof.&nbsp;Baumer
 <h2>A brief history of sabermetrics</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-5035047ad66aa0f82af5" style="width:960px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-5035047ad66aa0f82af5">{"x":{"diagram":"\ndigraph dot {\n\ngraph [layout = dot]\n\nnode [shape = oval,\n      style = filled,\n      color = darkgrey,\n      label = \"\"]\n\nnode [fillcolor = orange, width = 2]\na [label = \"sabermetrics\"]\n\nnode [fillcolor = dodgerblue, fixedsize = true, width = 1]\nb [label = \"data\"]\nc [label = \"tools\"]\nd [label = \"methods\"]\n\nedge [color = darkgrey]\n{b c d} -> a\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-3ddc806ff4788be53d96" style="width:960px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-3ddc806ff4788be53d96">{"x":{"diagram":"\ndigraph dot {\n\ngraph [layout = dot]\n\nnode [shape = oval,\n      style = filled,\n      color = darkgrey,\n      label = \"\"]\n\nnode [fillcolor = orange, width = 2]\na [label = \"sabermetrics\"]\n\nnode [fillcolor = dodgerblue, fixedsize = true, width = 1]\nb [label = \"data\"]\nc [label = \"tools\"]\nd [label = \"methods\"]\n\nedge [color = darkgrey]\n{b c d} -> a\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -848,9 +848,9 @@ play,1,1,ventr001,32,B.CB.SFFBS,K</code></pre>
 </ul>
 </div><div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(Lahman)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(Lahman)</span>
 <span id="cb2-2"><a></a>Teams <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  yearID lgID teamID franchID divID Rank   G Ghome  W  L DivWin WCWin LgWin
 1   1884   UA    ALT      ALT  &lt;NA&gt;   10  25    NA  6 19   &lt;NA&gt;  &lt;NA&gt;     N
@@ -894,9 +894,9 @@ play,1,1,ventr001,32,B.CB.SFFBS,K</code></pre>
 </ul>
 </div><div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(retrosheet)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">library</span>(retrosheet)</span>
 <span id="cb4-2"><a></a><span class="fu">get_retrosheet</span>(<span class="st">"game"</span>, <span class="dv">1986</span>, <span class="st">"NYN"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        Date DblHdr Day VisTm VisTmLg VisTmGNum HmTm HmTmLg HmTmGNum VisRuns
 1 1986-04-07      0 Mon   CLE      AL         1  BAL     AL        1       6
@@ -1056,28 +1056,28 @@ play,1,1,ventr001,32,B.CB.SFFBS,K</code></pre>
 <p><img data-src="https://upload.wikimedia.org/wikipedia/en/6/6a/Statcast_logo.jpg"> <img data-src="https://billpetti.github.io/baseballr/logo.png"></p>
 </div><div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># remotes::install_github("BillPetti/baseballr")</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># remotes::install_github("BillPetti/baseballr")</span></span>
 <span id="cb6-2"><a></a><span class="fu">library</span>(baseballr)</span>
 <span id="cb6-3"><a></a><span class="fu">statcast_search_pitchers</span>(</span>
 <span id="cb6-4"><a></a>  <span class="at">start_date =</span> <span class="st">"2025-08-30"</span>, </span>
 <span id="cb6-5"><a></a>  <span class="at">end_date =</span> <span class="fu">Sys.Date</span>(), </span>
 <span id="cb6-6"><a></a>  <span class="at">pitcherid =</span> <span class="dv">804636</span></span>
-<span id="cb6-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 96 × 118
+<pre><code># A tibble: 136 × 118
    pitch_type game_date  release_speed release_pos_x release_pos_z player_name
    &lt;chr&gt;      &lt;date&gt;             &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;      
- 1 FF         2025-09-06          98.2         -2.35          6.01 Tong, Jonah
- 2 CH         2025-09-06          88.2         -2.27          5.83 Tong, Jonah
- 3 CH         2025-09-06          86           -2.44          5.83 Tong, Jonah
- 4 FF         2025-09-06          97.5         -2.46          5.84 Tong, Jonah
- 5 CU         2025-09-06          78.3         -2.75          5.79 Tong, Jonah
- 6 FF         2025-09-06          95.6         -2.4           5.84 Tong, Jonah
- 7 FF         2025-09-06          96.9         -2.5           5.92 Tong, Jonah
- 8 CH         2025-09-06          87.4         -2.43          5.93 Tong, Jonah
- 9 CH         2025-09-06          87.4         -2.24          5.84 Tong, Jonah
-10 FF         2025-09-06          97.1         -2.39          5.89 Tong, Jonah
-# ℹ 86 more rows
+ 1 FF         2025-09-12          93.6         -2.56          5.83 Tong, Jonah
+ 2 FF         2025-09-12          94.4         -2.42          5.79 Tong, Jonah
+ 3 FF         2025-09-12          93.1         -2.51          5.79 Tong, Jonah
+ 4 CH         2025-09-12          84.7         -2.44          5.77 Tong, Jonah
+ 5 FF         2025-09-12          94.8         -2.42          5.84 Tong, Jonah
+ 6 CH         2025-09-12          84.4         -2.34          5.84 Tong, Jonah
+ 7 FF         2025-09-12          95.9         -2.4           5.87 Tong, Jonah
+ 8 FF         2025-09-12          93.8         -2.65          5.81 Tong, Jonah
+ 9 FF         2025-09-12          94.9         -2.44          5.89 Tong, Jonah
+10 FF         2025-09-12          94.2         -2.42          5.73 Tong, Jonah
+# ℹ 126 more rows
 # ℹ 112 more variables: batter &lt;dbl&gt;, pitcher &lt;dbl&gt;, events &lt;chr&gt;,
 #   description &lt;chr&gt;, spin_dir &lt;lgl&gt;, spin_rate_deprecated &lt;lgl&gt;,
 #   break_angle_deprecated &lt;lgl&gt;, break_length_deprecated &lt;lgl&gt;, zone &lt;dbl&gt;,
@@ -1280,7 +1280,7 @@ play,1,1,ventr001,32,B.CB.SFFBS,K</code></pre>
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1392,13 +1392,14 @@ play,1,1,ventr001,32,B.CB.SFFBS,K</code></pre>
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

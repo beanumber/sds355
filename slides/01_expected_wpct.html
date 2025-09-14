@@ -6,8 +6,8 @@
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.34">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.24">
 
   <meta name="author" content="Prof.&nbsp;Baumer">
   <meta name="dcterms.date" content="2025-09-08">
@@ -116,7 +116,7 @@
     div.csl-indent {
       margin-left: 2em;
     }  </style>
-  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-8a5cdbf101a0845817b98f2425171703.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-832775eafbd512325564c8c290c39367.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -294,7 +294,7 @@ Prof.&nbsp;Baumer
 <section id="computing-run-differential" class="slide level2">
 <h2>Computing run differential</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a></a><span class="fu">library</span>(Lahman)</span>
 <span id="cb1-3"><a></a></span>
 <span id="cb1-4"><a></a>team_runs <span class="ot">&lt;-</span> Teams <span class="sc">|&gt;</span> </span>
@@ -303,7 +303,7 @@ Prof.&nbsp;Baumer
 <span id="cb1-7"><a></a>  <span class="fu">mutate</span>(<span class="at">wpct =</span> W <span class="sc">/</span> (W <span class="sc">+</span> L), <span class="at">RD =</span> RS <span class="sc">-</span> RA) <span class="sc">|&gt;</span></span>
 <span id="cb1-8"><a></a>  <span class="fu">select</span>(yearID, teamID, lgID, wpct, RS, RA, RD)</span>
 <span id="cb1-9"><a></a></span>
-<span id="cb1-10"><a></a>team_runs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a></a>team_runs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     yearID teamID lgID      wpct   RS   RA   RD
 1      1961    LAA   AL 0.4347826  744  784  -40
@@ -2140,7 +2140,7 @@ Prof.&nbsp;Baumer
 <section id="visualize-the-relationship" class="slide level2">
 <h2>Visualize the relationship</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>rd_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>rd_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
 <span id="cb3-2"><a></a>  <span class="at">data =</span> team_runs, <span class="fu">aes</span>(<span class="at">x =</span> RD, <span class="at">y =</span> wpct)</span>
 <span id="cb3-3"><a></a>) <span class="sc">+</span></span>
 <span id="cb3-4"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"darkgray"</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
@@ -2148,21 +2148,21 @@ Prof.&nbsp;Baumer
 <span id="cb3-6"><a></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
 <span id="cb3-7"><a></a>  <span class="fu">xlab</span>(<span class="st">"Run Differential"</span>) <span class="sc">+</span> </span>
 <span id="cb3-8"><a></a>  <span class="fu">ylab</span>(<span class="st">"Winning Percentage"</span>) <span class="sc">+</span></span>
-<span id="cb3-9"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-9"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="historical-relationship" class="slide level2">
 <h2>Historical relationship</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>rd_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>rd_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
 <img data-src="01_expected_wpct_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 <section id="regression-model" class="slide level2">
 <h2>Regression model</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(wpct <span class="sc">~</span> RD, <span class="at">data =</span> team_runs)</span>
-<span id="cb5-2"><a></a><span class="fu">coef</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(wpct <span class="sc">~</span> RD, <span class="at">data =</span> team_runs)</span>
+<span id="cb5-2"><a></a><span class="fu">coef</span>(mod)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> (Intercept)           RD 
 0.4999771947 0.0006402553 </code></pre>
@@ -2173,7 +2173,7 @@ Prof.&nbsp;Baumer
 <li>Rule of thumb: 10 runs = 1 win</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">coef</span>(mod)[<span class="st">"RD"</span>] <span class="sc">*</span> <span class="dv">10</span> <span class="sc">*</span> <span class="dv">162</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">coef</span>(mod)[<span class="st">"RD"</span>] <span class="sc">*</span> <span class="dv">10</span> <span class="sc">*</span> <span class="dv">162</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      RD 
 1.037214 </code></pre>
@@ -2201,7 +2201,7 @@ Prof.&nbsp;Baumer
 <section id="computing-run-ratio" class="slide level2">
 <h2>Computing run ratio</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>team_runs <span class="ot">&lt;-</span> team_runs <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>team_runs <span class="ot">&lt;-</span> team_runs <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a></a>  <span class="fu">mutate</span>(<span class="at">run_ratio =</span> RS<span class="sc">/</span>RA)</span>
 <span id="cb9-3"><a></a></span>
 <span id="cb9-4"><a></a>rr_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
@@ -2215,15 +2215,15 @@ Prof.&nbsp;Baumer
 <span id="cb9-12"><a></a></span>
 <span id="cb9-13"><a></a>exp_wpct <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">k =</span> <span class="dv">2</span>) { </span>
 <span id="cb9-14"><a></a>  <span class="fu">return</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span>x)<span class="sc">^</span>k))</span>
-<span id="cb9-15"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-15"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="jamesian-model" class="slide level2">
 <h2>Jamesian model</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>rr_plot <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>rr_plot <span class="sc">+</span></span>
 <span id="cb10-2"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb10-3"><a></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> exp_wpct, <span class="at">args =</span> <span class="fu">list</span>(<span class="dv">2</span>), <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"navy"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> exp_wpct, <span class="at">args =</span> <span class="fu">list</span>(<span class="dv">2</span>), <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"navy"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
 <img data-src="01_expected_wpct_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
@@ -2234,13 +2234,13 @@ Prof.&nbsp;Baumer
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>optimal <span class="ot">&lt;-</span> team_runs <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>optimal <span class="ot">&lt;-</span> team_runs <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a></a>  <span class="fu">nls</span>(</span>
 <span id="cb11-3"><a></a>    <span class="at">formula =</span> wpct <span class="sc">~</span> <span class="dv">1</span><span class="sc">/</span>(<span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">/</span>run_ratio)<span class="sc">^</span>k), </span>
 <span id="cb11-4"><a></a>    <span class="at">start =</span> <span class="fu">list</span>(<span class="at">k =</span> <span class="dv">2</span>)</span>
 <span id="cb11-5"><a></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb11-6"><a></a>  <span class="fu">coef</span>()</span>
-<span id="cb11-7"><a></a>optimal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-7"><a></a>optimal</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       k 
 1.827689 </code></pre>
@@ -2251,10 +2251,10 @@ Prof.&nbsp;Baumer
 <section id="visualize-all-models" class="slide level2">
 <h2>Visualize all models</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>rr_plot <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>rr_plot <span class="sc">+</span></span>
 <span id="cb13-2"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
 <span id="cb13-3"><a></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> exp_wpct, <span class="at">args =</span> <span class="fu">list</span>(<span class="dv">2</span>), <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"navy"</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> exp_wpct, <span class="at">args =</span> <span class="fu">list</span>(optimal), <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"gold"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-4"><a></a>  <span class="fu">stat_function</span>(<span class="at">fun =</span> exp_wpct, <span class="at">args =</span> <span class="fu">list</span>(optimal), <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"gold"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
 <img data-src="01_expected_wpct_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
@@ -2480,7 +2480,7 @@ Glickman, Mark E, and Hal S Stern. 1998. <span>“A State-Space Model for Nation
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -2592,13 +2592,14 @@ Glickman, Mark E, and Hal S Stern. 1998. <span>“A State-Space Model for Nation
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

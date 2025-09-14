@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -67,14 +67,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d8bce306a4c47d71f1e7aa5fc1e1385a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-bf780f34dd70b02f70b9c7e0c168d62c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,6 +115,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">SDS 355: Fall 2025</span>
     </a>
@@ -233,8 +236,8 @@ Note
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Lahman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Lahman)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="hw-1-due-912" class="level2">
 <h2 class="anchored" data-anchor-id="hw-1-due-912">HW 1: Due 9/12</h2>
@@ -447,9 +450,42 @@ Tip
 <ol type="1">
 <li><a href="https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises"><em>ABDWR</em>, Exercise 4.7.1</a></li>
 </ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Hint: See <a href="https://beanumber.github.io/abdwr3e/02-intro.html#iterating-using-map" class="uri">https://beanumber.github.io/abdwr3e/02-intro.html#iterating-using-map</a></p>
+</div>
+</div>
 <ol start="2" type="1">
 <li><a href="https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises"><em>ABDWR</em>, Exercise 4.7.2</a></li>
+</ol>
+<ol start="3" type="1">
+<li>Fit a regression model to the <code>Teams</code> data since 1962 to estimate weights (i.e., run values) for the batting events included in <a href="https://en.wikipedia.org/wiki/Extrapolated_Runs#Purpose_and_formulae">eXtrapolated Runs Basic</a>. Compare your results to the values shown. Make sure that you compute everything <em>per game</em>!
+<ol type="1">
+<li>Report the <a href="https://en.wikipedia.org/wiki/Root_mean_square_deviation">Root Mean Squared Error</a>.</li>
+<li>Which run values are most similar?</li>
+<li>Which run values are most different? How meaningful are these differences?</li>
+<li>For those run values that are most different, hypothesize why they might be different?</li>
+</ol></li>
+</ol>
+<ol start="4" type="1">
+<li>For the same data set that you used above, compute:
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Batting_average#Baseball">batting average</a> (<code>BAVG</code>)</li>
+<li><a href="https://en.wikipedia.org/wiki/On-base_percentage">on-base percentage</a> (<code>OBP</code>)</li>
+<li><a href="https://en.wikipedia.org/wiki/Slugging_percentage">slugging percentage</a> (<code>SLG</code>)</li>
+<li><a href="https://en.wikipedia.org/wiki/On-base_plus_slugging">OPS</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Runs_created">Runs Created (basic)</a> (<code>RC</code>)</li>
+<li><a href="https://en.wikipedia.org/wiki/Extrapolated_Runs#Purpose_and_formulae">eXtrapolated Runs Basic</a> (<code>XR</code>)<br>
+Compute the Pearson correlation coefficient between each of these run estimators and (actual) <em>runs per game</em>. Which metrics correlate most closely to runs per game?</li>
+</ul></li>
 </ol>
 
 
@@ -507,13 +543,14 @@ Tip
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
