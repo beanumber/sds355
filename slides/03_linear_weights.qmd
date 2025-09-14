@@ -1,0 +1,218 @@
+---
+title: "Linear Weights"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "2025-09-15"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+# What is the value of a play? 
+
+## Watch
+
+{{< video https://www.youtube.com/embed/tGwB5jmdYWI width="1024" aspect-ratio="16x9">}}
+
+## What happened?
+
+- 1st and 3rd, nobody out
+- [Joey Votto](https://en.wikipedia.org/wiki/Joey_Votto) singles
+- [Billy Hamilton](https://en.wikipedia.org/wiki/Billy_Hamilton_(baseball,_born_1990)) scores *from first*!
+- error allows Votto to advance to 2nd
+- **two actual runs scored**
+
+## Retrosheet data
+
+```{r}
+library(tidyverse)
+library(retrosheet)
+cin2016 <- get_retrosheet("play", 2016, "CIN")
+cin2016[[19]] |>
+  pluck("play") |>
+  filter(retroID == "vottj001")
+```
+
+## How valuable is a single? 
+
+- In this case, 2 runs scored, 2 RBI
+- But [in general...](https://www.baseball-reference.com/leaders/1B_career.shtml)
+
+
+## Prepare a data set
+
+```{r}
+library(Lahman)
+teams54 <- Teams |>
+  filter(yearID >= 1954) |>
+  mutate(
+    X1B = H - X2B - X3B - HR,
+    OUTS = AB - H,
+    WK = ifelse(is.na(HBP), 0, HBP) + BB
+  )
+```
+
+## Convert to *per game* averages
+
+```{r}
+teams54rg <- teams54 |>
+  mutate(
+    across(c(R, X1B, X2B, X3B, HR, WK, OUTS, SF, SB, CS), \(x) x/G
+  ))
+```
+
+## Set up our basic plot
+
+```{r}
+rplot <- ggplot(teams54rg, aes(y = R, x = HR)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_y_continuous("Runs Scored")
+rplot
+```
+
+## Regression model for home runs
+
+```{r}
+lm(R ~ HR, data = teams54rg)
+```
+
+## Singles
+
+```{r}
+rplot + 
+  aes(x = X1B)
+```
+
+## Regression model for singles
+
+```{r}
+lm(R ~ X1B, data = teams54rg)
+```
+
+## Stolen bases
+
+```{r}
+rplot + 
+  aes(x = SB)
+```
+
+## Caught stealings
+
+```{r}
+rplot + 
+  aes(x = CS)
+```
+
+## Basic regression model
+
+```{r}
+# Curveball, pg. 180
+teams54rg |>
+  filter(yearID < 2000) |>
+  lm(R ~ X1B + X2B + X3B + HR + WK + SB, data = _) |>
+  summary()
+```
+
+## Full regression model
+
+```{r}
+lm(R ~ X1B + X2B + X3B + HR + WK + SF + SB + CS + OUTS, data = teams54rg)
+```
+
+## Iterate over eras
+
+```{r}
+lwts <- function(d) {
+  lm(R ~ X1B + X2B + X3B + HR + WK + SB + CS + OUTS, data = d) |>
+    coef() |>
+    t() |>
+    as_tibble()
+}
+
+lwts(teams54rg)
+
+teams54rg |>
+  mutate(score = floor(yearID %/% 20) * 20) |>
+  group_split(score) |>
+  map(lwts) |>
+  bind_rows()
+```
+
+# Evaluating run estimators
+
+## Common run estimators
+
+```{r}
+teams54 <- teams54 |>
+  mutate(
+    R = R/G,
+    BAVG = H / AB,
+    OBP = (H + WK) / (AB + WK + ifelse(is.na(SF), 0, SF)),
+    SLG = (X1B + 2*X2B + 3*X3B + 4*HR) / AB,
+    OPS = OBP + SLG,
+    LWTS = 0.46*X1B + 0.8*X2B + 1.02*X3B + 1.4*HR + 0.33*WK + 0.3*SB - 0.6*CS - 0.25*(OUTS),
+    XR = (0.5*X1B + 0.72*X2B + 1.04*X3B + 1.44*HR + 0.33*WK + 0.18*SB -0.32*CS - 0.098*OUTS) / G,
+    RC = OBP * SLG
+  ) 
+```
+
+## Batting average
+
+```{r}
+rplot <- rplot %+% teams54
+rplot +
+  aes(x = BAVG)
+```
+
+## On-base percentage
+
+```{r}
+rplot +
+  aes(x = OBP)
+```
+
+## Slugging percentage
+
+```{r}
+rplot +
+  aes(x = SLG)
+```
+
+## OPS
+
+```{r}
+rplot +
+  aes(x = OPS)
+```
+
+## eXtrapolated Runs
+
+```{r}
+rplot +
+  aes(x = XR)
+```
+
+## Runs Created
+
+```{r}
+rplot +
+  aes(x = RC)
+```
+
+## Correlation
+
+```{r}
+teams54 |>
+  select(R, BAVG, OBP, SLG, OPS, LWTS, XR, RC) |>
+  cor()
+```
+
+

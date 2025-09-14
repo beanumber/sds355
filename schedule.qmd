@@ -86,7 +86,7 @@ quiz <- function() {
 
 - `r quiz()` [Sporcle quiz 2](sporcle.qmd)
 - *Moneyball* discussion
-- Linear Weights
+- `r slides()` [Linear Weights](slides/03_linear_weights.qmd)
 
 ::: {.callout-note} 
 ## Homework

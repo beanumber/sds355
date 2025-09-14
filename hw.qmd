@@ -162,7 +162,11 @@ Teams |>
 
 1. [*ABDWR*, Exercise 4.7.1](https://beanumber.github.io/abdwr3e/04-pythagoras.html#exercises)
 
+::: {.callout-tip}
+
 Hint: See <https://beanumber.github.io/abdwr3e/02-intro.html#iterating-using-map>
+
+:::
 
 ::: {.content-hidden unless-meta="show-solutions"}
 ::: {.callout-note title="SOLUTION"}
@@ -222,3 +226,66 @@ old[c(7, 40), ]
 :::
 :::
 
+3. Fit a regression model to the `Teams` data since 1962 to estimate weights (i.e., run values) for the batting events included in [eXtrapolated Runs Basic](https://en.wikipedia.org/wiki/Extrapolated_Runs#Purpose_and_formulae). Compare your results to the values shown. Make sure that you compute everything *per game*!
+    1. Report the [Root Mean Squared Error](https://en.wikipedia.org/wiki/Root_mean_square_deviation). 
+    1. Which run values are most similar? 
+    1. Which run values are most different? How meaningful are these differences? 
+    1. For those run values that are most different, hypothesize why they might be different? 
+
+
+::: {.content-hidden unless-meta="show-solutions"}
+::: {.callout-note title="SOLUTION"}
+
+```{r}
+library(Lahman)
+teams62 <- Teams |>
+  filter(yearID >= 1962, G > 120) |>
+  mutate(
+    X1B = H - X2B - X3B - HR,
+    OUTS = AB - H,
+    WK = ifelse(is.na(HBP), 0, HBP) + BB,
+    BAVG = H / AB,
+    OBP = (H + WK) / (AB + WK + ifelse(is.na(SF), 0, SF)),
+    SLG = (X1B + 2*X2B + 3*X3B + 4*HR) / AB,
+    OPS = OBP + SLG,
+    LWTS = 0.46*X1B + 0.8*X2B + 1.02*X3B + 1.4*HR + 0.33*WK + 0.3*SB - 0.6*CS - 0.25*(OUTS),
+    XR = 0.5*X1B + 0.72*X2B + 1.04*X3B + 1.44*HR + 0.33*WK + 0.18*SB -0.32*CS - 0.098*OUTS
+  ) |>
+  mutate(
+    across(c(R, X1B, X2B, X3B, HR, WK, OUTS, SF, SB, CS), \(x) x/G
+  ))
+```
+
+```{r}
+mod <- lm(R ~ X1B + X2B + X3B + HR + WK + SB + CS + OUTS, data = teams62)
+summary(mod)
+
+# RMSE
+sqrt(mean(residuals(mod)^2))
+```
+
+:::
+:::
+
+4. For the same data set that you used above, compute:
+    - [batting average](https://en.wikipedia.org/wiki/Batting_average#Baseball) (`BAVG`)
+    - [on-base percentage](https://en.wikipedia.org/wiki/On-base_percentage) (`OBP`)
+    - [slugging percentage](https://en.wikipedia.org/wiki/Slugging_percentage) (`SLG`)
+    - [OPS](https://en.wikipedia.org/wiki/On-base_plus_slugging)
+    - [Runs Created (basic)](https://en.wikipedia.org/wiki/Runs_created) (`RC`)
+    - [eXtrapolated Runs Basic](https://en.wikipedia.org/wiki/Extrapolated_Runs#Purpose_and_formulae) (`XR`)
+\
+Compute the Pearson correlation coefficient between each of these run estimators and (actual) *runs per game*. Which metrics correlate most closely to runs per game? 
+
+
+::: {.content-hidden unless-meta="show-solutions"}
+::: {.callout-note title="SOLUTION"}
+
+```{r}
+teams62 |>
+  select(R, BAVG, OBP, SLG, OPS, XR) |>
+  cor()
+```
+
+:::
+:::
