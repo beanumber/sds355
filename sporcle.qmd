@@ -22,6 +22,7 @@ library(tidyverse)
 library(Lahman)
 ```
 
+# Sporcle Quizzes
 
 ## 9/10: [MLB Teams Last MVP](https://www.sporcle.com/games/Knapster/mlbteammvp)
 
@@ -120,6 +121,7 @@ ORDER BY t.name;
 
 ## 9/15: 
 
+# Appendix
 
 ## How to create a SQL duckdb database from the Lahman package { .appendix}
 
@@ -152,7 +154,11 @@ dbWriteTable(con, "AwardsPlayers", Lahman::AwardsPlayers)
 dbWriteTable(con, "TeamsFranchises", Lahman::TeamsFranchises)
 ```
 
+::: {.callout-tip}
+
 Challenge: Use a `map()` statement to do them all!
+
+:::
 
 ### Step 4: Inpsect the database
 

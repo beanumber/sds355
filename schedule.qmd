@@ -75,7 +75,6 @@ quiz <- function() {
   Hillyer Graham  
   Practice **Active Viewing** (see [page 12 of this](https://webapp4.asu.edu/bookstore/viewsyllabus/2227/93914/pdf;jsessionid=60F2D95BAFC1D6BEBFEAFDB6D0DEA997))
 - **HW 1 due Friday by 5 pm**
-- Read *ABDWR*, [Ch. 5](https://beanumber.github.io/abdwr3e/05-runsexpectancy.html)
 
 :::
 
@@ -84,13 +83,14 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- `r quiz()` [Sporcle quiz 2](sporcle.qmd)
 - *Moneyball* discussion
+- `r quiz()` [Sporcle quiz 2](sporcle.qmd)
 - `r slides()` [Linear Weights](slides/03_linear_weights.qmd)
 
 ::: {.callout-note} 
 ## Homework
 
+- Read *ABDWR*, [Ch. 5](https://beanumber.github.io/abdwr3e/05-runsexpectancy.html)
 
 :::
 
