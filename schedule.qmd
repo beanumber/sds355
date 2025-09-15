@@ -131,11 +131,13 @@ quiz <- function() {
 
 - Win Probability
 - [Tigers @ Red Sox](https://www.mlb.com/gameday/tigers-vs-red-sox/2025/09/26/776181/live?partnerId=LR_preview)  
-  Friday, 7:10 pm  
-  [Fenway Park, Boston, MA](https://www.google.com/maps/place/fenway+park/data=!4m2!3m1!1s0x89e379f63f253f6f:0xa2800dcb647a5504?sa=X&ved=1t:155783&ictx=111)
+  **Friday, 7:10 pm**  
+  [Fenway Park, Boston, MA](https://www.google.com/maps/place/fenway+park/data=!4m2!3m1!1s0x89e379f63f253f6f:0xa2800dcb647a5504?sa=X&ved=1t:155783&ictx=111)  
+  ![](https://www.fubo.tv/news/wp-content/uploads/2025/05/How_to_Stream_Boston_Red_Sox_at_Detroit_Tigers_Live_TV_Channel_May_13_2025.png)
 - [New England Symposium on Statistics in Sports](https://www.nessis.org/)  
-  Saturday, 9 am - 6 pm  
-  Harvard University
+  **Saturday**, 9 am - 6 pm  
+  Harvard University  
+  ![](https://www.euro-online.org/websites/orinsports/wp-content/uploads/sites/10/2019/01/Nessis.png)
 
 ::: 
 
