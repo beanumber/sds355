@@ -194,9 +194,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#mlb-teams-last-mvp" id="toc-mlb-teams-last-mvp" class="nav-link active" data-scroll-target="#mlb-teams-last-mvp"><span class="header-section-number">1</span> 9/10: MLB Teams Last MVP</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">2</span> 9/15:</a></li>
+  <li><a href="#sporcle-quizzes" id="toc-sporcle-quizzes" class="nav-link active" data-scroll-target="#sporcle-quizzes"><span class="header-section-number">1</span> Sporcle Quizzes</a>
+  <ul>
+  <li><a href="#mlb-teams-last-mvp" id="toc-mlb-teams-last-mvp" class="nav-link" data-scroll-target="#mlb-teams-last-mvp"><span class="header-section-number">1.1</span> 9/10: MLB Teams Last MVP</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">1.2</span> 9/15:</a></li>
+  </ul></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix"><span class="header-section-number">2</span> Appendix</a>
+  <ul>
   
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -240,8 +246,10 @@ Note
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Lahman)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="mlb-teams-last-mvp" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="mlb-teams-last-mvp"><span class="header-section-number">1</span> 9/10: <a href="https://www.sporcle.com/games/Knapster/mlbteammvp">MLB Teams Last MVP</a></h2>
+<section id="sporcle-quizzes" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Sporcle Quizzes</h1>
+<section id="mlb-teams-last-mvp" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="mlb-teams-last-mvp"><span class="header-section-number">1.1</span> 9/10: <a href="https://www.sporcle.com/games/Knapster/mlbteammvp">MLB Teams Last MVP</a></h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find all active teams (teams that played in 2023)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>active_teams <span class="ot">&lt;-</span> Teams <span class="sc">|&gt;</span></span>
@@ -460,22 +468,26 @@ Note
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> t.name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="section" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="section"><span class="header-section-number">2</span> 9/15:</h2>
+<section id="section" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="section"><span class="header-section-number">1.2</span> 9/15:</h2>
+</section>
+</section>
+<section id="appendix" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Appendix</h1>
+
 </section>
 
+<div id="quarto-appendix" class="default"><section id="how-to-create-a-sql-duckdb-database-from-the-lahman-package" class="level2 appendix" data-number="2.1"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">2.1</span> How to create a SQL duckdb database from the Lahman package</h2><div class="quarto-appendix-contents">
 
-<div id="quarto-appendix" class="default"><section id="how-to-create-a-sql-duckdb-database-from-the-lahman-package" class="level2 appendix" data-number="3"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">3</span> How to create a SQL duckdb database from the Lahman package</h2><div class="quarto-appendix-contents">
-
-<section id="educate-yourself" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="educate-yourself"><span class="header-section-number">3.1</span> Educate yourself</h3>
+<section id="educate-yourself" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="educate-yourself"><span class="header-section-number">2.1.1</span> Educate yourself</h3>
 <ol type="1">
 <li>Read <a href="https://r4ds.hadley.nz/databases.html"><em>R for Data Science</em>, Ch. 21</a></li>
 <li>See also <a href="https://mdsr-book.github.io/mdsr3e/15-sqlI.html"><em>Modern Data Science with R</em>, Ch. 15</a></li>
 </ol>
 </section>
-<section id="instantiate-the-database" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="instantiate-the-database"><span class="header-section-number">3.2</span> Instantiate the database</h3>
+<section id="instantiate-the-database" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="instantiate-the-database"><span class="header-section-number">2.1.2</span> Instantiate the database</h3>
 <p>Create a duckdb instance</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
@@ -483,8 +495,8 @@ Note
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(duckdb<span class="sc">::</span><span class="fu">duckdb</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="populate-the-database" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="populate-the-database"><span class="header-section-number">3.3</span> Populate the database</h3>
+<section id="populate-the-database" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="populate-the-database"><span class="header-section-number">2.1.3</span> Populate the database</h3>
 <p>Start populating it with data from the <strong>Lahman</strong> package.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Have to do this for every table...</span></span>
@@ -494,10 +506,22 @@ Note
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"AwardsPlayers"</span>, Lahman<span class="sc">::</span>AwardsPlayers)</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"TeamsFranchises"</span>, Lahman<span class="sc">::</span>TeamsFranchises)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Challenge: Use a <code>map()</code> statement to do them all!</p>
+</div>
+</div>
 </section>
-<section id="step-4-inpsect-the-database" class="level3" data-number="3.4">
-<h3 data-number="3.4" class="anchored" data-anchor-id="step-4-inpsect-the-database"><span class="header-section-number">3.4</span> Step 4: Inpsect the database</h3>
+<section id="step-4-inpsect-the-database" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="step-4-inpsect-the-database"><span class="header-section-number">2.1.4</span> Step 4: Inpsect the database</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListTables</span>(con)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -506,11 +530,11 @@ Note
 </div>
 </div>
 </section>
-<section id="access" class="level3" data-number="3.5">
-<h3 data-number="3.5" class="anchored" data-anchor-id="access"><span class="header-section-number">3.5</span> Access</h3>
+<section id="access" class="level3" data-number="2.1.5">
+<h3 data-number="2.1.5" class="anchored" data-anchor-id="access"><span class="header-section-number">2.1.5</span> Access</h3>
 <p>Now, you can access the data in your duckdb SQL database in several ways.</p>
-<section id="using-dbplyr" class="level4" data-number="3.5.1">
-<h4 data-number="3.5.1" class="anchored" data-anchor-id="using-dbplyr"><span class="header-section-number">3.5.1</span> Using <code>dbplyr</code></h4>
+<section id="using-dbplyr" class="level4" data-number="2.1.5.1">
+<h4 data-number="2.1.5.1" class="anchored" data-anchor-id="using-dbplyr"><span class="header-section-number">2.1.5.1</span> Using <code>dbplyr</code></h4>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>teams <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="st">"Teams"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -549,8 +573,8 @@ WHERE (yearID = 2023.0)</code></pre>
 </div>
 </div>
 </section>
-<section id="using-dbi" class="level4" data-number="3.5.2">
-<h4 data-number="3.5.2" class="anchored" data-anchor-id="using-dbi"><span class="header-section-number">3.5.2</span> Using <code>DBI</code></h4>
+<section id="using-dbi" class="level4" data-number="2.1.5.2">
+<h4 data-number="2.1.5.2" class="anchored" data-anchor-id="using-dbi"><span class="header-section-number">2.1.5.2</span> Using <code>DBI</code></h4>
 <p>If you want to practice writing the raw SQL query</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>con <span class="sc">|&gt;</span></span>
@@ -596,8 +620,8 @@ WHERE (yearID = 2023.0)</code></pre>
 </div>
 </div>
 </section>
-<section id="using-quartomarkdown" class="level4" data-number="3.5.3">
-<h4 data-number="3.5.3" class="anchored" data-anchor-id="using-quartomarkdown"><span class="header-section-number">3.5.3</span> Using Quarto/Markdown</h4>
+<section id="using-quartomarkdown" class="level4" data-number="2.1.5.3">
+<h4 data-number="2.1.5.3" class="anchored" data-anchor-id="using-quartomarkdown"><span class="header-section-number">2.1.5.3</span> Using Quarto/Markdown</h4>
 <p>If you want SQL syntax highlighting, and to use the data back in R, make an SQL chunk</p>
 <div class="cell" data-output.var="teams_sql">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sql}</span></span>
