@@ -119,7 +119,21 @@ ORDER BY t.name;
 
 
 
-## 9/15: 
+## 9/15: [MLB Top 5 HR Hitters (1970-2009)](https://www.sporcle.com/games/bennyboy44/top5hrhitters)
+
+```{r}
+library(tidyverse)
+library(Lahman)
+Batting |>
+  filter(yearID >= 1970 & yearID <= 2009) |>
+  group_by(playerID, yearID) |>
+  summarize(
+    tHR = sum(HR)
+  ) |>
+  group_by(yearID) |>
+  arrange(desc(tHR))
+```
+
 
 # Appendix
 
