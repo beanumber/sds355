@@ -1,0 +1,235 @@
+---
+title: "Run Expectancy"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "2025-09-17"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+# What is the value of a play? 
+
+## Last time
+
+- [Linear Weights](03_linear_weights.qmd)
+- [Runs Created](https://en.wikipedia.org/wiki/Runs_created)
+- TODAY: Run expectancy
+
+# Run Expectancy Matrix
+
+## George R. Lindsey
+
+:::: {.columns}
+::: {.column width="50%"}
+
+![](https://matthewswiseman.ca/wp-content/uploads/2020/05/lindsey.jpg?w=683)
+
+:::
+::: {.column width="50%"}
+
+[*An Investigation of Strategies in Baseball* (1963)](https://www-jstor-org.libproxy.smith.edu/stable/167996)
+
+:::
+::::
+
+## Retrosheet play-by-play data
+
+```{r}
+library(tidyverse)
+library(abdwr3edata)
+
+retro2016 |>
+  head()
+```
+
+## What was the situation?
+
+```{r}
+retro2016_small <- retro2016 |> 
+  select(
+    # where are we in the game?
+    game_id, inn_ct, bat_home_id, 
+    # how many outs (before and on play)?
+    outs_ct, event_outs_ct, 
+    # what was the score?
+    away_score_ct, home_score_ct,
+    # who was on base?
+    base1_run_id, base2_run_id, base3_run_id,
+    # where did everyone end up?
+    bat_dest_id, run1_dest_id, run2_dest_id, run3_dest_id,
+    # just in case, what happened?
+    bat_id, event_cd, bat_event_fl, event_tx
+  ) |>
+  mutate(
+    runs_before = away_score_ct + home_score_ct,
+    half_inning = paste(game_id, inn_ct, bat_home_id, sep = "-"),
+    runs_scored = 
+      (bat_dest_id > 3) + (run1_dest_id > 3) + 
+      (run2_dest_id > 3) + (run3_dest_id > 3)
+  )
+```
+
+## Summarize all half innings
+
+```{r}
+half_innings <- retro2016_small |>
+  group_by(half_inning) |>
+  summarize(
+    outs_inning = sum(event_outs_ct), 
+    runs_inning = sum(runs_scored),
+    runs_start = first(runs_before),
+    max_runs = runs_inning + runs_start
+  )
+
+half_innings |>
+  head()
+```
+
+## Runs scored in remainder of inning
+
+```{r}
+retro2016_small <- retro2016_small |>
+  inner_join(half_innings, by = "half_inning") |>
+  mutate(runs_roi = max_runs - runs_before)
+
+retro2016_small |>
+  select(contains("runs")) |>
+  head()
+```
+
+## Starting base-out state
+
+```{r}
+retro2016_small <- retro2016_small |>
+  mutate(
+    bases = paste0(
+      if_else(base1_run_id == "", 0, 1),
+      if_else(base2_run_id == "", 0, 1),
+      if_else(base3_run_id == "", 0, 1)
+    ),
+    state = paste(bases, outs_ct, sep = "-")
+  )
+
+retro2016_small |>
+  select(state, contains("run_id")) |>
+  head()
+```
+
+## Ending base-out state
+
+```{r}
+retro2016_small <- retro2016_small |>
+  mutate(
+    is_runner1 = as.numeric(run1_dest_id == 1 | bat_dest_id == 1),
+    is_runner2 = as.numeric(run1_dest_id == 2 | run2_dest_id == 2 | bat_dest_id == 2),
+    is_runner3 = as.numeric(run1_dest_id == 3 | run2_dest_id == 3 | run3_dest_id == 3 | bat_dest_id == 3),
+    new_outs = outs_ct + event_outs_ct,
+    new_bases = paste0(is_runner1, is_runner2, is_runner3),
+    new_state = paste(new_bases, new_outs, sep = "-")
+  )
+
+retro2016_small |>
+  select(state, new_state, runs_scored, event_tx) |>
+  head()
+```
+
+<https://www.retrosheet.org/eventfile.htm>
+
+## Remove irrelevant data
+
+```{r}
+changes2016 <- retro2016_small |>
+  # a handful of weird plays...
+  filter(state != new_state | runs_scored > 0) |>
+  # only complete innings -- no walk-offs!
+  filter(outs_inning == 3)
+```
+
+## Summarize the changes
+
+```{r}
+erm_2016 <- changes2016 |> 
+  group_by(bases, outs_ct) |>
+  summarize(exp_run_value = mean(runs_roi))
+```
+
+```{r}
+erm_2016 |>
+  pivot_wider(
+    names_from = outs_ct, 
+    values_from = exp_run_value, 
+    names_prefix = "Outs="
+  )
+```
+
+## Historical ERMs
+
+<https://www.tangotiger.net/re24.html>
+
+# RE24
+
+## Run values = Change in expected run value
+
+```{r}
+#| code-line-numbers: "2|4-7|10"
+retro2016_small <- retro2016_small |>
+  left_join(erm_2016, join_by("bases", "outs_ct")) |>
+  rename(erv_start = exp_run_value) |>
+  left_join(
+    erm_2016, 
+    join_by(new_bases == bases, new_outs == outs_ct)
+  ) |>
+  rename(erv_end = exp_run_value) |>
+  replace_na(list(erv_end = 0)) |>
+  mutate(delta_erv = erv_end - erv_start + runs_scored)
+
+retro2016_small |>
+  select(contains("state"), contains("rv_"), event_tx, contains("delta")) |>
+  head()
+```
+
+## Run values for events
+
+```{r}
+retro2016_small |> 
+  group_by(event_cd) |>
+  summarize(
+    sample_desc = first(event_tx),
+    mean_run_value = mean(delta_erv)
+  ) |>
+  arrange(desc(mean_run_value))
+```
+
+::: .footer
+<https://beanumber.github.io/abdwr3e/A_retrosheet.html#the-state-of-the-game>
+:::
+
+## RE24
+
+```{r}
+retro2016_small |>
+  filter(bat_event_fl == TRUE) |>
+  group_by(bat_id) |>
+  summarize(
+    PA = n(),
+    RE24 = sum(delta_erv)
+  ) |>
+  mutate(RE24_PA = RE24 / PA) |>
+  arrange(desc(RE24)) |>
+  left_join(Lahman::People, by = join_by(bat_id == retroID)) |>
+  mutate(Player = paste(nameFirst, nameLast)) |>
+  select(Player, PA, contains("RE24")) |>
+  head(10)
+```
+
+::: .footer
+<https://www.baseball-reference.com/leaders/re24_bat_top_ten.shtml>
+:::

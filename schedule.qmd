@@ -100,7 +100,8 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- The Run Expectancy Matrix
+- `r quiz()` [Sporcle quiz 3](sporcle.qmd)
+- `r slides()` [The Run Expectancy Matrix](slides/04_run_expectancy.qmd)
 
 ::: {.callout-note} 
 ## Homework
