@@ -477,31 +477,1254 @@ Note
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(yearID <span class="sc">&gt;=</span> <span class="dv">1970</span> <span class="sc">&amp;</span> yearID <span class="sc">&lt;=</span> <span class="dv">2009</span>) <span class="sc">|&gt;</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(playerID, yearID) <span class="sc">|&gt;</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">tHR =</span> <span class="fu">sum</span>(HR)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(yearID) <span class="sc">|&gt;</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(tHR))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">teamIDs =</span> <span class="fu">paste</span>(<span class="fu">unique</span>(teamID), <span class="at">collapse =</span> <span class="st">"/"</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">tHR =</span> <span class="fu">sum</span>(HR)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(People, <span class="at">by =</span> <span class="fu">join_by</span>(playerID)) <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">player_name =</span> <span class="fu">paste</span>(nameLast, nameFirst)) <span class="sc">|&gt;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(yearID, teamIDs, player_name, tHR) <span class="sc">|&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(yearID) <span class="sc">|&gt;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_split</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(<span class="sc">~</span><span class="fu">arrange</span>(.x, <span class="fu">desc</span>(tHR))) <span class="sc">|&gt;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(head, <span class="at">n =</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(yearID), <span class="fu">desc</span>(tHR)) <span class="sc">|&gt;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>playerID) <span class="sc">|&gt;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'playerID'. You can override using the
-`.groups` argument.</code></pre>
+`.groups` argument.
+Adding missing grouping variables: `playerID`</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 41,440 × 3
-# Groups:   yearID [40]
-   playerID  yearID   tHR
-   &lt;chr&gt;      &lt;int&gt; &lt;int&gt;
- 1 bondsba01   2001    73
- 2 mcgwima01   1998    70
- 3 sosasa01    1998    66
- 4 mcgwima01   1999    65
- 5 sosasa01    2001    64
- 6 sosasa01    1999    63
- 7 howarry01   2006    58
- 8 mcgwima01   1997    58
- 9 gonzalu01   2001    57
-10 rodrial01   2002    57
-# ℹ 41,430 more rows</code></pre>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">yearID</th>
+<th style="text-align: left;">teamIDs</th>
+<th style="text-align: left;">player_name</th>
+<th style="text-align: right;">tHR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2009</td>
+<td style="text-align: left;">SLN</td>
+<td style="text-align: left;">Pujols Albert</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2009</td>
+<td style="text-align: left;">MIL</td>
+<td style="text-align: left;">Fielder Prince</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2009</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Howard Ryan</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2009</td>
+<td style="text-align: left;">ARI</td>
+<td style="text-align: left;">Reynolds Mark</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2009</td>
+<td style="text-align: left;">SDN</td>
+<td style="text-align: left;">Gonzalez Adrian</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2008</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Howard Ryan</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2008</td>
+<td style="text-align: left;">ARI/CIN</td>
+<td style="text-align: left;">Dunn Adam</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2008</td>
+<td style="text-align: left;">NYN</td>
+<td style="text-align: left;">Delgado Carlos</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2008</td>
+<td style="text-align: left;">MIL</td>
+<td style="text-align: left;">Braun Ryan</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2008</td>
+<td style="text-align: left;">DET</td>
+<td style="text-align: left;">Cabrera Miguel</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2007</td>
+<td style="text-align: left;">NYA</td>
+<td style="text-align: left;">Rodriguez Alex</td>
+<td style="text-align: right;">54</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2007</td>
+<td style="text-align: left;">MIL</td>
+<td style="text-align: left;">Fielder Prince</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2007</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Howard Ryan</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2007</td>
+<td style="text-align: left;">TBA</td>
+<td style="text-align: left;">Peña Carlos</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2007</td>
+<td style="text-align: left;">CIN</td>
+<td style="text-align: left;">Dunn Adam</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Howard Ryan</td>
+<td style="text-align: right;">58</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">BOS</td>
+<td style="text-align: left;">Ortiz David</td>
+<td style="text-align: right;">54</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">SLN</td>
+<td style="text-align: left;">Pujols Albert</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">WAS</td>
+<td style="text-align: left;">Soriano Alfonso</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2006</td>
+<td style="text-align: left;">HOU</td>
+<td style="text-align: left;">Berkman Lance</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2005</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Jones Andruw</td>
+<td style="text-align: right;">51</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2005</td>
+<td style="text-align: left;">NYA</td>
+<td style="text-align: left;">Rodriguez Alex</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2005</td>
+<td style="text-align: left;">BOS</td>
+<td style="text-align: left;">Ortiz David</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2005</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: left;">Lee Derrek</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2005</td>
+<td style="text-align: left;">BOS</td>
+<td style="text-align: left;">Ramirez Manny</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2004</td>
+<td style="text-align: left;">LAN</td>
+<td style="text-align: left;">Beltre Adrian</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2004</td>
+<td style="text-align: left;">CIN</td>
+<td style="text-align: left;">Dunn Adam</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2004</td>
+<td style="text-align: left;">SLN</td>
+<td style="text-align: left;">Pujols Albert</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2004</td>
+<td style="text-align: left;">SFN</td>
+<td style="text-align: left;">Bonds Barry</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2004</td>
+<td style="text-align: left;">BOS</td>
+<td style="text-align: left;">Ramirez Manny</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2003</td>
+<td style="text-align: left;">TEX</td>
+<td style="text-align: left;">Rodriguez Alex</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2003</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Thome Jim</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2003</td>
+<td style="text-align: left;">SFN</td>
+<td style="text-align: left;">Bonds Barry</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2003</td>
+<td style="text-align: left;">MIL</td>
+<td style="text-align: left;">Sexson Richie</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2003</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Lopez Javy</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2002</td>
+<td style="text-align: left;">TEX</td>
+<td style="text-align: left;">Rodriguez Alex</td>
+<td style="text-align: right;">57</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2002</td>
+<td style="text-align: left;">CLE</td>
+<td style="text-align: left;">Thome Jim</td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2002</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: left;">Sosa Sammy</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2002</td>
+<td style="text-align: left;">SFN</td>
+<td style="text-align: left;">Bonds Barry</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2002</td>
+<td style="text-align: left;">TEX</td>
+<td style="text-align: left;">Palmeiro Rafael</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2001</td>
+<td style="text-align: left;">SFN</td>
+<td style="text-align: left;">Bonds Barry</td>
+<td style="text-align: right;">73</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2001</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: left;">Sosa Sammy</td>
+<td style="text-align: right;">64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2001</td>
+<td style="text-align: left;">ARI</td>
+<td style="text-align: left;">Gonzalez Luis</td>
+<td style="text-align: right;">57</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2001</td>
+<td style="text-align: left;">TEX</td>
+<td style="text-align: left;">Rodriguez Alex</td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2001</td>
+<td style="text-align: left;">LAN</td>
+<td style="text-align: left;">Green Shawn</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: left;">Sosa Sammy</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">SFN</td>
+<td style="text-align: left;">Bonds Barry</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">HOU</td>
+<td style="text-align: left;">Bagwell Jeff</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">ANA</td>
+<td style="text-align: left;">Glaus Troy</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">MON</td>
+<td style="text-align: left;">Guerrero Vladimir</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">SLN</td>
+<td style="text-align: left;">McGwire Mark</td>
+<td style="text-align: right;">65</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: left;">Sosa Sammy</td>
+<td style="text-align: right;">63</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">SEA</td>
+<td style="text-align: left;">Griffey Ken</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">TEX</td>
+<td style="text-align: left;">Palmeiro Rafael</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Jones Chipper</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1998</td>
+<td style="text-align: left;">SLN</td>
+<td style="text-align: left;">McGwire Mark</td>
+<td style="text-align: right;">70</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1998</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: left;">Sosa Sammy</td>
+<td style="text-align: right;">66</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1998</td>
+<td style="text-align: left;">SEA</td>
+<td style="text-align: left;">Griffey Ken</td>
+<td style="text-align: right;">56</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1998</td>
+<td style="text-align: left;">SDN</td>
+<td style="text-align: left;">Vaughn Greg</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1998</td>
+<td style="text-align: left;">CHA</td>
+<td style="text-align: left;">Belle Albert</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1997</td>
+<td style="text-align: left;">OAK/SLN</td>
+<td style="text-align: left;">McGwire Mark</td>
+<td style="text-align: right;">58</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1997</td>
+<td style="text-align: left;">SEA</td>
+<td style="text-align: left;">Griffey Ken</td>
+<td style="text-align: right;">56</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1997</td>
+<td style="text-align: left;">COL</td>
+<td style="text-align: left;">Walker Larry</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1997</td>
+<td style="text-align: left;">NYA</td>
+<td style="text-align: left;">Martinez Tino</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1997</td>
+<td style="text-align: left;">HOU</td>
+<td style="text-align: left;">Bagwell Jeff</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1996</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">McGwire Mark</td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1996</td>
+<td style="text-align: left;">BAL</td>
+<td style="text-align: left;">Anderson Brady</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1996</td>
+<td style="text-align: left;">SEA</td>
+<td style="text-align: left;">Griffey Ken</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1996</td>
+<td style="text-align: left;">CLE</td>
+<td style="text-align: left;">Belle Albert</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1996</td>
+<td style="text-align: left;">COL</td>
+<td style="text-align: left;">Galarraga Andres</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1995</td>
+<td style="text-align: left;">CLE</td>
+<td style="text-align: left;">Belle Albert</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1995</td>
+<td style="text-align: left;">COL</td>
+<td style="text-align: left;">Bichette Dante</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1995</td>
+<td style="text-align: left;">SEA</td>
+<td style="text-align: left;">Buhner Jay</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1995</td>
+<td style="text-align: left;">CHA</td>
+<td style="text-align: left;">Thomas Frank</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1995</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">McGwire Mark</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1994</td>
+<td style="text-align: left;">SFN</td>
+<td style="text-align: left;">Williams Matt</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1994</td>
+<td style="text-align: left;">SEA</td>
+<td style="text-align: left;">Griffey Ken</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1994</td>
+<td style="text-align: left;">HOU</td>
+<td style="text-align: left;">Bagwell Jeff</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1994</td>
+<td style="text-align: left;">CHA</td>
+<td style="text-align: left;">Thomas Frank</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1994</td>
+<td style="text-align: left;">SFN</td>
+<td style="text-align: left;">Bonds Barry</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1993</td>
+<td style="text-align: left;">SFN</td>
+<td style="text-align: left;">Bonds Barry</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1993</td>
+<td style="text-align: left;">TEX</td>
+<td style="text-align: left;">Gonzalez Juan</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1993</td>
+<td style="text-align: left;">SEA</td>
+<td style="text-align: left;">Griffey Ken</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1993</td>
+<td style="text-align: left;">CHA</td>
+<td style="text-align: left;">Thomas Frank</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1993</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Justice David</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1992</td>
+<td style="text-align: left;">TEX</td>
+<td style="text-align: left;">Gonzalez Juan</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1992</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">McGwire Mark</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1992</td>
+<td style="text-align: left;">DET</td>
+<td style="text-align: left;">Fielder Cecil</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1992</td>
+<td style="text-align: left;">SDN</td>
+<td style="text-align: left;">McGriff Fred</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1992</td>
+<td style="text-align: left;">CLE</td>
+<td style="text-align: left;">Belle Albert</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1991</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">Canseco Jose</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1991</td>
+<td style="text-align: left;">DET</td>
+<td style="text-align: left;">Fielder Cecil</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1991</td>
+<td style="text-align: left;">NYN</td>
+<td style="text-align: left;">Johnson Howard</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1991</td>
+<td style="text-align: left;">BAL</td>
+<td style="text-align: left;">Ripken Cal</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1991</td>
+<td style="text-align: left;">SFN</td>
+<td style="text-align: left;">Williams Matt</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1990</td>
+<td style="text-align: left;">DET</td>
+<td style="text-align: left;">Fielder Cecil</td>
+<td style="text-align: right;">51</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1990</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: left;">Sandberg Ryne</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1990</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">McGwire Mark</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1990</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">Canseco Jose</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1990</td>
+<td style="text-align: left;">NYN</td>
+<td style="text-align: left;">Strawberry Darryl</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1989</td>
+<td style="text-align: left;">SFN</td>
+<td style="text-align: left;">Mitchell Kevin</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1989</td>
+<td style="text-align: left;">NYN</td>
+<td style="text-align: left;">Johnson Howard</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1989</td>
+<td style="text-align: left;">TOR</td>
+<td style="text-align: left;">McGriff Fred</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1989</td>
+<td style="text-align: left;">CLE</td>
+<td style="text-align: left;">Carter Joe</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1989</td>
+<td style="text-align: left;">CIN</td>
+<td style="text-align: left;">Davis Eric</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1988</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">Canseco Jose</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1988</td>
+<td style="text-align: left;">NYN</td>
+<td style="text-align: left;">Strawberry Darryl</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1988</td>
+<td style="text-align: left;">TOR</td>
+<td style="text-align: left;">McGriff Fred</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1988</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">McGwire Mark</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1988</td>
+<td style="text-align: left;">HOU</td>
+<td style="text-align: left;">Davis Glenn</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1987</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: left;">Dawson Andre</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1987</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">McGwire Mark</td>
+<td style="text-align: right;">49</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1987</td>
+<td style="text-align: left;">TOR</td>
+<td style="text-align: left;">Bell George</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1987</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Murphy Dale</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1987</td>
+<td style="text-align: left;">NYN</td>
+<td style="text-align: left;">Strawberry Darryl</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1986</td>
+<td style="text-align: left;">TOR</td>
+<td style="text-align: left;">Barfield Jesse</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1986</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Schmidt Mike</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1986</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">Kingman Dave</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1986</td>
+<td style="text-align: left;">MIN</td>
+<td style="text-align: left;">Gaetti Gary</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1986</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">Canseco Jose</td>
+<td style="text-align: right;">33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1985</td>
+<td style="text-align: left;">DET</td>
+<td style="text-align: left;">Evans Darrell</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1985</td>
+<td style="text-align: left;">CHA</td>
+<td style="text-align: left;">Fisk Carlton</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1985</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Murphy Dale</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1985</td>
+<td style="text-align: left;">KCA</td>
+<td style="text-align: left;">Balboni Steve</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1985</td>
+<td style="text-align: left;">NYA</td>
+<td style="text-align: left;">Mattingly Don</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1984</td>
+<td style="text-align: left;">BOS</td>
+<td style="text-align: left;">Armas Tony</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1984</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Murphy Dale</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1984</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Schmidt Mike</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1984</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">Kingman Dave</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1984</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">Murphy Dwayne</td>
+<td style="text-align: right;">33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1983</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Schmidt Mike</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1983</td>
+<td style="text-align: left;">BOS</td>
+<td style="text-align: left;">Rice Jim</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1983</td>
+<td style="text-align: left;">BOS</td>
+<td style="text-align: left;">Armas Tony</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1983</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Murphy Dale</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1983</td>
+<td style="text-align: left;">CHA</td>
+<td style="text-align: left;">Kittle Ron</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1982</td>
+<td style="text-align: left;">CAL</td>
+<td style="text-align: left;">Jackson Reggie</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1982</td>
+<td style="text-align: left;">ML4</td>
+<td style="text-align: left;">Thomas Gorman</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1982</td>
+<td style="text-align: left;">NYN</td>
+<td style="text-align: left;">Kingman Dave</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1982</td>
+<td style="text-align: left;">NYA</td>
+<td style="text-align: left;">Winfield Dave</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1982</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Murphy Dale</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1981</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Schmidt Mike</td>
+<td style="text-align: right;">31</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1981</td>
+<td style="text-align: left;">MON</td>
+<td style="text-align: left;">Dawson Andre</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1981</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">Armas Tony</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1981</td>
+<td style="text-align: left;">BOS</td>
+<td style="text-align: left;">Evans Dwight</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1981</td>
+<td style="text-align: left;">CIN</td>
+<td style="text-align: left;">Foster George</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1980</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Schmidt Mike</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1980</td>
+<td style="text-align: left;">NYA</td>
+<td style="text-align: left;">Jackson Reggie</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1980</td>
+<td style="text-align: left;">ML4</td>
+<td style="text-align: left;">Oglivie Ben</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1980</td>
+<td style="text-align: left;">ML4</td>
+<td style="text-align: left;">Thomas Gorman</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1980</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">Armas Tony</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1979</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: left;">Kingman Dave</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1979</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Schmidt Mike</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1979</td>
+<td style="text-align: left;">ML4</td>
+<td style="text-align: left;">Thomas Gorman</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1979</td>
+<td style="text-align: left;">BOS</td>
+<td style="text-align: left;">Lynn Fred</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1979</td>
+<td style="text-align: left;">BOS</td>
+<td style="text-align: left;">Rice Jim</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1978</td>
+<td style="text-align: left;">BOS</td>
+<td style="text-align: left;">Rice Jim</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1978</td>
+<td style="text-align: left;">CIN</td>
+<td style="text-align: left;">Foster George</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1978</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Luzinski Greg</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1978</td>
+<td style="text-align: left;">CAL</td>
+<td style="text-align: left;">Baylor Don</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1978</td>
+<td style="text-align: left;">ML4</td>
+<td style="text-align: left;">Hisle Larry</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1977</td>
+<td style="text-align: left;">CIN</td>
+<td style="text-align: left;">Foster George</td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1977</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Burroughs Jeff</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1977</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Luzinski Greg</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1977</td>
+<td style="text-align: left;">BOS</td>
+<td style="text-align: left;">Rice Jim</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1977</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Schmidt Mike</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1976</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Schmidt Mike</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1976</td>
+<td style="text-align: left;">NYN</td>
+<td style="text-align: left;">Kingman Dave</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1976</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: left;">Monday Rick</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1976</td>
+<td style="text-align: left;">NYA</td>
+<td style="text-align: left;">Nettles Graig</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1976</td>
+<td style="text-align: left;">CIN</td>
+<td style="text-align: left;">Foster George</td>
+<td style="text-align: right;">29</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1975</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Schmidt Mike</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1975</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">Jackson Reggie</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1975</td>
+<td style="text-align: left;">NYN</td>
+<td style="text-align: left;">Kingman Dave</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1975</td>
+<td style="text-align: left;">ML4</td>
+<td style="text-align: left;">Scott George</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1975</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Luzinski Greg</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1974</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Schmidt Mike</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1974</td>
+<td style="text-align: left;">CIN</td>
+<td style="text-align: left;">Bench Johnny</td>
+<td style="text-align: right;">33</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1974</td>
+<td style="text-align: left;">CHA</td>
+<td style="text-align: left;">Allen Dick</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1974</td>
+<td style="text-align: left;">LAN</td>
+<td style="text-align: left;">Wynn Jim</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1974</td>
+<td style="text-align: left;">OAK</td>
+<td style="text-align: left;">Jackson Reggie</td>
+<td style="text-align: right;">29</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1973</td>
+<td style="text-align: left;">PIT</td>
+<td style="text-align: left;">Stargell Willie</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1973</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Johnson Davey</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1973</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Evans Darrell</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1973</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Aaron Hank</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1973</td>
+<td style="text-align: left;">SFN</td>
+<td style="text-align: left;">Bonds Bobby</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1972</td>
+<td style="text-align: left;">CIN</td>
+<td style="text-align: left;">Bench Johnny</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1972</td>
+<td style="text-align: left;">SDN</td>
+<td style="text-align: left;">Colbert Nate</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1972</td>
+<td style="text-align: left;">CHA</td>
+<td style="text-align: left;">Allen Dick</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1972</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: left;">Williams Billy</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1972</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Aaron Hank</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1971</td>
+<td style="text-align: left;">PIT</td>
+<td style="text-align: left;">Stargell Willie</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1971</td>
+<td style="text-align: left;">ATL</td>
+<td style="text-align: left;">Aaron Hank</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1971</td>
+<td style="text-align: left;">CIN</td>
+<td style="text-align: left;">May Lee</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1971</td>
+<td style="text-align: left;">PHI</td>
+<td style="text-align: left;">Johnson Deron</td>
+<td style="text-align: right;">34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1971</td>
+<td style="text-align: left;">SFN</td>
+<td style="text-align: left;">Bonds Bobby</td>
+<td style="text-align: right;">33</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1970</td>
+<td style="text-align: left;">CIN</td>
+<td style="text-align: left;">Bench Johnny</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1970</td>
+<td style="text-align: left;">WS2</td>
+<td style="text-align: left;">Howard Frank</td>
+<td style="text-align: right;">44</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1970</td>
+<td style="text-align: left;">CHN</td>
+<td style="text-align: left;">Williams Billy</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1970</td>
+<td style="text-align: left;">MIN</td>
+<td style="text-align: left;">Killebrew Harmon</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1970</td>
+<td style="text-align: left;">CIN</td>
+<td style="text-align: left;">Perez Tony</td>
+<td style="text-align: right;">40</td>
+</tr>
+</tbody>
+</table>
 </div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">CONCAT</span>(ANY_VALUE(p.nameFirst), <span class="st">' '</span>, ANY_VALUE(p.nameLast)) <span class="kw">AS</span> Player, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  yearID, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  GROUP_CONCAT(<span class="kw">DISTINCT</span> teamID) <span class="kw">AS</span> teamIDs, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(HR) <span class="kw">AS</span> tHR</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Batting b</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> People p <span class="kw">ON</span> p.playerID <span class="op">=</span> b.playerID</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> yearID <span class="op">&gt;=</span> <span class="dv">1970</span> <span class="kw">AND</span> yearID <span class="op">&lt;</span> <span class="dv">2010</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> yearID <span class="op">=</span> <span class="dv">2009</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> b.playerID, yearID</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> tHR <span class="kw">DESC</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -537,7 +1760,8 @@ Note
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"People"</span>, Lahman<span class="sc">::</span>People)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"Appearances"</span>, Lahman<span class="sc">::</span>Appearances)</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"AwardsPlayers"</span>, Lahman<span class="sc">::</span>AwardsPlayers)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"TeamsFranchises"</span>, Lahman<span class="sc">::</span>TeamsFranchises)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"Batting"</span>, Lahman<span class="sc">::</span>Batting)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(con, <span class="st">"TeamsFranchises"</span>, Lahman<span class="sc">::</span>TeamsFranchises)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -558,8 +1782,8 @@ Tip
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbListTables</span>(con)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Appearances"     "AwardsPlayers"   "People"          "Teams"          
-[5] "TeamsFranchises"</code></pre>
+<pre><code>[1] "Appearances"     "AwardsPlayers"   "Batting"         "People"         
+[5] "Teams"           "TeamsFranchises"</code></pre>
 </div>
 </div>
 </section>
