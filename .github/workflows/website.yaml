@@ -44,6 +44,7 @@ jobs:
         run: |
           Rscript -e 'remotes::install_github("SmithCollege-SDS/sds")'
           Rscript -e 'remotes::install_github("BillPetti/baseballr")'
+          Rscript -e 'remotes::install_github("beanumber/abdwr3edata")'
 
       - uses: quarto-dev/quarto-actions/setup@v2
         with:
