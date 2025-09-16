@@ -128,12 +128,60 @@ Batting |>
   filter(yearID >= 1970 & yearID <= 2009) |>
   group_by(playerID, yearID) |>
   summarize(
+    teamIDs = paste(unique(teamID), collapse = "/"),
     tHR = sum(HR)
   ) |>
+  left_join(People, by = join_by(playerID)) |>
+  mutate(player_name = paste(nameLast, nameFirst)) |>
+  select(yearID, teamIDs, player_name, tHR) |>
+  ungroup() |>
   group_by(yearID) |>
-  arrange(desc(tHR))
+  group_split() |>
+  map(~arrange(.x, desc(tHR))) |>
+  map(head, n = 5) |>
+  bind_rows() |>
+  arrange(desc(yearID), desc(tHR)) |>
+  select(-playerID) |>
+  knitr::kable()
 ```
 
+
+```{sql}
+#| connection: con
+#| eval: false
+SELECT 
+  CONCAT(ANY_VALUE(p.nameFirst), ' ', ANY_VALUE(p.nameLast)) AS Player, 
+  yearID, 
+  GROUP_CONCAT(DISTINCT teamID) AS teamIDs, 
+  SUM(HR) AS tHR
+FROM Batting b
+LEFT JOIN People p ON p.playerID = b.playerID
+WHERE yearID >= 1970 AND yearID < 2010
+  AND yearID = 2009
+GROUP BY b.playerID, yearID
+ORDER BY tHR DESC
+LIMIT 5;
+```
+
+```{r}
+#| eval: false
+#| include: false
+dbGetQuery(con, "
+
+SELECT 
+  CONCAT(ANY_VALUE(p.nameFirst), ' ', ANY_VALUE(p.nameLast)) AS Player, 
+  yearID, 
+  GROUP_CONCAT(DISTINCT teamID) AS teamIDs, 
+  SUM(HR) AS tHR
+FROM Batting b
+LEFT JOIN People p ON p.playerID = b.playerID
+WHERE yearID >= 1970 AND yearID < 2010
+  AND yearID = 2009
+GROUP BY b.playerID, yearID
+ORDER BY tHR DESC
+LIMIT 5;
+")
+```
 
 # Appendix
 
@@ -165,6 +213,7 @@ dbWriteTable(con, "Teams", Lahman::Teams)
 dbWriteTable(con, "People", Lahman::People)
 dbWriteTable(con, "Appearances", Lahman::Appearances)
 dbWriteTable(con, "AwardsPlayers", Lahman::AwardsPlayers)
+dbWriteTable(con, "Batting", Lahman::Batting)
 dbWriteTable(con, "TeamsFranchises", Lahman::TeamsFranchises)
 ```
 
