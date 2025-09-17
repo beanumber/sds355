@@ -15,7 +15,7 @@ execute:
   warning: false
 ---
 
-# What is the value of a play? 
+# What is the value of a game state? 
 
 ## Last time
 
