@@ -40,6 +40,10 @@ execute:
 :::
 ::::
 
+## Run Expectancy Matrix
+
+![](https://batsandstats.com/wp-content/uploads/2016/08/chart11.png)
+
 ## Retrosheet play-by-play data
 
 ```{r}
@@ -208,7 +212,7 @@ retro2016_small |>
   arrange(desc(mean_run_value))
 ```
 
-::: .footer
+::: footer
 <https://beanumber.github.io/abdwr3e/A_retrosheet.html#the-state-of-the-game>
 :::
 
@@ -230,6 +234,6 @@ retro2016_small |>
   head(10)
 ```
 
-::: .footer
+::: footer
 <https://www.baseball-reference.com/leaders/re24_bat_top_ten.shtml>
 :::
