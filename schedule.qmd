@@ -114,14 +114,13 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
-- Defense Independent Pitching Statistics (DIPS)
 - Evaluating strategies using the REM
 
 
 ::: {.callout-note} 
 ## Homework
 
-- Read @Albert2015
+- Read @mccracken2001dips
 
 :::
 
@@ -130,7 +129,9 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- Win Probability
+- Defense Independent Pitching Statistics (DIPS)
+
+
 - [Tigers @ Red Sox](https://www.mlb.com/gameday/tigers-vs-red-sox/2025/09/26/776181/live?partnerId=LR_preview)  
   **Friday, 7:10 pm**  
   [Fenway Park, Boston, MA](https://www.google.com/maps/place/fenway+park/data=!4m2!3m1!1s0x89e379f63f253f6f:0xa2800dcb647a5504?sa=X&ved=1t:155783&ictx=111)  
@@ -140,8 +141,13 @@ quiz <- function() {
   Harvard University  
   ![](https://www.euro-online.org/websites/orinsports/wp-content/uploads/sites/10/2019/01/Nessis.png)
 
-::: 
 
+::: {.callout-note} 
+## Homework
+
+- Read @Albert2015
+::: 
+:::
 :::
 
 ---
@@ -154,6 +160,7 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
+- Win Probability
 - Expected points per possession
 - [Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/)
 - [American Soccer Insights Summit](https://americansoccerinsights.com/call-for-proposals/)
