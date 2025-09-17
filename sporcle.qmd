@@ -4,6 +4,7 @@ format:
   html:
     toc: true
     number-sections: true
+    code-fold: show
 params:
   solutions: true
 ---
@@ -25,6 +26,8 @@ library(Lahman)
 # Sporcle Quizzes
 
 ## 9/10: [MLB Teams Last MVP](https://www.sporcle.com/games/Knapster/mlbteammvp)
+
+::: {.callout-tip title="My solution" collapse="true"}
 
 ```{r}
 #| include: !expr params$solutions
@@ -61,7 +64,9 @@ AwardsPlayers |>
   knitr::kable()
 ```
 
-Here's what that would look like in SQL
+:::
+
+::: {.callout-tip title="My solution using SQL" collapse="true"}
 
 ```{sql}
 #| connection: con
@@ -116,10 +121,12 @@ ORDER BY t.name;
 ")
 ```
 
-
+:::
 
 
 ## 9/15: [MLB Top 5 HR Hitters (1970-2009)](https://www.sporcle.com/games/bennyboy44/top5hrhitters)
+
+::: {.callout-tip title="My solution" collapse="true"}
 
 ```{r}
 library(tidyverse)
@@ -145,6 +152,8 @@ Batting |>
   knitr::kable()
 ```
 
+:::
+::: {.callout-tip title="My (partial) solution using SQL" collapse="true"}
 
 ```{sql}
 #| connection: con
@@ -182,6 +191,49 @@ ORDER BY tHR DESC
 LIMIT 5;
 ")
 ```
+
+:::
+
+## 9/17: [MLB 40-HRs by 4-Letter Players](https://www.sporcle.com/games/deej/40hr4letters)
+
+```{r}
+#| echo: false
+#| include: false
+Batting |>
+  group_by(playerID, yearID) |>
+  summarize(
+    tHR = sum(HR)
+  ) |>
+  filter(tHR >= 40) |>
+  group_by(playerID) |>
+  summarize(
+    n = n(),
+    last = max(yearID)
+  ) |>
+  arrange(desc(n)) |>
+  left_join(People, by = join_by(playerID)) |>
+  filter(nchar(nameLast) <= 4) |>
+  select(n, last, nameLast, nameFirst)
+```
+
+
+<!--
+[MLB Home Run Leaders (A-Z)](https://www.sporcle.com/games/g/azhomerunleaders)
+-->
+
+```{r}
+#| eval: false
+#| include: false
+Batting |>
+  group_by(playerID) |>
+  summarize(
+    Letter = first(str_sub(playerID, 1, 1)),
+    HomeRuns = sum(HR)
+  ) |>
+  group_by(Letter) |>
+  arrange(desc(HomeRuns))
+```
+
 
 # Appendix
 
