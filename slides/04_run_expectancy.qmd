@@ -145,7 +145,11 @@ retro2016_small |>
   head()
 ```
 
+::: footer
+
 <https://www.retrosheet.org/eventfile.htm>
+
+:::
 
 ## Remove irrelevant data
 
