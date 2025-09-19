@@ -196,9 +196,10 @@ LIMIT 5;
 
 ## 9/17: [MLB 40-HRs by 4-Letter Players](https://www.sporcle.com/games/deej/40hr4letters)
 
+
+::: {.callout-tip title="My solution" collapse="true"}
+
 ```{r}
-#| echo: false
-#| include: false
 Batting |>
   group_by(playerID, yearID) |>
   summarize(
@@ -213,8 +214,51 @@ Batting |>
   arrange(desc(n)) |>
   left_join(People, by = join_by(playerID)) |>
   filter(nchar(nameLast) <= 4) |>
-  select(n, last, nameLast, nameFirst)
+  select(n, last, nameLast, nameFirst) |>
+  knitr::kable()
 ```
+
+:::
+::: {.callout-tip title="My solution using SQL" collapse="true"}
+
+```{sql}
+#| connection: con
+#| eval: false
+SELECT 
+  COUNT(DISTINCT yearID) AS N, 
+  MAX(yearID) AS most_recent, 
+  ANY_VALUE(p.nameLast) AS last_name
+FROM
+  (SELECT playerID, yearID, SUM(HR) AS tHR
+  FROM Batting
+  GROUP BY playerID, yearID
+  HAVING SUM(HR) >= 40) AS hr40
+LEFT JOIN People p ON p.playerID = hr40.playerID
+GROUP BY hr40.playerID
+HAVING LEN(ANY_VALUE(p.nameLast)) <= 4
+ORDER BY N DESC;
+```
+
+```{r}
+#| eval: false
+#| include: false
+dbGetQuery(con, "
+
+SELECT COUNT(DISTINCT yearID) AS N, MAX(yearID) AS most_recent, ANY_VALUE(p.nameLast) AS last_name
+FROM
+  (SELECT playerID, yearID, SUM(HR) AS tHR
+  FROM Batting
+  GROUP BY playerID, yearID
+  HAVING SUM(HR) >= 40) AS hr40
+LEFT JOIN People p ON p.playerID = hr40.playerID
+GROUP BY hr40.playerID
+HAVING LEN(ANY_VALUE(p.nameLast)) <= 4
+ORDER BY N DESC;
+
+")
+```
+
+:::
 
 
 <!--
