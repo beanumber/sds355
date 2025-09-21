@@ -196,6 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#hw-1-due-912" id="toc-hw-1-due-912" class="nav-link active" data-scroll-target="#hw-1-due-912">HW 1: Due 9/12</a></li>
   <li><a href="#hw-2-due-919" id="toc-hw-2-due-919" class="nav-link" data-scroll-target="#hw-2-due-919">HW 2: Due 9/19</a></li>
+  <li><a href="#hw-3-due-926" id="toc-hw-3-due-926" class="nav-link" data-scroll-target="#hw-3-due-926">HW 3: Due 9/26</a></li>
   </ul>
 </nav>
     </div>
@@ -486,6 +487,128 @@ Tip
 <li><a href="https://en.wikipedia.org/wiki/Extrapolated_Runs#Purpose_and_formulae">eXtrapolated Runs Basic</a> (<code>XR</code>)<br>
 Compute the Pearson correlation coefficient between each of these run estimators and (actual) <em>runs per game</em>. Which metrics correlate most closely to runs per game?</li>
 </ul></li>
+</ol>
+</section>
+<section id="hw-3-due-926" class="level2">
+<h2 class="anchored" data-anchor-id="hw-3-due-926">HW 3: Due 9/26</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use may the following code to generate the expected run matrix for the 2016 season using Retrosheet play-by-play data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(abdwr3edata)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>half_innings <span class="ot">&lt;-</span> retro2016 <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">retrosheet_add_states</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(game_id, inn_ct, bat_home_id) <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">outs_inning =</span> <span class="fu">sum</span>(event_outs_ct), </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">runs_inning =</span> <span class="fu">sum</span>(runs_scored),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">runs_start =</span> <span class="fu">first</span>(away_score_ct <span class="sc">+</span> home_score_ct),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_runs =</span> runs_inning <span class="sc">+</span> runs_start</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>changes2016 <span class="ot">&lt;-</span> retro2016 <span class="sc">|&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">retrosheet_add_states</span>() <span class="sc">|&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(half_innings, <span class="at">by =</span> <span class="fu">join_by</span>(game_id, inn_ct, bat_home_id)) <span class="sc">|&gt;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">runs_roi =</span> max_runs <span class="sc">-</span> (away_score_ct <span class="sc">+</span> home_score_ct)) <span class="sc">|&gt;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">!=</span> new_state <span class="sc">|</span> runs_scored <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(outs_inning <span class="sc">==</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>erm2016 <span class="ot">&lt;-</span> changes2016 <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bases, outs_ct) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">exp_run_value =</span> <span class="fu">mean</span>(runs_roi)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'bases'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>erm2016 <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> outs_ct, </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> exp_run_value, </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"Outs="</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="st">`</span><span class="at">Outs=0</span><span class="st">`</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">bases</th>
+<th style="text-align: right;">Outs=0</th>
+<th style="text-align: right;">Outs=1</th>
+<th style="text-align: right;">Outs=2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">000</td>
+<td style="text-align: right;">0.498</td>
+<td style="text-align: right;">0.268</td>
+<td style="text-align: right;">0.106</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">100</td>
+<td style="text-align: right;">0.858</td>
+<td style="text-align: right;">0.512</td>
+<td style="text-align: right;">0.220</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">010</td>
+<td style="text-align: right;">1.133</td>
+<td style="text-align: right;">0.673</td>
+<td style="text-align: right;">0.312</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">001</td>
+<td style="text-align: right;">1.347</td>
+<td style="text-align: right;">0.937</td>
+<td style="text-align: right;">0.372</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">110</td>
+<td style="text-align: right;">1.445</td>
+<td style="text-align: right;">0.921</td>
+<td style="text-align: right;">0.414</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">101</td>
+<td style="text-align: right;">1.723</td>
+<td style="text-align: right;">1.196</td>
+<td style="text-align: right;">0.478</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">011</td>
+<td style="text-align: right;">1.929</td>
+<td style="text-align: right;">1.358</td>
+<td style="text-align: right;">0.548</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">111</td>
+<td style="text-align: right;">2.106</td>
+<td style="text-align: right;">1.537</td>
+<td style="text-align: right;">0.695</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<ol type="1">
+<li><a href="https://beanumber.github.io/abdwr3e/05-runsexpectancy.html#exercises"><em>ABDWR</em>, Exercise 5.11.1</a></li>
+<li><a href="https://beanumber.github.io/abdwr3e/05-runsexpectancy.html#exercises"><em>ABDWR</em>, Exercise 5.11.3</a></li>
+<li><a href="https://beanumber.github.io/abdwr3e/05-runsexpectancy.html#exercises"><em>ABDWR</em>, Exercise 5.11.4</a></li>
+<li><a href="https://beanumber.github.io/abdwr3e/05-runsexpectancy.html#exercises"><em>ABDWR</em>, Exercise 5.11.5</a></li>
 </ol>
 
 
