@@ -131,6 +131,13 @@ quiz <- function() {
 
 - Defense Independent Pitching Statistics (DIPS)
 
+::: {.callout-note} 
+## Homework
+
+- **HW 2 due Friday by 5 pm**
+- Read @Albert2015
+
+:::
 
 - [Tigers @ Red Sox](https://www.mlb.com/gameday/tigers-vs-red-sox/2025/09/26/776181/live?partnerId=LR_preview)  
   **Friday, 7:10 pm**  
@@ -142,11 +149,6 @@ quiz <- function() {
   ![](https://www.euro-online.org/websites/orinsports/wp-content/uploads/sites/10/2019/01/Nessis.png)
 
 
-::: {.callout-note} 
-## Homework
-
-- Read @Albert2015
-::: 
 :::
 :::
 
@@ -161,7 +163,6 @@ quiz <- function() {
 `r echo_date()`
 
 - Win Probability
-- Expected points per possession
 - [Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/)
 - [American Soccer Insights Summit](https://americansoccerinsights.com/call-for-proposals/)
 
@@ -175,6 +176,7 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
+- Expected points per possession
 - First-down conversion
 
 ::: {.callout-note} 
