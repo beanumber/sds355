@@ -114,8 +114,8 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
-- Evaluating strategies using the REM
-
+- `r activity()` [Evaluating strategies using the REM](activities/05_erm_strategies.qmd)
+- `r quiz()` [Sporcle quiz 4](sporcle.qmd)
 
 ::: {.callout-note} 
 ## Homework

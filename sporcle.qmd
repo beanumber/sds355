@@ -260,10 +260,73 @@ ORDER BY N DESC;
 
 :::
 
+## 9/22: [Multiple Cy Young Winners](https://www.sporcle.com/games/g/cyyoungmulti)
 
 <!--
-[MLB Home Run Leaders (A-Z)](https://www.sporcle.com/games/g/azhomerunleaders)
--->
+
+::: {.callout-tip title="My solution" collapse="true"}
+
+```{r}
+#| eval: false
+#| include: false
+
+AwardsPlayers |>
+  filter(str_detect(awardID, "Cy Young")) |>
+  group_by(playerID) |>
+  summarize(
+    n = n(),
+    years = paste(yearID, collapse = ", ")
+  ) |>
+  filter(n > 1) |>
+  arrange(n)
+```
+
+:::
+
+## 9/24: [MLB Win Leaders by Team](https://www.sporcle.com/games/g/mlb_teamwinsleaders)
+
+::: {.callout-tip title="My solution" collapse="true"}
+
+```{r}
+#| eval: false
+#| include: false
+Pitching |>
+  group_by(playerID, teamID) |>
+  summarize(wins = sum(W)) |>
+  group_by(teamID) |>
+  group_split() |>
+  map(~arrange(.x, desc(wins))) |>
+  map(slice_head, n = 1) |>
+  bind_rows()
+```
+
+:::
+
+## 9/24: [MLB Most Wins by Decade](https://www.sporcle.com/games/draftace/mlbwinsbydecade)
+
+::: {.callout-tip title="My solution" collapse="true"}
+
+```{r}
+#| eval: false
+#| include: false
+Pitching |>
+  mutate(decade = floor(yearID / 10) * 10) |>
+  group_by(playerID, decade) |>
+  summarize(
+    wins = sum(W)
+  ) |>
+  group_by(decade) |>
+  group_split() |>
+  map(~arrange(.x, desc(wins))) |>
+  map(slice_head, n = 1) |>
+  bind_rows()
+```
+
+:::
+
+## 9/24: [MLB Home Run Leaders (A-Z)](https://www.sporcle.com/games/g/azhomerunleaders)
+
+::: {.callout-tip title="My solution" collapse="true"}
 
 ```{r}
 #| eval: false
@@ -275,9 +338,13 @@ Batting |>
     HomeRuns = sum(HR)
   ) |>
   group_by(Letter) |>
-  arrange(desc(HomeRuns))
+  group_split() |>
+  map(~arrange(.x, desc(HomeRuns))) |>
+  map(head, 1) |>
+  bind_rows()
 ```
 
+-->
 
 # Appendix
 

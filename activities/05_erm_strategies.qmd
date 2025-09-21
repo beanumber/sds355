@@ -1,0 +1,171 @@
+---
+title: "Strategies using the ERM"
+author: "Prof. Baumer"
+date: 2025-09-22
+date-format: medium
+format: 
+  pdf:
+    template-partials: 
+      - ../tex/title.tex
+      - ../tex/before-body.tex
+    toc: false
+execute:
+  echo: false
+  warning: false
+---
+
+### Activity: Evaluating strategies using the Expected Run Matrix
+
+Recall the Expected Run Matrix for 2016 we generated using Retrosheet play-by-play data. 
+
+```{r}
+library(tidyverse)
+library(abdwr3edata)
+
+half_innings <- retro2016 |>
+  retrosheet_add_states() |>
+  group_by(game_id, inn_ct, bat_home_id) |>
+  summarize(
+    outs_inning = sum(event_outs_ct), 
+    runs_inning = sum(runs_scored),
+    runs_start = first(away_score_ct + home_score_ct),
+    max_runs = runs_inning + runs_start
+  )
+
+changes2016 <- retro2016 |>
+  retrosheet_add_states() |>
+  inner_join(half_innings, by = join_by(game_id, inn_ct, bat_home_id)) |>
+  mutate(runs_roi = max_runs - (away_score_ct + home_score_ct)) |>
+  # a handful of weird plays...
+  filter(state != new_state | runs_scored > 0) |>
+  # only complete innings -- no walk-offs!
+  filter(outs_inning == 3)
+```
+
+```{r}
+erm2016 <- changes2016 |> 
+  group_by(bases, outs_ct) |>
+  summarize(exp_run_value = mean(runs_roi)) 
+erm2016 |>
+  pivot_wider(
+    names_from = outs_ct, 
+    values_from = exp_run_value, 
+    names_prefix = "Outs="
+  ) |>
+  arrange(`Outs=0`) |>
+  knitr::kable(digits = 3)
+```
+
+### Stealing
+
+1. Suppose you have a runner on first and nobody out. If you steal second base successfully, what is the increase in run expectancy? 
+\
+\
+\
+1. If you get caught stealing, what is the decrease in run expectancy? 
+\
+\
+\
+\
+1. How often do you need to steal successfully in order to make attempting to steal worthwhile? 
+\
+\
+\
+\
+1. How would your analysis change if (no calculations necessary):
+    1. The batter was *very good*? 
+    \
+    \
+    1. The batter was *very bad*? 
+    \
+    \
+    1. The score was tied in the 9th inning and you only need one run to win? 
+    \
+    \
+    1. The pitcher was left-handed? 
+    \
+    \
+    1. It was raining moderately? 
+1. Perform the same analysis, but for a runner on second and one out.
+\
+\
+\
+\
+1. Perform the same analysis, but for a runner on second and two outs.
+
+\newpage
+
+### Productive outs
+
+A *productive out* occurs when the batter puts the ball in play, and is out, but one of the runners on base is able to advance. 
+
+1. Bunting is the most deliberate for of productive out. Use the expected run matrix to determine whether bunting the runner on first with one out is *productive*. 
+\
+\
+\
+\
+1. The table below indicates the frequency (`n`) and mean change in expected run value (`mean_delta_erv`) for all bunts in 2016. Redo your calculation considering all four of these possibilities, *and their relative frequency*! 
+\
+\
+
+```{r}
+plays2016 <- changes2016 |>
+  left_join(erm2016, join_by("bases", "outs_ct")) |>
+  rename(erv_start = exp_run_value) |>
+  left_join(
+    erm2016, 
+    join_by(new_bases == bases, new_outs == outs_ct)
+  ) |>
+  rename(erv_end = exp_run_value) |>
+  replace_na(list(erv_end = 0)) |>
+  mutate(delta_erv = erv_end - erv_start + runs_scored)
+
+
+plays2016 |>
+  filter(str_detect(event_tx, "BG|BP")) |>
+  group_by(event_cd) |>
+  summarize(
+    n = n(),
+    sample_tx = first(event_tx),
+#    mean_r = mean(runs_scored),
+    mean_delta_erv = mean(delta_erv)
+  ) |>
+  arrange(desc(n)) |>
+  knitr::kable(digits = 3)
+```
+
+\
+\
+1. Should you bunt a runner on second to third with nobody out? 
+\
+\
+\
+\
+1. How would your analysis change if the batter was very bad (e.g., a pitcher)? 
+\
+\
+\
+
+```{r}
+#| include: false
+changes2016 |>
+  filter(str_detect(event_tx, "BG|BP")) |>
+  mutate(outs_on_play = new_outs - outs_ct) |>
+  group_by(outs_on_play) |>
+  count()
+```
+
+### Sacrifice flys
+
+1. What is the change in expected run values for a sacrifice fly with *only* a runner on third and **zero outs**?
+\
+\
+\
+1. What about with one out? 
+\
+\
+\
+1. Recall that in [our previous analysis](https://slides/03_linear_weights.html#/full-regression-model) the mean run value for a sacrifice fly was 0.80 runs. How does this value square with your answers to the previous two questions? 
+
+
+
