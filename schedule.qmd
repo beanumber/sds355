@@ -197,6 +197,8 @@ quiz <- function() {
 ::: {.callout-note} 
 ## Homework
 
+Read @cervone2016multiresolution (it's tough going -- just try your best!)
+
 :::
 
 ::: 
