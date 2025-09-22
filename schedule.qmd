@@ -197,7 +197,14 @@ quiz <- function() {
 ::: {.callout-note} 
 ## Homework
 
-Read @cervone2016multiresolution (it's tough going -- just try your best!)
+Read @cervone2016multiresolution 
+
+::: {.callout-tip}
+
+This paper is tough going -- just try your best! 
+Try to understand the main ideas first -- don't worry about the details.
+
+:::
 
 :::
 
@@ -206,6 +213,13 @@ Read @cervone2016multiresolution (it's tough going -- just try your best!)
 `r echo_date(emoji::emoji("basketball"))`
 
 - Expected points per possession
+
+::: {.callout-note} 
+## Homework
+
+Read @lopez2020bigger
+
+:::
 
 ::: 
 ::: {.g-col-6 .card} 
@@ -221,12 +235,24 @@ Read @cervone2016multiresolution (it's tough going -- just try your best!)
 
 - First-down conversion
 
+::: {.callout-note} 
+## Homework
+
+- Read @Bradley1952
+
+:::
+
 ::: 
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
 - Bradley-Terry models
-- Bayesian state-space models
+
+::: {.callout-note} 
+## Homework
+
+
+:::
 
 ::: 
 ::: {.g-col-6 .card}
@@ -239,7 +265,11 @@ Read @cervone2016multiresolution (it's tough going -- just try your best!)
 ::: {.callout-note} 
 ## Homework
 
+![](https://static.wixstatic.com/media/7399fb_8ae07d4c212d48a0ac4ee7a16bf03cac~mv2.png/v1/fill/w_504,h_188,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/CONFERENCE.png)
+
 - [Carnegie Mellon University Sports Analytics Conference](https://www.cmsaconference.com/)
+
+
 
 :::
 
@@ -255,6 +285,8 @@ Read @cervone2016multiresolution (it's tough going -- just try your best!)
 
 ::: {.g-col-6 .card} 
 `r echo_date()`
+
+- Bayesian state-space models
 
 :::
 
