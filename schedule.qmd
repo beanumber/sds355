@@ -163,6 +163,14 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date(emoji::emoji("baseball"))``
 
+::: {.callout-note title="Invited Guest"}
+
+- [Emma Strawbridge](https://www.linkedin.com/in/emma-strawbridge-6895b5259/)  
+  [UMass doctoral student](https://www.umass.edu/mathematics-statistics/about/directory/emma-strawbridge)  
+  Bio: Emma Strawbridge (they/them) is a first year PhD student in Statistics at UMass Amherst. They graduated from Amherst college in 2025 with a Statistics and Math double major, and wrote an honors thesis in the statistics department titled "Capturing Baseball Pitch Patterns with Hidden Markov Models”. They have worked for the Chicago Blackhawks as a data science intern during the summer of 2024 and hope to work in sports analytics in the future. Emma is a fan of ice hockey, baseball, football, and occasionally cycling and tennis when the season is right. Go birds. 
+  
+:::
+  
 - Launch angle
 - Spin rate
 - [American Soccer Insights Summit](https://americansoccerinsights.com/call-for-proposals/)
@@ -293,8 +301,17 @@ Read @lopez2020bigger
 ::: {.g-col-6 .card}
 `r echo_date()`
 
+::: {.callout-note title="Invited Guest:"}
+
+- [Amanda Glazer](https://www.amandaglazer.com/about)  
+  Assistant Professor  
+  Statistics and Data Dciences  
+  UT Austin  
+  Bio: Prior to joining UT, I earned my PhD in Statistics from UC Berkeley. My research focuses on developing causal inference and nonparametric methods, and associated software and tools, that address real scientific problems. I am particularly drawn to problems that affect society such as issues of discrimination and social justice. Reproducibility, replicability and evaluating the appropriateness of statistical methods are especially important to me. I also conduct research in sports analytics and developed and taught a new Sports Analytics course at UT Austin in Spring 2025.  Previously, I worked as a baseball operations associate analyst for the San Francisco Giants for four years. 
 
 ::: 
+
+:::
 
 
 
