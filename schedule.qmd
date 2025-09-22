@@ -16,14 +16,14 @@ classes <- c(
   sort()
 
 i <- 0
-echo_date <- function() {
+echo_date <- function(...) {
   i <<- i + 1
   x <- classes[i] |>
     format("%a, %b %e")
   htmltools::div(
     class = "card-header",
     "data-date" = classes[i],
-    htmltools::h4(paste0(i, ". ", x))
+    htmltools::h4(paste(i, ".", x, ...))
   )
 }
 
@@ -114,6 +114,7 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
+- [Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/)
 - `r activity()` [Evaluating strategies using the REM](activities/05_erm_strategies.qmd)
 - `r quiz()` [Sporcle quiz 4](sporcle.qmd)
 
@@ -134,8 +135,8 @@ quiz <- function() {
 ::: {.callout-note} 
 ## Homework
 
-- **HW 2 due Friday by 5 pm**
-- Read @Albert2015
+- **HW 3 due Friday by 5 pm**
+- Read *ABDWR*, [Ch. 13.1-13.2](https://beanumber.github.io/abdwr3e/13-homeruns.html)
 
 :::
 
@@ -160,15 +161,16 @@ quiz <- function() {
 
 
 ::: {.g-col-6 .card} 
-`r echo_date()`
+`r echo_date(emoji::emoji("baseball"))``
 
-- Win Probability
-- [Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/)
+- Launch angle
+- Spin rate
 - [American Soccer Insights Summit](https://americansoccerinsights.com/call-for-proposals/)
 
 ::: {.callout-note} 
 ## Homework
 
+- Read @Albert2015
 
 :::
 
@@ -176,20 +178,21 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
-- Expected points per possession
-- First-down conversion
+- Win Probability
 
 ::: {.callout-note} 
+## Homework
 
+- Read @kubatko2007starting
 
 :::
 
 ::: 
 
 ::: {.g-col-6 .card} 
-`r echo_date()`
+`r echo_date(emoji::emoji("basketball"))`
 
-- Bradley-Terry models
+- Four factors
 
 ::: {.callout-note} 
 ## Homework
@@ -198,9 +201,9 @@ quiz <- function() {
 
 ::: 
 ::: {.g-col-6 .card} 
-`r echo_date()`
+`r echo_date(emoji::emoji("basketball"))`
 
-- Bayesian state-space models
+- Expected points per possession
 
 ::: 
 ::: {.g-col-6 .card} 
@@ -212,12 +215,16 @@ quiz <- function() {
 
 ::: 
 ::: {.g-col-6 .card} 
-`r echo_date()`
+`r echo_date(emoji::emoji("football"))`
 
+- First-down conversion
 
 ::: 
 ::: {.g-col-6 .card} 
 `r echo_date()`
+
+- Bradley-Terry models
+- Bayesian state-space models
 
 ::: 
 ::: {.g-col-6 .card}

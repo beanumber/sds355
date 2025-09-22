@@ -16,7 +16,7 @@ execute:
 
 ### Activity: Evaluating strategies using the Expected Run Matrix
 
-Recall the Expected Run Matrix for 2016 we generated using Retrosheet play-by-play data. 
+Recall the Expected Run Matrix for 2016 we generated using Retrosheet play-by-play data: 
 
 ```{r}
 library(tidyverse)
@@ -99,12 +99,12 @@ erm2016 |>
 
 A *productive out* occurs when the batter puts the ball in play, and is out, but one of the runners on base is able to advance. 
 
-1. Bunting is the most deliberate for of productive out. Use the expected run matrix to determine whether bunting the runner on first with one out is *productive*. 
+1. Bunting is the most deliberate form of productive out. Use the expected run matrix to determine whether bunting the runner on first with one out is *productive*. 
 \
 \
 \
 \
-1. The table below indicates the frequency (`n`) and mean change in expected run value (`mean_delta_erv`) for all bunts in 2016. Redo your calculation considering all four of these possibilities, *and their relative frequency*! 
+1. The table below indicates the frequency (`n`) and mean change in expected run value (`mean_delta_erv`) for all bunts in 2016. Compute the *weighted* mean change in expected run value considering all four of these possibilities, *and their relative frequency*! 
 \
 \
 
@@ -157,7 +157,7 @@ changes2016 |>
 
 ### Sacrifice flys
 
-1. What is the change in expected run values for a sacrifice fly with *only* a runner on third and **zero outs**?
+1. What is the change in expected run value for a sacrifice fly with *only* a runner on third and **zero outs**?
 \
 \
 \
