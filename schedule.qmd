@@ -43,7 +43,7 @@ quiz <- function() {
 ::: {.grid}
 
 ::: {.g-col-6 .card} 
-`r echo_date()`
+`r echo_date(emoji::emoji("baseball"))`
 
 - Introductions
 - `r activity()` [2004 Trade Deadline](activities/01_trade_deadline.qmd)
@@ -59,7 +59,7 @@ quiz <- function() {
 
 ::: 
 ::: {.g-col-6 .card} 
-`r echo_date()`
+`r echo_date(emoji::emoji("baseball"))`
 
 - Recap from Monday
 - `r quiz()` [Sporcle quiz 1](sporcle.qmd)
@@ -81,7 +81,7 @@ quiz <- function() {
 :::
 
 ::: {.g-col-6 .card}
-`r echo_date()`
+`r echo_date(emoji::emoji("baseball"))`
 
 - *Moneyball* discussion
 - `r quiz()` [Sporcle quiz 2](sporcle.qmd)
@@ -98,7 +98,7 @@ quiz <- function() {
 
 ::: 
 ::: {.g-col-6 .card}
-`r echo_date()`
+`r echo_date(emoji::emoji("baseball"))`
 
 - `r quiz()` [Sporcle quiz 3](sporcle.qmd)
 - `r slides()` [The Run Expectancy Matrix](slides/04_run_expectancy.qmd)
@@ -112,7 +112,7 @@ quiz <- function() {
 
 ::: 
 ::: {.g-col-6 .card} 
-`r echo_date()`
+`r echo_date(emoji::emoji("baseball"))`
 
 - [Big Data Bowl](https://operations.nfl.com/gameday/analytics/big-data-bowl/)
 - `r activity()` [Evaluating strategies using the REM](activities/05_erm_strategies.qmd)
@@ -128,7 +128,7 @@ quiz <- function() {
 
 ::: 
 ::: {.g-col-6 .card}
-`r echo_date()`
+`r echo_date(emoji::emoji("baseball"))`
 
 - `r slides()` [Defense Independent Pitching Statistics (DIPS)](slides/06_dips.qmd)
 - `r quiz()` [Sporcle quiz 5](sporcle.qmd)
@@ -162,7 +162,7 @@ quiz <- function() {
 
 
 ::: {.g-col-6 .card} 
-`r echo_date(emoji::emoji("baseball"))``
+`r echo_date(emoji::emoji("baseball"))`
 
 ::: {.callout-note title="Invited Guest"}
 
