@@ -19,9 +19,23 @@ execute:
 
 ## The claim
 
+::: footer
+<https://www.baseballprospectus.com/news/article/878/pitching-and-defense-how-much-control-do-hurlers-have/>
+:::
+
 > There is **little if any** difference among major-league pitchers in their ability to prevent hits on balls hit in the field of play.
 >
 > --Voros McCracken (2001)
+
+## The impact
+
+::: footer
+<https://www.espn.com/blog/sweetspot/post/_/id/6835/voros-mccracken-changed-the-game>
+:::
+
+> A decade after Baseball Prospectus let McCracken spread the gospel in a story that popularized DIPS across the sport, it remains among the **most seminal theories** developed by sabermetrics, the nickname given to quantitative baseball study. It's almost certainly the **most revolutionary**. Nothing before or since has so upended an entire line of thought and forced teams to assess a wide breadth of players in a different fashion.
+>
+> -- Jeff Passan (2011)
 
 ## Who is Voros McCracken?
 
@@ -48,18 +62,32 @@ execute:
 
 ## Outcomes of a plate appearance
 
+
+:::: {.columns}
+::: {.column width="50%}
+
 ::: {.incremental}
 
 - Balls in Play:
     - Hits
     - Outs
     - Errors
+
+:::
+:::
+::: {.column width="50%}
+
+::: {.incremental}
+
 - Balls not in play (aka "Three true outcomes"):
     - Strikeouts
     - Walks / Hit by Pitch
     - **Home Runs**
 
 :::
+
+:::
+::::
 
 ## Three True Outcomes
 
@@ -86,6 +114,10 @@ execute:
 ![](https://substackcdn.com/image/fetch/$s_!7ksX!,w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F64b9cf5b-9337-4ab1-8241-2977665152b8_1119x750.png)
 
 ## BABIP
+
+::: footer
+<https://library.fangraphs.com/pitching/babip/>
+:::
 
 ![](https://www.fangraphs.com/library/wp-content/uploads/2010/02/BABIP-Flash-Card-8-9-15-e1439133664971.png)
 
@@ -120,18 +152,22 @@ dips |>
 
 ## Another claim
 
-> There is little **correlation** between what a pitcher does **one year** in the stat and what he will do **the next**.
+::: footer
+<https://library.fangraphs.com/principles/dips/>
+:::
+
+> There is little **correlation** between what a pitcher does **one year** in the stat (BABIP) and what he will do **the next**.
 
 . . .
 
 > The pitchers who are the best at preventing hits on balls in play one year are often the worst at it the next.
 
-- Skill vs. luck
+. . .
 
-## Autocorrelation
+::: {.callout-tip title="Fundamental question in sports analytics"}
 
-::: footer
-<https://en.wikipedia.org/wiki/Autocorrelation>
+- How much of performance is skill? How much is luck?
+
 :::
 
 ## Pitcher-year pairs
@@ -175,6 +211,11 @@ dips_pairs |>
 
 ## BABIP autocorrelation
 
+::: footer
+<https://en.wikipedia.org/wiki/Autocorrelation>
+:::
+
+
 ```{r}
 dips_pairs |>
   ungroup() |>
@@ -183,7 +224,10 @@ dips_pairs |>
 
 babip_plot <- ggplot(dips_pairs, aes(x = BABIP.x, y = BABIP.y)) +
   geom_point() +
-  geom_label(data = filter(dips_pairs, playerID == "martipe02"), aes(label = yearID), color = "red") +
+  geom_label(
+    data = filter(dips_pairs, playerID == "martipe02"),
+    aes(label = yearID), color = "red"
+  ) +
   scale_x_continuous("BABIP in some even year") +
   scale_y_continuous("BABIP in the next year")
 ```
@@ -246,6 +290,9 @@ dips_pairs |>
   ungroup() |>
   select(contains("r.")) |>
   cor() |>
+  as_tibble(r, rownames = "stat") |>
+  select(-contains(".x")) |>
+  filter(str_detect(stat, ".x")) |>
   knitr::kable(digits = 2)
 ```
 
@@ -254,11 +301,18 @@ dips_pairs |>
 ## FIP
 
 ::: footer
-<https://www.google.com/url?sa=i&url=https%3A%2F%2Flibrary.fangraphs.com%2Fpitching%2Ffip%2F&psig=AOvVaw2rfAxdxr8KsufLKJGjjjoO&ust=1758740064497000&source=images&cd=vfe&opi=89978449&ved=0CBYQjRxqFwoTCLCKnbrH748DFQAAAAAdAAAAABAE>
+<https://library.fangraphs.com/pitching/fip/>
 :::
 
 ![](https://www.fangraphs.com/library/wp-content/uploads/2010/02/FIP-Flash-Card-7-11-15-e1436629435119.png)
 
+. . .
+
+::: {.callout-tip title="Challenge"}
+
+Calculate the year-to-year autocorrelation for FIP
+
+:::
 
 
 
@@ -299,5 +353,8 @@ dips_pairs |>
   ungroup() |>
   select(contains("r."), contains("BABIP")) |>
   cor() |>
+  as_tibble(r, rownames = "stat") |>
+  select(-contains(".x")) |>
+  filter(str_detect(stat, ".x")) |>
   knitr::kable(digits = 2)
 ```
