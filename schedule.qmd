@@ -130,7 +130,8 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- Defense Independent Pitching Statistics (DIPS)
+- `r slides()` [Defense Independent Pitching Statistics (DIPS)](slides/06_dips.qmd)
+- `r quiz()` [Sporcle quiz 5](sporcle.qmd)
 
 ::: {.callout-note} 
 ## Homework
@@ -205,14 +206,9 @@ quiz <- function() {
 ::: {.callout-note} 
 ## Homework
 
-Read @cervone2016multiresolution 
-
-::: {.callout-tip}
-
-This paper is tough going -- just try your best! 
-Try to understand the main ideas first -- don't worry about the details.
-
-:::
+- Read @cervone2016multiresolution 
+  This paper is tough going -- just try your best!  
+  Try to understand the main ideas first -- don't worry about the details.
 
 :::
 
@@ -225,7 +221,7 @@ Try to understand the main ideas first -- don't worry about the details.
 ::: {.callout-note} 
 ## Homework
 
-Read @lopez2020bigger
+- Read @lopez2020bigger
 
 :::
 

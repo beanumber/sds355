@@ -262,14 +262,10 @@ ORDER BY N DESC;
 
 ## 9/22: [Multiple Cy Young Winners](https://www.sporcle.com/games/g/cyyoungmulti)
 
-<!--
 
 ::: {.callout-tip title="My solution" collapse="true"}
 
 ```{r}
-#| eval: false
-#| include: false
-
 AwardsPlayers |>
   filter(str_detect(awardID, "Cy Young")) |>
   group_by(playerID) |>
@@ -282,6 +278,38 @@ AwardsPlayers |>
 ```
 
 :::
+::: {.callout-tip title="My solution using SQL" collapse="true"}
+
+```{sql}
+#| connection: con
+#| eval: false
+SELECT playerID, COUNT(*) AS num_awards, GROUP_CONCAT(yearID) AS years
+FROM AwardsPlayers
+WHERE awardID = 'Cy Young Award'
+GROUP BY playerID
+HAVING COUNT(*) > 1
+ORDER BY COUNT(*);
+```
+
+```{r}
+#| eval: false
+#| include: false
+dbGetQuery(con, "
+
+SELECT playerID, COUNT(*) AS num_awards, GROUP_CONCAT(yearID) AS years
+FROM AwardsPlayers
+WHERE awardID = 'Cy Young Award'
+GROUP BY playerID
+HAVING COUNT(*) > 1
+ORDER BY COUNT(*);
+
+")
+```
+
+:::
+
+
+<!--
 
 ## 9/24: [MLB Win Leaders by Team](https://www.sporcle.com/games/g/mlb_teamwinsleaders)
 

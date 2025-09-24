@@ -1,0 +1,303 @@
+---
+title: "DIPS"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "2025-09-24"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+# DIPS
+
+## The claim
+
+> There is **little if any** difference among major-league pitchers in their ability to prevent hits on balls hit in the field of play.
+>
+> --Voros McCracken (2001)
+
+## Who is Voros McCracken?
+
+::: footer
+<https://en.wikipedia.org/wiki/Voros_McCracken>
+:::
+
+:::: {.columns}
+::: {.column width="50%}
+
+![](https://pbs.twimg.com/profile_images/1899952589422419973/QPB5e8jn_400x400.jpg)
+
+:::
+::: {.column width="50%}
+
+::: {.fragment .fade-left}
+
+> Voros McCracken is a student living in Chicago. 
+
+:::
+
+:::
+::::
+
+## Outcomes of a plate appearance
+
+::: {.incremental}
+
+- Balls in Play:
+    - Hits
+    - Outs
+    - Errors
+- Balls not in play (aka "Three true outcomes"):
+    - Strikeouts
+    - Walks / Hit by Pitch
+    - **Home Runs**
+
+:::
+
+## Three True Outcomes
+
+::: footer
+<https://www.nytimes.com/athletic/3434355/2022/07/21/mlb-three-true-outcomes/>
+:::
+
+
+:::: {.columns}
+::: {.column width="50%}
+
+![](https://pbs.twimg.com/media/FYMloDLUIAE_kH9.jpg:large)
+
+:::
+::: {.column width="50%}
+
+[![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Adam_Dunn_on_June_28%2C_2009.jpg/250px-Adam_Dunn_on_June_28%2C_2009.jpg)](https://en.wikipedia.org/wiki/Adam_Dunn)
+
+:::
+::::
+
+## True outcomes over time
+
+![](https://substackcdn.com/image/fetch/$s_!7ksX!,w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F64b9cf5b-9337-4ab1-8241-2977665152b8_1119x750.png)
+
+## BABIP
+
+![](https://www.fangraphs.com/library/wp-content/uploads/2010/02/BABIP-Flash-Card-8-9-15-e1439133664971.png)
+
+## Computing BABIP
+
+```{r}
+#| code-line-numbers: "|12"
+library(tidyverse)
+library(Lahman)
+
+dips <- Batting |>
+  filter(yearID >= 1962) |>
+  group_by(yearID) |>
+  summarize(
+    TPA = sum(AB + BB + HBP + SF + SH),
+    Kr = sum(SO) / TPA,
+    Wr = sum(BB + HBP) / TPA,
+    HRr = sum(HR) / TPA,
+    BABIP = sum(H - HR) / sum(AB + SF - SO - HR) 
+  )
+```
+
+## True outcomes plot
+
+```{r}
+dips |>
+  pivot_longer(cols = Kr:BABIP) |>
+  ggplot(aes(x = yearID, y = value, color = name)) +
+  geom_line() + 
+  geom_smooth()
+```
+
+## Another claim
+
+> There is little **correlation** between what a pitcher does **one year** in the stat and what he will do **the next**.
+
+. . .
+
+> The pitchers who are the best at preventing hits on balls in play one year are often the worst at it the next.
+
+- Skill vs. luck
+
+## Autocorrelation
+
+::: footer
+<https://en.wikipedia.org/wiki/Autocorrelation>
+:::
+
+## Pitcher-year pairs
+
+```{r}
+#| code-line-numbers: "|3|12|14"
+dips_pitchers <- Pitching |>
+  filter(yearID >= 1962) |>
+  group_by(playerID, yearID) |>
+  summarize(
+    TPA = sum(BFP),
+    Kr = sum(SO) / TPA,
+    Wr = sum(BB + HBP) / TPA,
+    HRr = sum(HR) / TPA,
+    BABIP = sum(H - HR) / sum(BFP - BB - HBP - SO - HR),
+  ) |>
+  mutate(
+    next_yearID = yearID + 1
+  ) |>
+  filter(TPA > 400)
+```
+
+```{r}
+dips_evens <- dips_pitchers |>
+  filter(yearID %% 2 == 0)
+dips_odds <- dips_pitchers |>
+  filter(yearID %% 2 == 1)
+
+dips_pairs <- dips_evens |>
+  inner_join(dips_odds, by = join_by(playerID, next_yearID == yearID))
+```
+
+
+## Paired data
+
+```{r}
+dips_pairs |>
+  head() |>
+  select(contains("ID"), contains("BABIP"))
+```
+
+## BABIP autocorrelation
+
+```{r}
+dips_pairs |>
+  ungroup() |>
+  select(contains("BABIP")) |>
+  cor()
+
+babip_plot <- ggplot(dips_pairs, aes(x = BABIP.x, y = BABIP.y)) +
+  geom_point() +
+  geom_label(data = filter(dips_pairs, playerID == "martipe02"), aes(label = yearID), color = "red") +
+  scale_x_continuous("BABIP in some even year") +
+  scale_y_continuous("BABIP in the next year")
+```
+
+## Visualizing BABIP autocorrelation
+
+```{r}
+babip_plot
+```
+
+
+## No cross-correlation
+
+> There is no significant **cross-correlation**. That is, a high number of home runs allowed doesn’t really mean anything in determining how many hits per balls in play the pitcher will allow.
+
+## Cross-correlations
+
+```{r}
+dips_pairs |>
+  ungroup() |>
+  select(contains("r.x"), contains("BABIP")) |>
+  cor() |>
+  knitr::kable(digits = 2)
+```
+
+
+## Reliability
+
+::: footer
+<https://en.wikipedia.org/wiki/Reliability_(statistics)>
+:::
+
+![](https://qhaireenizzati.wordpress.com/wp-content/uploads/2017/11/21aae-560px-reliability_and_validity-svg.png)
+
+## Home run rate
+
+```{r}
+ggplot(dips_pairs, aes(x = HRr.x, y = HRr.y)) +
+  geom_point()
+```
+
+## Walk rate
+
+```{r}
+ggplot(dips_pairs, aes(x = Wr.x, y = Wr.y)) +
+  geom_point()
+```
+
+## Strikeout rate
+
+```{r}
+ggplot(dips_pairs, aes(x = Kr.x, y = Kr.y)) +
+  geom_point()
+```
+
+## Autocorrelations
+
+```{r}
+dips_pairs |>
+  ungroup() |>
+  select(contains("r.")) |>
+  cor() |>
+  knitr::kable(digits = 2)
+```
+
+
+
+## FIP
+
+::: footer
+<https://www.google.com/url?sa=i&url=https%3A%2F%2Flibrary.fangraphs.com%2Fpitching%2Ffip%2F&psig=AOvVaw2rfAxdxr8KsufLKJGjjjoO&ust=1758740064497000&source=images&cd=vfe&opi=89978449&ved=0CBYQjRxqFwoTCLCKnbrH748DFQAAAAAdAAAAABAE>
+:::
+
+![](https://www.fangraphs.com/library/wp-content/uploads/2010/02/FIP-Flash-Card-7-11-15-e1436629435119.png)
+
+
+
+
+## What about batters?
+
+```{r}
+#| echo: false
+dips_batters <- Batting |>
+  filter(yearID >= 1962) |>
+  group_by(playerID, yearID) |>
+  summarize(
+    TPA = sum(AB + BB + HBP + SF + SH),
+    Kr = sum(SO) / TPA,
+    Wr = sum(BB + HBP) / TPA,
+    HRr = sum(HR) / TPA,
+    BABIP = sum(H - HR) / sum(AB + SF - SO - HR),
+  ) |>
+  mutate(
+    next_yearID = yearID + 1
+  ) |>
+  filter(TPA > 400)
+```
+
+```{r}
+#| echo: false
+dips_evens <- dips_batters |>
+  filter(yearID %% 2 == 0)
+dips_odds <- dips_batters |>
+  filter(yearID %% 2 == 1)
+
+dips_pairs <- dips_evens |>
+  inner_join(dips_odds, by = join_by(playerID, next_yearID == yearID))
+```
+
+```{r}
+#| echo: false
+dips_pairs |>
+  ungroup() |>
+  select(contains("r."), contains("BABIP")) |>
+  cor() |>
+  knitr::kable(digits = 2)
+```
