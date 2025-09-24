@@ -46,7 +46,14 @@
     "href": "slides/06_dips.html#the-claim",
     "title": "DIPS",
     "section": "The claim",
-    "text": "The claim\n\nThere is little if any difference among major-league pitchers in their ability to prevent hits on balls hit in the field of play.\n–Voros McCracken (2001)"
+    "text": "The claim\n\nhttps://www.baseballprospectus.com/news/article/878/pitching-and-defense-how-much-control-do-hurlers-have/\n\n\nThere is little if any difference among major-league pitchers in their ability to prevent hits on balls hit in the field of play.\n–Voros McCracken (2001)"
+  },
+  {
+    "objectID": "slides/06_dips.html#the-impact",
+    "href": "slides/06_dips.html#the-impact",
+    "title": "DIPS",
+    "section": "The impact",
+    "text": "The impact\n\nhttps://www.espn.com/blog/sweetspot/post/_/id/6835/voros-mccracken-changed-the-game\n\n\nA decade after Baseball Prospectus let McCracken spread the gospel in a story that popularized DIPS across the sport, it remains among the most seminal theories developed by sabermetrics, the nickname given to quantitative baseball study. It’s almost certainly the most revolutionary. Nothing before or since has so upended an entire line of thought and forced teams to assess a wide breadth of players in a different fashion.\n– Jeff Passan (2011)"
   },
   {
     "objectID": "slides/06_dips.html#who-is-voros-mccracken",
@@ -60,7 +67,7 @@
     "href": "slides/06_dips.html#outcomes-of-a-plate-appearance",
     "title": "DIPS",
     "section": "Outcomes of a plate appearance",
-    "text": "Outcomes of a plate appearance\n\nBalls in Play:\n\nHits\nOuts\nErrors\n\nBalls not in play (aka “Three true outcomes”):\n\nStrikeouts\nWalks / Hit by Pitch\nHome Runs"
+    "text": "Outcomes of a plate appearance\n\n\n\nBalls in Play:\n\nHits\nOuts\nErrors\n\n\n\n\nBalls not in play (aka “Three true outcomes”):\n\nStrikeouts\nWalks / Hit by Pitch\nHome Runs"
   },
   {
     "objectID": "slides/06_dips.html#three-true-outcomes",
@@ -81,7 +88,7 @@
     "href": "slides/06_dips.html#babip",
     "title": "DIPS",
     "section": "BABIP",
-    "text": "BABIP"
+    "text": "BABIP\n\nhttps://library.fangraphs.com/pitching/babip/"
   },
   {
     "objectID": "slides/06_dips.html#computing-babip",
@@ -102,14 +109,7 @@
     "href": "slides/06_dips.html#another-claim",
     "title": "DIPS",
     "section": "Another claim",
-    "text": "Another claim\n\nThere is little correlation between what a pitcher does one year in the stat and what he will do the next.\n\n\n\nThe pitchers who are the best at preventing hits on balls in play one year are often the worst at it the next.\n\n\nSkill vs. luck"
-  },
-  {
-    "objectID": "slides/06_dips.html#autocorrelation",
-    "href": "slides/06_dips.html#autocorrelation",
-    "title": "DIPS",
-    "section": "Autocorrelation",
-    "text": "Autocorrelation\n\nhttps://en.wikipedia.org/wiki/Autocorrelation"
+    "text": "Another claim\n\nhttps://library.fangraphs.com/principles/dips/\n\n\nThere is little correlation between what a pitcher does one year in the stat (BABIP) and what he will do the next.\n\n\n\nThe pitchers who are the best at preventing hits on balls in play one year are often the worst at it the next.\n\n\n\n\n\n\n\n\n\n\nFundamental question in sports analytics\n\n\n\nHow much of performance is skill? How much is luck?"
   },
   {
     "objectID": "slides/06_dips.html#pitcher-year-pairs",
@@ -130,7 +130,7 @@
     "href": "slides/06_dips.html#babip-autocorrelation",
     "title": "DIPS",
     "section": "BABIP autocorrelation",
-    "text": "BABIP autocorrelation\n\ndips_pairs |&gt;\n  ungroup() |&gt;\n  select(contains(\"BABIP\")) |&gt;\n  cor()\n\n          BABIP.x   BABIP.y\nBABIP.x 1.0000000 0.2913783\nBABIP.y 0.2913783 1.0000000\n\nbabip_plot &lt;- ggplot(dips_pairs, aes(x = BABIP.x, y = BABIP.y)) +\n  geom_point() +\n  geom_label(data = filter(dips_pairs, playerID == \"martipe02\"), aes(label = yearID), color = \"red\") +\n  scale_x_continuous(\"BABIP in some even year\") +\n  scale_y_continuous(\"BABIP in the next year\")"
+    "text": "BABIP autocorrelation\n\nhttps://en.wikipedia.org/wiki/Autocorrelation\n\n\ndips_pairs |&gt;\n  ungroup() |&gt;\n  select(contains(\"BABIP\")) |&gt;\n  cor()\n\n          BABIP.x   BABIP.y\nBABIP.x 1.0000000 0.2913783\nBABIP.y 0.2913783 1.0000000\n\nbabip_plot &lt;- ggplot(dips_pairs, aes(x = BABIP.x, y = BABIP.y)) +\n  geom_point() +\n  geom_label(\n    data = filter(dips_pairs, playerID == \"martipe02\"),\n    aes(label = yearID), color = \"red\"\n  ) +\n  scale_x_continuous(\"BABIP in some even year\") +\n  scale_y_continuous(\"BABIP in the next year\")"
   },
   {
     "objectID": "slides/06_dips.html#visualizing-babip-autocorrelation",
@@ -186,21 +186,21 @@
     "href": "slides/06_dips.html#autocorrelations",
     "title": "DIPS",
     "section": "Autocorrelations",
-    "text": "Autocorrelations\n\ndips_pairs |&gt;\n  ungroup() |&gt;\n  select(contains(\"r.\")) |&gt;\n  cor() |&gt;\n  knitr::kable(digits = 2)\n\n\n\n\n\nKr.x\nWr.x\nHRr.x\nKr.y\nWr.y\nHRr.y\n\n\n\n\nKr.x\n1.00\n0.10\n0.09\n0.82\n0.08\n0.13\n\n\nWr.x\n0.10\n1.00\n-0.01\n0.13\n0.64\n-0.05\n\n\nHRr.x\n0.09\n-0.01\n1.00\n0.11\n-0.06\n0.46\n\n\nKr.y\n0.82\n0.13\n0.11\n1.00\n0.05\n0.07\n\n\nWr.y\n0.08\n0.64\n-0.06\n0.05\n1.00\n-0.02\n\n\nHRr.y\n0.13\n-0.05\n0.46\n0.07\n-0.02\n1.00"
+    "text": "Autocorrelations\n\ndips_pairs |&gt;\n  ungroup() |&gt;\n  select(contains(\"r.\")) |&gt;\n  cor() |&gt;\n  as_tibble(r, rownames = \"stat\") |&gt;\n  select(-contains(\".x\")) |&gt;\n  filter(str_detect(stat, \".x\")) |&gt;\n  knitr::kable(digits = 2)\n\n\n\n\nstat\nKr.y\nWr.y\nHRr.y\n\n\n\n\nKr.x\n0.82\n0.08\n0.13\n\n\nWr.x\n0.13\n0.64\n-0.05\n\n\nHRr.x\n0.11\n-0.06\n0.46"
   },
   {
     "objectID": "slides/06_dips.html#fip",
     "href": "slides/06_dips.html#fip",
     "title": "DIPS",
     "section": "FIP",
-    "text": "FIP\n\nhttps://www.google.com/url?sa=i&url=https%3A%2F%2Flibrary.fangraphs.com%2Fpitching%2Ffip%2F&psig=AOvVaw2rfAxdxr8KsufLKJGjjjoO&ust=1758740064497000&source=images&cd=vfe&opi=89978449&ved=0CBYQjRxqFwoTCLCKnbrH748DFQAAAAAdAAAAABAE"
+    "text": "FIP\n\nhttps://library.fangraphs.com/pitching/fip/\n\n\n\n\n\n\n\n\n\n\nChallenge\n\n\nCalculate the year-to-year autocorrelation for FIP"
   },
   {
     "objectID": "slides/06_dips.html#what-about-batters",
     "href": "slides/06_dips.html#what-about-batters",
     "title": "DIPS",
     "section": "What about batters?",
-    "text": "What about batters?\n\n\n\n\n\n\nKr.x\nWr.x\nHRr.x\nKr.y\nWr.y\nHRr.y\nBABIP.x\nBABIP.y\n\n\n\n\nKr.x\n1.00\n0.20\n0.50\n0.88\n0.22\n0.48\n0.14\n0.12\n\n\nWr.x\n0.20\n1.00\n0.36\n0.21\n0.77\n0.34\n0.02\n-0.01\n\n\nHRr.x\n0.50\n0.36\n1.00\n0.49\n0.37\n0.76\n-0.03\n-0.05\n\n\nKr.y\n0.88\n0.21\n0.49\n1.00\n0.21\n0.49\n0.11\n0.10\n\n\nWr.y\n0.22\n0.77\n0.37\n0.21\n1.00\n0.38\n0.02\n0.04\n\n\nHRr.y\n0.48\n0.34\n0.76\n0.49\n0.38\n1.00\n-0.01\n-0.03\n\n\nBABIP.x\n0.14\n0.02\n-0.03\n0.11\n0.02\n-0.01\n1.00\n0.46\n\n\nBABIP.y\n0.12\n-0.01\n-0.05\n0.10\n0.04\n-0.03\n0.46\n1.00"
+    "text": "What about batters?\n\n\n\n\n\nstat\nKr.y\nWr.y\nHRr.y\nBABIP.y\n\n\n\n\nKr.x\n0.88\n0.22\n0.48\n0.12\n\n\nWr.x\n0.21\n0.77\n0.34\n-0.01\n\n\nHRr.x\n0.49\n0.37\n0.76\n-0.05\n\n\nBABIP.x\n0.11\n0.02\n-0.01\n0.46"
   },
   {
     "objectID": "slides/03_linear_weights.html#watch",

@@ -214,9 +214,22 @@ Prof.&nbsp;Baumer
 </section>
 <section id="the-claim" class="slide level2">
 <h2>The claim</h2>
+<div class="footer">
+<p><a href="https://www.baseballprospectus.com/news/article/878/pitching-and-defense-how-much-control-do-hurlers-have/" class="uri">https://www.baseballprospectus.com/news/article/878/pitching-and-defense-how-much-control-do-hurlers-have/</a></p>
+</div>
 <blockquote>
 <p>There is <strong>little if any</strong> difference among major-league pitchers in their ability to prevent hits on balls hit in the field of play.</p>
 <p>–Voros McCracken (2001)</p>
+</blockquote>
+</section>
+<section id="the-impact" class="slide level2">
+<h2>The impact</h2>
+<div class="footer">
+<p><a href="https://www.espn.com/blog/sweetspot/post/_/id/6835/voros-mccracken-changed-the-game" class="uri">https://www.espn.com/blog/sweetspot/post/_/id/6835/voros-mccracken-changed-the-game</a></p>
+</div>
+<blockquote>
+<p>A decade after Baseball Prospectus let McCracken spread the gospel in a story that popularized DIPS across the sport, it remains among the <strong>most seminal theories</strong> developed by sabermetrics, the nickname given to quantitative baseball study. It’s almost certainly the <strong>most revolutionary</strong>. Nothing before or since has so upended an entire line of thought and forced teams to assess a wide breadth of players in a different fashion.</p>
+<p>– Jeff Passan (2011)</p>
 </blockquote>
 </section>
 <section id="who-is-voros-mccracken" class="slide level2">
@@ -237,6 +250,8 @@ Prof.&nbsp;Baumer
 </section>
 <section id="outcomes-of-a-plate-appearance" class="slide level2">
 <h2>Outcomes of a plate appearance</h2>
+<div class="columns">
+<div class="column" style="width:&quot;50%;">
 <ul>
 <li class="fragment">Balls in Play:
 <ul>
@@ -244,6 +259,9 @@ Prof.&nbsp;Baumer
 <li class="fragment">Outs</li>
 <li class="fragment">Errors</li>
 </ul></li>
+</ul>
+</div><div class="column" style="width:&quot;50%;">
+<ul>
 <li class="fragment">Balls not in play (aka “Three true outcomes”):
 <ul>
 <li class="fragment">Strikeouts</li>
@@ -251,6 +269,7 @@ Prof.&nbsp;Baumer
 <li class="fragment"><strong>Home Runs</strong></li>
 </ul></li>
 </ul>
+</div></div>
 </section>
 <section id="three-true-outcomes" class="slide level2">
 <h2>Three True Outcomes</h2>
@@ -270,6 +289,9 @@ Prof.&nbsp;Baumer
 <img data-src="https://substackcdn.com/image/fetch/$s_!7ksX!,w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F64b9cf5b-9337-4ab1-8241-2977665152b8_1119x750.png" class="r-stretch"></section>
 <section id="babip" class="slide level2">
 <h2>BABIP</h2>
+<div class="footer">
+<p><a href="https://library.fangraphs.com/pitching/babip/" class="uri">https://library.fangraphs.com/pitching/babip/</a></p>
+</div>
 
 <img data-src="https://www.fangraphs.com/library/wp-content/uploads/2010/02/BABIP-Flash-Card-8-9-15-e1439133664971.png" class="r-stretch"></section>
 <section id="computing-babip" class="slide level2">
@@ -303,22 +325,35 @@ Prof.&nbsp;Baumer
 <img data-src="06_dips_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
 <section id="another-claim" class="slide level2">
 <h2>Another claim</h2>
+<div class="footer">
+<p><a href="https://library.fangraphs.com/principles/dips/" class="uri">https://library.fangraphs.com/principles/dips/</a></p>
+</div>
 <blockquote>
-<p>There is little <strong>correlation</strong> between what a pitcher does <strong>one year</strong> in the stat and what he will do <strong>the next</strong>.</p>
+<p>There is little <strong>correlation</strong> between what a pitcher does <strong>one year</strong> in the stat (BABIP) and what he will do <strong>the next</strong>.</p>
 </blockquote>
 <div class="fragment">
 <blockquote>
 <p>The pitchers who are the best at preventing hits on balls in play one year are often the worst at it the next.</p>
 </blockquote>
+</div>
+<div class="fragment">
+<div title="Fundamental question in sports analytics">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Fundamental question in sports analytics</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li>Skill vs.&nbsp;luck</li>
+<li>How much of performance is skill? How much is luck?</li>
 </ul>
 </div>
-</section>
-<section id="autocorrelation" class="slide level2">
-<h2>Autocorrelation</h2>
-<div class="footer">
-<p><a href="https://en.wikipedia.org/wiki/Autocorrelation" class="uri">https://en.wikipedia.org/wiki/Autocorrelation</a></p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="pitcher-year-pairs" class="slide level2">
@@ -371,6 +406,9 @@ Prof.&nbsp;Baumer
 </section>
 <section id="babip-autocorrelation" class="slide level2">
 <h2>BABIP autocorrelation</h2>
+<div class="footer">
+<p><a href="https://en.wikipedia.org/wiki/Autocorrelation" class="uri">https://en.wikipedia.org/wiki/Autocorrelation</a></p>
+</div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>dips_pairs <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
@@ -383,9 +421,12 @@ BABIP.y 0.2913783 1.0000000</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>babip_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dips_pairs, <span class="fu">aes</span>(<span class="at">x =</span> BABIP.x, <span class="at">y =</span> BABIP.y)) <span class="sc">+</span></span>
 <span id="cb9-2"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb9-3"><a></a>  <span class="fu">geom_label</span>(<span class="at">data =</span> <span class="fu">filter</span>(dips_pairs, playerID <span class="sc">==</span> <span class="st">"martipe02"</span>), <span class="fu">aes</span>(<span class="at">label =</span> yearID), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb9-4"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"BABIP in some even year"</span>) <span class="sc">+</span></span>
-<span id="cb9-5"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="st">"BABIP in the next year"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-3"><a></a>  <span class="fu">geom_label</span>(</span>
+<span id="cb9-4"><a></a>    <span class="at">data =</span> <span class="fu">filter</span>(dips_pairs, playerID <span class="sc">==</span> <span class="st">"martipe02"</span>),</span>
+<span id="cb9-5"><a></a>    <span class="fu">aes</span>(<span class="at">label =</span> yearID), <span class="at">color =</span> <span class="st">"red"</span></span>
+<span id="cb9-6"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb9-7"><a></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"BABIP in some even year"</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="st">"BABIP in the next year"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="visualizing-babip-autocorrelation" class="slide level2">
@@ -505,15 +546,15 @@ BABIP.y 0.2913783 1.0000000</code></pre>
 <span id="cb15-2"><a></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
 <span id="cb15-3"><a></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"r."</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb15-4"><a></a>  <span class="fu">cor</span>() <span class="sc">|&gt;</span></span>
-<span id="cb15-5"><a></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-5"><a></a>  <span class="fu">as_tibble</span>(r, <span class="at">rownames =</span> <span class="st">"stat"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-6"><a></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">contains</span>(<span class="st">".x"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb15-7"><a></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(stat, <span class="st">".x"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb15-8"><a></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">Kr.x</th>
-<th style="text-align: right;">Wr.x</th>
-<th style="text-align: right;">HRr.x</th>
+<th style="text-align: left;">stat</th>
 <th style="text-align: right;">Kr.y</th>
 <th style="text-align: right;">Wr.y</th>
 <th style="text-align: right;">HRr.y</th>
@@ -522,57 +563,21 @@ BABIP.y 0.2913783 1.0000000</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Kr.x</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">0.10</td>
-<td style="text-align: right;">0.09</td>
 <td style="text-align: right;">0.82</td>
 <td style="text-align: right;">0.08</td>
 <td style="text-align: right;">0.13</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Wr.x</td>
-<td style="text-align: right;">0.10</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">-0.01</td>
 <td style="text-align: right;">0.13</td>
 <td style="text-align: right;">0.64</td>
 <td style="text-align: right;">-0.05</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HRr.x</td>
-<td style="text-align: right;">0.09</td>
-<td style="text-align: right;">-0.01</td>
-<td style="text-align: right;">1.00</td>
 <td style="text-align: right;">0.11</td>
 <td style="text-align: right;">-0.06</td>
 <td style="text-align: right;">0.46</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Kr.y</td>
-<td style="text-align: right;">0.82</td>
-<td style="text-align: right;">0.13</td>
-<td style="text-align: right;">0.11</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">0.05</td>
-<td style="text-align: right;">0.07</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Wr.y</td>
-<td style="text-align: right;">0.08</td>
-<td style="text-align: right;">0.64</td>
-<td style="text-align: right;">-0.06</td>
-<td style="text-align: right;">0.05</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">-0.02</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">HRr.y</td>
-<td style="text-align: right;">0.13</td>
-<td style="text-align: right;">-0.05</td>
-<td style="text-align: right;">0.46</td>
-<td style="text-align: right;">0.07</td>
-<td style="text-align: right;">-0.02</td>
-<td style="text-align: right;">1.00</td>
 </tr>
 </tbody>
 </table>
@@ -582,10 +587,27 @@ BABIP.y 0.2913783 1.0000000</code></pre>
 <section id="fip" class="slide level2">
 <h2>FIP</h2>
 <div class="footer">
-<p><a href="https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Flibrary.fangraphs.com%2Fpitching%2Ffip%2F&amp;psig=AOvVaw2rfAxdxr8KsufLKJGjjjoO&amp;ust=1758740064497000&amp;source=images&amp;cd=vfe&amp;opi=89978449&amp;ved=0CBYQjRxqFwoTCLCKnbrH748DFQAAAAAdAAAAABAE" class="uri">https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Flibrary.fangraphs.com%2Fpitching%2Ffip%2F&amp;psig=AOvVaw2rfAxdxr8KsufLKJGjjjoO&amp;ust=1758740064497000&amp;source=images&amp;cd=vfe&amp;opi=89978449&amp;ved=0CBYQjRxqFwoTCLCKnbrH748DFQAAAAAdAAAAABAE</a></p>
+<p><a href="https://library.fangraphs.com/pitching/fip/" class="uri">https://library.fangraphs.com/pitching/fip/</a></p>
 </div>
 
-<img data-src="https://www.fangraphs.com/library/wp-content/uploads/2010/02/FIP-Flash-Card-7-11-15-e1436629435119.png" class="r-stretch"></section>
+<img data-src="https://www.fangraphs.com/library/wp-content/uploads/2010/02/FIP-Flash-Card-7-11-15-e1436629435119.png" class="r-stretch"><div class="fragment">
+<div title="Challenge">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Challenge</strong></p>
+</div>
+<div class="callout-content">
+<p>Calculate the year-to-year autocorrelation for FIP</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="what-about-batters" class="slide level2">
 <h2>What about batters?</h2>
 <div class="cell">
@@ -593,105 +615,41 @@ BABIP.y 0.2913783 1.0000000</code></pre>
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th style="text-align: left;"></th>
-<th style="text-align: right;">Kr.x</th>
-<th style="text-align: right;">Wr.x</th>
-<th style="text-align: right;">HRr.x</th>
+<th style="text-align: left;">stat</th>
 <th style="text-align: right;">Kr.y</th>
 <th style="text-align: right;">Wr.y</th>
 <th style="text-align: right;">HRr.y</th>
-<th style="text-align: right;">BABIP.x</th>
 <th style="text-align: right;">BABIP.y</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Kr.x</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">0.20</td>
-<td style="text-align: right;">0.50</td>
 <td style="text-align: right;">0.88</td>
 <td style="text-align: right;">0.22</td>
 <td style="text-align: right;">0.48</td>
-<td style="text-align: right;">0.14</td>
 <td style="text-align: right;">0.12</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Wr.x</td>
-<td style="text-align: right;">0.20</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">0.36</td>
 <td style="text-align: right;">0.21</td>
 <td style="text-align: right;">0.77</td>
 <td style="text-align: right;">0.34</td>
-<td style="text-align: right;">0.02</td>
 <td style="text-align: right;">-0.01</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">HRr.x</td>
-<td style="text-align: right;">0.50</td>
-<td style="text-align: right;">0.36</td>
-<td style="text-align: right;">1.00</td>
 <td style="text-align: right;">0.49</td>
 <td style="text-align: right;">0.37</td>
 <td style="text-align: right;">0.76</td>
-<td style="text-align: right;">-0.03</td>
 <td style="text-align: right;">-0.05</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Kr.y</td>
-<td style="text-align: right;">0.88</td>
-<td style="text-align: right;">0.21</td>
-<td style="text-align: right;">0.49</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">0.21</td>
-<td style="text-align: right;">0.49</td>
-<td style="text-align: right;">0.11</td>
-<td style="text-align: right;">0.10</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Wr.y</td>
-<td style="text-align: right;">0.22</td>
-<td style="text-align: right;">0.77</td>
-<td style="text-align: right;">0.37</td>
-<td style="text-align: right;">0.21</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">0.38</td>
-<td style="text-align: right;">0.02</td>
-<td style="text-align: right;">0.04</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">HRr.y</td>
-<td style="text-align: right;">0.48</td>
-<td style="text-align: right;">0.34</td>
-<td style="text-align: right;">0.76</td>
-<td style="text-align: right;">0.49</td>
-<td style="text-align: right;">0.38</td>
-<td style="text-align: right;">1.00</td>
-<td style="text-align: right;">-0.01</td>
-<td style="text-align: right;">-0.03</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">BABIP.x</td>
-<td style="text-align: right;">0.14</td>
-<td style="text-align: right;">0.02</td>
-<td style="text-align: right;">-0.03</td>
 <td style="text-align: right;">0.11</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">-0.01</td>
-<td style="text-align: right;">1.00</td>
 <td style="text-align: right;">0.46</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">BABIP.y</td>
-<td style="text-align: right;">0.12</td>
-<td style="text-align: right;">-0.01</td>
-<td style="text-align: right;">-0.05</td>
-<td style="text-align: right;">0.10</td>
-<td style="text-align: right;">0.04</td>
-<td style="text-align: right;">-0.03</td>
-<td style="text-align: right;">0.46</td>
-<td style="text-align: right;">1.00</td>
 </tr>
 </tbody>
 </table>
