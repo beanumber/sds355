@@ -1008,6 +1008,27 @@
     "text": "1.4 9/22: Multiple Cy Young Winners\n\n\n\n\n\n\nTipMy solution\n\n\n\n\n\n\n\nCode\nAwardsPlayers |&gt;\n  filter(str_detect(awardID, \"Cy Young\")) |&gt;\n  group_by(playerID) |&gt;\n  summarize(\n    n = n(),\n    years = paste(yearID, collapse = \", \")\n  ) |&gt;\n  filter(n &gt; 1) |&gt;\n  arrange(n)\n\n\n# A tibble: 22 × 3\n   playerID      n years     \n   &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;     \n 1 degroja01     2 2018, 2019\n 2 gibsobo01     2 1968, 1970\n 3 glavito02     2 1991, 1998\n 4 hallaro01     2 2003, 2010\n 5 klubeco01     2 2014, 2017\n 6 linceti01     2 2008, 2009\n 7 mclaide01     2 1968, 1969\n 8 perryga01     2 1972, 1978\n 9 saberbr01     2 1985, 1989\n10 santajo01     2 2004, 2006\n# ℹ 12 more rows\n\n\n\n\n\n\n\n\n\n\n\nTipMy solution using SQL\n\n\n\n\n\n\n\nCode\nSELECT playerID, COUNT(*) AS num_awards, GROUP_CONCAT(yearID) AS years\nFROM AwardsPlayers\nWHERE awardID = 'Cy Young Award'\nGROUP BY playerID\nHAVING COUNT(*) &gt; 1\nORDER BY COUNT(*);"
   },
   {
+    "objectID": "sporcle.html#mlb-win-leaders-by-team",
+    "href": "sporcle.html#mlb-win-leaders-by-team",
+    "title": "Sporcle",
+    "section": "1.5 9/24: MLB Win Leaders by Team",
+    "text": "1.5 9/24: MLB Win Leaders by Team\n\n\n\n\n\n\nTipMy solution\n\n\n\n\n\n\n\nCode\nPitching |&gt;\n  group_by(playerID, teamID) |&gt;\n  summarize(wins = sum(W)) |&gt;\n  group_by(teamID) |&gt;\n  group_split() |&gt;\n  map(arrange, desc(wins)) |&gt;\n  map(slice_head, n = 1) |&gt;\n  bind_rows() |&gt;\n  right_join(\n    Teams |&gt;\n      filter(yearID == 2023) |&gt;\n      select(teamID, name),\n    by = join_by(teamID)\n  ) |&gt;\n  arrange(name) |&gt;\n  knitr::kable()\n\n\n`summarise()` has grouped output by 'playerID'. You can override using the\n`.groups` argument.\n\n\n\n\n\nplayerID\nteamID\nwins\nname\n\n\n\n\njohnsra05\nARI\n118\nArizona Diamondbacks\n\n\nniekrph01\nATL\n266\nAtlanta Braves\n\n\npalmeji01\nBAL\n268\nBaltimore Orioles\n\n\nclemero02\nBOS\n192\nBoston Red Sox\n\n\nrootch01\nCHN\n201\nChicago Cubs\n\n\nlyonste01\nCHA\n260\nChicago White Sox\n\n\nrixeyep01\nCIN\n179\nCincinnati Reds\n\n\nfellebo01\nCLE\n266\nCleveland Guardians\n\n\ndelarjo01\nCOL\n86\nColorado Rockies\n\n\ndaussho01\nDET\n222\nDetroit Tigers\n\n\nniekrjo01\nHOU\n144\nHouston Astros\n\n\nsplitpa01\nKCA\n166\nKansas City Royals\n\n\nweaveje02\nLAA\n150\nLos Angeles Angels of Anaheim\n\n\nsuttodo01\nLAN\n233\nLos Angeles Dodgers\n\n\nalcansa01\nMIA\n41\nMiami Marlins\n\n\ngallayo01\nMIL\n89\nMilwaukee Brewers\n\n\nkaatji01\nMIN\n189\nMinnesota Twins\n\n\nseaveto01\nNYN\n198\nNew York Mets\n\n\nfordwh01\nNYA\n236\nNew York Yankees\n\n\nhunteca01\nOAK\n131\nOakland Athletics\n\n\ncarltst01\nPHI\n241\nPhiladelphia Phillies\n\n\ncoopewi01\nPIT\n202\nPittsburgh Pirates\n\n\nshower01\nSDN\n100\nSan Diego Padres\n\n\nmaricju01\nSFN\n238\nSan Francisco Giants\n\n\nhernafe02\nSEA\n169\nSeattle Mariners\n\n\ngibsobo01\nSLN\n251\nSt. Louis Cardinals\n\n\nshielja02\nTBA\n87\nTampa Bay Rays\n\n\nhoughch01\nTEX\n139\nTexas Rangers\n\n\nstiebda01\nTOR\n175\nToronto Blue Jays\n\n\nstrasst01\nWAS\n113\nWashington Nationals"
+  },
+  {
+    "objectID": "sporcle.html#mlb-most-wins-by-decade",
+    "href": "sporcle.html#mlb-most-wins-by-decade",
+    "title": "Sporcle",
+    "section": "1.6 9/24: MLB Most Wins by Decade",
+    "text": "1.6 9/24: MLB Most Wins by Decade\n\n\n\n\n\n\nTipMy solution"
+  },
+  {
+    "objectID": "sporcle.html#mlb-home-run-leaders-a-z",
+    "href": "sporcle.html#mlb-home-run-leaders-a-z",
+    "title": "Sporcle",
+    "section": "1.7 9/24: MLB Home Run Leaders (A-Z)",
+    "text": "1.7 9/24: MLB Home Run Leaders (A-Z)\n\n\n\n\n\n\nTipMy solution"
+  },
+  {
     "objectID": "sporcle.html#how-to-create-a-sql-duckdb-database-from-the-lahman-package",
     "href": "sporcle.html#how-to-create-a-sql-duckdb-database-from-the-lahman-package",
     "title": "Sporcle",
