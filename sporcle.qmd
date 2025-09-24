@@ -309,23 +309,28 @@ ORDER BY COUNT(*);
 :::
 
 
-<!--
 
 ## 9/24: [MLB Win Leaders by Team](https://www.sporcle.com/games/g/mlb_teamwinsleaders)
 
 ::: {.callout-tip title="My solution" collapse="true"}
 
 ```{r}
-#| eval: false
-#| include: false
 Pitching |>
   group_by(playerID, teamID) |>
   summarize(wins = sum(W)) |>
   group_by(teamID) |>
   group_split() |>
-  map(~arrange(.x, desc(wins))) |>
+  map(arrange, desc(wins)) |>
   map(slice_head, n = 1) |>
-  bind_rows()
+  bind_rows() |>
+  right_join(
+    Teams |>
+      filter(yearID == 2023) |>
+      select(teamID, name),
+    by = join_by(teamID)
+  ) |>
+  arrange(name) |>
+  knitr::kable()
 ```
 
 :::
@@ -345,7 +350,7 @@ Pitching |>
   ) |>
   group_by(decade) |>
   group_split() |>
-  map(~arrange(.x, desc(wins))) |>
+  map(arrange, desc(wins)) |>
   map(slice_head, n = 1) |>
   bind_rows()
 ```
@@ -367,12 +372,12 @@ Batting |>
   ) |>
   group_by(Letter) |>
   group_split() |>
-  map(~arrange(.x, desc(HomeRuns))) |>
+  map(arrange, desc(HomeRuns)) |>
   map(head, 1) |>
   bind_rows()
 ```
 
--->
+:::
 
 # Appendix
 
