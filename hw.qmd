@@ -340,3 +340,14 @@ erm2016 |>
 1. [*ABDWR*, Exercise 5.11.3](https://beanumber.github.io/abdwr3e/05-runsexpectancy.html#exercises)
 1. [*ABDWR*, Exercise 5.11.4](https://beanumber.github.io/abdwr3e/05-runsexpectancy.html#exercises)
 1. [*ABDWR*, Exercise 5.11.5](https://beanumber.github.io/abdwr3e/05-runsexpectancy.html#exercises)
+
+## HW 4: Due 10/3
+
+1. [*ABDWR*, Exercise 13.5.2](https://beanumber.github.io/abdwr3e/13-homeruns.html#exercises)
+1. [*ABDWR*, Exercise 13.5.3](https://beanumber.github.io/abdwr3e/13-homeruns.html#exercises)
+
+::: {.callout-tip}
+Use the `glm()` function, or ask a `#question` on Slack about generalized linear models. 
+:::
+
+3. Use your creativity to create **one data graphic** like the ones shown in [Exploring Statcast](slides/07_statcast.qmd). Try to make this data graphic as compelling as possible. 

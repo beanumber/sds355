@@ -1,0 +1,132 @@
+---
+title: "Statcast"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "2025-09-29"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+# Obtaining Statcast data
+
+## Statcast
+
+![](https://i.ytimg.com/vi/4Bnnek1oaN4/maxresdefault.jpg)
+
+## 1. via `baseballr`
+
+```{r}
+#| eval: false
+#| echo: fenced
+library(baseballr)
+sc <- statcast_search_batters("2025-09-26", "2025-09-26")
+write_rds(sc, here::here("data/sc20250926.rds"))
+```
+
+. . .
+
+```{r}
+#| eval: true
+#| echo: fenced
+library(tidyverse)
+sc <- read_rds(here::here("data/sc20250926.rds"))
+```
+
+## Other ways
+
+::: {.incremental}
+
+- Via [**sabRmetrics**](https://saberpowers.github.io/sabRmetrics/)
+- From the [CSAS 2025 data challenge](https://statds.org/events/csas2025/challenge.html)
+
+:::
+
+## What's in there? 
+
+```{r}
+dim(sc)
+sc |> names()
+```
+
+
+## Strike zone
+
+```{r}
+sc <- sc |>
+  mutate(
+    is_called_strike = type == "S",
+    within_zbounds = plate_z <= sz_top & plate_z >= sz_bot,
+    within_xbounds = abs(plate_x <= 8.5/12),
+    is_within_strike_zone = within_zbounds & within_xbounds
+  )
+```
+
+. . .
+
+```{r}
+kzone_plot <- ggplot(sc, aes(x = plate_x, y = plate_z, color = is_called_strike)) +
+  geom_rect(
+    aes(
+      xmin = -8.5/12, xmax = 8.5/12, 
+      ymin = mean(sz_bot, na.rm = TRUE), ymax = mean(sz_top, na.rm = TRUE)
+    ), 
+    color = "grey", alpha = 0.7
+  ) +
+  geom_point(alpha = 0.3) +
+  facet_wrap(vars(stand)) +
+  scale_color_brewer(palette = "Set2")
+```
+
+## Strike zone plot
+
+```{r}
+kzone_plot
+```
+
+
+## Release point
+
+```{r}
+ggplot(sc, aes(x = release_pos_x, y = release_pos_z, color = pitch_type)) +
+  geom_point(alpha = 0.5)
+```
+
+## Separate by pitcher
+
+```{r}
+sc |>
+  filter(home_team == "BOS") |>
+  ggplot(aes(x = release_pos_x, y = release_pos_z, color = pitch_type)) +
+  geom_point(alpha = 0.5) +
+  facet_wrap(vars(pitcher))
+```
+
+## Spin rate and velocity
+
+```{r}
+ggplot(sc, aes(x = release_speed, y = release_spin_rate, color = pitch_type)) +
+  geom_point(alpha = 0.5)
+```
+
+## Spin rate and break
+
+```{r}
+ggplot(sc, aes(x = release_spin_rate, y = api_break_z_with_gravity, color = pitch_type)) +
+  geom_point(alpha = 0.5)
+```
+
+## Launch angle and launch speed
+
+```{r}
+ggplot(sc, aes(y = launch_angle, x = launch_speed, color = estimated_ba_using_speedangle)) +
+  geom_point(alpha = 0.5)
+```
+

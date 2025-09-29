@@ -171,10 +171,9 @@ quiz <- function() {
   Bio: Emma Strawbridge (they/them) is a first year PhD student in Statistics at UMass Amherst. They graduated from Amherst college in 2025 with a Statistics and Math double major, and wrote an honors thesis in the statistics department titled "Capturing Baseball Pitch Patterns with Hidden Markov Models”. They have worked for the Chicago Blackhawks as a data science intern during the summer of 2024 and hope to work in sports analytics in the future. Emma is a fan of ice hockey, baseball, football, and occasionally cycling and tennis when the season is right. Go birds. 
   
 :::
-  
-- Launch angle
-- Spin rate
-- [American Soccer Insights Summit](https://americansoccerinsights.com/call-for-proposals/)
+
+- NESSIS recap  
+- `r slides()` [Exploring Statcast data](slides/07_statcast.qmd)
 
 ::: {.callout-note} 
 ## Homework
@@ -187,11 +186,13 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
+- [American Soccer Insights Summit](https://americansoccerinsights.com/call-for-proposals/)
 - Win Probability
 
 ::: {.callout-note} 
 ## Homework
 
+- **HW 3 due Friday by 5 pm**
 - Read @kubatko2007starting
 
 :::
