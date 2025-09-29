@@ -192,7 +192,7 @@ quiz <- function() {
 ::: {.callout-note} 
 ## Homework
 
-- **HW 3 due Friday by 5 pm**
+- **HW 4 due Friday by 5 pm**
 - Read @kubatko2007starting
 
 :::

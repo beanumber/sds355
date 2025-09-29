@@ -37,6 +37,14 @@ You are free to present any paper on any topic in sports analytics, provided tha
 - it's not one of the other papers we are reading for this class
 - it is approved by me
 
+Good places to look for papers:
+
+- [*Journal of Quantitative Analysis in Sports*](https://www.degruyterbrill.com/journal/key/jqas/html)
+- [*Journal of Sports Analytics*](https://journals.sagepub.com/home/san)
+- [Google Scholar](https://scholar.google.com/)
+- See relevant sections and references in:  
+  @baumer2023big
+
 The following is a non-exhaustive list of high-quality papers which I think would be appropriate. 
 
 ## Baseball

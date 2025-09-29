@@ -1,5 +1,5 @@
 ---
-title: "Statcast"
+title: "Exporing Statcast data"
 subtitle: "SDS 355"
 author: "Prof. Baumer" 
 date: "2025-09-29"
@@ -46,6 +46,7 @@ sc <- read_rds(here::here("data/sc20250926.rds"))
 
 - Via [**sabRmetrics**](https://saberpowers.github.io/sabRmetrics/)
 - From the [CSAS 2025 data challenge](https://statds.org/events/csas2025/challenge.html)
+- Via [Baseball Savant](https://baseballsavant.mlb.com/)
 
 :::
 
