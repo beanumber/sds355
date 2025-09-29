@@ -41,6 +41,7 @@ Good places to look for papers:
 
 - [*Journal of Quantitative Analysis in Sports*](https://www.degruyterbrill.com/journal/key/jqas/html)
 - [*Journal of Sports Analytics*](https://journals.sagepub.com/home/san)
+- [Previous NESSISs](https://nessis.org/nessis23.html)
 - [Google Scholar](https://scholar.google.com/)
 - See relevant sections and references in:  
   @baumer2023big
