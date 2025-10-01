@@ -1,0 +1,173 @@
+---
+title: "Win Probability"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "2025-10-01"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+# Win Probability
+
+## Compute the score for each half inning
+
+```{r}
+library(tidyverse)
+library(abdwr3edata)
+half_innings <- retro2016 |>
+  filter(bat_home_id == 1, inn_ct <= 10) |>
+  mutate(home_lead = home_score_ct - away_score_ct) |>
+  group_by(game_id, inn_ct) |>
+  summarize(
+    home_lead = last(home_lead)
+  )
+  
+half_innings |>
+  group_by(inn_ct, home_lead) |>
+  summarize(
+    n = n(),
+  )
+```
+
+## Determine the winners
+
+```{r}
+winners <- retro2016 |>
+  group_by(game_id) |>
+  summarize(
+    final_score = max(home_score_ct) - max(away_score_ct)
+  ) |>
+  mutate(is_home_win = final_score >= 0)
+
+winners |> 
+  group_by(is_home_win) |> 
+  count()
+```
+
+## Add the winners to the half-innings
+
+```{r}
+win_prob <- half_innings |>
+  left_join(winners, by = join_by(game_id))
+```
+
+## Fit the logistic regression models for each inning
+
+```{r}
+win_prob_grp <- win_prob |>
+  group_by(inn_ct)
+win_prob_mods <- win_prob_grp |>
+  group_split() |>
+  map(~glm(is_home_win ~ home_lead, family = binomial, data = .x))
+win_prob_mods |>
+  map(coef) |>
+  bind_rows()
+```
+
+## Make a prediction
+
+```{r}
+predict(win_prob_mods[[4]], newdata = data.frame(home_lead = 2), type = "response")
+```
+
+## Flesh out the grid of expected win probabilities
+
+```{r}
+grid <- data.frame(home_lead = -10:10)
+win_prob_grid <- win_prob_mods |>
+  map(~predict(.x, newdata = grid, type = "response")) |>
+  bind_rows() |>
+  setNames(grid$home_lead) |>
+  bind_cols(group_keys(win_prob_grp))
+
+win_prob_grid |>
+  knitr::kable(digits = 3)
+```
+
+## Visualize win probabilities
+
+```{r}
+win_prob_long <- win_prob_grid |>
+  pivot_longer(cols = -inn_ct, names_to = "home_lead", values_to = "p_hat") |>
+  mutate(home_lead = parse_number(home_lead))
+ggplot(win_prob_long, aes(x = inn_ct, y = home_lead, fill = p_hat)) +
+  geom_tile() +
+  scale_fill_distiller("Greens")
+```
+
+## Write function to compute fitted values
+
+```{r}
+predict_wp_one <- function(inn_ct, exp_home_lead) {
+  predict(win_prob_mods[[inn_ct]], newdata = data.frame(home_lead = exp_home_lead), type = "response")
+}
+
+predict_wp <- function(inn_ct, exp_home_lead) {
+  map2_dbl(inn_ct, exp_home_lead, predict_wp_one)
+}
+
+predict_wp(1:4, 2:5)
+```
+
+## Bring in the Expected Run Matrix
+
+::: footer
+<https://www.baseball-reference.com/boxes/ANA/ANA201604070.shtml>
+:::
+
+```{r}
+erm2016 <- read_rds(here::here("data/erm2016.rda"))
+
+wpa <- retro2016 |>
+  filter(game_id == "ANA201604070") |>
+  retrosheet_add_states() |>
+  mutate(home_lead = home_score_ct - away_score_ct) |>
+  left_join(erm2016, by = join_by(bases, outs_ct)) |>
+  mutate(
+    exp_home_lead = home_lead + ifelse(bat_home_id == 1, exp_run_value, -exp_run_value),
+    p_hat = predict_wp(inn_ct, home_lead),
+    p_hat_exp = predict_wp(inn_ct, exp_home_lead)
+  )
+```
+
+## Spot check
+
+```{r}
+wpa |>
+  select(event_id, bat_home_id, inn_ct, bases, outs_ct, bat_id, home_lead, exp_run_value, exp_home_lead, p_hat, p_hat_exp)
+```
+
+## Win probability plot
+
+```{r}
+ggplot(wpa, aes(x = event_id, y = p_hat)) +
+  geom_hline(yintercept = 0.5, color = "red") +
+  geom_line() +
+  geom_line(aes(y = p_hat_exp), color = "blue")
+```
+
+## Win probability added
+
+```{r}
+wpa |>
+  mutate(
+    next_p_hat = lead(p_hat, default = 1),
+    next_p_hat_exp = lead(p_hat_exp, default = 1)
+  ) |> 
+#  select(event_id, inn_ct, bases, outs_ct, bat_id, home_lead, exp_run_value, exp_home_lead, p_hat, next_p_hat) |> view()
+  group_by(bat_id) |>
+  summarize(
+    wpa = sum(next_p_hat - p_hat, na.rm = TRUE),
+    wpa_exp = sum(next_p_hat_exp - p_hat_exp, na.rm = TRUE)
+  ) |>
+  arrange(desc(wpa))
+```
+
