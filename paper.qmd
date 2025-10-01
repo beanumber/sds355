@@ -2,7 +2,21 @@
 title: "Research Paper"
 ---
 
-## Writing for data science
+## Assignment
+
+You will conduct original research on a topic of your choosing in sports analytics. 
+The final deliverable will be an academic paper written as a **[Quarto Manuscript](https://quarto.org/docs/manuscripts/)**. 
+The use of GitHub to store and host your paper is strongly encouraged. 
+
+Your paper is **due by 5 pm on December 17**.
+
+
+
+### Audience
+
+For your convenience, the format should conform to the [Undergraduate Research Project Competition (USRESP)](https://www.causeweb.org/usproc/usresp) guidelines. If possible, you are strongly encouraged to submit your paper to the competition, but that decision will not affect your grade in this class. The paper should be 12--15 pages long, plus references, and an appendix (of arbitrary length) in which you can show more graphics, tables, etc. 
+
+### Writing for data science
 
 Please follow the following guidelines for *all* drafts of your final paper:
 
@@ -15,14 +29,6 @@ Please follow the following guidelines for *all* drafts of your final paper:
 - Put any pieces of code in backticks (`). That includes names of packages, functions, variable names, and even certain strings. For bits of actual code, use a chunk. Note that Quarto supports chunks in many languages, including [Python](https://quarto.org/docs/computations/python.html), [SQL](https://bookdown.org/yihui/rmarkdown/language-engines.html#sql), and [bash](https://bookdown.org/yihui/rmarkdown/language-engines.html#shell-scripts).
 - Limit your [use of adverbs](https://twitter.com/ClintSmithIII/status/1290772304801259521?ref_src=twsrc%5Etfw).
 
-## Audience
-
-Your final deliverable will be to write up your project as an academic paper. For your convenience, the format should conform to the [Undergraduate Research Project Competition (USRESP)](https://www.causeweb.org/usproc/usresp) guidelines. If possible, you are strongly encouraged to submit your paper to the competition, but that decision will not affect your grade in this class. The paper should be 12--15 pages long, plus references, and an appendix (of arbitrary length) in which you can show more graphics, tables, etc. 
-
-- Use your GitHub repository to write the paper. Put the paper contents into a subdirectory called `quarto-manuscript`.
-- Use GitHub issues to delegate certain tasks to certain people, and to keep track of your progress.
-- Use the [Manuscripts](https://quarto.org/docs/manuscripts/) feature to write the paper in Quarto.
-- One submission per group.
 
 ### The structure of a scientific paper
 
@@ -53,15 +59,6 @@ General feedback:
 - Don't be afraid to get technical -- this is a scientific paper. However, if you are going to invoke technical terms or concepts, you have to either explain them or give a citation to a reference that does. 
 - Focus on problems and solutions. What were the problems that your client had? How did you solve them? **Don't just narrate about what you did** -- connect the work that you did to the problems that existed before you started. If you find this hard to do, perhaps what you are writing about doesn't need to be in the paper. 
 - Revise, then revise again. 
-
-
-### Ethical statement
-
-Your final paper **must** include an ethical statement. 
-The ethical statement may be relegated to the appendix at your discretion. 
-
-- Drawing on what you have learned about data science ethics in this class, discuss **any** ethical considerations in your project. For some projects, this statement could be quite short (one paragraph may suffice). For other projects, more detail may be needed (no more than 2 pages). 
-- Be expansive and creative in your thinking about **possible** ethical considerations. One way to do this assignment poorly would be to write a short statement asserting that there are no ethical considerations, only to have me think of several fairly obvious ones. 
 
 
 ## Drafts and rubrics

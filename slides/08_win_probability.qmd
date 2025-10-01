@@ -17,24 +17,48 @@ execute:
 
 # Win Probability
 
+## [Super Bowl LI](https://en.wikipedia.org/wiki/Super_Bowl_LI)
+
+![](https://statsbylopez.com/wp-content/uploads/2017/03/winprob.png)
+
+## Pipping & Wyner (2025)
+
+- *A Paradox of Blown Leads: Rethinking Win Probability in Football*
+
+> The most paradoxical and counterintuitive result of our study is that high win probabilities are not uncommon among teams that ultimately lose. In both simulated and real NFL games between evenly matched opponents, the losing team reached a win probability of at least 66–67% in half of all cases. 
+
+
+::: footer
+<https://wsb.wharton.upenn.edu/a-paradox-of-blown-leads-rethinking-win-probability-in-football/>
+:::
+
+## Pipping & Wyner (2025)
+
+![](https://wsb.wharton.upenn.edu/wp-content/uploads/2025/07/threshold-sim-900x750.png)
+
+
+# Computing Win Probability
+
 ## Compute the score for each half inning
 
 ```{r}
+#| code-line-numbers: "|5"
 library(tidyverse)
 library(abdwr3edata)
+
 half_innings <- retro2016 |>
   filter(bat_home_id == 1, inn_ct <= 10) |>
   mutate(home_lead = home_score_ct - away_score_ct) |>
   group_by(game_id, inn_ct) |>
-  summarize(
-    home_lead = last(home_lead)
-  )
-  
+  summarize(home_lead = last(home_lead))
+```
+
+## Half-innings
+
+```{r}
 half_innings |>
   group_by(inn_ct, home_lead) |>
-  summarize(
-    n = n(),
-  )
+  count()
 ```
 
 ## Determine the winners
@@ -42,9 +66,7 @@ half_innings |>
 ```{r}
 winners <- retro2016 |>
   group_by(game_id) |>
-  summarize(
-    final_score = max(home_score_ct) - max(away_score_ct)
-  ) |>
+  summarize(final_score = max(home_score_ct) - max(away_score_ct)) |>
   mutate(is_home_win = final_score >= 0)
 
 winners |> 
@@ -57,16 +79,21 @@ winners |>
 ```{r}
 win_prob <- half_innings |>
   left_join(winners, by = join_by(game_id))
+
+win_prob
 ```
 
 ## Fit the logistic regression models for each inning
 
 ```{r}
+#| code-line-numbers: "|6|9"
 win_prob_grp <- win_prob |>
   group_by(inn_ct)
+
 win_prob_mods <- win_prob_grp |>
   group_split() |>
   map(~glm(is_home_win ~ home_lead, family = binomial, data = .x))
+
 win_prob_mods |>
   map(coef) |>
   bind_rows()
@@ -74,22 +101,41 @@ win_prob_mods |>
 
 ## Make a prediction
 
+- For a 2-run lead in the 4th inning:
+
 ```{r}
-predict(win_prob_mods[[4]], newdata = data.frame(home_lead = 2), type = "response")
+win_prob_mods[[4]] |>
+  predict(newdata = data.frame(home_lead = 2), type = "response")
 ```
+
+. . .
+
+- For a 0-run lead in the 1st inning:
+
+```{r}
+win_prob_mods[[1]] |>
+  predict(newdata = data.frame(home_lead = 0), type = "response")
+```
+
 
 ## Flesh out the grid of expected win probabilities
 
 ```{r}
+#| code-line-numbers: "|1|4|6,7"
 grid <- data.frame(home_lead = -10:10)
+
 win_prob_grid <- win_prob_mods |>
   map(~predict(.x, newdata = grid, type = "response")) |>
   bind_rows() |>
   setNames(grid$home_lead) |>
   bind_cols(group_keys(win_prob_grp))
+```
 
+## View the grid {.smaller}
+
+```{r}
 win_prob_grid |>
-  knitr::kable(digits = 3)
+  knitr::kable(digits = 2)
 ```
 
 ## Visualize win probabilities
@@ -100,21 +146,25 @@ win_prob_long <- win_prob_grid |>
   mutate(home_lead = parse_number(home_lead))
 ggplot(win_prob_long, aes(x = inn_ct, y = home_lead, fill = p_hat)) +
   geom_tile() +
-  scale_fill_distiller("Greens")
+  scale_fill_viridis_c()
 ```
 
 ## Write function to compute fitted values
 
 ```{r}
 predict_wp_one <- function(inn_ct, exp_home_lead) {
-  predict(win_prob_mods[[inn_ct]], newdata = data.frame(home_lead = exp_home_lead), type = "response")
+  win_prob_mods[[inn_ct]] |>
+    predict(
+      newdata = data.frame(home_lead = exp_home_lead), 
+      type = "response"
+    )
 }
 
 predict_wp <- function(inn_ct, exp_home_lead) {
   map2_dbl(inn_ct, exp_home_lead, predict_wp_one)
 }
 
-predict_wp(1:4, 2:5)
+predict_wp(1:4, -2:1)
 ```
 
 ## Bring in the Expected Run Matrix
@@ -124,6 +174,7 @@ predict_wp(1:4, 2:5)
 :::
 
 ```{r}
+#| code-line-numbers: "|4|7|9|10,11"
 erm2016 <- read_rds(here::here("data/erm2016.rda"))
 
 wpa <- retro2016 |>
@@ -138,7 +189,7 @@ wpa <- retro2016 |>
   )
 ```
 
-## Spot check
+## Spot check {.smaller}
 
 ```{r}
 wpa |>
@@ -153,6 +204,10 @@ ggplot(wpa, aes(x = event_id, y = p_hat)) +
   geom_line() +
   geom_line(aes(y = p_hat_exp), color = "blue")
 ```
+
+## What happened? 
+
+{{< video https://www.youtube.com/embed/S7Sc3MoGAUE width="1000" aspect-ratio="16x9" >}}
 
 ## Win probability added
 

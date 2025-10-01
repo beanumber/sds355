@@ -131,7 +131,6 @@ quiz <- function() {
 `r echo_date(emoji::emoji("baseball"))`
 
 - `r slides()` [Defense Independent Pitching Statistics (DIPS)](slides/06_dips.qmd)
-- `r quiz()` [Sporcle quiz 5](sporcle.qmd)
 
 ::: {.callout-note} 
 ## Homework
@@ -187,7 +186,8 @@ quiz <- function() {
 `r echo_date()`
 
 - [American Soccer Insights Summit](https://americansoccerinsights.com/call-for-proposals/)
-- Win Probability
+- `r slides()` [Win Probability](slides/08_win_probability.qmd)
+- `r quiz()` [Sporcle quiz 5](sporcle.qmd)
 
 ::: {.callout-note} 
 ## Homework
