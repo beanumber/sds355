@@ -1,0 +1,251 @@
+---
+title: "Four Factors"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "2025-10-05"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+# Expected Winning Percentage
+
+## Write a scraping function
+
+```{r}
+library(tidyverse)
+library(rvest)
+
+scrape_standings <- function(year = 2025) {
+  url <- paste0("https://www.basketball-reference.com/leagues/NBA_", year, ".html")
+  x <- url |>
+    read_html() |>
+    html_table()
+  
+  y <- x[1:2] |>
+    map(janitor::clean_names) |>
+    map(rename_with, ~str_remove(.x, "eastern_|western_"), contains("conference")) |>
+    list_rbind()
+  
+  y |>
+    mutate(
+      p_ratio = ps_g / pa_g,
+      wpct = w_l_percent,
+      logWratio = log(w / l), 
+      logPratio = log(ps_g / pa_g)
+    )
+}
+```
+
+## Scrape the data
+
+```{r}
+#| eval: false
+#| echo: fenced
+nba <- 2018:2025 |>
+  map(scrape_standings) |>
+  list_rbind()
+
+write_rds(nba, here::here("data/nba.rds"))
+```
+
+```{r}
+#| echo: fenced
+nba <- read_rds(here::here("data/nba.rds"))
+```
+
+## Inspect the data
+
+```{r}
+nba
+```
+
+
+## Visualize the relationship
+
+```{r}
+ggplot(nba, aes(x = p_ratio, y = wpct)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+## Fit the model!
+
+```{r}
+lm(logWratio ~ 0 + logPratio, data = nba) |>
+  summary()
+```
+
+# The Four Factors
+
+## Dean Oliver
+
+:::: {.columns}
+::: {.column width="50%"}
+
+![](https://espnpressroom.com/us/files/2024/05/Dean-Oliver-Image-1.png)
+
+:::
+::: {.column width="50%"}
+
+![](https://substackcdn.com/image/fetch/$s_!Mmtd!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c64972f-dd22-4833-bd63-9fc3f09f27d7_1532x2048.jpeg)
+
+:::
+::::
+
+## NBA history
+
+```{r}
+#| eval: false
+#| include: false
+library(tidyverse)
+library(hoopR)
+
+team_id <- nba_teams() |>
+  pull(team_id)
+```
+
+```{r}
+#| include: false
+#| eval: false
+standings2025 <- nba_leaguestandingsv3(season = 2025)
+team_id <- standings2025 |>
+  pluck(1) |>
+  pull(TeamID)
+```
+
+. . .
+
+```{r}
+#| eval: false
+library(hoopR)
+celtics <- nba_teamyearbyyearstats(team_id = '1610612738')[[1]]
+
+nba_history <- team_id |>
+  map(~nba_teamyearbyyearstats(team_id = .x)) |>
+  map(pluck, 1) |>
+  list_rbind()
+```
+
+```{r}
+#| eval: false
+write_rds(nba_history, here::here("data/nba_history.rds"))
+```
+
+## Clean the data
+
+```{r}
+nba_history <- read_rds(here::here("data/nba_history.rds"))
+nba_history <- nba_history |>
+  mutate(
+    year = parse_number(YEAR) + 1,
+    wpct = parse_number(WIN_PCT),
+    poss = parse_number(FGA) + 0.44 * parse_number(FTA) - parse_number(OREB) + parse_number(TOV),
+    pace = 5 * poss / (parse_number(GP) * 48 * 5),
+    efg_pct = (parse_number(FGM) + 0.5 * parse_number(FG3M)) / parse_number(FGA),
+    to_ratio = parse_number(TOV) / poss,
+    reb_share = parse_number(OREB) / (parse_number(OREB) + parse_number(DREB)),
+    ft_per_fga = parse_number(FTM) / parse_number(FGA)
+  )
+```
+
+## Effective field goal percentage
+
+```{r}
+nba_history |>
+  filter(efg_pct < Inf) |>
+  ggplot(aes(x = year, y = efg_pct)) +
+  geom_point() +
+  geom_smooth()
+```
+
+## The Four Factors, isolated
+
+```{r}
+ff <- nba_history |>
+  filter(efg_pct < Inf) |>
+  select(wpct, efg_pct, to_ratio, reb_share, ft_per_fga)
+
+cor(ff)
+```
+
+## The Four Factors, visualized
+
+```{r}
+ff |>
+  pivot_longer(cols = -c(wpct), values_to = "value", names_to = "statistic") |>
+  ggplot(aes(x = value, y = wpct)) +
+  geom_point() +
+  geom_smooth() +
+  facet_wrap(vars(statistic))
+```
+
+
+# Play-by-play data
+
+```{r}
+#| eval: false
+nba2025 <- hoopR::load_nba_pbp(seasons = 2025)
+write_rds(nba2025, here::here("data-large/nba2025.rds"))
+
+celtics2025 <- nba2025 |>
+  filter(home_team_id == 2)
+
+write_rds(celtics2025, here::here("data/celtics2025.rds"))
+```
+
+```{r}
+celtics2025 <- read_rds(here::here("data/celtics2025.rds"))
+celtics2025 |>
+  group_by(season, home_team_name) |>
+  summarize(
+    num_plays = n(),
+    g = n_distinct(game_id)
+  )
+```
+
+## Shot chart
+
+```{r}
+shots <- celtics2025 |>
+  filter(shooting_play) |>
+  ggplot(aes(x = coordinate_x, y = coordinate_y)) +
+  geom_jitter(width = 0.25, alpha = 0.5)
+shots
+```
+
+## Halfcourt
+
+```{r}
+shots + aes(x = abs(coordinate_x), color = factor(score_value)) +
+  scale_color_viridis_d()
+```
+
+## Hex bin plot
+
+```{r}
+shots + aes(x = abs(coordinate_x), z = score_value) +
+  stat_summary_hex(
+    fun = mean, mapping = aes(fill = after_stat(value))
+  ) +
+  scale_fill_viridis_c()
+```
+
+
+## `sportyR`
+
+```{r}
+sportyR::geom_basketball("nba", xlims = c(0, 50)) +
+  geom_jitter(data = celtics2025, aes(x = coordinate_x, y = coordinate_y), width = 0.25, alpha = 0.5)
+```
+
+## `wehoop`
+
+<https://wehoop.sportsdataverse.org/>

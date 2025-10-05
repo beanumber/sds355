@@ -57,6 +57,7 @@ The following is a **non-exhaustive** list of high-quality papers which I think 
 1. @lindsey1963investigation
 1. @Albert2015
 1. @elmore2022bang
+1. @baumer2015openwar
 
 ## Basketball
 

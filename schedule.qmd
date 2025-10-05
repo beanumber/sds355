@@ -187,7 +187,6 @@ quiz <- function() {
 
 - [American Soccer Insights Summit](https://americansoccerinsights.com/call-for-proposals/)
 - `r slides()` [Win Probability](slides/08_win_probability.qmd)
-- `r quiz()` [Sporcle quiz 5](sporcle.qmd)
 
 ::: {.callout-note} 
 ## Homework
@@ -202,7 +201,8 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date(emoji::emoji("basketball"))`
 
-- Four factors
+- `r quiz()` [Sporcle quiz 5](sporcle.qmd)
+- `r slides()` [Four factors](slides/09_four_factors.qmd)
 
 ::: {.callout-note} 
 ## Homework
