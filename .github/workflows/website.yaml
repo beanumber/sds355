@@ -35,8 +35,11 @@ jobs:
             any::emoji
             any::ggrepel
             any::here
+            any::hoopR
             any::Lahman
             any::retrosheet
+            any::rvest
+            any::sportyR
             any::teamcolors
             any::usethis
 
