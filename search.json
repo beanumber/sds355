@@ -46,7 +46,7 @@
     "href": "slides/09_four_factors.html#write-a-scraping-function",
     "title": "Four Factors",
     "section": "Write a scraping function",
-    "text": "Write a scraping function\n\nlibrary(tidyverse)\nlibrary(rvest)\n\nscrape_standings &lt;- function(year = 2025) {\n  url &lt;- paste0(\"https://www.basketball-reference.com/leagues/NBA_\", year, \".html\")\n  x &lt;- url |&gt;\n    read_html() |&gt;\n    html_table()\n  \n  y &lt;- x[1:2] |&gt;\n    map(janitor::clean_names) |&gt;\n    map(rename_with, ~str_remove(.x, \"eastern_|western_\"), contains(\"conference\")) |&gt;\n    list_rbind()\n  \n  y |&gt;\n    mutate(\n      p_ratio = ps_g / pa_g,\n      wpct = w_l_percent,\n      logWratio = log(w / l), \n      logPratio = log(ps_g / pa_g)\n    )\n}"
+    "text": "Write a scraping function\n\nlibrary(rvest)\n\nscrape_standings &lt;- function(year = 2025) {\n  url &lt;- paste0(\"https://www.basketball-reference.com/leagues/NBA_\", year, \".html\")\n  x &lt;- url |&gt;\n    read_html() |&gt;\n    html_table()\n  \n  x[1:2] |&gt;\n    map(janitor::clean_names) |&gt;\n    map(rename_with, ~str_remove(.x, \"eastern_|western_\"), contains(\"conference\")) |&gt;\n    list_rbind() |&gt;\n    mutate(\n      p_ratio = ps_g / pa_g,\n      wpct = w_l_percent,\n      logWratio = log(w / l), \n      logPratio = log(ps_g / pa_g)\n    )\n}"
   },
   {
     "objectID": "slides/09_four_factors.html#scrape-the-data",
@@ -77,18 +77,32 @@
     "text": "Fit the model!\n\nlm(logWratio ~ 0 + logPratio, data = nba) |&gt;\n  summary()\n\n\nCall:\nlm(formula = logWratio ~ 0 + logPratio, data = nba)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-0.48391 -0.10326  0.01291  0.09221  0.50469 \n\nCoefficients:\n          Estimate Std. Error t value Pr(&gt;|t|)    \nlogPratio  13.7839     0.2496   55.22   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.1695 on 239 degrees of freedom\nMultiple R-squared:  0.9273,    Adjusted R-squared:  0.927 \nF-statistic:  3050 on 1 and 239 DF,  p-value: &lt; 2.2e-16"
   },
   {
-    "objectID": "slides/09_four_factors.html#dean-oliver",
-    "href": "slides/09_four_factors.html#dean-oliver",
+    "objectID": "slides/09_four_factors.html#dean-oliver-basketball-on-paper",
+    "href": "slides/09_four_factors.html#dean-oliver-basketball-on-paper",
     "title": "Four Factors",
-    "section": "Dean Oliver",
-    "text": "Dean Oliver"
+    "section": "Dean Oliver, Basketball on Paper",
+    "text": "Dean Oliver, Basketball on Paper\n\nhttps://en.wikipedia.org/wiki/Dean_Oliver_(statistician)"
+  },
+  {
+    "objectID": "slides/09_four_factors.html#possessions-and-pace",
+    "href": "slides/09_four_factors.html#possessions-and-pace",
+    "title": "Four Factors",
+    "section": "Possessions and pace",
+    "text": "Possessions and pace\n\nPossessions are the fundemental unit of time\n\n\\[\n  POSS = FGA + 0.44 \\cdot FTA - OREB + TOV\n\\]\n\n\\(ORtg = PTS_{T} / POSS_{T}\\)\n\\(DRtg = PTS_{O} / POSS_{O}\\)"
+  },
+  {
+    "objectID": "slides/09_four_factors.html#the-four-factors-1",
+    "href": "slides/09_four_factors.html#the-four-factors-1",
+    "title": "Four Factors",
+    "section": "The Four Factors",
+    "text": "The Four Factors\n\nEffective Field Goal Percentage\nTurnover Rate\nOffensive Rebound Percentage\nFree Throw Conversion Rate"
   },
   {
     "objectID": "slides/09_four_factors.html#nba-history",
     "href": "slides/09_four_factors.html#nba-history",
     "title": "Four Factors",
     "section": "NBA history",
-    "text": "NBA history\n\n\nlibrary(hoopR)\nceltics &lt;- nba_teamyearbyyearstats(team_id = '1610612738')[[1]]\n\nnba_history &lt;- team_id |&gt;\n  map(~nba_teamyearbyyearstats(team_id = .x)) |&gt;\n  map(pluck, 1) |&gt;\n  list_rbind()\n\n\nwrite_rds(nba_history, here::here(\"data/nba_history.rds\"))"
+    "text": "NBA history\n\nlibrary(tidyverse)\nlibrary(hoopR)\n\nteam_id &lt;- nba_teams() |&gt;\n  pull(team_id)\n\n\n\nlibrary(hoopR)\nceltics &lt;- nba_teamyearbyyearstats(team_id = '1610612738')[[1]]\n\nnba_history &lt;- team_id |&gt;\n  map(~nba_teamyearbyyearstats(team_id = .x)) |&gt;\n  map(pluck, 1) |&gt;\n  list_rbind()\n\n\nwrite_rds(nba_history, here::here(\"data/nba_history.rds\"))"
   },
   {
     "objectID": "slides/09_four_factors.html#clean-the-data",
@@ -102,14 +116,35 @@
     "href": "slides/09_four_factors.html#effective-field-goal-percentage",
     "title": "Four Factors",
     "section": "Effective field goal percentage",
-    "text": "Effective field goal percentage\n\nnba_history |&gt;\n  filter(efg_pct &lt; Inf) |&gt;\n  ggplot(aes(x = year, y = efg_pct)) +\n  geom_point() +\n  geom_smooth()"
+    "text": "Effective field goal percentage\n\nwpct_plot &lt;- nba_history |&gt;\n  filter(efg_pct &lt; Inf) |&gt;\n  ggplot(aes(x = year, y = efg_pct)) +\n  geom_point() +\n  geom_smooth()\nwpct_plot"
   },
   {
-    "objectID": "slides/09_four_factors.html#the-four-factors-isolated",
-    "href": "slides/09_four_factors.html#the-four-factors-isolated",
+    "objectID": "slides/09_four_factors.html#turnover-ratio",
+    "href": "slides/09_four_factors.html#turnover-ratio",
     "title": "Four Factors",
-    "section": "The Four Factors, isolated",
-    "text": "The Four Factors, isolated\n\nff &lt;- nba_history |&gt;\n  filter(efg_pct &lt; Inf) |&gt;\n  select(wpct, efg_pct, to_ratio, reb_share, ft_per_fga)\n\ncor(ff)\n\n                 wpct    efg_pct   to_ratio  reb_share ft_per_fga\nwpct        1.0000000  0.4611902 -0.2467902 -0.1873886  0.1969880\nefg_pct     0.4611902  1.0000000 -0.4898974 -0.6204240 -0.2578221\nto_ratio   -0.2467902 -0.4898974  1.0000000  0.5701978  0.4738253\nreb_share  -0.1873886 -0.6204240  0.5701978  1.0000000  0.4118808\nft_per_fga  0.1969880 -0.2578221  0.4738253  0.4118808  1.0000000"
+    "section": "Turnover ratio",
+    "text": "Turnover ratio\n\nwpct_plot + aes(y = to_ratio)"
+  },
+  {
+    "objectID": "slides/09_four_factors.html#offensive-rebound-percentage",
+    "href": "slides/09_four_factors.html#offensive-rebound-percentage",
+    "title": "Four Factors",
+    "section": "Offensive rebound percentage",
+    "text": "Offensive rebound percentage\n\nwpct_plot + aes(y = reb_share)"
+  },
+  {
+    "objectID": "slides/09_four_factors.html#free-throw-conversion-rate",
+    "href": "slides/09_four_factors.html#free-throw-conversion-rate",
+    "title": "Four Factors",
+    "section": "Free throw conversion rate",
+    "text": "Free throw conversion rate\n\nwpct_plot + aes(y = ft_per_fga)"
+  },
+  {
+    "objectID": "slides/09_four_factors.html#the-four-factors-correlated",
+    "href": "slides/09_four_factors.html#the-four-factors-correlated",
+    "title": "Four Factors",
+    "section": "The Four Factors, correlated",
+    "text": "The Four Factors, correlated\n\nff &lt;- nba_history |&gt;\n  filter(efg_pct &lt; Inf) |&gt;\n  select(wpct, efg_pct, to_ratio, reb_share, ft_per_fga)\n\ncor(ff)\n\n                 wpct    efg_pct   to_ratio  reb_share ft_per_fga\nwpct        1.0000000  0.4611902 -0.2467902 -0.1873886  0.1969880\nefg_pct     0.4611902  1.0000000 -0.4898974 -0.6204240 -0.2578221\nto_ratio   -0.2467902 -0.4898974  1.0000000  0.5701978  0.4738253\nreb_share  -0.1873886 -0.6204240  0.5701978  1.0000000  0.4118808\nft_per_fga  0.1969880 -0.2578221  0.4738253  0.4118808  1.0000000"
   },
   {
     "objectID": "slides/09_four_factors.html#the-four-factors-visualized",
@@ -117,6 +152,13 @@
     "title": "Four Factors",
     "section": "The Four Factors, visualized",
     "text": "The Four Factors, visualized\n\nff |&gt;\n  pivot_longer(cols = -c(wpct), values_to = \"value\", names_to = \"statistic\") |&gt;\n  ggplot(aes(x = value, y = wpct)) +\n  geom_point() +\n  geom_smooth() +\n  facet_wrap(vars(statistic))"
+  },
+  {
+    "objectID": "slides/09_four_factors.html#download-and-save",
+    "href": "slides/09_four_factors.html#download-and-save",
+    "title": "Four Factors",
+    "section": "Download and save",
+    "text": "Download and save\n\nnba2025 &lt;- hoopR::load_nba_pbp(seasons = 2025)\nwrite_rds(nba2025, here::here(\"data-large/nba2025.rds\"))\n\nceltics2025 &lt;- nba2025 |&gt;\n  filter(home_team_id == 2)\n\nwrite_rds(celtics2025, here::here(\"data/celtics2025.rds\"))\n\n\n\nceltics2025 &lt;- read_rds(here::here(\"data/celtics2025.rds\"))\nceltics2025 |&gt;\n  group_by(season, home_team_name) |&gt;\n  summarize(\n    num_plays = n(),\n    g = n_distinct(game_id)\n  )\n\n# A tibble: 1 × 4\n# Groups:   season [1]\n  season home_team_name num_plays     g\n   &lt;int&gt; &lt;chr&gt;              &lt;int&gt; &lt;int&gt;\n1   2025 Boston             21328    47"
   },
   {
     "objectID": "slides/09_four_factors.html#shot-chart",
@@ -140,18 +182,32 @@
     "text": "Hex bin plot\n\nshots + aes(x = abs(coordinate_x), z = score_value) +\n  stat_summary_hex(\n    fun = mean, mapping = aes(fill = after_stat(value))\n  ) +\n  scale_fill_viridis_c()"
   },
   {
-    "objectID": "slides/09_four_factors.html#sportyr",
-    "href": "slides/09_four_factors.html#sportyr",
+    "objectID": "slides/09_four_factors.html#the-game-has-changed",
+    "href": "slides/09_four_factors.html#the-game-has-changed",
     "title": "Four Factors",
-    "section": "sportyR",
-    "text": "sportyR\n\nsportyR::geom_basketball(\"nba\", xlims = c(0, 50)) +\n  geom_jitter(data = celtics2025, aes(x = coordinate_x, y = coordinate_y), width = 0.25, alpha = 0.5)"
+    "section": "The game has changed",
+    "text": "The game has changed"
+  },
+  {
+    "objectID": "slides/09_four_factors.html#add-the-court-lines-with-sportyr",
+    "href": "slides/09_four_factors.html#add-the-court-lines-with-sportyr",
+    "title": "Four Factors",
+    "section": "Add the court lines with sportyR",
+    "text": "Add the court lines with sportyR\n\nsportyR::geom_basketball(\"nba\", xlims = c(0, 50)) +\n  geom_jitter(data = celtics2025, aes(x = coordinate_x, y = coordinate_y), width = 0.25, alpha = 0.5)"
   },
   {
     "objectID": "slides/09_four_factors.html#wehoop",
     "href": "slides/09_four_factors.html#wehoop",
     "title": "Four Factors",
     "section": "wehoop",
-    "text": "wehoop\nhttps://wehoop.sportsdataverse.org/"
+    "text": "wehoop\n\n\nhttps://wehoop.sportsdataverse.org/\n\nlibrary(wehoop)\nwnba2025 &lt;- wehoop::load_wnba_pbp(season = 2025)\nwrite_rds(wnba2025, here::here(\"data-large/wnba2025.rds\"))\n\nfever2025 &lt;- wnba2025 |&gt;\n  filter(home_team_id == 5)\n\nwrite_rds(fever2025, here::here(\"data/fever2025.rds\"))"
+  },
+  {
+    "objectID": "slides/09_four_factors.html#wnba-shot-chart",
+    "href": "slides/09_four_factors.html#wnba-shot-chart",
+    "title": "Four Factors",
+    "section": "WNBA shot chart",
+    "text": "WNBA shot chart\n\nfever2025 &lt;- read_rds(here::here(\"data/fever2025.rds\"))\nfever2025 |&gt;\n  filter(shooting_play) |&gt;\n  ggplot(aes(x = coordinate_x, y = coordinate_y)) +\n  geom_jitter(width = 0.25, alpha = 0.5)"
   },
   {
     "objectID": "slides/07_statcast.html#statcast",
@@ -655,7 +711,14 @@
     "href": "colloquium.html#football",
     "title": "Colloquium presentation",
     "section": "Football",
-    "text": "Football\n\nYurko, R., Ventura, S., & Horowitz, M. (2019). nflWAR: A reproducible method for offensive player evaluation in football. Journal of Quantitative Analysis in Sports, 15(3), 163–183. https://doi.org/10.1515/jqas-2018-0010\nDutta, R., Yurko, R., & Ventura, S. L. (2020). Unsupervised methods for identifying pass coverage among defensive backs with NFL player tracking data. Journal of Quantitative Analysis in Sports, 16(2), 143–161. https://doi.org/10.1515/jqas-2020-0017\nMallepalle, S., Yurko, R., Pelechrinis, K., & Ventura, S. L. (2020). Extracting NFL tracking data from images to evaluate quarterbacks and pass defenses. Journal of Quantitative Analysis in Sports, 16(2), 95–120. https://doi.org/10.1515/jqas-2019-0052\nYurko, R., Matano, F., Richardson, L. F., Granered, N., Pospisil, T., Pelechrinis, K., & Ventura, S. L. (2020). Going deep: Models for continuous-time within-play valuation of game outcomes in american football with tracking data. Journal of Quantitative Analysis in Sports, 16(2), 163–182. https://doi.org/10.1515/jqas-2019-0056\nRomer, D. (2006). Do firms maximize? Evidence from professional football. Journal of Political Economy, 114(2), 340–365. https://doi.org/10.1086/501171\nYam, D. R., & Lopez, M. J. (2019). What was lost? A causal estimate of fourth down behavior in the national football league. Journal of Sports Analytics, 5(3), 153–167. https://doi.org/10.3233/jsa-190294\nLopez, M. J. (2020). Bigger data, better questions, and a return to fourth down behavior: An introduction to a special issue on tracking data in the national football league. Journal of Quantitative Analysis in Sports, 16(2), 73–79. https://doi.org/10.1515/jqas-2020-0057"
+    "text": "Football\n\nYurko, R., Ventura, S., & Horowitz, M. (2019). nflWAR: A reproducible method for offensive player evaluation in football. Journal of Quantitative Analysis in Sports, 15(3), 163–183. https://doi.org/10.1515/jqas-2018-0010\nNguyen, Q., Yurko, R., & Matthews, G. J. (2024). Here comes the strain: Analyzing defensive pass rush in american football with player tracking data. The American Statistician, 78(2), 199–208. https://doi.org/10.1080/00031305.2023.2242442\nBrill, R. S., Yurko, R., & Wyner, A. J. (2025). Analytics, have some humility: A statistical view of fourth-down decision making. The American Statistician, 1–17. https://doi.org/10.1080/00031305.2025.2475801\nDutta, R., Yurko, R., & Ventura, S. L. (2020). Unsupervised methods for identifying pass coverage among defensive backs with NFL player tracking data. Journal of Quantitative Analysis in Sports, 16(2), 143–161. https://doi.org/10.1515/jqas-2020-0017\nMallepalle, S., Yurko, R., Pelechrinis, K., & Ventura, S. L. (2020). Extracting NFL tracking data from images to evaluate quarterbacks and pass defenses. Journal of Quantitative Analysis in Sports, 16(2), 95–120. https://doi.org/10.1515/jqas-2019-0052\nYurko, R., Matano, F., Richardson, L. F., Granered, N., Pospisil, T., Pelechrinis, K., & Ventura, S. L. (2020). Going deep: Models for continuous-time within-play valuation of game outcomes in american football with tracking data. Journal of Quantitative Analysis in Sports, 16(2), 163–182. https://doi.org/10.1515/jqas-2019-0056\nRomer, D. (2006). Do firms maximize? Evidence from professional football. Journal of Political Economy, 114(2), 340–365. https://doi.org/10.1086/501171\nYam, D. R., & Lopez, M. J. (2019). What was lost? A causal estimate of fourth down behavior in the national football league. Journal of Sports Analytics, 5(3), 153–167. https://doi.org/10.3233/jsa-190294\nLopez, M. J. (2020). Bigger data, better questions, and a return to fourth down behavior: An introduction to a special issue on tracking data in the national football league. Journal of Quantitative Analysis in Sports, 16(2), 73–79. https://doi.org/10.1515/jqas-2020-0057"
+  },
+  {
+    "objectID": "colloquium.html#hockey",
+    "href": "colloquium.html#hockey",
+    "title": "Colloquium presentation",
+    "section": "Hockey",
+    "text": "Hockey\n\nThomas, A., Ventura, S. L., Jensen, S. T., & Ma, S. (2013). Competing process hazard function models for player ratings in ice hockey. The Annals of Applied Statistics, 1497–1524. https://doi.org/10.1214/13-AOAS646\nBrian, M. (2011). A regression-based adjusted plus-minus statistic for NHL players. Journal of Quantitative Analysis in Sports, 7(3). https://doi.org/10.2202/1559-0410.1284"
   },
   {
     "objectID": "colloquium.html#multisport",

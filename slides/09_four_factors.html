@@ -215,28 +215,25 @@ Prof.&nbsp;Baumer
 <section id="write-a-scraping-function" class="slide level2">
 <h2>Write a scraping function</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(rvest)</span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a>scrape_standings <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">year =</span> <span class="dv">2025</span>) {</span>
-<span id="cb1-5"><a></a>  url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"https://www.basketball-reference.com/leagues/NBA_"</span>, year, <span class="st">".html"</span>)</span>
-<span id="cb1-6"><a></a>  x <span class="ot">&lt;-</span> url <span class="sc">|&gt;</span></span>
-<span id="cb1-7"><a></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
-<span id="cb1-8"><a></a>    <span class="fu">html_table</span>()</span>
-<span id="cb1-9"><a></a>  </span>
-<span id="cb1-10"><a></a>  y <span class="ot">&lt;-</span> x[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">|&gt;</span></span>
-<span id="cb1-11"><a></a>    <span class="fu">map</span>(janitor<span class="sc">::</span>clean_names) <span class="sc">|&gt;</span></span>
-<span id="cb1-12"><a></a>    <span class="fu">map</span>(rename_with, <span class="sc">~</span><span class="fu">str_remove</span>(.x, <span class="st">"eastern_|western_"</span>), <span class="fu">contains</span>(<span class="st">"conference"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb1-13"><a></a>    <span class="fu">list_rbind</span>()</span>
-<span id="cb1-14"><a></a>  </span>
-<span id="cb1-15"><a></a>  y <span class="sc">|&gt;</span></span>
-<span id="cb1-16"><a></a>    <span class="fu">mutate</span>(</span>
-<span id="cb1-17"><a></a>      <span class="at">p_ratio =</span> ps_g <span class="sc">/</span> pa_g,</span>
-<span id="cb1-18"><a></a>      <span class="at">wpct =</span> w_l_percent,</span>
-<span id="cb1-19"><a></a>      <span class="at">logWratio =</span> <span class="fu">log</span>(w <span class="sc">/</span> l), </span>
-<span id="cb1-20"><a></a>      <span class="at">logPratio =</span> <span class="fu">log</span>(ps_g <span class="sc">/</span> pa_g)</span>
-<span id="cb1-21"><a></a>    )</span>
-<span id="cb1-22"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" data-code-line-numbers="|4|10|11|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(rvest)</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a>scrape_standings <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">year =</span> <span class="dv">2025</span>) {</span>
+<span id="cb1-4"><a></a>  url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"https://www.basketball-reference.com/leagues/NBA_"</span>, year, <span class="st">".html"</span>)</span>
+<span id="cb1-5"><a></a>  x <span class="ot">&lt;-</span> url <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a></a>    <span class="fu">html_table</span>()</span>
+<span id="cb1-8"><a></a>  </span>
+<span id="cb1-9"><a></a>  x[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a></a>    <span class="fu">map</span>(janitor<span class="sc">::</span>clean_names) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a></a>    <span class="fu">map</span>(rename_with, <span class="sc">~</span><span class="fu">str_remove</span>(.x, <span class="st">"eastern_|western_"</span>), <span class="fu">contains</span>(<span class="st">"conference"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-12"><a></a>    <span class="fu">list_rbind</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a></a>    <span class="fu">mutate</span>(</span>
+<span id="cb1-14"><a></a>      <span class="at">p_ratio =</span> ps_g <span class="sc">/</span> pa_g,</span>
+<span id="cb1-15"><a></a>      <span class="at">wpct =</span> w_l_percent,</span>
+<span id="cb1-16"><a></a>      <span class="at">logWratio =</span> <span class="fu">log</span>(w <span class="sc">/</span> l), </span>
+<span id="cb1-17"><a></a>      <span class="at">logPratio =</span> <span class="fu">log</span>(ps_g <span class="sc">/</span> pa_g)</span>
+<span id="cb1-18"><a></a>    )</span>
+<span id="cb1-19"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="scrape-the-data" class="slide level2">
@@ -288,7 +285,7 @@ Prof.&nbsp;Baumer
 <span id="cb6-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="fit-the-model" class="slide level2">
 <h2>Fit the model!</h2>
 <div class="cell">
@@ -320,8 +317,11 @@ F-statistic:  3050 on 1 and 239 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h1>The Four Factors</h1>
 
 </section>
-<section id="dean-oliver" class="slide level2">
-<h2>Dean Oliver</h2>
+<section id="dean-oliver-basketball-on-paper" class="slide level2">
+<h2>Dean Oliver, <em>Basketball on Paper</em></h2>
+<div class="footer">
+<p><a href="https://en.wikipedia.org/wiki/Dean_Oliver_(statistician)" class="uri">https://en.wikipedia.org/wiki/Dean_Oliver_(statistician)</a></p>
+</div>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><img data-src="https://espnpressroom.com/us/files/2024/05/Dean-Oliver-Image-1.png"></p>
@@ -329,59 +329,110 @@ F-statistic:  3050 on 1 and 239 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><img data-src="https://substackcdn.com/image/fetch/$s_!Mmtd!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c64972f-dd22-4833-bd63-9fc3f09f27d7_1532x2048.jpeg"></p>
 </div></div>
 </section>
+<section id="possessions-and-pace" class="slide level2">
+<h2>Possessions and pace</h2>
+<ul>
+<li class="fragment"><strong>Possessions</strong> are the fundemental unit of time</li>
+</ul>
+<p><span class="math display">\[
+  POSS = FGA + 0.44 \cdot FTA - OREB + TOV
+\]</span></p>
+<ul>
+<li class="fragment"><span class="math inline">\(ORtg = PTS_{T} / POSS_{T}\)</span></li>
+<li class="fragment"><span class="math inline">\(DRtg = PTS_{O} / POSS_{O}\)</span></li>
+</ul>
+</section>
+<section id="the-four-factors-1" class="slide level2">
+<h2>The Four Factors</h2>
+<ol type="1">
+<li class="fragment">Effective Field Goal Percentage</li>
+<li class="fragment">Turnover Rate</li>
+<li class="fragment">Offensive Rebound Percentage</li>
+<li class="fragment">Free Throw Conversion Rate</li>
+</ol>
+</section>
 <section id="nba-history" class="slide level2">
 <h2>NBA history</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-2"><a></a><span class="fu">library</span>(hoopR)</span>
+<span id="cb9-3"><a></a></span>
+<span id="cb9-4"><a></a>team_id <span class="ot">&lt;-</span> <span class="fu">nba_teams</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a></a>  <span class="fu">pull</span>(team_id)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(hoopR)</span>
-<span id="cb9-2"><a></a>celtics <span class="ot">&lt;-</span> <span class="fu">nba_teamyearbyyearstats</span>(<span class="at">team_id =</span> <span class="st">'1610612738'</span>)[[<span class="dv">1</span>]]</span>
-<span id="cb9-3"><a></a></span>
-<span id="cb9-4"><a></a>nba_history <span class="ot">&lt;-</span> team_id <span class="sc">|&gt;</span></span>
-<span id="cb9-5"><a></a>  <span class="fu">map</span>(<span class="sc">~</span><span class="fu">nba_teamyearbyyearstats</span>(<span class="at">team_id =</span> .x)) <span class="sc">|&gt;</span></span>
-<span id="cb9-6"><a></a>  <span class="fu">map</span>(pluck, <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-7"><a></a>  <span class="fu">list_rbind</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">library</span>(hoopR)</span>
+<span id="cb10-2"><a></a>celtics <span class="ot">&lt;-</span> <span class="fu">nba_teamyearbyyearstats</span>(<span class="at">team_id =</span> <span class="st">'1610612738'</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb10-3"><a></a></span>
+<span id="cb10-4"><a></a>nba_history <span class="ot">&lt;-</span> team_id <span class="sc">|&gt;</span></span>
+<span id="cb10-5"><a></a>  <span class="fu">map</span>(<span class="sc">~</span><span class="fu">nba_teamyearbyyearstats</span>(<span class="at">team_id =</span> .x)) <span class="sc">|&gt;</span></span>
+<span id="cb10-6"><a></a>  <span class="fu">map</span>(pluck, <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-7"><a></a>  <span class="fu">list_rbind</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">write_rds</span>(nba_history, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/nba_history.rds"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">write_rds</span>(nba_history, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/nba_history.rds"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
 <section id="clean-the-data" class="slide level2">
 <h2>Clean the data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>nba_history <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/nba_history.rds"</span>))</span>
-<span id="cb11-2"><a></a>nba_history <span class="ot">&lt;-</span> nba_history <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-4"><a></a>    <span class="at">year =</span> <span class="fu">parse_number</span>(YEAR) <span class="sc">+</span> <span class="dv">1</span>,</span>
-<span id="cb11-5"><a></a>    <span class="at">wpct =</span> <span class="fu">parse_number</span>(WIN_PCT),</span>
-<span id="cb11-6"><a></a>    <span class="at">poss =</span> <span class="fu">parse_number</span>(FGA) <span class="sc">+</span> <span class="fl">0.44</span> <span class="sc">*</span> <span class="fu">parse_number</span>(FTA) <span class="sc">-</span> <span class="fu">parse_number</span>(OREB) <span class="sc">+</span> <span class="fu">parse_number</span>(TOV),</span>
-<span id="cb11-7"><a></a>    <span class="at">pace =</span> <span class="dv">5</span> <span class="sc">*</span> poss <span class="sc">/</span> (<span class="fu">parse_number</span>(GP) <span class="sc">*</span> <span class="dv">48</span> <span class="sc">*</span> <span class="dv">5</span>),</span>
-<span id="cb11-8"><a></a>    <span class="at">efg_pct =</span> (<span class="fu">parse_number</span>(FGM) <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">parse_number</span>(FG3M)) <span class="sc">/</span> <span class="fu">parse_number</span>(FGA),</span>
-<span id="cb11-9"><a></a>    <span class="at">to_ratio =</span> <span class="fu">parse_number</span>(TOV) <span class="sc">/</span> poss,</span>
-<span id="cb11-10"><a></a>    <span class="at">reb_share =</span> <span class="fu">parse_number</span>(OREB) <span class="sc">/</span> (<span class="fu">parse_number</span>(OREB) <span class="sc">+</span> <span class="fu">parse_number</span>(DREB)),</span>
-<span id="cb11-11"><a></a>    <span class="at">ft_per_fga =</span> <span class="fu">parse_number</span>(FTM) <span class="sc">/</span> <span class="fu">parse_number</span>(FGA)</span>
-<span id="cb11-12"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" data-code-line-numbers="|7|8|9|10|11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>nba_history <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/nba_history.rds"</span>))</span>
+<span id="cb12-2"><a></a>nba_history <span class="ot">&lt;-</span> nba_history <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-4"><a></a>    <span class="at">year =</span> <span class="fu">parse_number</span>(YEAR) <span class="sc">+</span> <span class="dv">1</span>,</span>
+<span id="cb12-5"><a></a>    <span class="at">wpct =</span> <span class="fu">parse_number</span>(WIN_PCT),</span>
+<span id="cb12-6"><a></a>    <span class="at">poss =</span> <span class="fu">parse_number</span>(FGA) <span class="sc">+</span> <span class="fl">0.44</span> <span class="sc">*</span> <span class="fu">parse_number</span>(FTA) <span class="sc">-</span> <span class="fu">parse_number</span>(OREB) <span class="sc">+</span> <span class="fu">parse_number</span>(TOV),</span>
+<span id="cb12-7"><a></a>    <span class="at">pace =</span> <span class="dv">5</span> <span class="sc">*</span> poss <span class="sc">/</span> (<span class="fu">parse_number</span>(GP) <span class="sc">*</span> <span class="dv">48</span> <span class="sc">*</span> <span class="dv">5</span>),</span>
+<span id="cb12-8"><a></a>    <span class="at">efg_pct =</span> (<span class="fu">parse_number</span>(FGM) <span class="sc">+</span> <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">parse_number</span>(FG3M)) <span class="sc">/</span> <span class="fu">parse_number</span>(FGA),</span>
+<span id="cb12-9"><a></a>    <span class="at">to_ratio =</span> <span class="fu">parse_number</span>(TOV) <span class="sc">/</span> poss,</span>
+<span id="cb12-10"><a></a>    <span class="at">reb_share =</span> <span class="fu">parse_number</span>(OREB) <span class="sc">/</span> (<span class="fu">parse_number</span>(OREB) <span class="sc">+</span> <span class="fu">parse_number</span>(DREB)),</span>
+<span id="cb12-11"><a></a>    <span class="at">ft_per_fga =</span> <span class="fu">parse_number</span>(FTM) <span class="sc">/</span> <span class="fu">parse_number</span>(FGA)</span>
+<span id="cb12-12"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="effective-field-goal-percentage" class="slide level2">
 <h2>Effective field goal percentage</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>nba_history <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a></a>  <span class="fu">filter</span>(efg_pct <span class="sc">&lt;</span> <span class="cn">Inf</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> efg_pct)) <span class="sc">+</span></span>
-<span id="cb12-4"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb12-5"><a></a>  <span class="fu">geom_smooth</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>wpct_plot <span class="ot">&lt;-</span> nba_history <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a></a>  <span class="fu">filter</span>(efg_pct <span class="sc">&lt;</span> <span class="cn">Inf</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> efg_pct)) <span class="sc">+</span></span>
+<span id="cb13-4"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-5"><a></a>  <span class="fu">geom_smooth</span>()</span>
+<span id="cb13-6"><a></a>wpct_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
-<section id="the-four-factors-isolated" class="slide level2">
-<h2>The Four Factors, isolated</h2>
+<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section id="turnover-ratio" class="slide level2">
+<h2>Turnover ratio</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>ff <span class="ot">&lt;-</span> nba_history <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a></a>  <span class="fu">filter</span>(efg_pct <span class="sc">&lt;</span> <span class="cn">Inf</span>) <span class="sc">|&gt;</span></span>
-<span id="cb13-3"><a></a>  <span class="fu">select</span>(wpct, efg_pct, to_ratio, reb_share, ft_per_fga)</span>
-<span id="cb13-4"><a></a></span>
-<span id="cb13-5"><a></a><span class="fu">cor</span>(ff)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>wpct_plot <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">y =</span> to_ratio)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section id="offensive-rebound-percentage" class="slide level2">
+<h2>Offensive rebound percentage</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>wpct_plot <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">y =</span> reb_share)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<section id="free-throw-conversion-rate" class="slide level2">
+<h2>Free throw conversion rate</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>wpct_plot <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">y =</span> ft_per_fga)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<section id="the-four-factors-correlated" class="slide level2">
+<h2>The Four Factors, correlated</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>ff <span class="ot">&lt;-</span> nba_history <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a></a>  <span class="fu">filter</span>(efg_pct <span class="sc">&lt;</span> <span class="cn">Inf</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a></a>  <span class="fu">select</span>(wpct, efg_pct, to_ratio, reb_share, ft_per_fga)</span>
+<span id="cb17-4"><a></a></span>
+<span id="cb17-5"><a></a><span class="fu">cor</span>(ff)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 wpct    efg_pct   to_ratio  reb_share ft_per_fga
 wpct        1.0000000  0.4611902 -0.2467902 -0.1873886  0.1969880
@@ -395,35 +446,40 @@ ft_per_fga  0.1969880 -0.2578221  0.4738253  0.4118808  1.0000000</code></pre>
 <section id="the-four-factors-visualized" class="slide level2">
 <h2>The Four Factors, visualized</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>ff <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(wpct), <span class="at">values_to =</span> <span class="st">"value"</span>, <span class="at">names_to =</span> <span class="st">"statistic"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb15-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> wpct)) <span class="sc">+</span></span>
-<span id="cb15-4"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb15-5"><a></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
-<span id="cb15-6"><a></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(statistic))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>ff <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span><span class="fu">c</span>(wpct), <span class="at">values_to =</span> <span class="st">"value"</span>, <span class="at">names_to =</span> <span class="st">"statistic"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> wpct)) <span class="sc">+</span></span>
+<span id="cb19-4"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-5"><a></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
+<span id="cb19-6"><a></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(statistic))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section></section>
 <section>
 <section id="play-by-play-data" class="title-slide slide level1 center">
 <h1>Play-by-play data</h1>
+
+</section>
+<section id="download-and-save" class="slide level2">
+<h2>Download and save</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a>nba2025 <span class="ot">&lt;-</span> hoopR<span class="sc">::</span><span class="fu">load_nba_pbp</span>(<span class="at">seasons =</span> <span class="dv">2025</span>)</span>
-<span id="cb16-2"><a></a><span class="fu">write_rds</span>(nba2025, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data-large/nba2025.rds"</span>))</span>
-<span id="cb16-3"><a></a></span>
-<span id="cb16-4"><a></a>celtics2025 <span class="ot">&lt;-</span> nba2025 <span class="sc">|&gt;</span></span>
-<span id="cb16-5"><a></a>  <span class="fu">filter</span>(home_team_id <span class="sc">==</span> <span class="dv">2</span>)</span>
-<span id="cb16-6"><a></a></span>
-<span id="cb16-7"><a></a><span class="fu">write_rds</span>(celtics2025, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/celtics2025.rds"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>nba2025 <span class="ot">&lt;-</span> hoopR<span class="sc">::</span><span class="fu">load_nba_pbp</span>(<span class="at">seasons =</span> <span class="dv">2025</span>)</span>
+<span id="cb20-2"><a></a><span class="fu">write_rds</span>(nba2025, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data-large/nba2025.rds"</span>))</span>
+<span id="cb20-3"><a></a></span>
+<span id="cb20-4"><a></a>celtics2025 <span class="ot">&lt;-</span> nba2025 <span class="sc">|&gt;</span></span>
+<span id="cb20-5"><a></a>  <span class="fu">filter</span>(home_team_id <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb20-6"><a></a></span>
+<span id="cb20-7"><a></a><span class="fu">write_rds</span>(celtics2025, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/celtics2025.rds"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a>celtics2025 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/celtics2025.rds"</span>))</span>
-<span id="cb17-2"><a></a>celtics2025 <span class="sc">|&gt;</span></span>
-<span id="cb17-3"><a></a>  <span class="fu">group_by</span>(season, home_team_name) <span class="sc">|&gt;</span></span>
-<span id="cb17-4"><a></a>  <span class="fu">summarize</span>(</span>
-<span id="cb17-5"><a></a>    <span class="at">num_plays =</span> <span class="fu">n</span>(),</span>
-<span id="cb17-6"><a></a>    <span class="at">g =</span> <span class="fu">n_distinct</span>(game_id)</span>
-<span id="cb17-7"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>celtics2025 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/celtics2025.rds"</span>))</span>
+<span id="cb21-2"><a></a>celtics2025 <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a></a>  <span class="fu">group_by</span>(season, home_team_name) <span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a></a>  <span class="fu">summarize</span>(</span>
+<span id="cb21-5"><a></a>    <span class="at">num_plays =</span> <span class="fu">n</span>(),</span>
+<span id="cb21-6"><a></a>    <span class="at">g =</span> <span class="fu">n_distinct</span>(game_id)</span>
+<span id="cb21-7"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
 # Groups:   season [1]
@@ -432,51 +488,82 @@ ft_per_fga  0.1969880 -0.2578221  0.4738253  0.4118808  1.0000000</code></pre>
 1   2025 Boston             21328    47</code></pre>
 </div>
 </div>
+</div>
 </section>
 <section id="shot-chart" class="slide level2">
 <h2>Shot chart</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>shots <span class="ot">&lt;-</span> celtics2025 <span class="sc">|&gt;</span></span>
-<span id="cb19-2"><a></a>  <span class="fu">filter</span>(shooting_play) <span class="sc">|&gt;</span></span>
-<span id="cb19-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> coordinate_x, <span class="at">y =</span> coordinate_y)) <span class="sc">+</span></span>
-<span id="cb19-4"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span>
-<span id="cb19-5"><a></a>shots</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>shots <span class="ot">&lt;-</span> celtics2025 <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a></a>  <span class="fu">filter</span>(shooting_play) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> coordinate_x, <span class="at">y =</span> coordinate_y)) <span class="sc">+</span></span>
+<span id="cb23-4"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span>
+<span id="cb23-5"><a></a>shots</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
 <section id="halfcourt" class="slide level2">
 <h2>Halfcourt</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a>shots <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">abs</span>(coordinate_x), <span class="at">color =</span> <span class="fu">factor</span>(score_value)) <span class="sc">+</span></span>
-<span id="cb20-2"><a></a>  <span class="fu">scale_color_viridis_d</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>shots <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">abs</span>(coordinate_x), <span class="at">color =</span> <span class="fu">factor</span>(score_value)) <span class="sc">+</span></span>
+<span id="cb24-2"><a></a>  <span class="fu">scale_color_viridis_d</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
+<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-22-1.png" width="960" class="r-stretch"></section>
 <section id="hex-bin-plot" class="slide level2">
 <h2>Hex bin plot</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>shots <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">abs</span>(coordinate_x), <span class="at">z =</span> score_value) <span class="sc">+</span></span>
-<span id="cb21-2"><a></a>  <span class="fu">stat_summary_hex</span>(</span>
-<span id="cb21-3"><a></a>    <span class="at">fun =</span> mean, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">after_stat</span>(value))</span>
-<span id="cb21-4"><a></a>  ) <span class="sc">+</span></span>
-<span id="cb21-5"><a></a>  <span class="fu">scale_fill_viridis_c</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>shots <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">abs</span>(coordinate_x), <span class="at">z =</span> score_value) <span class="sc">+</span></span>
+<span id="cb25-2"><a></a>  <span class="fu">stat_summary_hex</span>(</span>
+<span id="cb25-3"><a></a>    <span class="at">fun =</span> mean, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">after_stat</span>(value))</span>
+<span id="cb25-4"><a></a>  ) <span class="sc">+</span></span>
+<span id="cb25-5"><a></a>  <span class="fu">scale_fill_viridis_c</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-19-1.png" width="960" class="r-stretch"></section>
-<section id="sportyr" class="slide level2">
-<h2><code>sportyR</code></h2>
+<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-23-1.png" width="960" class="r-stretch"></section>
+<section id="the-game-has-changed" class="slide level2">
+<h2>The game has changed</h2>
+
+<img data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKn0ojIFpIZY2wH4wrwYU9UDfOV0YkO9NYUg&amp;s.png" class="r-stretch"></section>
+<section id="add-the-court-lines-with-sportyr" class="slide level2">
+<h2>Add the court lines with <code>sportyR</code></h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>sportyR<span class="sc">::</span><span class="fu">geom_basketball</span>(<span class="st">"nba"</span>, <span class="at">xlims =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>)) <span class="sc">+</span></span>
-<span id="cb22-2"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">data =</span> celtics2025, <span class="fu">aes</span>(<span class="at">x =</span> coordinate_x, <span class="at">y =</span> coordinate_y), <span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>sportyR<span class="sc">::</span><span class="fu">geom_basketball</span>(<span class="st">"nba"</span>, <span class="at">xlims =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>)) <span class="sc">+</span></span>
+<span id="cb26-2"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">data =</span> celtics2025, <span class="fu">aes</span>(<span class="at">x =</span> coordinate_x, <span class="at">y =</span> coordinate_y), <span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
+<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-24-1.png" width="960" class="r-stretch"></section>
 <section id="wehoop" class="slide level2">
 <h2><code>wehoop</code></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p><a href="https://wehoop.sportsdataverse.org/" class="uri">https://wehoop.sportsdataverse.org/</a></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">library</span>(wehoop)</span>
+<span id="cb27-2"><a></a>wnba2025 <span class="ot">&lt;-</span> wehoop<span class="sc">::</span><span class="fu">load_wnba_pbp</span>(<span class="at">season =</span> <span class="dv">2025</span>)</span>
+<span id="cb27-3"><a></a><span class="fu">write_rds</span>(wnba2025, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data-large/wnba2025.rds"</span>))</span>
+<span id="cb27-4"><a></a></span>
+<span id="cb27-5"><a></a>fever2025 <span class="ot">&lt;-</span> wnba2025 <span class="sc">|&gt;</span></span>
+<span id="cb27-6"><a></a>  <span class="fu">filter</span>(home_team_id <span class="sc">==</span> <span class="dv">5</span>)</span>
+<span id="cb27-7"><a></a></span>
+<span id="cb27-8"><a></a><span class="fu">write_rds</span>(fever2025, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/fever2025.rds"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img data-src="https://wehoop.sportsdataverse.org/logo.png"></p>
+</div></div>
+</section>
+<section id="wnba-shot-chart" class="slide level2">
+<h2>WNBA shot chart</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>fever2025 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/fever2025.rds"</span>))</span>
+<span id="cb28-2"><a></a>fever2025 <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a></a>  <span class="fu">filter</span>(shooting_play) <span class="sc">|&gt;</span></span>
+<span id="cb28-4"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> coordinate_x, <span class="at">y =</span> coordinate_y)) <span class="sc">+</span></span>
+<span id="cb28-5"><a></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
 
 
-</section></section>
+<img data-src="09_four_factors_files/figure-revealjs/unnamed-chunk-26-1.png" width="960" class="r-stretch"></section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png" class="slide-logo"></p>
