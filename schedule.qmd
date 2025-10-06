@@ -222,6 +222,7 @@ quiz <- function() {
 ::: {.callout-note} 
 ## Homework
 
+- **HW 5 due Friday by 5 pm**
 - Read @lopez2020bigger
 
 :::

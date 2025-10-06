@@ -351,3 +351,8 @@ It's just [logistic regression](https://en.wikipedia.org/wiki/Logistic_regressio
 :::
 
 3. Use your creativity to create **one data graphic** like the ones shown in [Exploring Statcast data](slides/07_statcast.qmd). Try to make this data graphic as compelling as possible. 
+
+## HW 5: Due 10/10
+
+1. Use the `hoopR` (for the NBA) or the `wehoop` (for the WNBA) package to create a *compelling* data graphic. You could pursue something more statistical (like the scatterplots for the Four Factors) or something more visual (like the shot charts). 
+1. Sports like field hockey, ice hockey, and soccer share important properties with basketball. Choose one of those sports (or another sport that you think would also fit), and describe how the concepts from the Four Factors would (or wouldn't) translate to that sport. 
