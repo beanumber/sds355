@@ -17,10 +17,15 @@ execute:
 
 # Expected Winning Percentage
 
+```{r}
+#| include: false
+library(tidyverse)
+```
+
 ## Write a scraping function
 
 ```{r}
-library(tidyverse)
+#| code-line-numbers: "|4|10|11|"
 library(rvest)
 
 scrape_standings <- function(year = 2025) {
@@ -29,12 +34,10 @@ scrape_standings <- function(year = 2025) {
     read_html() |>
     html_table()
   
-  y <- x[1:2] |>
+  x[1:2] |>
     map(janitor::clean_names) |>
     map(rename_with, ~str_remove(.x, "eastern_|western_"), contains("conference")) |>
-    list_rbind()
-  
-  y |>
+    list_rbind() |>
     mutate(
       p_ratio = ps_g / pa_g,
       wpct = w_l_percent,
@@ -85,7 +88,11 @@ lm(logWratio ~ 0 + logPratio, data = nba) |>
 
 # The Four Factors
 
-## Dean Oliver
+## Dean Oliver, *Basketball on Paper*
+
+::: footer
+<https://en.wikipedia.org/wiki/Dean_Oliver_(statistician)>
+:::
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -100,11 +107,37 @@ lm(logWratio ~ 0 + logPratio, data = nba) |>
 :::
 ::::
 
+## Possessions and pace
+
+::: {.incremental}
+
+- **Possessions** are the fundemental unit of time
+
+$$
+  POSS = FGA + 0.44 \cdot FTA - OREB + TOV
+$$
+
+- $ORtg = PTS_{T} / POSS_{T}$
+- $DRtg = PTS_{O} / POSS_{O}$
+
+:::
+
+## The Four Factors
+
+::: {.incremental}
+
+1. Effective Field Goal Percentage
+1. Turnover Rate
+1. Offensive Rebound Percentage
+1. Free Throw Conversion Rate
+
+:::
+
 ## NBA history
 
 ```{r}
 #| eval: false
-#| include: false
+#| include: true
 library(tidyverse)
 library(hoopR)
 
@@ -142,6 +175,7 @@ write_rds(nba_history, here::here("data/nba_history.rds"))
 ## Clean the data
 
 ```{r}
+#| code-line-numbers: "|7|8|9|10|11"
 nba_history <- read_rds(here::here("data/nba_history.rds"))
 nba_history <- nba_history |>
   mutate(
@@ -159,14 +193,34 @@ nba_history <- nba_history |>
 ## Effective field goal percentage
 
 ```{r}
-nba_history |>
+wpct_plot <- nba_history |>
   filter(efg_pct < Inf) |>
   ggplot(aes(x = year, y = efg_pct)) +
   geom_point() +
   geom_smooth()
+wpct_plot
 ```
 
-## The Four Factors, isolated
+## Turnover ratio
+
+```{r}
+wpct_plot + aes(y = to_ratio)
+```
+
+## Offensive rebound percentage
+
+```{r}
+wpct_plot + aes(y = reb_share)
+```
+
+## Free throw conversion rate
+
+```{r}
+wpct_plot + aes(y = ft_per_fga)
+```
+
+
+## The Four Factors, correlated
 
 ```{r}
 ff <- nba_history |>
@@ -190,6 +244,8 @@ ff |>
 
 # Play-by-play data
 
+## Download and save
+
 ```{r}
 #| eval: false
 nba2025 <- hoopR::load_nba_pbp(seasons = 2025)
@@ -200,6 +256,8 @@ celtics2025 <- nba2025 |>
 
 write_rds(celtics2025, here::here("data/celtics2025.rds"))
 ```
+
+. . .
 
 ```{r}
 celtics2025 <- read_rds(here::here("data/celtics2025.rds"))
@@ -238,8 +296,11 @@ shots + aes(x = abs(coordinate_x), z = score_value) +
   scale_fill_viridis_c()
 ```
 
+## The game has changed
 
-## `sportyR`
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKn0ojIFpIZY2wH4wrwYU9UDfOV0YkO9NYUg&s)
+
+## Add the court lines with `sportyR`
 
 ```{r}
 sportyR::geom_basketball("nba", xlims = c(0, 50)) +
@@ -248,4 +309,37 @@ sportyR::geom_basketball("nba", xlims = c(0, 50)) +
 
 ## `wehoop`
 
+:::: {.columns}
+::: {.column width="50%"}
+
 <https://wehoop.sportsdataverse.org/>
+
+```{r}
+#| eval: false
+library(wehoop)
+wnba2025 <- wehoop::load_wnba_pbp(season = 2025)
+write_rds(wnba2025, here::here("data-large/wnba2025.rds"))
+
+fever2025 <- wnba2025 |>
+  filter(home_team_id == 5)
+
+write_rds(fever2025, here::here("data/fever2025.rds"))
+```
+
+
+:::
+::: {.column width="50%"}
+![](https://wehoop.sportsdataverse.org/logo.png)
+
+:::
+::::
+
+## WNBA shot chart
+
+```{r}
+fever2025 <- read_rds(here::here("data/fever2025.rds"))
+fever2025 |>
+  filter(shooting_play) |>
+  ggplot(aes(x = coordinate_x, y = coordinate_y)) +
+  geom_jitter(width = 0.25, alpha = 0.5)
+```

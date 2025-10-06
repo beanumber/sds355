@@ -67,12 +67,19 @@ The following is a **non-exhaustive** list of high-quality papers which I think 
 ## Football
 
 1. @Yurko2019nflwar
+1. @nguyen2024here
+1. @brill2025analytics
 1. @dutta2020unsupervised
 1. @mallepalle2020extracting
 1. @yurko2020going
 1. @Romer2006
 1. @Yam2019
 1. @lopez2020bigger
+
+## Hockey
+
+1. @thomas2013competing
+1. @brian2011regression
 
 ## Multisport
 

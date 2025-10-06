@@ -35,6 +35,7 @@ jobs:
             any::emoji
             any::ggrepel
             any::here
+            any::hexbin
             any::hoopR
             any::Lahman
             any::retrosheet
