@@ -58,12 +58,15 @@ The following is a **non-exhaustive** list of high-quality papers which I think 
 1. @Albert2015
 1. @elmore2022bang
 1. @baumer2015openwar
+1. @yan2025comparing
+1. @jensen2009hierarchical
 
 ## Basketball
 
 1. @Deshpande2016
 1. @cervone2016multiresolution
 1. @franks2015characterizing
+1. @terner2021modeling
 
 ## Football
 
