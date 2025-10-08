@@ -33,6 +33,8 @@ jobs:
             any::DiagrammeR
             any::duckdb
             any::emoji
+            any::gganimate
+            any::ggforce
             any::ggrepel
             any::here
             any::hexbin
