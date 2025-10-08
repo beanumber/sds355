@@ -201,7 +201,6 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date(emoji::emoji("basketball"))`
 
-- `r quiz()` [Sporcle quiz 5](sporcle.qmd)
 - `r slides()` [Four factors](slides/09_four_factors.qmd)
 
 ::: {.callout-note} 
@@ -217,7 +216,8 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date(emoji::emoji("basketball"))`
 
-- Expected points per possession
+- `r quiz()` [Sporcle quiz 5](sporcle.qmd)
+- `r slides()` [Expected points per possession](slides/10_epv.qmd)
 
 ::: {.callout-note} 
 ## Homework
@@ -321,6 +321,8 @@ quiz <- function() {
 ::: {.callout-note} 
 ## Homework
 
+- Read TBD
+
 :::
 
 
@@ -328,16 +330,12 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
-
-::: 
-::: {.g-col-6 .card} 
-`r echo_date()`
-
-- Projects
-
+- Abby & Selam: TBD
 
 ::: {.callout-note} 
 ## Homework
+
+- Read TBD
 
 :::
 
@@ -345,10 +343,27 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
+- Gabriela: TBD
 
 
 ::: {.callout-note} 
 ## Homework
+
+- Read TBD
+
+:::
+
+::: 
+::: {.g-col-6 .card} 
+`r echo_date()`
+
+- Anna: TBD
+
+
+::: {.callout-note} 
+## Homework
+
+- Read TBD
 
 :::
 
@@ -356,14 +371,25 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- Projects
+- Tyler: TBD
+
+::: {.callout-note} 
+## Homework
+
+- Read TBD
+
+:::
 
 ::: 
 ::: {.g-col-6 .card}
 `r echo_date()`
 
+- Lorelei: TBD
+
 ::: {.callout-note} 
 ## Homework
+
+- Read TBD
 
 :::
 
@@ -372,10 +398,12 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- Projects
+- Eliana: TBD
 
 ::: {.callout-note} 
 ## Homework
+
+- Read TBD
 
 :::
 
@@ -393,7 +421,14 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- Projects
+- Abby & Selam: TBD
+
+::: {.callout-note} 
+## Homework
+
+- Read TBD
+
+:::
 
 ::: 
 
@@ -401,7 +436,7 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- Projects
+- Abi
 
 ::: 
 ::: {.g-col-6 .card}

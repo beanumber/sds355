@@ -1,0 +1,165 @@
+---
+title: "EPV"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "2025-10-08"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+# Expected Point Value (EPV)
+
+## {background-image="https://compote.slate.com/images/585d1abb-9b81-46e9-85ad-9839f50e9719.jpg" background-size="contain"}
+
+## Who deserves what credit for this play? 
+
+{{< video https://www.youtube.com/embed/OVY15CHD6FQ width="900" aspect-ratio="16x9">}}
+
+## {background-image="https://images.deadspin.com/tr:w-900/19ev8vjva3hkepng.png" background-size="contain"}
+
+## {background-image="https://grantland.com/wp-content/uploads/2014/02/epv-chart-features.png?resize=1024,676" background-size="contain"}
+
+
+## SportVu tracking data
+
+- <https://grantland.com/features/expected-value-possession-nba-analytics/>
+- <https://grantland.com/features/the-toronto-raptors-sportvu-cameras-nba-analytical-revolution/>
+
+## EPV Dashboard
+
+<https://josedv.shinyapps.io/EPV_NBA_Dashboard/>
+
+## Raw data
+
+```{r}
+#| eval: false
+library(tidyverse)
+epv <- read_csv(here::here("data-large/2013_11_01_MIA_BKN.csv"))
+epv_small <- epv |>
+  filter(possID < 10) |>
+  write_rds(here::here("data/epv_small.rds"))
+```
+
+```{r}
+library(tidyverse)
+epv_small <- read_rds(here::here("data/epv_small.rds"))
+dim(epv_small)
+
+players <- read_csv(here::here("data/players2013.csv"))
+head(players)
+```
+
+::: footer
+<https://www.nba.com/game/mia-vs-bkn-0021300028/play-by-play>
+:::
+
+## What's in there? 
+
+```{r}
+epv_small |>
+  group_by(possID) |>
+  count()
+```
+
+## Where did the ball go? 
+
+```{r}
+epv_small |>
+  ggplot(aes(x = x, y = y)) +
+  geom_point() +
+  facet_wrap(vars(possID))
+```
+
+## Tracking Paul Pierce
+
+```{r}
+epv_small |>
+  filter(h2_ent == 3235, possID < 10) |>
+  ggplot(aes(x = h2_x, y = h2_y)) +
+  geom_point() +
+  facet_wrap(vars(possID))
+```
+
+```{r}
+#| eval: false
+#| include: false
+these_teams <- teamcolors::teamcolors |>
+  filter(str_detect(name, "Miami|Brooklyn"), league == "nba") |>
+  pull(primary)
+library(gganimate)
+first_play <- epv_small |>
+  filter(possID == 1) |>
+  ggplot() +
+  geom_vline(xintercept = c(47)) +
+  ggforce::geom_circle(
+    aes(x0 = x0, y0 = y0, r = r), 
+    data = data.frame(
+      x0 = c(4 + 15, 47, 94 - 4- 15),
+      y0 = 25,
+      r = 6
+    )
+  ) +
+  xlim(0, 94) + ylim(0, 50) + 
+  geom_point(aes(x = x, y = y), fill = "orange", size = 3, pch = 21) +
+  geom_point(aes(x = a1_x, y = a1_y), color = these_teams[2]) +
+  geom_point(aes(x = a2_x, y = a2_y), color = these_teams[2]) +
+  geom_point(aes(x = a3_x, y = a3_y), color = these_teams[2]) +
+  geom_point(aes(x = a4_x, y = a4_y), color = these_teams[2]) +
+  geom_point(aes(x = a5_x, y = a5_y), color = these_teams[2]) +
+  geom_point(aes(x = h1_x, y = h1_y), color = these_teams[1]) +
+  geom_point(aes(x = h2_x, y = h2_y), color = these_teams[1]) +
+  geom_point(aes(x = h3_x, y = h3_y), color = these_teams[1]) +
+  geom_point(aes(x = h4_x, y = h4_y), color = these_teams[1]) +
+  geom_point(aes(x = h5_x, y = h5_y), color = these_teams[1]) +
+  geom_label(aes(x = h2_x, y = h2_y, label = "Pierce"), color = these_teams[1]) +
+  transition_states(time, wrap = FALSE)
+anim_save(here::here("data/mia_bkn_poss1.gif"), animation = first_play)
+```
+
+## The first play
+
+![](../data/mia_bkn_poss1.gif){width=100%}
+
+## The second play
+
+```{r}
+#| eval: false
+#| include: false
+second_play <- epv_small |>
+  filter(possID == 2) |>
+  ggplot() +
+  geom_vline(xintercept = c(47)) +
+  ggforce::geom_circle(
+    aes(x0 = x0, y0 = y0, r = r), 
+    data = data.frame(
+      x0 = c(4 + 15, 47, 94 - 4- 15),
+      y0 = 25,
+      r = 6
+    )
+  ) +
+  xlim(0, 94) + ylim(0, 50) + 
+  geom_point(aes(x = x, y = y), fill = "orange", size = 3, pch = 21) +
+  geom_point(aes(x = a1_x, y = a1_y), color = these_teams[2]) +
+  geom_point(aes(x = a2_x, y = a2_y), color = these_teams[2]) +
+  geom_point(aes(x = a3_x, y = a3_y), color = these_teams[2]) +
+  geom_point(aes(x = a4_x, y = a4_y), color = these_teams[2]) +
+  geom_point(aes(x = a5_x, y = a5_y), color = these_teams[2]) +
+  geom_point(aes(x = h1_x, y = h1_y), color = these_teams[1]) +
+  geom_point(aes(x = h2_x, y = h2_y), color = these_teams[1]) +
+  geom_point(aes(x = h3_x, y = h3_y), color = these_teams[1]) +
+  geom_point(aes(x = h4_x, y = h4_y), color = these_teams[1]) +
+  geom_point(aes(x = h5_x, y = h5_y), color = these_teams[1]) +
+  geom_label(aes(x = h2_x, y = h2_y, label = "Pierce"), color = these_teams[1]) +
+  transition_states(time, wrap = FALSE)
+anim_save(here::here("data/mia_bkn_poss2.gif"), animation = second_play)
+```
+
+![](../data/mia_bkn_poss2.gif){width=100%}

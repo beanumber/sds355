@@ -63,6 +63,7 @@ The following is a **non-exhaustive** list of high-quality papers which I think 
 
 1. @Deshpande2016
 1. @cervone2016multiresolution
+1. @franks2015characterizing
 
 ## Football
 
