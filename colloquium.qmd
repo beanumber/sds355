@@ -60,6 +60,9 @@ The following is a **non-exhaustive** list of high-quality papers which I think 
 1. @baumer2015openwar
 1. @yan2025comparing
 1. @jensen2009hierarchical
+1. @sidle2018using
+1. @bouzarth2021swing
+1. @deshpande2017hierarchical
 
 ## Basketball
 
@@ -67,6 +70,7 @@ The following is a **non-exhaustive** list of high-quality papers which I think 
 1. @cervone2016multiresolution
 1. @franks2015characterizing
 1. @terner2021modeling
+1. @lopez2015building
 
 ## Football
 
@@ -76,17 +80,30 @@ The following is a **non-exhaustive** list of high-quality papers which I think 
 1. @dutta2020unsupervised
 1. @mallepalle2020extracting
 1. @yurko2020going
-1. @Romer2006
 1. @Yam2019
-1. @lopez2020bigger
+1. @martin2018markov
+1. @DeshpandeEvans2020
+1. @urschel2011
+1. @White2002
+1. @glickman2017estimating
+1. @ChuReyersThomsonWu2020
+1. @Lock2014
+1. @Reyers2021quarterback
 
 ## Hockey
 
 1. @thomas2013competing
 1. @brian2011regression
+1. @beaudoin2010strategies
+
+## Tennis
+
+1. @kovalchik2019calibration
+1. @kovalchik2016searching
 
 ## Multisport
 
+1. @macdonald2020recreating
 1. @franks2016metaanalytics
 1. @Bradley1952
 1. @Lopez2018
@@ -94,5 +111,6 @@ The following is a **non-exhaustive** list of high-quality papers which I think 
 ## Other
 
 1. @de2025age
+1. @maymin2021smart
 1. @Elo1978
-1. @kovalchik2016searching
+
