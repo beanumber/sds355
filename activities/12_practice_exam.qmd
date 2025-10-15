@@ -1,0 +1,75 @@
+---
+title: "Practice Exam"
+author: "Prof. Baumer"
+date: 2025-10-15
+date-format: medium
+format: 
+  pdf:
+    template-partials: 
+      - ../tex/title.tex
+      - ../tex/before-body.tex
+    toc: false
+execute:
+  echo: false
+  warning: false
+---
+
+1. Consider Figure 1 from @Romer2006, reprinted below. What is the main idea that the plot conveys? 
+\
+![](../gfx/images_medium_fg1.jpeg){width="75%"}
+\
+\
+\
+\
+\
+\
+\
+\
+1. How would the ideas from Figure 1 influence your decision-making as a head football coach? 
+\
+\
+\
+\
+\
+\
+\
+\
+1. Suppose that your team was trailing by 2 points with under 2 minutes to play, and had the ball at the 50-yard line. To what extent would Figure 1 be useful to you? 
+\
+\
+\
+\
+\
+\
+\
+\
+1. How do the ideas in Figure 1 connect to the notion of the *expected run matrix* used in baseball analysis? 
+\newpage
+1. Consider the following figure from @lopez2020bigger. What is the main idea explored in the paper and conveyed by the plot? 
+\
+![](../gfx/dist_v2.pdf){width="75%"}
+\
+\
+\
+\
+\
+\
+\
+1. Section 2 of @lopez2020bigger describes the importance of "unmeasured confounding". What did Lopez identify as an "unmeasured confounding" variable? How was he eventually able to measure it? 
+\
+\
+\
+\
+\
+\
+\
+1. What broader lessons can you see for aspiring sports analysts in this episode? What can the rest of us draw away from Lopez's experience?
+\
+\
+\
+\
+\
+\
+\
+
+## References

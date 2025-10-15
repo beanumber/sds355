@@ -239,12 +239,13 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date(emoji::emoji("football"))`
 
-- First-down conversion
+- `r slides()` [Fourth down conversion](slides/12_fourth_downs.qmd)
+- `r activity()` [Practice Exam](activities/12_practice_exam.qmd)
 
 ::: {.callout-note} 
 ## Homework
 
-- Read @Bradley1952
+- Read @Glickman2013
 
 :::
 

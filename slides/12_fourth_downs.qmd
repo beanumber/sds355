@@ -1,0 +1,44 @@
+---
+title: "Fourth Down analysis"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "2025-10-15"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+# Fourth down analysis
+
+## @Romer2006
+
+![](https://www.journals.uchicago.edu/cms/10.1086/501171/asset/images/medium/fg1.jpeg)
+
+## Kicking
+
+![](https://www.journals.uchicago.edu/cms/10.1086/501171/asset/images/medium/fg2.jpeg)
+
+## Comparison
+
+![](https://www.journals.uchicago.edu/cms/10.1086/501171/asset/images/medium/fg3.jpeg)
+
+## Decisions
+
+![](https://www.journals.uchicago.edu/cms/10.1086/501171/asset/images/medium/fg4.jpeg)
+
+## @lopez2020bigger
+
+::: footer
+
+<https://arxiv.org/pdf/1909.10631>
+
+:::
+
+## References

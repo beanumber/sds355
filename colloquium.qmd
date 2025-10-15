@@ -111,6 +111,7 @@ The following is a **non-exhaustive** list of high-quality papers which I think 
 ## Other
 
 1. @de2025age
+1. @hamilton2023many
 1. @maymin2021smart
 1. @Elo1978
 
