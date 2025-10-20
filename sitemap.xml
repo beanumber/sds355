@@ -2,70 +2,74 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://beanumber.github.io/sds355/syllabus.html</loc>
-    <lastmod>2025-10-15T13:04:44.275Z</lastmod>
+    <lastmod>2025-10-20T12:39:35.112Z</lastmod>
   </url>
   <url>
-    <loc>https://beanumber.github.io/sds355/slides/12_fourth_downs.html</loc>
-    <lastmod>2025-10-15T13:04:44.275Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/slides/09_four_factors.html</loc>
-    <lastmod>2025-10-15T13:04:44.275Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/slides/07_statcast.html</loc>
-    <lastmod>2025-10-15T13:04:44.275Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/slides/04_run_expectancy.html</loc>
-    <lastmod>2025-10-15T13:04:44.275Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/slides/02_sabermetrics.html</loc>
-    <lastmod>2025-10-15T13:04:44.274Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/schedule.html</loc>
-    <lastmod>2025-10-15T13:04:44.274Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/index.html</loc>
-    <lastmod>2025-10-15T13:04:44.274Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/colloquium.html</loc>
-    <lastmod>2025-10-15T13:04:44.206Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/hw.html</loc>
-    <lastmod>2025-10-15T13:04:44.274Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/paper.html</loc>
-    <lastmod>2025-10-15T13:04:44.274Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/slides/01_expected_wpct.html</loc>
-    <lastmod>2025-10-15T13:04:44.274Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/slides/03_linear_weights.html</loc>
-    <lastmod>2025-10-15T13:04:44.275Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/slides/06_dips.html</loc>
-    <lastmod>2025-10-15T13:04:44.275Z</lastmod>
-  </url>
-  <url>
-    <loc>https://beanumber.github.io/sds355/slides/08_win_probability.html</loc>
-    <lastmod>2025-10-15T13:04:44.275Z</lastmod>
+    <loc>https://beanumber.github.io/sds355/slides/13_bradley-terry.html</loc>
+    <lastmod>2025-10-20T12:39:35.112Z</lastmod>
   </url>
   <url>
     <loc>https://beanumber.github.io/sds355/slides/10_epv.html</loc>
-    <lastmod>2025-10-15T13:04:44.275Z</lastmod>
+    <lastmod>2025-10-20T12:39:35.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/slides/08_win_probability.html</loc>
+    <lastmod>2025-10-20T12:39:35.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/slides/06_dips.html</loc>
+    <lastmod>2025-10-20T12:39:35.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/slides/03_linear_weights.html</loc>
+    <lastmod>2025-10-20T12:39:35.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/slides/01_expected_wpct.html</loc>
+    <lastmod>2025-10-20T12:39:35.111Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/paper.html</loc>
+    <lastmod>2025-10-20T12:39:35.111Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/hw.html</loc>
+    <lastmod>2025-10-20T12:39:35.111Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/colloquium.html</loc>
+    <lastmod>2025-10-20T12:39:35.044Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/index.html</loc>
+    <lastmod>2025-10-20T12:39:35.111Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/schedule.html</loc>
+    <lastmod>2025-10-20T12:39:35.111Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/slides/02_sabermetrics.html</loc>
+    <lastmod>2025-10-20T12:39:35.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/slides/04_run_expectancy.html</loc>
+    <lastmod>2025-10-20T12:39:35.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/slides/07_statcast.html</loc>
+    <lastmod>2025-10-20T12:39:35.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/slides/09_four_factors.html</loc>
+    <lastmod>2025-10-20T12:39:35.112Z</lastmod>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/sds355/slides/12_fourth_downs.html</loc>
+    <lastmod>2025-10-20T12:39:35.112Z</lastmod>
   </url>
   <url>
     <loc>https://beanumber.github.io/sds355/sporcle.html</loc>
-    <lastmod>2025-10-15T13:04:44.275Z</lastmod>
+    <lastmod>2025-10-20T12:39:35.112Z</lastmod>
   </url>
 </urlset>
