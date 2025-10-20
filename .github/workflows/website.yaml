@@ -28,6 +28,7 @@ jobs:
           packages:
             any::remotes
             any::tidyverse
+            any::BradleyTerry2
             any::DBI
             any::dbplyr
             any::DiagrammeR

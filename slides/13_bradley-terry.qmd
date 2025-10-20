@@ -1,0 +1,296 @@
+---
+title: "Bradley-Terry models"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "2025-10-20"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+# Paired comparison models
+
+## @Bradley1952
+
+Let $A_i, A_j$ be teams. Then
+
+$$
+  p_{ij} = \Pr{ \left( A_i \text{ defeats } A_j \right) }
+= \frac{\lambda_i}{\lambda_i + \lambda_j}
+$$
+for **unobserved** team strengths $\lambda_i, \lambda_j > 0$. 
+
+## Use logistic distribution
+
+Set $\beta_i = \ln{\lambda_i}$. Then,
+
+$$
+  p_{ij} = \frac{1}{1 + e^{-(\beta_i-\beta_j)}} = F(\beta_i - \beta_j),
+$$
+where $F(x)$ is the CDF of the [logistic distribution](https://en.wikipedia.org/wiki/Logistic_distribution) with $\mu = 0, s = 1$. 
+
+## Convert to odds
+
+Form the **odds**, then the log-odds:
+
+\begin{align*}
+  \frac{p_{ij}}{1 - p_{ij}} 
+    &= e^{(\beta_i - \beta_j)} \\
+  \ln{\left( \frac{p_{ij}}{1 - p_{ij}} \right)} 
+    &= \beta_i - \beta_j
+\end{align*}
+
+## Setup design matrix
+
+But this is the setup for [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression):
+
+\begin{align*}
+  \ln{ \left( \frac{p_{ij}}{1 - p_{ij}} \right) } 
+    &= \beta_i - \beta_j \\
+    &= \begin{pmatrix} 0 & 0 & 1 & \cdots & -1 & \cdots & 0 \end{pmatrix} \begin{pmatrix} \beta_1 \\ \vdots \\ \beta_n \end{pmatrix} \\
+    &= \vec{X} \cdot \vec{\beta} 
+\end{align*}
+
+## `BradleyTerry2`
+
+```{r}
+library(tidyverse)
+library(BradleyTerry2)
+```
+
+::: footer
+<https://www.jstatsoft.org/article/view/v048i09/601>
+:::
+
+# Example: Men's tennis
+
+## Head-to-head matchups
+
+```{r}
+tennis <- tibble(
+  Djokovic = c(NA, 9, 14, 9, 4),
+  Federer = c(6, NA, 5, 5, 7),
+  Murray = c(3, 0, NA, 2, 2),
+  Nadal = c(2, 1, 4, NA, 4),
+  Wawrinka = c(3, 2, 2, 3, NA)
+) |>
+  t() |>
+  BradleyTerry2::countsToBinomial()
+tennis
+```
+
+## Fit the model
+
+```{r}
+btm_tennis <- BradleyTerry2::BTm(cbind(win1, win2), player1, player2, data = tennis)
+btm_tennis
+```
+
+## Recover abilities
+
+```{r}
+players <- btm_tennis |>
+  update(refcat = "Wawrinka") |>
+  BradleyTerry2::BTabilities() |> 
+  as_tibble(rownames = "Player") |>
+  arrange(desc(ability))
+players
+```
+
+## Visualize abilities
+
+```{r}
+ggplot(players, aes(y = Player, x = ability)) +
+  geom_vline(xintercept = 0, linetype = 3) + 
+  geom_point(aes(x = ability)) +
+  geom_errorbarh(aes(xmin = ability - 1.96*s.e., xmax = ability + 1.96*s.e.), height = 0.25)
+```
+
+# Example: MLB teams
+
+## Get Retrosheet data
+
+```{r}
+library(retrosheet)
+games <- get_retrosheet("game", 2024)
+games |>
+  head()
+```
+
+## Refactor to matchup format
+
+```{r}
+bt_games <- games |>
+  group_by(HmTm, VisTm) |>
+  summarize(
+    home_w = sum(HmRuns > VisRuns),
+    away_w = sum(VisRuns > HmRuns),
+  ) |>
+  mutate(
+    HmTm = factor(HmTm),
+    VisTm = factor(VisTm, levels = levels(HmTm))
+  )
+bt_games |>
+  head()
+```
+
+## Fit the model
+
+```{r}
+btm_mlb <- BTm(
+  outcome = cbind(home_w, away_w), 
+  player1 = HmTm, 
+  player2 = VisTm,
+  data = bt_games, 
+  id = "team"
+)
+btm_mlb
+```
+
+## Wrangle team strengths
+
+```{r}
+strengths <- btm_mlb |>
+  BradleyTerry2::BTabilities() |> 
+  as_tibble(rownames = "teamID") |>
+  arrange(desc(ability))
+strengths
+```
+
+## Visualize team strengths
+
+```{r}
+#| echo: false
+mlb_plot <- strengths |>
+  ggplot(aes(y = fct_reorder(teamID, ability), color = teamID)) +
+  geom_vline(xintercept = 0, linetype = 3) +
+  geom_point(aes(x = ability)) +
+  geom_errorbarh(aes(xmin = ability - 1.96*s.e., xmax = ability + 1.96*s.e.)) +
+  scale_y_discrete(NULL) +
+  guides(color = "none")
+mlb_plot
+```
+
+## Consolidate team names
+
+```{r}
+# Retrosheet teamIDs
+levels(bt_games$HmTm)
+```
+
+```{r}
+active_teams <- Lahman::Teams |>
+  filter(yearID == 2024) |>
+  select(teamIDretro, name) |>
+  mutate(name = str_remove(name, " of Anaheim"))
+active_teams
+```
+
+## Match teamIDs to get colors
+
+```{r}
+mlb_colors <- teamcolors::teamcolors |>
+  filter(league == "mlb") |>
+  mutate(name = ifelse(name == "Cleveland Indians", "Cleveland Guardians", name)) |>
+  left_join(active_teams, by = join_by(name)) |>
+  select(teamIDretro, name, primary, secondary)
+
+mlb_colors |>
+  head()
+```
+
+## Create color palette
+
+```{r}
+mlb_pal <- mlb_colors |>
+  pull(primary) |>
+  setNames(mlb_colors$teamIDretro)
+
+mlb_pal
+```
+
+## Visualize plot with team colors!
+
+```{r}
+mlb_plot +
+  scale_color_manual(values = mlb_pal)
+```
+
+## Collect standings
+
+```{r}
+home <- bt_games |>
+  group_by(teamID = HmTm) |>
+  summarize(W = sum(home_w), L = sum(away_w))
+away <- bt_games |>
+  group_by(teamID = VisTm) |>
+  summarize(W = sum(away_w), L = sum(home_w))
+teams <- bind_rows(home, away) |>
+  group_by(teamID) |>
+  summarize(W = sum(W), L = sum(L)) |>
+  mutate(wpct = W / (W + L)) |>
+  left_join(strengths, by = join_by(teamID))
+teams
+```
+
+## Compare to winning percentage
+
+```{r}
+ggplot(teams, aes(x = wpct, y = ability)) +
+  geom_vline(xintercept = 0.5, linetype = 3) +
+  geom_point(aes(color = teamID)) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.5) +
+  ggrepel::geom_label_repel(aes(label = teamID)) + 
+  scale_color_manual(values = mlb_pal)
+```
+
+# Add home field advantage
+
+## Update model
+
+```{r}
+bt_games2 <- bt_games |>
+  mutate(
+    HmTm = data.frame(team = HmTm, at_home = 1),
+    VisTm = data.frame(team = VisTm, at_home = 0)
+  )
+
+btm2 <- btm_mlb |>
+  update(formula = ~ team + at_home, data = bt_games2)
+btm2
+```
+
+## Collect abilities
+
+```{r}
+strengths_ha <- btm2 |>
+  BradleyTerry2::BTabilities() |> 
+  as_tibble(rownames = "teamID") |>
+  arrange(desc(ability))
+```
+
+## Visualize team strengths
+
+```{r}
+#| echo: false
+strengths_ha |>
+  ggplot(aes(y = fct_reorder(teamID, ability), color = teamID)) +
+  geom_vline(xintercept = 0, linetype = 3) +
+  geom_vline(xintercept = coef(btm2)["at_home"], linetype = 2) +
+  geom_point(aes(x = ability)) +
+  geom_errorbarh(aes(xmin = ability - 1.96*s.e., xmax = ability + 1.96*s.e.)) + 
+  scale_color_manual(values = mlb_pal)
+```
+
+## Read more!
+
+@Lopez2018
+
+## References

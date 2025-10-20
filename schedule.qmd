@@ -253,11 +253,13 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
-- Bradley-Terry models
+- `r slides()` [Bradley-Terry models](slides/13_bradley-terry.qmd)
 
 ::: {.callout-note} 
 ## Homework
 
+- Review previous material 
+- Come prepared with questions!
 
 :::
 
@@ -266,7 +268,7 @@ quiz <- function() {
 `r echo_date()`
 
 
-- **MIDTERM EXAM**
+- **MIDTERM EXAM over WEEKEND (Oct 24-26)**
 
 
 ::: {.callout-note} 
