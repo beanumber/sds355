@@ -36,6 +36,16 @@ $$
 $$
 where $F(x)$ is the CDF of the [logistic distribution](https://en.wikipedia.org/wiki/Logistic_distribution) with $\mu = 0, s = 1$. 
 
+::: {.fragment .fade-up}
+
+::: {.callout-tip}
+
+Setting $s = 400$ yields the [Elo rating system](https://en.wikipedia.org/wiki/Elo_rating_system)! [@Elo1978]
+
+:::
+
+:::
+
 ## Convert to odds
 
 Form the **odds**, then the log-odds:
