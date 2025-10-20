@@ -53,7 +53,7 @@
     "href": "slides/13_bradley-terry.html#use-logistic-distribution",
     "title": "Bradley-Terry models",
     "section": "Use logistic distribution",
-    "text": "Use logistic distribution\nSet \\(\\beta_i = \\ln{\\lambda_i}\\). Then,\n\\[\n  p_{ij} = \\frac{1}{1 + e^{-(\\beta_i-\\beta_j)}} = F(\\beta_i - \\beta_j),\n\\] where \\(F(x)\\) is the CDF of the logistic distribution with \\(\\mu = 0, s = 1\\)."
+    "text": "Use logistic distribution\nSet \\(\\beta_i = \\ln{\\lambda_i}\\). Then,\n\\[\n  p_{ij} = \\frac{1}{1 + e^{-(\\beta_i-\\beta_j)}} = F(\\beta_i - \\beta_j),\n\\] where \\(F(x)\\) is the CDF of the logistic distribution with \\(\\mu = 0, s = 1\\).\n\n\n\n\n\n\n\nTip\n\n\nSetting \\(s = 400\\) yields the Elo rating system! (Elo 1978)"
   },
   {
     "objectID": "slides/13_bradley-terry.html#convert-to-odds",
@@ -214,7 +214,7 @@
     "href": "slides/13_bradley-terry.html#references",
     "title": "Bradley-Terry models",
     "section": "References",
-    "text": "References\n\n\n\n\nBradley, Ralph Allan, and Milton E. Terry. 1952. “Rank Analysis of Incomplete Block Designs: I. The Method of Paired Comparisons.” Biometrika 39 (3/4): 324–45. https://doi.org/10.2307/2334029.\n\n\nLopez, Michael J, Gregory J Matthews, and Benjamin S Baumer. 2018. “How Often Does the Best Team Win? A Unified Approach to Understanding Randomness in North American Sport.” The Annals of Applied Statistics 12 (4): 2483–2516. https://doi.org/10.1214/18-aoas1165."
+    "text": "References\n\n\n\n\nBradley, Ralph Allan, and Milton E. Terry. 1952. “Rank Analysis of Incomplete Block Designs: I. The Method of Paired Comparisons.” Biometrika 39 (3/4): 324–45. https://doi.org/10.2307/2334029.\n\n\nElo, A. E. 1978. The Rating of Chessplayers, Past and Present. New York: Arco Publishing.\n\n\nLopez, Michael J, Gregory J Matthews, and Benjamin S Baumer. 2018. “How Often Does the Best Team Win? A Unified Approach to Understanding Randomness in North American Sport.” The Annals of Applied Statistics 12 (4): 2483–2516. https://doi.org/10.1214/18-aoas1165."
   },
   {
     "objectID": "slides/10_epv.html#who-deserves-what-credit-for-this-play",
