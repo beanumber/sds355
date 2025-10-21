@@ -333,7 +333,7 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
-- Abby & Selam: TBD
+- Abby & Selam: @van2021home
 
 ::: {.callout-note} 
 ## Homework
