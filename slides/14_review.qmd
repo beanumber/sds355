@@ -1,0 +1,112 @@
+---
+title: "Midterm Review"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "2025-10-22"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+# Topics
+
+## Expected Value of a game state
+
+::: {.incremental}
+
+- `r emoji::emoji("baseball")` [Run Expectancy Matrix](04_run_expectancy.qmd) 
+    - `r emoji::emoji("baseball")` Strategies via the ERM
+    - `r emoji::emoji("baseball")` Expected run values
+    - `r emoji::emoji("baseball")` [Linear Weights](03_linear_weights.qmd)
+- `r emoji::emoji("basketball")` [EPV](10_epv.qmd)
+- `r emoji::emoji("football")` [4th down conversion](12_fourth_downs.qmd)
+
+:::
+
+## Win probability 
+
+- [Win probability](08_win_probability.qmd)
+
+## Estimating team strength
+
+- [Expected winning percentage](01_expected_wpct.qmd)
+- [Bradley-Terry models](13_bradley-terry.qmd)
+
+## Sabermetrics
+
+::: {.incremental}
+
+- `r emoji::emoji("baseball")` [*Moneyball*](02_sabermetrics.qmd)
+- `r emoji::emoji("baseball")` [Statcast data](07_statcast.qmd)
+- `r emoji::emoji("baseball")` [DIPS](06_dips.qmd)
+- `r emoji::emoji("basketball")` [Four factors](09_four_factors.qmd)
+
+:::
+
+# The exam
+
+## Policies
+
+::: {.incremental}
+
+- You **may** use:
+    - a single sheet of notes
+    - a standalone calculator
+- You **may** not use:
+    - phone, laptop, tablet, or computer
+        - calculator app on your phone!
+    - Internet
+    - books
+    - other people
+
+:::
+
+## I expect that you...
+
+::: {.incremental}
+
+- have read the assigned readings
+- have done the assigned homework
+- have attended and participated in class regularly 
+- have taken the prerequisite courses
+    - SDS 192
+    - SDS 210
+
+:::
+
+## Therefore, I expect that you...
+
+::: {.incremental}
+
+- have a [working knowledge](https://en.wiktionary.org/wiki/working_knowledge) of the Topics
+- can recall basic facts and main ideas from Topics
+- can analyze, synthesize, compare ideas from Topics
+- can interpret familiar R code and output (about Topics)
+- can manipulate equations using arithmetic and basic algebra
+
+:::
+
+## I don't expect you...
+
+::: {.incremental}
+
+- to write any R code
+- to memorize or derive any formulas
+- to recall esoteric details from readings, etc. 
+- know more than the basics about any sport
+    - anything beyond what we've talked about in class already
+
+:::
+

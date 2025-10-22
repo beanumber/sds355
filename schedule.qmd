@@ -267,12 +267,12 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-
-- **MIDTERM EXAM over WEEKEND (Oct 24-26)**
-
+- [Review](slides/14_review.qmd)
 
 ::: {.callout-note} 
 ## Homework
+
+- **MIDTERM EXAM over WEEKEND (Oct 24-26)**
 
 ![](https://static.wixstatic.com/media/7399fb_8ae07d4c212d48a0ac4ee7a16bf03cac~mv2.png/v1/fill/w_504,h_188,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/CONFERENCE.png)
 
@@ -295,22 +295,39 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
+- [Projects](paper.qmd)
 - Bayesian state-space models
+
+::: {.callout-note} 
+## Homework
+
+- Read @Lopez2018
+
+:::
 
 :::
 
 ::: {.g-col-6 .card}
 `r echo_date()`
 
+- Playoff simulations
+
 ::: {.callout-note title="Invited Guest:"}
 
 - [Amanda Glazer](https://www.amandaglazer.com/about)  
   Assistant Professor  
-  Statistics and Data Dciences  
+  Statistics and Data Sciences  
   UT Austin  
   Bio: Prior to joining UT, I earned my PhD in Statistics from UC Berkeley. My research focuses on developing causal inference and nonparametric methods, and associated software and tools, that address real scientific problems. I am particularly drawn to problems that affect society such as issues of discrimination and social justice. Reproducibility, replicability and evaluating the appropriateness of statistical methods are especially important to me. I also conduct research in sports analytics and developed and taught a new Sports Analytics course at UT Austin in Spring 2025.  Previously, I worked as a baseball operations associate analyst for the San Francisco Giants for four years. 
 
 ::: 
+
+::: {.callout-note} 
+## Homework
+
+- Read @baumer2015openwar
+
+:::
 
 :::
 
@@ -319,12 +336,12 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
-
+- openWAR
 
 ::: {.callout-note} 
 ## Homework
 
-- Read TBD
+- Read @van2021home
 
 :::
 
