@@ -43,6 +43,7 @@ jobs:
             any::Lahman
             any::retrosheet
             any::rvest
+            any::scholar
             any::sportyR
             any::teamcolors
             any::usethis
