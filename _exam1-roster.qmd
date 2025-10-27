@@ -1,0 +1,50 @@
+---
+title: "Midterm Exam Roster"
+author: "Prof. Baumer"
+date: 2025-10-24
+date-format: medium
+format: 
+  pdf:
+    documentclass: article
+    template-partials: 
+      - tex/title.tex
+      - tex/before-body.tex
+    colorlinks: true
+    keep-tex: true
+    header-includes: # Use 'header-includes' for Quarto
+      - \renewcommand{\arraystretch}{1.5} # Sets vertical padding to 1.5x default
+
+execute:
+  echo: false
+  message: false
+  warning: false
+  fig-height: 3.5
+---
+
+```{r}
+library(tidyverse)
+library(readxl)
+students <- read_xlsx("~/Dropbox/Academic/Smith/courses/sds355-f25/Course_Section_Roster_-_Smith.xlsx") |>
+  arrange(`Last Name`, `Preferred First Name`)
+```
+
+There are `r nrow(students)` students enrolled in SDS 355: Seminar in Sports Analytics.
+Their names (as listed on the school record sheet) are given below. 
+I have provided `r nrow(students) + 3` copies of the first exam. 
+If there are any issues that arise during the administration of the exam, I may be best reached at <bbaumer@smith.edu>.
+
+```{r}
+students |>
+  rename('Name on Record' = "Student") |>
+  mutate(
+    `#` = row_number(), 
+    Date = " ", 
+    "Student's Signature" = "                            "
+  ) |>
+  select(`#`, Date, `Name on Record`, `Student's Signature`) |>
+  knitr::kable(
+    format = "latex", vline = "|", linesep = "\\hline", 
+    longtable = TRUE
+  ) |>
+  kableExtra::column_spec(4, width = "2in")
+```

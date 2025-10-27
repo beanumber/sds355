@@ -1,0 +1,424 @@
+---
+title: "Midterm Exam"
+author: "Name:"
+date: 2025-10-24
+date-format: medium
+format: 
+  pdf:
+    documentclass: article
+    template-partials: 
+      - tex/title.tex
+      - tex/before-body.tex
+    colorlinks: true
+    keep-tex: true
+execute:
+  echo: false
+  message: false
+  warning: false
+  fig-height: 3.5
+---
+
+```{r}
+library(tidyverse)
+```
+
+## SDS 355: Prof. Baumer
+
+| Student  | Section  |
+|-------|----------|
+|       |          |
+
+: {tbl-colwidths="[70,15]"}
+
+
+## Instructions
+
+The exam consists of **four problems**, each with multiple parts. 
+
+- It is a **closed-book** exam, meaning that you cannot consult with the textbook (or any other books)
+- You may use **a single sheet of notes**, written on **one side** of an $8.5\times 11$ piece of paper
+- You may use a (standalone) **calculator**. However, **phones and laptops are not permitted**. 
+- No interaction with anyone is allowed, and you may not discuss this exam with others until after the end of all self-scheduled exam periods.
+- Please **show all of your work**. If you believe that a question is ambiguous or contains an error, please note that and state your assumptions.
+
+You will have 180 minutes (**3 hours**) to complete and return the exam (unless you have a permitted extension).
+All exams must be [returned](https://www.science.smith.edu/self-scheduled-exams/) by the end of the exam period: 
+
+- 9 p.m. on Friday, October 24
+- 6 p.m. on Saturday, October 25
+- 6 p.m. on Sunday, October 26
+
+The front page **must have two timestamps** on it. **Don't forget to stamp your exam** "out" when you begin and "in" when you finish!
+
+## Maintaining Your Academic Integrity
+
+> Smith students are responsible for upholding their own integrity by adhering to all course policies and properly acknowledging all sources used in preparing academic work. When assignments require students to submit work that is the product of their own intellectual labor, faculty expect that students have neither used unauthorized resources nor engaged in unauthorized collaboration with others.
+
+## Points Distribution
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+	\hline
+  	Question & Points Earned & Points Possible \\
+  	\hline
+	& &  \\[-0.5em]
+  	1 & & 30 \\[0.75em]
+  	\hline
+	& &  \\[-0.5em]
+  	2 & & 21 \\[0.75em]
+	\hline
+	& &  \\[-0.5em]
+  	3 & & 24 \\[0.75em]
+	\hline
+	& &  \\[-0.5em]
+  	4 & & 25 \\[0.75em]
+	\hline
+	\hline
+	& &  \\[-0.5em]
+	Total & & 100 \\[0.5em]
+	\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+```{r}
+library(tidyverse)
+```
+
+### Problem 1 (30 points)
+
+Consider the Expected Run Matrix shown in @fig-erm, and use it to answer the following questions.  
+
+```{r}
+#| label: fig-erm
+#| fig-cap: "Expected Run Matrix for MLB, 2016. Note that `bases` = '100' corresponds to a runner on 1st base, and `bases` = '001' corresponds to a runner on 3rd base."
+erm2016 <- read_rds("data/erm2016.rda")
+erm2016 |>
+  pivot_wider(
+    names_from = outs_ct, 
+    values_from = exp_run_value, 
+    names_prefix = "Outs="
+  ) |>
+  arrange(`Outs=0`) |>
+  knitr::kable(digits = 2)
+```
+
+a. If the batter hits a single, the runner on 1st base must (by definition) advance to 2nd base. But sometimes, if the runner is fast and/or the defense takes too long to throw the ball in, the runner on 1st can advance to 3rd base. This is known as "taking the extra base". Consider only the state `100` with one out. What is the value of taking the extra base *in this situation*? 
+\
+\
+\
+\
+\
+\
+\
+\
+a. Continuing to focus only on the `100` situation, expand your analysis to include all possible outs. Assuming each of these situations is equally likely, what is the *average* value of taking the extra base?
+\
+\
+\
+\
+\
+\
+\
+\
+\
+a. How could you use the Expected Run Matrix to estimate the *average* value of "taking the extra base" in all situations? 
+\
+\
+
+\newpage
+
+d. The vast majority of *double plays* occur when a routine ground ball is hit with a runner on 1st and less than 2 outs. In these situations, the defense is often able to force out the runner (who was on 1st) at 2nd base, and then relay the ball to 1st to force out the batter. Estimate the *average* loss of run expectancy for such double plays for all appropriate situations *with one out*. [Note that in these situations, the 3rd out of the inning is made by forcing out the batter at first base, which immediately ends the inning, and so any runners who score in these situations do *not* count!]
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+d. For the same set of situations, estimate the *average* loss of run expectancy for such plays *with zero outs*. [Note that since the inning continues after these double plays, any runners who score in these situation *do* count.]
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+d. From the perspective of the offense, which is worse: grounding into a double play *with one out* or *with zero outs*? State any assumptions you make. 
+
+\newpage
+
+### Problem 2 (21 points)
+
+The following questions revolve around notions of expected points. 
+
+a. Use the concept of Expected Points per Shot to explain why basketball teams increasingly emphasize three-point shots (especially from the corners) and frown upon long two-point shots. 
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+b. Briefly explain the concept of Expected Possession Value (EPV) in the context of basketball. 
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+    \
+c. Choose one of the following sports (ice hockey, field hockey, soccer, lacrosse) and articulate how the concept of EPV could be translated into that sport. What similarities and differences would there be with respect to basketball?  
+
+\newpage
+
+### Problem 3 (24 points)
+
+Please refer to the plots in @fig-dips in answering the questions on the following page. 
+Each dot in each plot represents one pitcher. 
+Only pitchers who faced at least 400 batters in two consecutive seasons since 1962 are included. 
+In the plots on the top row, the dot shows how the *same statistic* varied across consecutive seasons (for that pitcher). 
+In the plots on the bottom row, the dot shows the value of two different statistics for that pitcher in the *same season*. 
+
+```{r}
+library(tidyverse)
+library(Lahman)
+
+dips_pitchers <- Pitching |>
+  filter(yearID >= 1962) |>
+  group_by(playerID, yearID) |>
+  summarize(
+    TPA = sum(BFP),
+    Kr = sum(SO) / TPA,
+    Wr = sum(BB + HBP) / TPA,
+    HRr = sum(HR) / TPA,
+    BABIP = sum(H - HR) / sum(BFP - BB - HBP - SO - HR),
+    RA9 = sum(ER) * 27 / sum(IPouts)
+  ) |>
+  mutate(
+    next_yearID = yearID + 1
+  ) |>
+  filter(TPA > 400)
+```
+
+```{r}
+dips_evens <- dips_pitchers |>
+  filter(yearID %% 2 == 0)
+dips_odds <- dips_pitchers |>
+  filter(yearID %% 2 == 1)
+
+dips_pairs <- dips_evens |>
+  inner_join(dips_odds, by = join_by(playerID, next_yearID == yearID))
+```
+
+```{r}
+#| label: fig-dips
+#| layout-ncol: 2
+#| fig-height: 5
+#| fig-cap: "Note that the (Pearson product-moment) correlation coefficient between the $x$ and $y$ variables is superimposed.  "
+#| fig-subcap: 
+#|   - "Year-to-Year correlation of BABIP"
+#|   - "Year-to-Year correlation of strikeout rate"
+#|   - "Relationship of runs allowed per 9 innings to BABIP"
+#|   - "Relationship of runs allowed per 9 innings to strikeout rate"
+cors <- dips_pairs |>
+  ungroup() |>
+  select(contains("BABIP"), contains("Kr"), "RA9.x") |>
+  cor()
+
+
+compute_label <- function(x, y) {
+  dips_pairs |>
+    ungroup() |>
+    summarize(
+      x = mean({{ x }}),
+      y = mean({{ y }}),
+      label = paste("Cor:", round(cor({{ x }}, {{ y }}), 3))
+    )
+}
+
+labels <- bind_rows(
+  compute_label(BABIP.x, BABIP.y),
+  compute_label(Kr.x, Kr.y),
+  compute_label(BABIP.x, RA9.x),
+  compute_label(Kr.x, RA9.x),
+)
+
+ggplot(dips_pairs, aes(x = BABIP.x, y = BABIP.y)) +
+  geom_point(alpha = 0.1) +
+  geom_label(data = labels[1,], aes(x = x, y = y, label = label)) +
+  scale_x_continuous("BABIP in some even year") +
+  scale_y_continuous("BABIP in the next year")
+
+ggplot(dips_pairs, aes(x = Kr.x, y = Kr.y)) +
+  geom_point(alpha = 0.1) +
+  geom_label(data = labels[2,], aes(x = x, y = y, label = label)) +
+  scale_x_continuous("Strikeout rate in some even year") +
+  scale_y_continuous("Strikeout rate in the next year")
+
+ggplot(dips_pairs, aes(x = BABIP.x, y = RA9.x)) +
+  geom_point(alpha = 0.1) +
+  geom_label(data = labels[3,], aes(x = x, y = y, label = label)) +
+  scale_x_continuous("BABIP rate in some even year") +
+  scale_y_continuous("Runs allowed per 9 innings in that same year")
+
+ggplot(dips_pairs, aes(x = Kr.x, y = RA9.x)) +
+  geom_point(alpha = 0.1) +
+  geom_label(data = labels[4,], aes(x = x, y = y, label = label)) +
+  scale_x_continuous("Strikeout rate in some even year") +
+  scale_y_continuous("Runs allowed per 9 innings in that same year")
+```
+
+\newpage
+
+a. Which of the correlations shown in the plots is the weakest? Which is the strongest? 
+\
+\
+\
+\
+\
+\
+\
+a. The plots on the top row reveal that for pitchers, strikeout rate is more highly correlated with itself across seasons than batting average on balls in play is ($BABIP$). How does this inform our understanding of skill vs. luck (with respect to pitchers)?
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+b. How do the plots on the bottom row inform our understanding of what the number of runs allowed by a pitcher is actually measuring? 
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+c. How do the four plots relate to Voros McCracken's theory of Defense Independent Pitching Statistics? 
+
+\newpage
+
+### Problem 4 (25 pts)
+
+In the 2018 NFL season, the Los Angeles Rams (`LA`) and the New Orleans Saints (`NO`) tied for the best regular season record, with 13 wins and 3 losses each. 
+However, the Chicago Bears (`CHI`) had a 12-4 record and the best ratio (`p_ratio`) of cumulative points scored (`PS`) to cumulative points allowed (`PA`) (see @tbl-nfl). 
+
+```{r}
+nfl <- read_csv("https://data.scorenetwork.org/data/nfl_mahomes_era_games.csv")
+```
+
+```{r}
+#| label: tbl-nfl
+#| tbl-cap: "Top 6 NFL teams in 2018, ranked by ratio of points scored (PS) to points allowed (PA)."
+nfl_bt <- nfl |>
+  filter(season == 2018, game_type == "REG") |>
+  group_by(home_team, away_team) |>
+  summarize(
+    home_wins = sum(score_diff > 0), 
+    home_losses = sum(score_diff < 0),
+    home_pf = sum(home_score),
+    home_pa = sum(away_score)
+  ) |>
+  mutate(home_team = factor(home_team), away_team = factor(away_team, levels = levels(home_team)))
+
+bind_rows(
+  nfl_bt |>
+    group_by(team = home_team) |>
+    summarize(W = sum(home_wins), L = sum(home_losses), PF = sum(home_pf), PA = sum(home_pa)),
+  nfl_bt |>
+    group_by(team = away_team) |>
+    summarize(W = sum(home_losses), L = sum(home_wins), PF = sum(home_pa), PA = sum(home_pf))
+) |>
+  group_by(team) |>
+  summarize(W = sum(W), L = sum(L), PS = sum(PF), PA = sum(PA)) |>
+  mutate(p_ratio = PS / PA) |>
+  arrange(desc(p_ratio)) |>
+  head() |>
+  knitr::kable(digits = 2)
+```
+
+a. Based on his previous work in baseball, describe how Bill James likely would have used the observed point ratio to build a model for expected winning percentage.
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+a. How could the model you described in part (a) inform your estimation as to which team was the strongest at the end of the regular season. 
+\
+\
+
+
+\newpage
+
+```{r}
+#| label: tbl-bt
+#| tbl-cap: "Top 6 NFL teams in 2018, ranked by estimated Bradley-Terry team strength parameter. "
+mod_bt <- BradleyTerry2::BTm(outcome = cbind(home_wins, home_losses), player1 = home_team, player2 = away_team, data = nfl_bt)
+
+mod_bt |>
+  BradleyTerry2::BTabilities() |>
+  as_tibble(rownames = "team") |>
+  arrange(desc(ability)) |>
+  head() |>
+  knitr::kable(digits = 2)
+```
+
+c. @tbl-bt shows the top 6 teams, ranked according to their team strength parameter from a simple Bradley-Terry model fit to the regular season won-loss data. Which team is perceived to be the strongest? 
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+c. What are some possible reasons for the Bears ranking only 5th by this measure (when they ranked 3rd in winning percentage and 1st in points ratio)?
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+c. During the playoffs, the Bears lost in the first round, and the New England Patriots (`NE`) beat the Rams in the Super Bowl (the championship game). What are some possible explanations for the observed discrepancies between estimated team strength and the actual outcomes in the playoffs? 
