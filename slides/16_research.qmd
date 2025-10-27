@@ -32,15 +32,16 @@ sigs
 ```{r}
 #| include: false
 papers <- sigs |>
-  unnest()
+  unnest(cols = papers) |>
+  rename(paper_title = title)
 ```
 
 ## Most cited sportsball papers
 
 ```{r}
 papers |>
-  filter(str_detect(title, "sports|ball|home run|winning")) |>
-  select(year, scholar, cites, title) |>
+  filter(str_detect(paper_title, "sports|ball|home run|winning")) |>
+  select(year, scholar, cites, paper_title) |>
   arrange(desc(cites)) |>
   print(n = 21)
 ```
@@ -49,8 +50,8 @@ papers |>
 
 ```{r}
 papers |>
-  filter(grepl("baseball", title)) |>
-  select(year, scholar, cites, title) |>
+  filter(grepl("baseball", paper_title)) |>
+  select(year, scholar, cites, paper_title) |>
   arrange(desc(cites))
 ```
 
@@ -58,7 +59,7 @@ papers |>
 
 ```{r}
 papers |>
-  filter(grepl("sports|ball|home run", title)) |>
+  filter(grepl("sports|ball|home run", paper_title)) |>
   group_by(journal) |>
   summarize(
     N = n(), 
