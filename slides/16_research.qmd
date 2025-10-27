@@ -1,0 +1,70 @@
+---
+title: "Research"
+subtitle: "SDS 355"
+author: "Prof. Baumer" 
+date: "2025-10-27"
+format: 
+  revealjs:
+    slide-number: true
+    footer: "SDS 355"
+    logo: "https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png"
+    theme: solarized
+execute: 
+  echo: true
+  message: false
+  warning: false
+---
+
+## Statistics in Sports Significant Contributor Award
+
+::: footer
+<https://community.amstat.org/sis/aboutus/honorees>
+:::
+
+```{r}
+library(tidyverse)
+library(scholar)
+sigs <- read_csv(here::here("data/sig_contributors.csv")) |>
+  mutate(papers = map(scholar_id, get_publications)) 
+sigs
+```
+
+```{r}
+#| include: false
+papers <- sigs |>
+  unnest()
+```
+
+## Most cited sportsball papers
+
+```{r}
+papers |>
+  filter(grepl("sports|ball|home run|winning", title)) |>
+  select(year, scholar, cites, title) |>
+  arrange(desc(cites)) |>
+  print(n = 21)
+```
+
+## Most cited "baseball" papers
+
+```{r}
+papers |>
+  filter(grepl("baseball", title)) |>
+  select(year, scholar, cites, title) |>
+  arrange(desc(cites))
+```
+
+## Venues
+
+```{r}
+papers |>
+  filter(grepl("sports|ball|home run", title)) |>
+  group_by(journal) |>
+  summarize(
+    N = n(), 
+    avg_cites = mean(cites), 
+    med_cites = median(cites)
+  ) |>
+  arrange(desc(N)) |>
+  knitr::kable(digits = 1)
+```

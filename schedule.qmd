@@ -296,6 +296,8 @@ quiz <- function() {
 `r echo_date()`
 
 - [Projects](paper.qmd)
+- `r slides()` [Research](slides/16_research.qmd)
+- [How often does the best team win?](https://beanumber.github.io/talks/fields2018/fields2018.html#)
 - Bayesian state-space models
 
 ::: {.callout-note} 

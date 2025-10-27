@@ -11,17 +11,6 @@ In a [colloquium](https://en.wikipedia.org/wiki/Colloquium), there is usually a 
 During the second half of the semester, our class will run as a quasi-colloquium, wherein you will take turns presenting a sports analytics paper to the rest of the class. 
 This seminar is very common in graduate school, and is a great way to learn how to read a research paper at a deep level. 
 
-Your presentation should take about half of the class period (i.e., 35-40 minutes). 
-Your goal is maximize each other student's understanding of the paper by the time they leave the room. 
-
-Here is some advice and ground rules:
-
-- You can expect that the rest of the class will have read the paper. 
-- You can use slides but you don't have to. You can ask the author for any slides that they may have already made and use those. 
-- You can use your own code or code from another source. 
-- Don't just lecture---prepare some type of activity (lasting no more than ~10-15 minutes) that will engage the other students and help them understand the material. 
-
-
 ## Expectations
 
 You will choose a partner, and a [paper](#suggested-papers), and a date during the [second half of the semester](schedule.qmd), and send them to me for approval. 
@@ -31,6 +20,25 @@ By **Wednesday, October 8th** we will have the colloquium schedule and topics se
 
 - If you choose to work alone, you will present **one paper**
 - If you choose to work with a partner, you will present **two papers**
+
+### For presenters
+
+Your presentation should take about half of the class period (i.e., 35-40 minutes). 
+Your goal is *maximize* each other student's understanding of the paper by the time they leave the room. 
+
+Here is some advice and ground rules:
+
+- You can expect that the rest of the class will have read the paper. 
+- You can use slides but you don't have to. You can ask the author for any slides that they may have already made and use those. 
+- You can use your own code or code from another source. 
+- Don't just lecture---prepare some type of activity (lasting no more than ~10-15 minutes) that will engage the other students and help them understand the material. 
+- Expect to read the paper 3--5 times!
+
+### For participants
+
+- Spend 1 hour reading the paper. Focus on the Introduction and Results sections. 
+- Come to class prepared to ask questions about the things you didn't understand
+- **Don't** expect to just sit silently in class!
 
 # Suggested papers
 
