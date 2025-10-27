@@ -39,7 +39,7 @@ papers <- sigs |>
 
 ```{r}
 papers |>
-  filter(grepl("sports|ball|home run|winning", title)) |>
+  filter(str_detect(title, "sports|ball|home run|winning")) |>
   select(year, scholar, cites, title) |>
   arrange(desc(cites)) |>
   print(n = 21)
