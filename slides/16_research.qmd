@@ -24,16 +24,24 @@ execute:
 ```{r}
 library(tidyverse)
 library(scholar)
+```
+
+```{r}
+#| eval: false
 sigs <- read_csv(here::here("data/sig_contributors.csv")) |>
   mutate(papers = map(scholar_id, get_publications)) 
 sigs
+
+papers <- sigs |>
+  unnest(cols = papers) |>
+  rename(paper_title = title)
+
+write_rds(papers, here::here("data/papers.rda"))
 ```
 
 ```{r}
 #| include: false
-papers <- sigs |>
-  unnest(cols = papers) |>
-  rename(paper_title = "title")
+papers <- read_rds(here::here("data/papers.rda"))
 ```
 
 ## Most cited sportsball papers
