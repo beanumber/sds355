@@ -33,7 +33,7 @@ sigs
 #| include: false
 papers <- sigs |>
   unnest(cols = papers) |>
-  rename(paper_title = title)
+  rename(paper_title = "title")
 ```
 
 ## Most cited sportsball papers
