@@ -214,26 +214,18 @@ Prof.&nbsp;Baumer
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a></a><span class="fu">library</span>(scholar)</span>
-<span id="cb1-3"><a></a>sigs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/sig_contributors.csv"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb1-4"><a></a>  <span class="fu">mutate</span>(<span class="at">papers =</span> <span class="fu">map</span>(scholar_id, get_publications)) </span>
-<span id="cb1-5"><a></a>sigs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 32 × 4
-    Year scholar         scholar_id   papers      
-   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;        &lt;list&gt;      
- 1  1994 George Lindsey  &lt;NA&gt;         &lt;df [0 × 8]&gt;
- 2  1995 Robert Hooke    &lt;NA&gt;         &lt;df [0 × 8]&gt;
- 3  1996 Fred Mosteller  POvQVvkAAAAJ &lt;df [0 × 8]&gt;
- 4  1997 Harry Roberts   &lt;NA&gt;         &lt;df [0 × 8]&gt;
- 5  1998 Carl Morris     _pyigsMAAAAJ &lt;df [0 × 8]&gt;
- 6  1999 Hal Stern       l-Jd0tUAAAAJ &lt;df [0 × 8]&gt;
- 7  2000 David Harville  &lt;NA&gt;         &lt;df [0 × 8]&gt;
- 8  2001 Jay Bennett     &lt;NA&gt;         &lt;df [0 × 8]&gt;
- 9  2002 Donald Morrison &lt;NA&gt;         &lt;df [0 × 8]&gt;
-10  2003 Jim Albert      _r5nG-wAAAAJ &lt;df [0 × 8]&gt;
-# ℹ 22 more rows</code></pre>
+<span id="cb1-2"><a></a><span class="fu">library</span>(scholar)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>sigs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/sig_contributors.csv"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a></a>  <span class="fu">mutate</span>(<span class="at">papers =</span> <span class="fu">map</span>(scholar_id, get_publications)) </span>
+<span id="cb2-3"><a></a>sigs</span>
+<span id="cb2-4"><a></a></span>
+<span id="cb2-5"><a></a>papers <span class="ot">&lt;-</span> sigs <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> papers) <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a></a>  <span class="fu">rename</span>(<span class="at">paper_title =</span> title)</span>
+<span id="cb2-8"><a></a></span>
+<span id="cb2-9"><a></a><span class="fu">write_rds</span>(papers, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/papers.rda"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="most-cited-sportsball-papers" class="slide level2">
@@ -245,8 +237,31 @@ Prof.&nbsp;Baumer
 <span id="cb3-4"><a></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(cites)) <span class="sc">|&gt;</span></span>
 <span id="cb3-5"><a></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="dv">21</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 0 × 4
-# ℹ 4 variables: year &lt;dbl&gt;, scholar &lt;chr&gt;, cites &lt;dbl&gt;, paper_title &lt;chr&gt;</code></pre>
+<pre><code># A tibble: 210 × 4
+    year scholar            cites paper_title                                   
+   &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt; &lt;chr&gt;                                         
+ 1  2016 Luke Bornn           246 A multiresolution stochastic process model fo…
+ 2  2005 Hal Stern            190 A state-space model for National Football Lea…
+ 3  2005 Mark Glickman        190 A state-space model for National Football Lea…
+ 4  2014 Luke Bornn           180 Factorized point process intensities: A spati…
+ 5  2015 Luke Bornn           167 Characterizing the spatial structure of defen…
+ 6  2005 Hal Stern            165 On the probability of winning a football game 
+ 7  2017 Sameer Deshpande     158 Association of playing high school football w…
+ 8  1999 Shane Reese          138 Bridging different eras in sports             
+ 9  2014 Ben Baumer           127 The sabermetric revolution: Assessing the gro…
+10  2017 Jim Albert           124 Handbook of statistical methods and analyses …
+11  2017 Mark Glickman        124 Handbook of statistical methods and analyses …
+12  2016 Shane Jensen         124 Estimating an NBA player’s impact on his team…
+13  2017 Tim Swartz           124 Handbook of statistical methods and analyses …
+14  2016 Sameer Deshpande     124 Estimating an NBA player’s impact on his team…
+15  2015 Luke Bornn           107 Counterpoints: Advanced defensive metrics for…
+16  2005 Hal Stern             95 A Brownian motion model for the progress of s…
+17  1999 Gilbert Fellingham    92 Effects of two instructional models—skill tea…
+18  2007 Jim Albert            81 Statistical thinking in sports                
+19  2004 Gilbert Fellingham    81 The effects of two instructional models-tacti…
+20  2018 Jim Albert            80 Analyzing baseball data with R                
+21  2010 Gilbert Fellingham    80 Skill importance in women’s volleyball        
+# ℹ 189 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -258,8 +273,20 @@ Prof.&nbsp;Baumer
 <span id="cb5-3"><a></a>  <span class="fu">select</span>(year, scholar, cites, paper_title) <span class="sc">|&gt;</span></span>
 <span id="cb5-4"><a></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(cites))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 0 × 4
-# ℹ 4 variables: year &lt;dbl&gt;, scholar &lt;chr&gt;, cites &lt;dbl&gt;, paper_title &lt;chr&gt;</code></pre>
+<pre><code># A tibble: 38 × 4
+    year scholar          cites paper_title                                     
+   &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;                                           
+ 1  2014 Ben Baumer         127 The sabermetric revolution: Assessing the growt…
+ 2  2018 Jim Albert          80 Analyzing baseball data with R                  
+ 3  2018 Ben Baumer          80 Analyzing baseball data with R                  
+ 4  2015 Shane Jensen        77 openWAR: An open source system for evaluating o…
+ 5  2015 Ben Baumer          77 openWAR: An open source system for evaluating o…
+ 6  2015 Gregory Matthews    77 openWAR: An open source system for evaluating o…
+ 7  1993 Jim Albert          66 A statistical analysis of hitting streaks in ba…
+ 8  2004 Tim Swartz          57 A two-stage Bayesian model for predicting winne…
+ 9  2003 Jim Albert          56 Teaching statistics using baseball              
+10  2008 Jim Albert          54 Streaky hitting in baseball                     
+# ℹ 28 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -278,6 +305,12 @@ Prof.&nbsp;Baumer
 <span id="cb7-10"><a></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top">
+<colgroup>
+<col style="width: 77%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">journal</th>
@@ -287,6 +320,612 @@ Prof.&nbsp;Baumer
 </tr>
 </thead>
 <tbody>
+<tr class="odd">
+<td style="text-align: left;">Journal of Quantitative Analysis in Sports</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">33.3</td>
+<td style="text-align: right;">23.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chance</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">15.0</td>
+<td style="text-align: right;">9.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The American Statistician</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">23.4</td>
+<td style="text-align: right;">17.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">arXiv preprint arXiv:</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">4.2</td>
+<td style="text-align: right;">2.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">26.7</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Anthology of Statistics in Sports</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">33.7</td>
+<td style="text-align: right;">2.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Journal of the American Statistical Association</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">84.2</td>
+<td style="text-align: right;">47.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Journal of Sports Analytics</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12.8</td>
+<td style="text-align: right;">3.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AMSTAT news: the membership magazine of the American Statistical Association</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Curve Ball: Baseball, Statistics, and the Role of Chance in the Game</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AMSTAT news: the membership magazine of the American Statistical Association&nbsp;…</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Anthology of statistics in sports</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">158.3</td>
+<td style="text-align: right;">190.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Crc Press</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">124.0</td>
+<td style="text-align: right;">124.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">International Journal of Sports Science &amp; Coaching</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">24.7</td>
+<td style="text-align: right;">19.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Wiley Interdisciplinary Reviews: Computational Statistics</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">32.7</td>
+<td style="text-align: right;">48.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BAYESIAN ANALYSIS</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brigham Young University-Provo</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">70.0</td>
+<td style="text-align: right;">70.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CRC Press</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">80.0</td>
+<td style="text-align: right;">80.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">De Gruyter</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Epidemiology</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">3.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Harvard Data Science Review</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">13.5</td>
+<td style="text-align: right;">13.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">International Journal of Racket Sports Science</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Journal of Statistics Education</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">29.5</td>
+<td style="text-align: right;">29.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Motriz: Revista de Educação Física</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">16.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PLoS one</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">21.5</td>
+<td style="text-align: right;">21.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Physics Today</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Plos one</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">10.0</td>
+<td style="text-align: right;">10.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Significance</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">3.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sloan Sports Analytics Conference</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">22.0</td>
+<td style="text-align: right;">22.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Statistica Applicata-Italian Journal of Applied Statistics</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">10.5</td>
+<td style="text-align: right;">10.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(No Title)</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">APHA’s</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AStA Advances in Statistical Analysis</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">19.0</td>
+<td style="text-align: right;">19.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Journal of Epidemiology</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9.0</td>
+<td style="text-align: right;">9.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">American journal of epidemiology</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">10.0</td>
+<td style="text-align: right;">10.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Annals of Applied Statistics</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">167.0</td>
+<td style="text-align: right;">167.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Annual Review of Statistics and Its Application</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">44.0</td>
+<td style="text-align: right;">44.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Australian &amp; New Zealand Journal of Statistics</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">16.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Barça sports analytics summit</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">60.0</td>
+<td style="text-align: right;">60.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bowling Green State University</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">11.0</td>
+<td style="text-align: right;">11.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Brigham Young University</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">41.0</td>
+<td style="text-align: right;">41.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CHANCE</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CRC Press, Boca Raton, FL</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">3.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chapman and Hall/CRC</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Copernicus Books</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CrC Press</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">81.0</td>
+<td style="text-align: right;">81.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Eastern Economic Journal</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">22.0</td>
+<td style="text-align: right;">22.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Economic Inquiry</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">14.0</td>
+<td style="text-align: right;">14.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Frontiers in Behavioral Economics</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Frontiers in Psychology</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">13.0</td>
+<td style="text-align: right;">13.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Handbook of sports and lottery markets</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6.0</td>
+<td style="text-align: right;">6.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Handbook of statistical methods and analyses in sports</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: right;">12.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ISBS Proceedings Archive</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">International Conference on Machine Learning (ICML)</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">180.0</td>
+<td style="text-align: right;">180.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">International Journal of Exercise Science: Conference Proceedings</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">International Journal of Forecasting</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">8.0</td>
+<td style="text-align: right;">8.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">International Journal of Performance Analysis in Sport</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">25.0</td>
+<td style="text-align: right;">25.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">International Journal of Physical Education</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">13.0</td>
+<td style="text-align: right;">13.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">International Journal of Sports Physiology and Performance</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: right;">12.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">International Statistical Review/Revue Internationale de Statistique</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">J. Statist. Education</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JAMA neurology</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">158.0</td>
+<td style="text-align: right;">158.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JSM Proceedings, Statistics in Sports, ASA</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">7.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Journal of Applied Statistics</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">2.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Journal of Data Science</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">57.0</td>
+<td style="text-align: right;">57.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Journal of Quantitative analysis in Sports</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">49.0</td>
+<td style="text-align: right;">49.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Journal of Sports Sciences</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">19.0</td>
+<td style="text-align: right;">19.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Journal of science and medicine in sport</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">39.0</td>
+<td style="text-align: right;">39.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Journal of teaching in Physical Education</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">92.0</td>
+<td style="text-align: right;">92.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Journal of teaching in physical education</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">73.0</td>
+<td style="text-align: right;">73.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maa</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">56.0</td>
+<td style="text-align: right;">56.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Major League Baseball</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">7.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Manuscript, Bowling Green State University</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">23.0</td>
+<td style="text-align: right;">23.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Medicine and science in sports and exercise</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">3.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Methodological and Applied Statistics and Demography IV: SIS</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Observational Studies</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.0</td>
+<td style="text-align: right;">4.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Office of the Commissioner of Baseball</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: right;">12.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PLoS One</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">36.0</td>
+<td style="text-align: right;">36.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Physical Educator</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">81.0</td>
+<td style="text-align: right;">81.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PloS one</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">68.0</td>
+<td style="text-align: right;">68.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Proc. Joint Statistical Meetings</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Proceedings of the Section on Sports Statistics</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">18.0</td>
+<td style="text-align: right;">18.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Quality Engineering</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">9.0</td>
+<td style="text-align: right;">9.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R package version</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Research Quarterly for Exercise and Sport</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">28.0</td>
+<td style="text-align: right;">28.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Scientific Meeting of the Italian Statistical Society</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Section on Statistics in Sports</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2.0</td>
+<td style="text-align: right;">2.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Society for Industrial and Applied Mathematics</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">72.0</td>
+<td style="text-align: right;">72.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SportRxiv</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sports medicine-open</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">70.0</td>
+<td style="text-align: right;">70.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sports, Games &amp; Play</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">15.0</td>
+<td style="text-align: right;">15.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Statistical Thinking in Sports</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">7.0</td>
+<td style="text-align: right;">7.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Statistics in sport</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">17.0</td>
+<td style="text-align: right;">17.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Stats</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">16.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">The Annals of Applied Statistics</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">50.0</td>
+<td style="text-align: right;">50.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">The Journal of Strength &amp; Conditioning Research</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">University of Pennsylvania</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">8.0</td>
+<td style="text-align: right;">8.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">University of Pennsylvania Press</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">127.0</td>
+<td style="text-align: right;">127.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Youth &amp; Society</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pre-sented to the American Association for the Advancement of Science on&nbsp;…</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.0</td>
+<td style="text-align: right;">5.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ÈÖÓ Ò× Ó Ø Ë ÜØ Ù× ØÖ Ð Ò ÓÒ Ö Ò ÓÒ Å ÌÀ Å ÌÁ Ë Æ ÇÅÈÍÌ ÊË ÁÆ ËÈÇÊÌ</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">1.0</td>
+</tr>
 </tbody>
 </table>
 </div>
