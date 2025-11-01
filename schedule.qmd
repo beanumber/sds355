@@ -385,7 +385,7 @@ quiz <- function() {
 ::: {.callout-note} 
 ## Homework
 
-- Read TBD
+- Read @jensen2009hierarchical
 
 :::
 
@@ -393,7 +393,7 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- Tyler: TBD
+- Tyler: @jensen2009hierarchical
 
 ::: {.callout-note} 
 ## Homework
