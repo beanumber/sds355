@@ -338,6 +338,7 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
+- [World Series, Game 7](https://www.mlb.com/video/condensed-game-lad-tor-game-7?partnerId=web_video-playback-page_video-share)
 - openWAR
 
 ::: {.callout-note} 
