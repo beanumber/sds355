@@ -338,8 +338,10 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
+- [Bay FC Analytics](https://www.linkedin.com/posts/wearebayfc_bayfc-ugcPost-7390100011335745536-PerK)  
+  [Arielle Dror '20](https://www.linkedin.com/in/arielledror/)
 - [World Series, Game 7](https://www.mlb.com/video/condensed-game-lad-tor-game-7?partnerId=web_video-playback-page_video-share)
-- openWAR
+- [openWAR](https://beanumber.github.io/talks/amherst2014/openWARtalk.pdf)
 
 ::: {.callout-note} 
 ## Homework
@@ -372,7 +374,7 @@ quiz <- function() {
 ::: {.callout-note} 
 ## Homework
 
-- Read TBD
+- Read @kovalchik2016searching
 
 :::
 
@@ -380,7 +382,7 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
-- Anna: TBD
+- Anna: @kovalchik2016searching
 
 
 ::: {.callout-note} 
