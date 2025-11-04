@@ -401,7 +401,7 @@ quiz <- function() {
 ::: {.callout-note} 
 ## Homework
 
-- Read TBD
+- Read @maymin2021smart
 
 :::
 
@@ -409,7 +409,7 @@ quiz <- function() {
 ::: {.g-col-6 .card}
 `r echo_date()`
 
-- Lorelei: TBD
+- Lorelei: @maymin2021smart
 
 ::: {.callout-note} 
 ## Homework
