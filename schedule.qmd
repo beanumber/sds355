@@ -355,7 +355,7 @@ quiz <- function() {
 ::: {.g-col-6 .card} 
 `r echo_date()`
 
-- Abby & Selam: @van2021home
+- [Abby & Selam](https://docs.google.com/presentation/d/1cMcdeAhsHr12E5Ju1GneBGDtmuqDsYQcfs_qwYKd7Z0/edit?slide=id.g36fa14c8c3d_0_293#slide=id.g36fa14c8c3d_0_293): @van2021home
 
 ::: {.callout-note} 
 ## Homework
