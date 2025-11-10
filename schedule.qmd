@@ -388,6 +388,7 @@ quiz <- function() {
 ::: {.callout-note} 
 ## Homework
 
+- **[Project, topic statement due](paper.html)**
 - Read @jensen2009hierarchical
 
 :::
@@ -414,6 +415,7 @@ quiz <- function() {
 ::: {.callout-note} 
 ## Homework
 
+- **[Project, 1st draft due](paper.html#first-draft)**
 - Read @lopez2015building
 
 :::
@@ -462,6 +464,12 @@ quiz <- function() {
 `r echo_date()`
 
 - Abi: @elmore2022bang
+
+::: {.callout-note} 
+## Homework
+- **[Project, 2nd draft due](paper.html#second-draft)**
+:::
+
 
 ::: 
 ::: {.g-col-6 .card}
