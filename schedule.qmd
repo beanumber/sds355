@@ -496,7 +496,7 @@ tibble::tibble(
 
 
 
-- Lightning talks (5 minutes, [2 slides](https://docs.google.com/presentation/d/1qMDYzdpfDkVkYT1a4lB8_k_92FkcSrT_wwwbpWOxukw/edit?usp=sharing))
+- Lightning talks (5 minutes, [3 slides](https://docs.google.com/presentation/d/1UlXSYhURwFSYjIKbPM7ZQOu5Co69OdgJZnDuHPwotzc/edit?usp=sharing))
 - Course feedback questionnaire
 
 ::: {.callout-note} 
